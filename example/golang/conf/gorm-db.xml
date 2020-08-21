@@ -1,0 +1,47 @@
+<!--支持的数据类型int8,uint8,int16,int32,int,int64,uint16,uint32,uint64,double,string,blob,char-->
+<!--blob统一对应到mysql的mediumblob，上限为16M-->
+<!--string对应到mysql的varchar字段，后面必须跟size限制-->
+<!--char对应到mysql的char字段，后面必须跟size，最大不能超过255，超过则自动转为varchar类型-->
+<!--
+    对游戏应用来说：char与varchar的主要区别
+	char类型数据中间不能有空格，有空格会被截断。但是char类型检索效率比varchar高
+	char适合用来存储openid，设备号等不带空格，并且有检索需求的字段
+-->
+
+<!--
+每个表都有一个secritylevel属性，可以配置两种属性[normal,high]，默认为normal
+配置为high的数据，会在更新的时候实时写入数据库
+-->
+<!--cache属性为是否需要缓存，默认需要为true-->
+<!--列名中不能带空格-->
+<!--每个表会自动增加一列版本号version字段，类型为uint64-->
+<!--debug版本会自动增加json列，用来存储动态增加的字段-->
+<giant-game version="1">
+	<table name="role" version="1">
+		<column name="roleId" type="int64" desc="用户ID"/>
+		<column name="roleName" type="string" size="1024" notnull="true" desc="角色名"/>
+		<column name="level" type="int" desc="等级"/>
+		<column name="exp" type="int64" desc="经验"/>
+		<column name="characterId" type="int" desc="人物ID"/>
+		<column name="gold" type="int" desc="金币"/>
+		<column name="offlineTime" type="int64" desc="离线时间"/>
+		<column name="inited" type="int" desc="预创建标致"/>
+		<column name="createTime" type="int64" desc="创建时间"/>
+		<column name="face" type="string" size="1024" desc="角色捏脸"/>
+		<column name="online" type="int64" desc="今天上线次数"/>
+		<column name="blob" type="blob" desc="今天上线次数"/>
+		<index name="role_id" columns="roleId" unique="true"/>
+		<splitinfo columns="roleId" num="128"/>
+	</table>
+	<databases>
+		<!--name为数据库用户名，database为数据库名字 defaultrouter为默认路由数据库-->
+		<db name="mysql1" host="192.168.12.42" port="3306" user="mark" password="123456" type="mysql" database="test1" defaultroute="true"/>
+		<db name="mysql2" host="192.168.12.42" port="3306" user="mark" password="123456" type="mysql" database="test2"/>
+	</databases>
+	<routes>
+		<table name="role" splittablekey="id">
+			<db name="mysql1" splittablenum="128"/>
+			<db name="mysql2" splittablenum="128"/>
+		</table>
+	</routes>
+</giant-game>

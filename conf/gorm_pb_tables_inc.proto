@@ -1,0 +1,71 @@
+syntax = "proto3";
+package gorm;
+option go_package = "gorm/gorm";
+import "gorm-db.proto";
+
+
+enum GORM_PB_TABLE_INDEX
+{
+    GORM_PB_TABLE_IDX_MIN__ = 0;
+	GORM_PB_TABLE_IDX_ROLE = 1;
+	GORM_PB_TABLE_IDX_MAX__ = 2;
+}
+
+enum GORM_PB_ROLE_FIELD_INDEX
+{
+	GORM_PB_FIELD_ROLE_VERSION = 0;
+	GORM_PB_FIELD_ROLE_ROLEID = 1;
+	GORM_PB_FIELD_ROLE_ROLENAME = 2;
+	GORM_PB_FIELD_ROLE_LEVEL = 3;
+	GORM_PB_FIELD_ROLE_EXP = 4;
+	GORM_PB_FIELD_ROLE_CHARACTERID = 5;
+	GORM_PB_FIELD_ROLE_GOLD = 6;
+	GORM_PB_FIELD_ROLE_OFFLINETIME = 7;
+	GORM_PB_FIELD_ROLE_INITED = 8;
+	GORM_PB_FIELD_ROLE_CREATETIME = 9;
+	GORM_PB_FIELD_ROLE_FACE = 10;
+	GORM_PB_FIELD_ROLE_ONLINE = 11;
+}
+
+
+enum GORM_PB_COLUMN_TYPE
+{
+	GORM_PB_COLUMN_TYPE_INVALID = 0;
+	GORM_PB_COLUMN_TYPE_INT		= 1;
+	GORM_PB_COLUMN_TYPE_UINT 	= 2;
+	GORM_PB_COLUMN_TYPE_DOUBLE	= 3;
+	GORM_PB_COLUMN_TYPE_STRING	= 4;
+}
+
+message GORM_PB_COLUMN_VALUE
+{
+	GORM_PB_COLUMN_TYPE	type 		= 1;
+	uint64				uintvalue 	= 2;
+	int64				intvalue 	= 3;
+	double				doublevalue = 4;
+	string				stringvalue	= 5;
+}
+
+message GORM_PB_COLUMN
+{
+	string  				name 	= 1;				// 列名
+	GORM_PB_COLUMN_VALUE 	value 	= 2;	// 存储的数据
+}
+
+
+message GORM_PB_CUSTEM_COLUMNS
+{
+	repeated	GORM_PB_COLUMN	columns 	= 1;
+}
+message GORM_PB_TABLE
+{
+	int32 TableId = 1;
+	GORM_PB_CUSTEM_COLUMNS	custom_columns = 2;
+	 GORM_PB_Table_role role = 3;
+}
+
+message GORM_PB_TABLES
+{
+	repeated GORM_PB_Table_role role = 1;
+}
+

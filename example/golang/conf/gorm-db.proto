@@ -1,0 +1,19 @@
+syntax = "proto3";
+package gorm;
+option go_package = "gorm/gorm";
+message GORM_PB_Table_role{
+    uint64 version = 1;
+    int64 roleid = 2;
+    string rolename = 3;
+    int32 level = 4;
+    int64 exp = 5;
+    int32 characterid = 6;
+    int32 gold = 7;
+    int64 offlinetime = 8;
+    int32 inited = 9;
+    int64 createtime = 10;
+    string face = 11;
+    int64 online = 12;
+    bytes blob = 13;
+}
+

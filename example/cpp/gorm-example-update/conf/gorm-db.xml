@@ -1,0 +1,51 @@
+<!--支持的数据类型int8,uint8,int16,int32,int,int64,uint16,uint32,uint64,double,string,blob,char-->
+<!--blob统一对应到mysql的mediumblob，上限为16M-->
+<!--string对应到mysql的varchar字段，后面必须跟size限制-->
+<!--char对应到mysql的char字段，后面必须跟size，最大不能超过255，超过则自动转为varchar类型-->
+<!--
+    对游戏应用来说：char与varchar的主要区别
+	char类型数据中间不能有空格，有空格会被截断。但是char类型检索效率比varchar高
+	char适合用来存储openid，设备号等不带空格，并且有检索需求的字段
+-->
+
+<!--
+每个表都有一个secritylevel属性，可以配置两种属性[normal,high]，默认为normal
+配置为high的数据，会在更新的时候实时写入数据库
+-->
+<giant-game version="1">
+	<table name="account" secritylevel="high" cache="true" primarykey="id" version="1" >
+		<column name="id" type="int" defaultvalue="0" desc="用户id"/>
+		<column name="account" type="char" size="128" notnull="true" desc="用户名字"/>
+		<column name="desc" type="string" size="1024" desc="用户自己填充的简介"/>
+		<column name="allbinary" type="blob" desc="二进制数据存放"/>
+		<!--索引信息 name索引的名字 columns索引的列 unique是否唯一索引默认为false-->
+		<index name="account_id" columns="id" unique="true"/>
+		<!--数据库的主键 column为主键列名-->
+		<primarykey column="id"/>
+		<!--分表信息 columns分表规则的列支持多列,列名之间用逗号隔开,如"id,account" num分表的份数(此处分表信息主要是在开发的时候使用,作为校验规则,防止写出和分表规则不匹配的SQL语句)-->
+		<!--没有指定splitinfo的时候默认以primarykey作为分表信息,每次更新的时候必须将分表信息带上-->
+		<splitinfo columns="id,account" num="128"/>
+	</table>
+	<table name="bag" primarykey="id" version="1">
+		<column name="uid" type="uint64" defaultvalue="0" desc="用户id"/>
+		<column name="bagid" type="int" desc="用户背包id"/>
+		<column name="allbinary" type="blob" desc="二进制数据存放"/>
+		<index name="bag_id" columns="uid,bagid"/>
+		<splitinfo columns="uid" num="128"/>
+	</table>
+	<databases>
+		<!--name为数据库用户名，database为数据库名字 defaultrouter为默认路由数据库-->
+		<db name="mysql1" host="192.168.12.42" port="3306" user="mark" password="123456" type="mysql" database="test1" defaultroute="true"/>
+		<db name="mysql2" host="192.168.12.42" port="3306" user="mark" password="123456" type="mysql" database="test2"/>
+	</databases>
+	<routes>
+		<table name="account" splittablekey="id">
+			<db name="mysql1" splittablenum="128"/>
+			<db name="mysql2" splittablenum="128"/>
+		</table>
+		<table name="bag" splittablekey="id">
+			<db name="mysql1" splittablenum="128"/>
+			<db name="mysql2" splittablenum="128"/>
+		</table>
+	</routes>
+</giant-game>

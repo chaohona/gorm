@@ -1,0 +1,240 @@
+syntax = "proto3";
+package gorm;
+
+option go_package = "gorm/gorm";
+
+
+// 此协议文件不需要变更，里面保存了GORM客户端与服务器通信的所需要的协议
+//gorm_tables_inc.proto包含所有表的定义
+import "gorm_pb_tables_inc.proto";
+
+
+enum GORM_CODE
+{
+	GORM_CODE_OK = 0;
+	
+	GORM_CODE_ERROR              = -1;
+	GORM_CODE_EAGAIN             = -2;
+	GORM_CODE_INVALID_CLIENT     = -3;
+	GORM_CODE_PART_FAILED        = -4; // 请求部分失败
+	GORM_CODE_INVALID_TABLE      = -5; // 无效的表
+	GORM_CODE_RESET              = -6; // 重复设置
+	GORM_CODE_TOO_MUCH_RECORD    = -7; // 太多record
+	GORM_CODE_INIT_RECORD        = -8;
+	GORM_CODE_INVALID_FIELD      = -9;  // 无效的field
+	GORM_CODE_PACK_REQ_ERROR     = -10; // 打包请求失败
+	GORM_CODE_REQ_NO_RECORDS     = -11; // 没有往请求中放入record
+	GORM_CODE_MULTI_TABLES       = -12; // 有多张表
+	GORM_CODE_RSP_UNPACK_FAILED  = -13; // 响应解包失败
+	GORM_CODE_CONN_CLOSED        = -14; // 连接已经关闭了
+	GORM_CODE_CONN_FAILED        = -15; // 连接RetErr服务器失败
+	GORM_CODE_DB_ERROR           = -16; // 数据库发生错误,此时需要根据db信息获取进一步错误信息
+	GORM_CODE_NO_DB              = -17; // 没有找到db
+	GORM_CODE_REQ_MSG_ERROR      = -18; // 请求信息错误
+	GORM_CODE_NOT_SUPPORT_CMD    = -19; // 不支持的命令
+	GORM_CODE_UNPACK_REQ         = -20; // 解压缩请求信息出错
+	GORM_CODE_PACK_RSP_ERROR     = -21; // 压缩响应消息出错
+	GORM_CODE_REQ_MSG_NO_HEADER  = -22; // 请求没有设置消息头
+	GORM_CODE_REQ_NEED_SPLIT     = -23; // split信息没有带全
+	GORM_CODE_REQ_TOO_LARGE      = -24; // 请求数据太大
+	GORM_CODE_DB_2_STRUCT_ERROR  = -25; // db结果转换到struct出错，一般都是版本对不上导致
+	GORM_CODE_NO_MORE_RECORD     = -26; // 没有更多record
+	GORM_CODE_VERSION_NOT_SET    = -27; // 没有设置版本号
+	GORM_CODE_CACHE_ERROR        = -28; // 操作缓存错误
+	GORM_CODE_NO_VALUE           = -29; // 没有对应的值
+	GORM_CODE_INVALID_VALUE_TYPE = -30; // 无效的类型
+}
+
+enum GORM_CMD
+{
+	GORM_CMD_INVALID = 0;
+	GORM_CMD_HEART              = 1;    // 心跳，内部使用的协议
+    GORM_CMD_GET_CLIENT_ID      = 2;    // 握手，获取客户端id过程
+    GORM_CMD_INSERT             = 3;    // 增加记录
+    GORM_CMD_REPLACE            = 4;    // 有则替换，没有则插入
+    GORM_CMD_INCREASE           = 5;    // 增量更新请求
+    GORM_CMD_GET                = 6;    // 单条查询请求
+    GORM_CMD_DELETE             = 7;    // 删除请求
+    GORM_CMD_BATCH_GET          = 8;    // 批量查询请求
+    GORM_CMD_GET_BY_PARTKEY     = 9;    // 部分key查询请求
+    GORM_CMD_UPDATE             = 10;    // 更新请求
+    GORM_CMD_GET_BY_NON_PRIMARY_KEY = 11;   // 通过非主键批量获取 
+}
+
+message GORM_PB_SPLIT_INFO
+{
+	message GORM_COLUMN_VALUE
+	{
+		int32 	Column = 1;
+		bytes 	Value = 2;
+	}
+	repeated GORM_COLUMN_VALUE SplitInfo = 1;
+}
+
+message GORM_PB_Ret_Code 
+{
+	int32 	Code = 1;			// 0 为成功，-1为失败，-4为部分失败
+	int32 	DBCode = 2;			// 后端db的错误码
+	string 	DBErrInfo = 3;		// 后端db错误的详细信息
+	int32	SucessNum	 = 4;	// 成功的请求个数
+	int32 	TotalNum	 = 5;	// 所有的请求
+}
+
+message GORM_PB_RELOAD_TABLE_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1; 
+	uint64 					TableVersion = 2;
+}
+
+message GORM_PB_RELOAD_TABLE_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+}
+
+message GORM_PB_REQ_HEADER 
+{
+	int32   				TableId	 = 1;	// 表的类型
+	int32    				BusinessID = 2;	// 串行化ID
+	int32 					VerPolice = 3;	// 版本校验规则
+	uint32 				ReqFlag  = 4;	// 参见GORM_CMD_FLAG_XXX
+	bytes					FieldMode	= 5;
+	GORM_PB_SPLIT_INFO 	SplitTableInfo = 6;	// 分库分表信息
+}
+
+message GORM_PB_HEART_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1; 
+}
+
+message GORM_PB_HEART_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+} 
+
+message GORM_PB_GET_CLIENT_ID_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1;
+}
+
+message GORM_PB_GET_CLIENT_ID_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+}
+
+// 插入暂时只能支持单挑记录插入
+message GORM_PB_INSERT_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1;
+	repeated GORM_PB_TABLE 	Tables = 2;
+}
+
+message GORM_PB_INSERT_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	repeated GORM_PB_TABLE 	Tables = 2;	// 如果需要回带数据，则将数据带回
+	uint64					LastInsertId = 3;
+}
+
+message GORM_PB_UPDATE_REQ
+{
+	GORM_PB_REQ_HEADER 		Header 	= 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;
+}
+
+message GORM_PB_UPDATE_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	int32					AffectedNum = 3;
+}
+
+message GORM_PB_REPLACE_REQ
+{
+	GORM_PB_REQ_HEADER 		Header 	= 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;
+}
+
+message GORM_PB_REPLACE_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	int32					AffectedNum = 3;
+}
+
+message GORM_PB_GET_REQ 
+{
+	GORM_PB_REQ_HEADER 	Header 	= 1;
+	GORM_PB_TABLE		Table	= 2;
+	int32	GetFlag = 3;
+}
+
+message GORM_PB_GET_RSP
+{
+	GORM_PB_Ret_Code 	RetCode = 1;
+	GORM_PB_TABLE 		Table 	= 2;
+	int32				NewInsert = 3;	// 结果是否是新插入的
+	uint64				LastInsertId = 4;	// 结果是否是新插入的
+}
+
+message GORM_PB_BATCH_GET_REQ 
+{
+	GORM_PB_REQ_HEADER 		Header 	= 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+}
+
+message GORM_PB_BATCH_GET_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;
+}
+
+message GORM_PB_INCREASE_REQ
+{
+	GORM_PB_REQ_HEADER 			Header 	 = 1;
+	repeated GORM_PB_TABLE 		Tables 	= 2;
+	string 						PlusColumns = 3;	// 增加的字段
+	string 						MinusColumns = 4;	// 减少的字段
+}
+
+message GORM_PB_INCREASE_RSP
+{
+	GORM_PB_Ret_Code 			RetCode = 1;
+	repeated GORM_PB_TABLE 		Tables 	= 2;
+	int32						AffectedNum = 3;
+}
+
+message GORM_PB_DELETE_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1;
+	GORM_PB_TABLE			Table	= 2;
+}
+
+message GORM_PB_DELETE_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	int32					AffectedNum = 2;
+}
+
+message GORM_PB_GET_BY_PARTKEY_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+}
+
+message GORM_PB_GET_BY_PARTKEY_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;
+}
+
+message GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ
+{
+	GORM_PB_REQ_HEADER 		Header = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+}
+
+message GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP
+{
+	GORM_PB_Ret_Code 		RetCode = 1;
+	repeated GORM_PB_TABLE 	Tables 	= 2;
+}

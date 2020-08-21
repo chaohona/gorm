@@ -1,0 +1,35 @@
+# gorm-server configuration file example.
+
+#server listen address
+listen-address: 0.0.0.0:8806
+
+#work thread numbers
+work-threads: 1
+
+# By default gorm-server does not run as a daemon. Use 'yes' if you need it.
+# Note that gorm-server will write a pid file in /var/run/gorm-server.pid when daemonized.
+daemonize: no
+
+# Specify the server verbosity level.
+# This can be one of:
+# none          (no log)                                                        print:nothing
+# error         (error happend)                                                 print:error
+# warning       (many rarely useful info, but not a mess like the debug level)  print:error,warning
+# info          (only very important / critical messages are logged)            print:error,warning,info
+# debug         (a lot of information, useful for development/testing)          print:all
+loglevel: debug
+
+# Specify the log file name. Also the empty string can be used to force
+# Redis to log on the standard output. Note that if you use standard
+# output for logging but daemonize, logs will be sent to /dev/null
+logfile: ""
+
+database-config: ./conf/gorm-db.yml
+
+# on  open cache
+# off close cache
+#cache-switch: on
+#cache-type: redis
+
+#redis-info:
+#  redis-server: "127.0.0.1:60001/127.0.0.1:60001"
