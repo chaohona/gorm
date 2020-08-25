@@ -25,8 +25,10 @@ public:
     virtual void Loop() = 0;
     virtual int SendRequest2DB(GORM_DBRequest *pRequest) = 0;
 public:
-    int m_iMaxPoolSize; // 每个库最大的连接数
-    char m_szUrl[MAX_URL_LEN];
+    int     m_iMaxPoolSize; // 每个库最大的连接数
+    char    m_szUrl[MAX_URL_LEN];
+    string  m_strName;
+    GORM_DBInfo *pDbInfo;   // 此链接对应的db信息
 };
 
 struct UrlInfo

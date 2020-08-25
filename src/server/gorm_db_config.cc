@@ -210,13 +210,6 @@ int GORM_RouteInfo::ParseRoute(YAML::Node &node)
             }
             strncpy(pTable->szTable, table["table_name"].as<string>().c_str(), GORM_DB_TABLE_MAX_LEN);
 
-            if (!table["split_key"])
-            {
-                GORM_LOGE("invalid config table_route.split_key:%d", i);
-                return GORM_ERROR;
-            }
-            strncpy(pTable->szSplitColumn, table["split_key"].as<string>().c_str(), GORM_DB_FIELD_MAX_LEN);
-
             if (!table["router"])
             {
                 GORM_LOGE("invalid config table_route.router:%d", i);

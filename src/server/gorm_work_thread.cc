@@ -205,8 +205,10 @@ int GORM_WorkThread::Init(mutex *m, GORM_Config *pConfig)
     return GORM_OK;
 }
 
+// 暂不支持缓存
 int GORM_WorkThread::CacheInit(GORM_Config *pConfig)
 {
+    return GORM_OK;
     if (0 == GORM_CACHE_SWITCH)
     {
         return GORM_OK;

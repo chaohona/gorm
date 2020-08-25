@@ -2,6 +2,9 @@
 #include "gorm_db_config.h"
 #include "gorm_log.h"
 #include "gorm_mysql_conn_pool.h"
+#include "gorm_table_field_map.h"
+
+using namespace gorm;
 
 GORM_DBConnMgr::GORM_DBConnMgr()
 {
@@ -10,15 +13,93 @@ GORM_DBConnMgr::GORM_DBConnMgr()
 // 进程已经结束了，内存就不管了
 GORM_DBConnMgr::~GORM_DBConnMgr()
 {
-    /*if (this->m_pDBPool != nullptr)
-    {
-        delete []m_pDBPool;
-    }*/
+    if (this->m_vTableRouteInfo != nullptr)
+        delete this->m_vTableRouteInfo;
 }
 
 GORM_Ret GORM_DBConnMgr::Init(GORM_WorkThread *pWorkThread, mutex *m)
 {
     m_pWorkThread = pWorkThread;
+
+    if (GORM_OK != this->InitDB())
+    {
+        GORM_LOGE("connect to database failed.");
+        return GORM_ERROR;
+    }
+    
+    if (GORM_OK != this->InitRoute())
+    {
+        GORM_LOGE("init route failed.");
+        return GORM_ERROR;
+    }
+
+    return GORM_OK;
+}
+
+int GORM_DBConnMgr::InitRoute()
+{
+    GORM_RouteInfo *pRoute = GetDatabaseRoute();
+
+    if (pRoute->routes.iTableNum < 1)
+    {
+        GORM_LOGE("table route was not configed.");
+        return GORM_ERROR;
+    }
+    // 获取最大的表ID
+    for (int i=0; i<pRoute->routes.iTableNum; i++)
+    {
+        GORM_RouteTable &table = &pRoute->routes.vRouteTables[i];
+        int iNowId = -1;
+        GORM_GetTableId(table.szTable, iNowId);
+        if (iNowId < 1)
+        {
+            GORM_LOGE("table was not loaded from xml, table name:%s", table.szTable);
+            return GORM_ERROR;
+        }
+        table.iTableId = iNowId;
+        int iSplitMode = 0;
+        for (int j=0; j<table.iDBNum; j++)
+        {
+            iSplitMode += table.vRouteDB[j].iSplitNum;
+        }
+        if (iSplitMode < 1)
+        {
+            GORM_LOGE("table route was not configed, table name:%s", table.szTable);
+            return GORM_ERROR;
+        }
+        table.iSplitMode = iSplitMode;
+        if (iNowId > this->iMaxTableId)
+            this->iMaxTableId = iNowId;
+    }
+    this->m_vTableRouteInfo = new GORM_RouteMgr[this->iMaxTableId+1];
+    for (int i=0; i<pRoute->routes.iTableNum; i++)
+    {
+        GORM_RouteTable &table = &pRoute->routes.vRouteTables[i];
+        GORM_RouteMgr &routeMgr = &this->m_vTableRouteInfo[i];
+        routeMgr.iSpilitMode = table.iSplitMode;
+        routeMgr.iTableId = table.iTableId;
+        routeMgr.vDbConn = new GORM_DBConnPool*[routeMgr.iSpilitMode];
+        int splitIdx = 0;
+        for (int j=0; j<table.iDBNum; j++)
+        {
+            GORM_RouteDB &routeDB = &table.vRouteDB[j];
+            GORM_DBConnPool *pConn = m_mapDB2Conn[routeDB.szDBSymbol];
+            if (pConn == nullptr)
+            {
+                GORM_LOGE("get connect for database failed, db:%s", routeDB.szDBSymbol);
+                return GORM_ERROR;
+            }
+            for (;splitIdx<routeDB.iSplitNum; splitIdx++)
+            {
+                routeMgr.vDbConn[splitIdx] = pConn;
+            }
+        }
+    }
+    return GORM_OK;
+}
+
+int GORM_DBConnMgr::InitDB()
+{
     this->m_pDBPool = new GORM_DBConnPool*[GORM_DB_MAX_DB_LIST];
     bzero(this->m_pDBPool, sizeof(GORM_DBConnPool*)*GORM_DB_MAX_DB_LIST);
 
@@ -38,7 +119,6 @@ GORM_Ret GORM_DBConnMgr::Init(GORM_WorkThread *pWorkThread, mutex *m)
             return GORM_ERROR;
         }
     }
-    
     return GORM_OK;
 }
 
@@ -81,12 +161,14 @@ GORM_Ret GORM_DBConnMgr::CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m)
             GORM_LOGE("invalid db type, %s, %s", pDbInfo->szDBSymbol, pDbInfo->szType);
             GORM_ERROR;
         }
+        pPool->pDbInfo = pDbInfo;
         if (!pPool->Init(pDbInfo, m))
         {
             GORM_LOGE("init db connection failed:%s", pDbInfo->szDBSymbol);
             return GORM_ERROR;
         }
         this->m_pDBPool[iIndex] = pPool;
+        this->m_mapDB2Conn[pDbInfo->szDBSymbol] = pPool;
     }
     catch(exception &e)
     {
@@ -107,7 +189,15 @@ int GORM_DBConnMgr::GetDBPool(int iTableId, uint32 uiHashValue, GORM_DBConnPool 
     {
         return GORM_NO_DB;
     }
-    pDbPool = m_pDBPool[0];
+    if (iTableId < 1 || iTableId > this->iMaxTableId)
+    {
+        GORM_LOGE("invalid table id:%d", iTableId);
+        return GORM_INVALID_TABLE;
+    }
+    GORM_RouteMgr &route = &this->m_vTableRouteInfo[iTableId];
+    int iIndex = uiHashValue%route.iSpilitMode;
+    pDbPool = route.vDbConn[iIndex];
+    //pDbPool = m_pDBPool[0];
     return GORM_OK;
 }
 

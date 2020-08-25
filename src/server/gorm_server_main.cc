@@ -8,6 +8,7 @@
 #include "gorm_work_thread.h"
 #include "gorm_frontend_thread.h"
 #include "gorm_db_config.h"
+#include "gorm_table_field_map.h"
 
 static bool bGlobalStopFlag = false;
 
@@ -53,6 +54,12 @@ GORM_Ret PreRun()
     }
 
     GORM_DefaultLog::Instance()->SetLogLevel(GORM_Config::Instance()->m_iLogLevel);
+
+    if (GORM_OK != GORM_TableFieldMapInstance::Instance()->Init(pLogger))
+    {
+        cout << "init table field map failed." << endl;
+        return GORM_ERROR;
+    }
     // 2、设置后台运行
     if (GORM_Config::Instance()->m_bDaemonize)
         GORM_Daemonize();

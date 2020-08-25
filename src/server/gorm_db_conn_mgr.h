@@ -11,6 +11,16 @@
 
 using namespace gorm;
 // 先做成一个线程一个连接池，TODO改成所有线程共享一个连接池
+
+struct GORM_RouteMgr
+{
+public:
+    
+public:
+    int iSpilitMode = 1;
+    int iTableId = 0;
+    GORM_DBConnPool **vDbConn;
+};
 class GORM_WorkThread;
 class GORM_DBConnMgr 
 {
@@ -25,12 +35,17 @@ public:
     int RequestNum(); // 返回当前没有处理的请求的个数，如果有请求没有处理，则接着处理，否则休眠等待唤醒
 private:
     GORM_Ret CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m);
+    int InitRoute();
+    int InitDB();
 private:
-    int m_iPoolNum = 0;
-    GORM_DBConnPool **m_pDBPool;
-    GORM_WorkThread *m_pWorkThread;
-    DBType          m_iDBType = DBType_NONE;
     mutex       m_Mutex;
+    int m_iPoolNum = 0;
+    GORM_DBConnPool **m_pDBPool = nullptr;
+    unordered_map<string, GORM_DBConnPool*> m_mapDB2Conn;
+    GORM_WorkThread *m_pWorkThread = nullptr;
+    DBType          m_iDBType = DBType_NONE;
+    int iMaxTableId = 0;
+    GORM_RouteMgr   *m_vTableRouteInfo = nullptr;
 };
 
 
