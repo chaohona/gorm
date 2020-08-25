@@ -21,13 +21,13 @@ GORM_Ret GORM_DBConnMgr::Init(GORM_WorkThread *pWorkThread, mutex *m)
 {
     m_pWorkThread = pWorkThread;
 
-    if (GORM_OK != this->InitDB())
+    if (GORM_OK != this->InitDB(m))
     {
         GORM_LOGE("connect to database failed.");
         return GORM_ERROR;
     }
     
-    if (GORM_OK != this->InitRoute())
+    if (GORM_OK != this->InitRoute(m))
     {
         GORM_LOGE("init route failed.");
         return GORM_ERROR;
@@ -36,7 +36,7 @@ GORM_Ret GORM_DBConnMgr::Init(GORM_WorkThread *pWorkThread, mutex *m)
     return GORM_OK;
 }
 
-int GORM_DBConnMgr::InitRoute()
+int GORM_DBConnMgr::InitRoute(mutex *m)
 {
     GORM_RouteInfo *pRoute = GetDatabaseRoute();
 
@@ -98,7 +98,7 @@ int GORM_DBConnMgr::InitRoute()
     return GORM_OK;
 }
 
-int GORM_DBConnMgr::InitDB()
+int GORM_DBConnMgr::InitDB(mutex *m)
 {
     this->m_pDBPool = new GORM_DBConnPool*[GORM_DB_MAX_DB_LIST];
     bzero(this->m_pDBPool, sizeof(GORM_DBConnPool*)*GORM_DB_MAX_DB_LIST);

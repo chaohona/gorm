@@ -55,7 +55,7 @@ GORM_Ret PreRun()
 
     GORM_DefaultLog::Instance()->SetLogLevel(GORM_Config::Instance()->m_iLogLevel);
 
-    if (GORM_OK != GORM_TableFieldMapInstance::Instance()->Init(pLogger))
+    if (GORM_OK != GORM_TableFieldMapInstance::Instance()->Init(GORM_DefaultLog::Instance()))
     {
         cout << "init table field map failed." << endl;
         return GORM_ERROR;

@@ -35,8 +35,8 @@ public:
     int RequestNum(); // 返回当前没有处理的请求的个数，如果有请求没有处理，则接着处理，否则休眠等待唤醒
 private:
     GORM_Ret CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m);
-    int InitRoute();
-    int InitDB();
+    int InitRoute(mutex *m);
+    int InitDB(mutex *m);
 private:
     mutex       m_Mutex;
     int m_iPoolNum = 0;
