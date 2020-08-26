@@ -48,7 +48,7 @@ int GORM_DBConnMgr::InitRoute(mutex *m)
     // 获取最大的表ID
     for (int i=0; i<pRoute->routes.iTableNum; i++)
     {
-        GORM_RouteTable &table = &pRoute->routes.vRouteTables[i];
+        GORM_RouteTable &table = pRoute->routes.vRouteTables[i];
         int iNowId = -1;
         GORM_GetTableId(table.szTable, iNowId);
         if (iNowId < 1)
@@ -74,15 +74,15 @@ int GORM_DBConnMgr::InitRoute(mutex *m)
     this->m_vTableRouteInfo = new GORM_RouteMgr[this->iMaxTableId+1];
     for (int i=0; i<pRoute->routes.iTableNum; i++)
     {
-        GORM_RouteTable &table = &pRoute->routes.vRouteTables[i];
-        GORM_RouteMgr &routeMgr = &this->m_vTableRouteInfo[i];
+        GORM_RouteTable &table = pRoute->routes.vRouteTables[i];
+        GORM_RouteMgr &routeMgr = this->m_vTableRouteInfo[i];
         routeMgr.iSpilitMode = table.iSplitMode;
         routeMgr.iTableId = table.iTableId;
         routeMgr.vDbConn = new GORM_DBConnPool*[routeMgr.iSpilitMode];
         int splitIdx = 0;
         for (int j=0; j<table.iDBNum; j++)
         {
-            GORM_RouteDB &routeDB = &table.vRouteDB[j];
+            GORM_RouteDB &routeDB = table.vRouteDB[j];
             GORM_DBConnPool *pConn = m_mapDB2Conn[routeDB.szDBSymbol];
             if (pConn == nullptr)
             {
@@ -183,20 +183,20 @@ GORM_Ret GORM_DBConnMgr::CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m)
     return GORM_OK;
 }
 
-int GORM_DBConnMgr::GetDBPool(int iTableId, uint32 uiHashValue, GORM_DBConnPool *&pDbPool)
+int GORM_DBConnMgr::GetDBPool(GORM_DBRequest *pDBReq)
 {
     if (this->m_iPoolNum == 0)
     {
         return GORM_NO_DB;
     }
-    if (iTableId < 1 || iTableId > this->iMaxTableId)
+    if (pDBReq->iReqTableId < 1 || pDBReq->iReqTableId > this->iMaxTableId)
     {
-        GORM_LOGE("invalid table id:%d", iTableId);
+        GORM_LOGE("invalid table id:%d", pDBReq->iReqTableId);
         return GORM_INVALID_TABLE;
     }
-    GORM_RouteMgr &route = &this->m_vTableRouteInfo[iTableId];
-    int iIndex = uiHashValue%route.iSpilitMode;
-    pDbPool = route.vDbConn[iIndex];
+    GORM_RouteMgr &route = this->m_vTableRouteInfo[pDBReq->iReqTableId];
+    pDBReq->iTableIndex = pDBReq->uiHashValue%route.iSpilitMode;
+    pDBReq->pDbPool = route.vDbConn[pDBReq->iTableIndex];
     //pDbPool = m_pDBPool[0];
     return GORM_OK;
 }

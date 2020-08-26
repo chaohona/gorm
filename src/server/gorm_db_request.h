@@ -52,7 +52,7 @@ public:
 private:
     void SetDbErrInfo(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
 public:
-    GORM_Event  *pFrontendEvent = nullptr;
+    GORM_Event      *pFrontendEvent = nullptr;
     GORM_DBConnPool *pDbPool = nullptr;
     //GORM_CacheOpt   *pCacheOpt = nullptr;
     
@@ -77,7 +77,7 @@ public:
     int                 iDBErrCode = 0;
     GORM_MemPoolData    *pDbErrorInfo = nullptr;
     GORM_CMD            iReqCmd = GORM_CMD_INVALID;
-    GORM_CMD            iRedirectCmd = GORM_CMD_INVALID;
+    GORM_CMD            iRedirectCmd = GORM_CMD_INVALID;    // 重新发起命令，目前有两种情况，1:get的时候如果没有数据则插入一条，2:需要会带数据的情况
     PB_MSG_PTR          pReqPbMsg = nullptr;              // 收到的前端的pb请求消息
     PB_MSG_PTR          pRspPbMsg = nullptr;
     GORM_MemPoolData    *pRspData = nullptr;
@@ -92,8 +92,9 @@ public:
 
     gorm::GORM_PB_TABLE         *pNowRspProcTable = nullptr;            // 当前响应需要填充的table
 
-    uint32 uiHashValue = 0;
-    int staticRequest = 0;      // 此标记为1，则不会被回收
+    uint32  uiHashValue = 0;
+    int     iTableIndex = -1;   // 表下标
+    int     staticRequest = 0;      // 此标记为1，则不会被回收
 };
 
 #endif

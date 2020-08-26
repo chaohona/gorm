@@ -31,7 +31,7 @@ public:
     GORM_Ret Init(GORM_WorkThread *pWorkThread, mutex *m);
     void Loop();
     // 获取请求的路由的数据库
-    int GetDBPool(int iTableId, uint32 uiHashValue, GORM_DBConnPool *&pDbPool);
+    int GetDBPool(GORM_DBRequest *pDBReq);
     int RequestNum(); // 返回当前没有处理的请求的个数，如果有请求没有处理，则接着处理，否则休眠等待唤醒
 private:
     GORM_Ret CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m);

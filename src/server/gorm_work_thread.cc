@@ -119,7 +119,7 @@ int GORM_WorkThread::RequestPreProc()
         }*/
 
         // 根据路由，获取到响应的mysql句柄，传给mysql
-        int iRet = this->m_dbMgr.GetDBPool(pReq->iReqTableId, pReq->uiHashValue, pReq->pDbPool);
+        int iRet = this->m_dbMgr.GetDBPool(pReq);
         if (iRet != GORM_OK)
         {
             pReq->GetResult(iRet);

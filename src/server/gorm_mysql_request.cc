@@ -607,8 +607,8 @@ int GORM_MySQLRequest::PackSQL()
                 return GORM_REQ_MSG_ERROR;
             }
             GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-            uiHashValue = GORM_TableHash(iReqTableId, *pNowReqProcTable);
-            if (GORM_OK != GORM_PackGetSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, uiHashValue, *pNowReqProcTable, pReqData))
+            // uiHashValue = GORM_TableHash(iReqTableId, *pNowReqProcTable);
+            if (GORM_OK != GORM_PackGetSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, *pNowReqProcTable, pReqData))
             {
                 GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
                 return GORM_ERROR;
@@ -622,8 +622,8 @@ int GORM_MySQLRequest::PackSQL()
                 return GORM_REQ_MSG_ERROR;
             }
             GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-            uiHashValue = GORM_TableHash(iReqTableId, *pNowReqProcTable);
-            if (GORM_OK != GORM_PackInsertSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, uiHashValue, *pNowReqProcTable, pReqData))
+            // uiHashValue = GORM_TableHash(iReqTableId, *pNowReqProcTable);
+            if (GORM_OK != GORM_PackInsertSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, *pNowReqProcTable, pReqData))
             {
                 GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
                 return GORM_ERROR;
@@ -760,7 +760,7 @@ int GORM_MySQLRequest::InsertReq()
     if (nullptr == this->pNowReqProcTable)
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
     
-    if (GORM_OK != GORM_PackInsertSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackInsertSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -786,7 +786,7 @@ int GORM_MySQLRequest::ReplaceReq()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
 
     
-    if (GORM_OK != GORM_PackReplaceSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackReplaceSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack replace sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -811,7 +811,7 @@ int GORM_MySQLRequest::IncreaseReq()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
     
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackIncreaseSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackIncreaseSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -841,7 +841,7 @@ int GORM_MySQLRequest::GetReq()
     
     // TODO 放在dbpool中做，也就是放在work线程中做
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackGetSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackGetSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -857,7 +857,7 @@ int GORM_MySQLRequest::DeleteReq()
     ASSERT(pReqMsg!=nullptr);
 
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackDeleteSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackDeleteSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -913,7 +913,7 @@ int GORM_MySQLRequest::BatchGetNext()
     if (nullptr == this->pNowReqProcTable)
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(this->iGotRspNum));
 
-    if (GORM_OK != GORM_PackGetSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, table, pReqData))
+    if (GORM_OK != GORM_PackGetSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, table, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -968,7 +968,7 @@ int GORM_MySQLRequest::UpdateReq()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
 
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackUpdateSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackUpdateSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -998,7 +998,7 @@ int GORM_MySQLRequest::GetByNonPrimaryKey()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
 
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackGet_By_Non_Primary_KeySQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->uiHashValue, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackGet_By_Non_Primary_KeySQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
