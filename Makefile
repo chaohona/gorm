@@ -20,7 +20,7 @@ PROTO_LIB=-lprotobuf -lprotobuf-lite
 #LIB=-L$(LIB_PATH)/protobuf/ /root/gorm/lib/mysql-connector/libmysqlclient.a $(PROTO_LIB) -L$(LIB_PATH)/yaml/ -lyaml-cpp -lpthread  -lm -lrt -lssl -lcrypto -ldl
 LIB=-lmysqlclient $(PROTO_LIB) -lpthread
 
-SHARE_LIB=-lmysqlclient $(PROTO_LIB) -lpthread  -lm -lrt -lssl -lcrypto -ldl
+SHARE_LIB=-lmysqlclient $(PROTO_LIB) -lpthread  -lm -lrt -lssl -lcrypto -ldl 
 
 CXX=g++
 DEBUG=-g -ggdb -rdynamic -DGORM_DEBUG=1
@@ -70,11 +70,13 @@ SHARE_TABLES_OBJ=$(TABLES_SRC:%.cc=%.o)
 SERVER_LIBS=$(LIB_PATH)/redis/libhiredis.a -L$(LIB_PATH)/yaml/ -lyaml-cpp
 
 DEBUG_FLAGS=$(SVRCXXFLAGS) -DGORM_DEBUG=1
-$(GORM_SERVER_DEBUG) : $(SHAREClient) $(COMMON_OBJ) $(TABLES_OBJ) $(GORM_SVR_OBJ) $(TABLES_SVR_OBJ)
-	$(CXX) $(DEBUG_FLAGS) -o $@ $^ $(DEPS) $(SERVER_LIBS) -L$(PWD)/lib/gorm -lgorm-client -lgorm-tables
+$(GORM_SERVER_DEBUG) : $(COMMON_OBJ) $(GORM_SVR_OBJ)
+	$(CXX) $(DEBUG_FLAGS) -o $@ $^ $(DEPS) $(SERVER_LIBS) -L$(PWD)/lib/gorm -lgorm-tables
 
-$(GORMServer) : $(SHAREClient) $(COMMON_OBJ) $(TABLES_OBJ) $(GORM_SVR_OBJ) $(TABLES_SVR_OBJ)
-	$(CXX) $(SVRCXXFLAGS) -o $@ $^ $(DEPS) $(SERVER_LIBS) -L$(PWD)/lib/gorm -lgorm-client -lgorm-tables
+RUN_LIB_PATH=-Wl,-rpath=./lib/gorm 
+
+$(GORMServer) : $(COMMON_OBJ) $(GORM_SVR_OBJ)
+	$(CXX) $(SVRCXXFLAGS) -o $@ $^ $(DEPS) $(SERVER_LIBS) -L$(PWD)/lib/gorm -lgorm-tables $(RUN_LIB_PATH)
 	if [ "$$?" != "0" ]; then\
 		echo "make $(GORMServer) failed...";\
 	else\
@@ -86,7 +88,7 @@ $(GORMProxy) : $(PROXY_OBJ) $(COMMON_OBJ)
 
 $(STATICTABLES) : $(TABLES_OBJ)
 	ar rcs $(STATICTABLES) $(TABLES_OBJ)
-$(SHARETABLES) : $(TABLES_OBJ)
+$(SHARETABLES) : $(TABLES_OBJ) $(TABLES_SVR_OBJ)
 	$(CXX) $(CXXFLAGS) -shared -o $@ $^ $(SHARE_LIB)
 $(STATICClient) : $(COMMON_OBJ) $(GORM_CLIENT_OBJ)
 	ar rcs $(STATICClient) $(COMMON_OBJ) $(GORM_CLIENT_OBJ)
