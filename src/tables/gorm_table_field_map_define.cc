@@ -20,7 +20,11 @@ uint32 GORM_TableHash(int iTableId, const GORM_PB_TABLE &pbTable)
             return 0;
         const GORM_PB_Table_role& role = pbTable.role();
         int64 numROLEID = role.roleid();
-        return GORM_Hash::Crc32_1((const char*)&numROLEID, 8);
+        char szSrcHash[1024];
+        int iTotalLen = snprintf(szSrcHash, 1024, "%ll:%s", numROLEID);
+        if (iTotalLen > 1024)
+            iTotalLen = 1024;
+        return GORM_Hash::Crc32_1((const char*)szSrcHash, iTotalLen);
     }
     default:
         return 0;

@@ -17,7 +17,7 @@ struct GORM_RouteMgr
 public:
     
 public:
-    int iSpilitMode = 1;
+    int iSpilitMode = 0;
     int iTableId = 0;
     GORM_DBConnPool **vDbConn;
 };

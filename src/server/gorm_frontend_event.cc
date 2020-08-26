@@ -301,7 +301,7 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     {
         
     }
-    GORM_LOGD("got request from client, cmd:%d, seqid:%d, flag:%d", iReqCmd, iReqID, flag);
+    GORM_LOGD("got request from client, cmd:%d, seqid:%u, flag:%d", iReqCmd, iReqID, flag);
 
     // TODO 返回心跳，连接5秒没消息则主动断开
     if (iReqCmd == GORM_CMD_HEART)

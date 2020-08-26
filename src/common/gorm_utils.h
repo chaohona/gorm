@@ -79,6 +79,23 @@ _vscnprintf(char *buf, size_t size, const char *fmt, va_list args);
 #define GORM_VscnPrintf(_s, _n, _f, _a)   \
     _vscnprintf((char *)(_s), (size_t)(_n), _f, _a)
 
+inline int GORM_SafeSnprintf(char *buf, size_t size, const char *fmt, ...);
+
+int GORM_SafeSnprintf(char *buf, size_t size, const char *fmt, ...)
+{
+    if (size <=0 )
+        return 0;
+
+    va_list ap;
+    va_start(ap, fmt);
+    int iResult = vsnprintf(buf, size, fmt, ap);
+    va_end(ap);
+
+    if (iResult > size)
+        iResult = size;
+
+    return iResult;
+}
 
 
 void GORM_Stacktrace(int skip_count);

@@ -39,7 +39,7 @@ GORM_Ret ReloadRoute(const char *szCfg)
         pNewRoute = new GORM_RouteInfo();
         if (GORM_OK != pNewRoute->Init(szCfg) )
         {
-            cout << "parse route config file filed:" <<  szCfg << endl;
+            cout << "parse route config file failed:" <<  szCfg << endl;
             return GORM_ERROR;
         }
     }
