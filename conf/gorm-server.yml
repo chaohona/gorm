@@ -1,7 +1,7 @@
 # gorm-server configuration file example.
 
 #server listen address
-listen-address: 0.0.0.0:8806
+listen-address: 0.0.0.0:6606
 
 #work thread numbers
 work-threads: 1

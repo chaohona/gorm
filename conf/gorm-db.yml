@@ -1,16 +1,58 @@
-version: 1
 databases:
-  - name: mysql1
+  - name: lixiang_game
     type: mysql
-    host: 127.0.0.1
+    host: 192.168.12.42
     port: 3306
     user: root
     passwd: ztgame@123
-    database: daobatu
-  - name: mysql2
+    database: game
+  - name: lixiang_account
     type: mysql
-    host: 127.0.0.1
+    host: 192.168.12.42
     port: 3306
     user: root
     passwd: ztgame@123
-    database: daobatu
+    database: account
+table_route:
+  - table_name: currency
+    router:
+      - lixiang_game: 2
+  - table_name: cycleevent
+    router:
+      - lixiang_game: 2
+  - table_name: equip
+    router:
+      - lixiang_game: 2
+  - table_name: food
+    router:
+      - lixiang_game: 2
+  - table_name: hero
+    router:
+      - lixiang_game: 2
+  - table_name: mail
+    router:
+      - lixiang_game: 2
+  - table_name: material
+    router:
+      - lixiang_game: 2
+  - table_name: npc
+    router:
+      - lixiang_game: 2
+  - table_name: role
+    router:
+      - lixiang_game: 2
+  - table_name: scene
+    router:
+      - lixiang_game: 2
+  - table_name: skill
+    router:
+      - lixiang_game: 2
+  - table_name: interaction
+    router:
+      - lixiang_game: 2
+  - table_name: roles
+    router:
+      - lixiang_account: 2
+  - table_name: user
+    router:
+      - lixiang_account: 2

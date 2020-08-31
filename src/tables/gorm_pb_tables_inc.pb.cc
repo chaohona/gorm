@@ -17,7 +17,20 @@
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5ftables_5finc_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GORM_PB_COLUMN_gorm_5fpb_5ftables_5finc_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5ftables_5finc_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_COLUMN_VALUE_gorm_5fpb_5ftables_5finc_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5ftables_5finc_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GORM_PB_CUSTEM_COLUMNS_gorm_5fpb_5ftables_5finc_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_cycleevent_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_equip_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_food_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_hero_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_mail_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_material_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_scene_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_skill_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto;
 namespace gorm {
 class GORM_PB_COLUMN_VALUEDefaultTypeInternal {
  public:
@@ -95,10 +108,23 @@ static void InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto(
   ::gorm::GORM_PB_TABLE::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<15> scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 15, 0, InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto}, {
       &scc_info_GORM_PB_CUSTEM_COLUMNS_gorm_5fpb_5ftables_5finc_2eproto.base,
-      &scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto.base,}};
+      &scc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_cycleevent_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_equip_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_food_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_hero_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_mail_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_material_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_scene_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_skill_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base,}};
 
 static void InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -111,12 +137,25 @@ static void InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto
   ::gorm::GORM_PB_TABLES::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto}, {
-      &scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<14> scc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 14, 0, InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto}, {
+      &scc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_cycleevent_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_equip_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_food_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_hero_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_mail_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_material_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_scene_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_skill_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base,}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gorm_5fpb_5ftables_5finc_2eproto[5];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[3];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[16];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gorm_5fpb_5ftables_5finc_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5ftables_5finc_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -150,20 +189,46 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5ftables_5finc_2epro
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, tableid_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, custom_columns_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, currency_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, cycleevent_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, equip_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, food_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, hero_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, mail_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, material_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, npc_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, role_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, scene_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, skill_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, interaction_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, user_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, roles_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, currency_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, cycleevent_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, equip_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, food_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, hero_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, mail_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, material_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, npc_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, role_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, scene_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, skill_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, interaction_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, user_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, roles_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::gorm::GORM_PB_COLUMN_VALUE)},
   { 10, -1, sizeof(::gorm::GORM_PB_COLUMN)},
   { 17, -1, sizeof(::gorm::GORM_PB_CUSTEM_COLUMNS)},
   { 23, -1, sizeof(::gorm::GORM_PB_TABLE)},
-  { 31, -1, sizeof(::gorm::GORM_PB_TABLES)},
+  { 44, -1, sizeof(::gorm::GORM_PB_TABLES)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -183,29 +248,153 @@ const char descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto[] PROTOBUF
   "_PB_COLUMN\022\014\n\004name\030\001 \001(\t\022)\n\005value\030\002 \001(\0132"
   "\032.gorm.GORM_PB_COLUMN_VALUE\"\?\n\026GORM_PB_C"
   "USTEM_COLUMNS\022%\n\007columns\030\001 \003(\0132\024.gorm.GO"
-  "RM_PB_COLUMN\"~\n\rGORM_PB_TABLE\022\017\n\007TableId"
-  "\030\001 \001(\005\0224\n\016custom_columns\030\002 \001(\0132\034.gorm.GO"
-  "RM_PB_CUSTEM_COLUMNS\022&\n\004role\030\003 \001(\0132\030.gor"
-  "m.GORM_PB_Table_role\"8\n\016GORM_PB_TABLES\022&"
-  "\n\004role\030\001 \003(\0132\030.gorm.GORM_PB_Table_role*k"
-  "\n\023GORM_PB_TABLE_INDEX\022\033\n\027GORM_PB_TABLE_I"
-  "DX_MIN__\020\000\022\032\n\026GORM_PB_TABLE_IDX_ROLE\020\001\022\033"
-  "\n\027GORM_PB_TABLE_IDX_MAX__\020\002*\227\003\n\030GORM_PB_"
-  "ROLE_FIELD_INDEX\022\036\n\032GORM_PB_FIELD_ROLE_V"
-  "ERSION\020\000\022\035\n\031GORM_PB_FIELD_ROLE_ROLEID\020\001\022"
-  "\037\n\033GORM_PB_FIELD_ROLE_ROLENAME\020\002\022\034\n\030GORM"
-  "_PB_FIELD_ROLE_LEVEL\020\003\022\032\n\026GORM_PB_FIELD_"
-  "ROLE_EXP\020\004\022\"\n\036GORM_PB_FIELD_ROLE_CHARACT"
-  "ERID\020\005\022\033\n\027GORM_PB_FIELD_ROLE_GOLD\020\006\022\"\n\036G"
-  "ORM_PB_FIELD_ROLE_OFFLINETIME\020\007\022\035\n\031GORM_"
-  "PB_FIELD_ROLE_INITED\020\010\022!\n\035GORM_PB_FIELD_"
-  "ROLE_CREATETIME\020\t\022\033\n\027GORM_PB_FIELD_ROLE_"
-  "FACE\020\n\022\035\n\031GORM_PB_FIELD_ROLE_ONLINE\020\013*\261\001"
-  "\n\023GORM_PB_COLUMN_TYPE\022\037\n\033GORM_PB_COLUMN_"
-  "TYPE_INVALID\020\000\022\033\n\027GORM_PB_COLUMN_TYPE_IN"
-  "T\020\001\022\034\n\030GORM_PB_COLUMN_TYPE_UINT\020\002\022\036\n\032GOR"
-  "M_PB_COLUMN_TYPE_DOUBLE\020\003\022\036\n\032GORM_PB_COL"
-  "UMN_TYPE_STRING\020\004B\013Z\tgorm/gormb\006proto3"
+  "RM_PB_COLUMN\"\266\005\n\rGORM_PB_TABLE\022\017\n\007TableI"
+  "d\030\001 \001(\005\0224\n\016custom_columns\030\002 \001(\0132\034.gorm.G"
+  "ORM_PB_CUSTEM_COLUMNS\022.\n\010currency\030\003 \001(\0132"
+  "\034.gorm.GORM_PB_Table_currency\0222\n\ncycleev"
+  "ent\030\004 \001(\0132\036.gorm.GORM_PB_Table_cycleeven"
+  "t\022(\n\005equip\030\005 \001(\0132\031.gorm.GORM_PB_Table_eq"
+  "uip\022&\n\004food\030\006 \001(\0132\030.gorm.GORM_PB_Table_f"
+  "ood\022&\n\004hero\030\007 \001(\0132\030.gorm.GORM_PB_Table_h"
+  "ero\022&\n\004mail\030\010 \001(\0132\030.gorm.GORM_PB_Table_m"
+  "ail\022.\n\010material\030\t \001(\0132\034.gorm.GORM_PB_Tab"
+  "le_material\022$\n\003npc\030\n \001(\0132\027.gorm.GORM_PB_"
+  "Table_npc\022&\n\004role\030\013 \001(\0132\030.gorm.GORM_PB_T"
+  "able_role\022(\n\005scene\030\014 \001(\0132\031.gorm.GORM_PB_"
+  "Table_scene\022(\n\005skill\030\r \001(\0132\031.gorm.GORM_P"
+  "B_Table_skill\0224\n\013interaction\030\016 \001(\0132\037.gor"
+  "m.GORM_PB_Table_interaction\022&\n\004user\030\017 \001("
+  "\0132\030.gorm.GORM_PB_Table_user\022(\n\005roles\030\020 \001"
+  "(\0132\031.gorm.GORM_PB_Table_roles\"\360\004\n\016GORM_P"
+  "B_TABLES\022.\n\010currency\030\001 \003(\0132\034.gorm.GORM_P"
+  "B_Table_currency\0222\n\ncycleevent\030\002 \003(\0132\036.g"
+  "orm.GORM_PB_Table_cycleevent\022(\n\005equip\030\003 "
+  "\003(\0132\031.gorm.GORM_PB_Table_equip\022&\n\004food\030\004"
+  " \003(\0132\030.gorm.GORM_PB_Table_food\022&\n\004hero\030\005"
+  " \003(\0132\030.gorm.GORM_PB_Table_hero\022&\n\004mail\030\006"
+  " \003(\0132\030.gorm.GORM_PB_Table_mail\022.\n\010materi"
+  "al\030\007 \003(\0132\034.gorm.GORM_PB_Table_material\022$"
+  "\n\003npc\030\010 \003(\0132\027.gorm.GORM_PB_Table_npc\022&\n\004"
+  "role\030\t \003(\0132\030.gorm.GORM_PB_Table_role\022(\n\005"
+  "scene\030\n \003(\0132\031.gorm.GORM_PB_Table_scene\022("
+  "\n\005skill\030\013 \003(\0132\031.gorm.GORM_PB_Table_skill"
+  "\0224\n\013interaction\030\014 \003(\0132\037.gorm.GORM_PB_Tab"
+  "le_interaction\022&\n\004user\030\r \003(\0132\030.gorm.GORM"
+  "_PB_Table_user\022(\n\005roles\030\016 \003(\0132\031.gorm.GOR"
+  "M_PB_Table_roles*\357\003\n\023GORM_PB_TABLE_INDEX"
+  "\022\033\n\027GORM_PB_TABLE_IDX_MIN__\020\000\022\036\n\032GORM_PB"
+  "_TABLE_IDX_CURRENCY\020\001\022 \n\034GORM_PB_TABLE_I"
+  "DX_CYCLEEVENT\020\002\022\033\n\027GORM_PB_TABLE_IDX_EQU"
+  "IP\020\003\022\032\n\026GORM_PB_TABLE_IDX_FOOD\020\004\022\032\n\026GORM"
+  "_PB_TABLE_IDX_HERO\020\005\022\032\n\026GORM_PB_TABLE_ID"
+  "X_MAIL\020\006\022\036\n\032GORM_PB_TABLE_IDX_MATERIAL\020\007"
+  "\022\031\n\025GORM_PB_TABLE_IDX_NPC\020\010\022\032\n\026GORM_PB_T"
+  "ABLE_IDX_ROLE\020\t\022\033\n\027GORM_PB_TABLE_IDX_SCE"
+  "NE\020\n\022\033\n\027GORM_PB_TABLE_IDX_SKILL\020\013\022!\n\035GOR"
+  "M_PB_TABLE_IDX_INTERACTION\020\014\022\032\n\026GORM_PB_"
+  "TABLE_IDX_USER\020\r\022\033\n\027GORM_PB_TABLE_IDX_RO"
+  "LES\020\016\022\033\n\027GORM_PB_TABLE_IDX_MAX__\020\017*\241\002\n\034G"
+  "ORM_PB_CURRENCY_FIELD_INDEX\022\"\n\036GORM_PB_F"
+  "IELD_CURRENCY_VERSION\020\000\022!\n\035GORM_PB_FIELD"
+  "_CURRENCY_ROLEID\020\001\022\"\n\036GORM_PB_FIELD_CURR"
+  "ENCY_SNAKEID\020\002\022$\n GORM_PB_FIELD_CURRENCY"
+  "_CURRENCY1\020\003\022$\n GORM_PB_FIELD_CURRENCY_C"
+  "URRENCY2\020\004\022$\n GORM_PB_FIELD_CURRENCY_CUR"
+  "RENCY3\020\005\022$\n GORM_PB_FIELD_CURRENCY_CURRE"
+  "NCY4\020\006*\220\001\n\036GORM_PB_CYCLEEVENT_FIELD_INDE"
+  "X\022$\n GORM_PB_FIELD_CYCLEEVENT_VERSION\020\000\022"
+  "#\n\037GORM_PB_FIELD_CYCLEEVENT_ROLEID\020\001\022#\n\037"
+  "GORM_PB_FIELD_CYCLEEVENT_EVENTS\020\002*\375\001\n\031GO"
+  "RM_PB_EQUIP_FIELD_INDEX\022\037\n\033GORM_PB_FIELD"
+  "_EQUIP_VERSION\020\000\022\036\n\032GORM_PB_FIELD_EQUIP_"
+  "ROLEID\020\001\022\037\n\033GORM_PB_FIELD_EQUIP_SNAKEID\020"
+  "\002\022\036\n\032GORM_PB_FIELD_EQUIP_EQUIP1\020\003\022\036\n\032GOR"
+  "M_PB_FIELD_EQUIP_EQUIP2\020\004\022\036\n\032GORM_PB_FIE"
+  "LD_EQUIP_EQUIP3\020\005\022\036\n\032GORM_PB_FIELD_EQUIP"
+  "_EQUIP4\020\006*\361\001\n\030GORM_PB_FOOD_FIELD_INDEX\022\036"
+  "\n\032GORM_PB_FIELD_FOOD_VERSION\020\000\022\035\n\031GORM_P"
+  "B_FIELD_FOOD_ROLEID\020\001\022\036\n\032GORM_PB_FIELD_F"
+  "OOD_SNAKEID\020\002\022\034\n\030GORM_PB_FIELD_FOOD_FOOD"
+  "1\020\003\022\034\n\030GORM_PB_FIELD_FOOD_FOOD2\020\004\022\034\n\030GOR"
+  "M_PB_FIELD_FOOD_FOOD3\020\005\022\034\n\030GORM_PB_FIELD"
+  "_FOOD_FOOD4\020\006*\227\001\n\030GORM_PB_HERO_FIELD_IND"
+  "EX\022\036\n\032GORM_PB_FIELD_HERO_VERSION\020\000\022\035\n\031GO"
+  "RM_PB_FIELD_HERO_ROLEID\020\001\022\036\n\032GORM_PB_FIE"
+  "LD_HERO_SNAKEID\020\002\022\034\n\030GORM_PB_FIELD_HERO_"
+  "HEROS\020\003*\262\002\n\030GORM_PB_MAIL_FIELD_INDEX\022\036\n\032"
+  "GORM_PB_FIELD_MAIL_VERSION\020\000\022\035\n\031GORM_PB_"
+  "FIELD_MAIL_ROLEID\020\001\022\034\n\030GORM_PB_FIELD_MAI"
+  "L_MAIL1\020\002\022\034\n\030GORM_PB_FIELD_MAIL_MAIL2\020\003\022"
+  "\034\n\030GORM_PB_FIELD_MAIL_MAIL3\020\004\022\034\n\030GORM_PB"
+  "_FIELD_MAIL_MAIL4\020\005\022\034\n\030GORM_PB_FIELD_MAI"
+  "L_MAIL5\020\006\022!\n\035GORM_PB_FIELD_MAIL_LASTMAIL"
+  "ID\020\007\022\036\n\032GORM_PB_FIELD_MAIL_SNAKEID\020\010*\241\002\n"
+  "\034GORM_PB_MATERIAL_FIELD_INDEX\022\"\n\036GORM_PB"
+  "_FIELD_MATERIAL_VERSION\020\000\022!\n\035GORM_PB_FIE"
+  "LD_MATERIAL_ROLEID\020\001\022\"\n\036GORM_PB_FIELD_MA"
+  "TERIAL_SNAKEID\020\002\022$\n GORM_PB_FIELD_MATERI"
+  "AL_MATERIAL1\020\003\022$\n GORM_PB_FIELD_MATERIAL"
+  "_MATERIAL2\020\004\022$\n GORM_PB_FIELD_MATERIAL_M"
+  "ATERIAL3\020\005\022$\n GORM_PB_FIELD_MATERIAL_MAT"
+  "ERIAL4\020\006*\221\001\n\027GORM_PB_NPC_FIELD_INDEX\022\035\n\031"
+  "GORM_PB_FIELD_NPC_VERSION\020\000\022\034\n\030GORM_PB_F"
+  "IELD_NPC_ROLEID\020\001\022\035\n\031GORM_PB_FIELD_NPC_S"
+  "NAKEID\020\002\022\032\n\026GORM_PB_FIELD_NPC_NPCS\020\003*\227\003\n"
+  "\030GORM_PB_ROLE_FIELD_INDEX\022\036\n\032GORM_PB_FIE"
+  "LD_ROLE_VERSION\020\000\022\035\n\031GORM_PB_FIELD_ROLE_"
+  "ROLEID\020\001\022\037\n\033GORM_PB_FIELD_ROLE_ROLENAME\020"
+  "\002\022\034\n\030GORM_PB_FIELD_ROLE_LEVEL\020\003\022\032\n\026GORM_"
+  "PB_FIELD_ROLE_EXP\020\004\022\"\n\036GORM_PB_FIELD_ROL"
+  "E_CHARACTERID\020\005\022\033\n\027GORM_PB_FIELD_ROLE_GO"
+  "LD\020\006\022\"\n\036GORM_PB_FIELD_ROLE_OFFLINETIME\020\007"
+  "\022\035\n\031GORM_PB_FIELD_ROLE_INITED\020\010\022!\n\035GORM_"
+  "PB_FIELD_ROLE_CREATETIME\020\t\022\033\n\027GORM_PB_FI"
+  "ELD_ROLE_FACE\020\n\022\035\n\031GORM_PB_FIELD_ROLE_ON"
+  "LINE\020\013*\237\001\n\031GORM_PB_SCENE_FIELD_INDEX\022\037\n\033"
+  "GORM_PB_FIELD_SCENE_VERSION\020\000\022\036\n\032GORM_PB"
+  "_FIELD_SCENE_ROLEID\020\001\022\037\n\033GORM_PB_FIELD_S"
+  "CENE_SCENEID\020\002\022 \n\034GORM_PB_FIELD_SCENE_CO"
+  "LLECTS\020\003*\375\001\n\031GORM_PB_SKILL_FIELD_INDEX\022\037"
+  "\n\033GORM_PB_FIELD_SKILL_VERSION\020\000\022\036\n\032GORM_"
+  "PB_FIELD_SKILL_ROLEID\020\001\022\037\n\033GORM_PB_FIELD"
+  "_SKILL_SNAKEID\020\002\022\036\n\032GORM_PB_FIELD_SKILL_"
+  "SKILL1\020\003\022\036\n\032GORM_PB_FIELD_SKILL_SKILL2\020\004"
+  "\022\036\n\032GORM_PB_FIELD_SKILL_SKILL3\020\005\022\036\n\032GORM"
+  "_PB_FIELD_SKILL_SKILL4\020\006*\305\002\n\037GORM_PB_INT"
+  "ERACTION_FIELD_INDEX\022%\n!GORM_PB_FIELD_IN"
+  "TERACTION_VERSION\020\000\022$\n GORM_PB_FIELD_INT"
+  "ERACTION_ROLEID\020\001\022%\n!GORM_PB_FIELD_INTER"
+  "ACTION_SNAKEID\020\002\022*\n&GORM_PB_FIELD_INTERA"
+  "CTION_INTERACTION1\020\003\022*\n&GORM_PB_FIELD_IN"
+  "TERACTION_INTERACTION2\020\004\022*\n&GORM_PB_FIEL"
+  "D_INTERACTION_INTERACTION3\020\005\022*\n&GORM_PB_"
+  "FIELD_INTERACTION_INTERACTION4\020\006*\270\001\n\030GOR"
+  "M_PB_USER_FIELD_INDEX\022\036\n\032GORM_PB_FIELD_U"
+  "SER_VERSION\020\000\022\035\n\031GORM_PB_FIELD_USER_USER"
+  "ID\020\001\022\033\n\027GORM_PB_FIELD_USER_PTID\020\002\022\035\n\031GOR"
+  "M_PB_FIELD_USER_PTTYPE\020\003\022!\n\035GORM_PB_FIEL"
+  "D_USER_CREATETIME\020\004*\273\002\n\031GORM_PB_ROLES_FI"
+  "ELD_INDEX\022\037\n\033GORM_PB_FIELD_ROLES_VERSION"
+  "\020\000\022\036\n\032GORM_PB_FIELD_ROLES_ROLEID\020\001\022\036\n\032GO"
+  "RM_PB_FIELD_ROLES_USERID\020\002\022\037\n\033GORM_PB_FI"
+  "ELD_ROLES_WORLDID\020\003\022\034\n\030GORM_PB_FIELD_ROL"
+  "ES_DBID\020\004\022\034\n\030GORM_PB_FIELD_ROLES_NAME\020\005\022"
+  "\036\n\032GORM_PB_FIELD_ROLES_CHARID\020\006\022\034\n\030GORM_"
+  "PB_FIELD_ROLES_FACE\020\007\022\"\n\036GORM_PB_FIELD_R"
+  "OLES_CREATETIME\020\010*\347\003\n\023GORM_PB_COLUMN_TYP"
+  "E\022\037\n\033GORM_PB_COLUMN_TYPE_INVALID\020\000\022\033\n\027GO"
+  "RM_PB_COLUMN_TYPE_INT\020\001\022\034\n\030GORM_PB_COLUM"
+  "N_TYPE_UINT\020\002\022\036\n\032GORM_PB_COLUMN_TYPE_DOU"
+  "BLE\020\003\022\036\n\032GORM_PB_COLUMN_TYPE_STRING\020\004\022\034\n"
+  "\030GORM_PB_COLUMN_TYPE_INT8\020\005\022\035\n\031GORM_PB_C"
+  "OLUMN_TYPE_INT16\020\006\022\035\n\031GORM_PB_COLUMN_TYP"
+  "E_INT32\020\007\022\035\n\031GORM_PB_COLUMN_TYPE_INT64\020\010"
+  "\022\035\n\031GORM_PB_COLUMN_TYPE_UINT8\020\t\022\036\n\032GORM_"
+  "PB_COLUMN_TYPE_UINT16\020\n\022\036\n\032GORM_PB_COLUM"
+  "N_TYPE_UINT32\020\013\022\036\n\032GORM_PB_COLUMN_TYPE_U"
+  "INT64\020\014\022\034\n\030GORM_PB_COLUMN_TYPE_BLOB\020\r\022\034\n"
+  "\030GORM_PB_COLUMN_TYPE_CHAR\020\016B\013Z\tgorm/gorm"
+  "b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_deps[1] = {
   &::descriptor_table_gorm_2ddb_2eproto,
@@ -219,7 +408,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gorm_5fpb_5ftables_5finc_2eproto = {
-  false, false, descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto, "gorm_pb_tables_inc.proto", 1238,
+  false, false, descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto, "gorm_pb_tables_inc.proto", 6168,
   &descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_once, descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_sccs, descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_deps, 5, 1,
   schemas, file_default_instances, TableStruct_gorm_5fpb_5ftables_5finc_2eproto::offsets,
   file_level_metadata_gorm_5fpb_5ftables_5finc_2eproto, 5, file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto, file_level_service_descriptors_gorm_5fpb_5ftables_5finc_2eproto,
@@ -237,6 +426,163 @@ bool GORM_PB_TABLE_INDEX_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_CURRENCY_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[1];
+}
+bool GORM_PB_CURRENCY_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_CYCLEEVENT_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[2];
+}
+bool GORM_PB_CYCLEEVENT_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_EQUIP_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[3];
+}
+bool GORM_PB_EQUIP_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_FOOD_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[4];
+}
+bool GORM_PB_FOOD_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_HERO_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[5];
+}
+bool GORM_PB_HERO_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_MAIL_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[6];
+}
+bool GORM_PB_MAIL_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_MATERIAL_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[7];
+}
+bool GORM_PB_MATERIAL_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_NPC_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[8];
+}
+bool GORM_PB_NPC_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -245,7 +591,7 @@ bool GORM_PB_TABLE_INDEX_IsValid(int value) {
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_ROLE_FIELD_INDEX_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
-  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[1];
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[9];
 }
 bool GORM_PB_ROLE_FIELD_INDEX_IsValid(int value) {
   switch (value) {
@@ -267,9 +613,101 @@ bool GORM_PB_ROLE_FIELD_INDEX_IsValid(int value) {
   }
 }
 
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_SCENE_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[10];
+}
+bool GORM_PB_SCENE_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_SKILL_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[11];
+}
+bool GORM_PB_SKILL_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_INTERACTION_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[12];
+}
+bool GORM_PB_INTERACTION_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_USER_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[13];
+}
+bool GORM_PB_USER_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_ROLES_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[14];
+}
+bool GORM_PB_ROLES_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+      return true;
+    default:
+      return false;
+  }
+}
+
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_COLUMN_TYPE_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
-  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[2];
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[15];
 }
 bool GORM_PB_COLUMN_TYPE_IsValid(int value) {
   switch (value) {
@@ -278,6 +716,16 @@ bool GORM_PB_COLUMN_TYPE_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
       return true;
     default:
       return false;
@@ -1061,28 +1509,197 @@ void GORM_PB_CUSTEM_COLUMNS::InternalSwap(GORM_PB_CUSTEM_COLUMNS* other) {
 void GORM_PB_TABLE::InitAsDefaultInstance() {
   ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->custom_columns_ = const_cast< ::gorm::GORM_PB_CUSTEM_COLUMNS*>(
       ::gorm::GORM_PB_CUSTEM_COLUMNS::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->currency_ = const_cast< ::gorm::GORM_PB_Table_currency*>(
+      ::gorm::GORM_PB_Table_currency::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->cycleevent_ = const_cast< ::gorm::GORM_PB_Table_cycleevent*>(
+      ::gorm::GORM_PB_Table_cycleevent::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->equip_ = const_cast< ::gorm::GORM_PB_Table_equip*>(
+      ::gorm::GORM_PB_Table_equip::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->food_ = const_cast< ::gorm::GORM_PB_Table_food*>(
+      ::gorm::GORM_PB_Table_food::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->hero_ = const_cast< ::gorm::GORM_PB_Table_hero*>(
+      ::gorm::GORM_PB_Table_hero::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->mail_ = const_cast< ::gorm::GORM_PB_Table_mail*>(
+      ::gorm::GORM_PB_Table_mail::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->material_ = const_cast< ::gorm::GORM_PB_Table_material*>(
+      ::gorm::GORM_PB_Table_material::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->npc_ = const_cast< ::gorm::GORM_PB_Table_npc*>(
+      ::gorm::GORM_PB_Table_npc::internal_default_instance());
   ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->role_ = const_cast< ::gorm::GORM_PB_Table_role*>(
       ::gorm::GORM_PB_Table_role::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->scene_ = const_cast< ::gorm::GORM_PB_Table_scene*>(
+      ::gorm::GORM_PB_Table_scene::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->skill_ = const_cast< ::gorm::GORM_PB_Table_skill*>(
+      ::gorm::GORM_PB_Table_skill::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->interaction_ = const_cast< ::gorm::GORM_PB_Table_interaction*>(
+      ::gorm::GORM_PB_Table_interaction::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->user_ = const_cast< ::gorm::GORM_PB_Table_user*>(
+      ::gorm::GORM_PB_Table_user::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->roles_ = const_cast< ::gorm::GORM_PB_Table_roles*>(
+      ::gorm::GORM_PB_Table_roles::internal_default_instance());
 }
 class GORM_PB_TABLE::_Internal {
  public:
   static const ::gorm::GORM_PB_CUSTEM_COLUMNS& custom_columns(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_currency& currency(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_cycleevent& cycleevent(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_equip& equip(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_food& food(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_hero& hero(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_mail& mail(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_material& material(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_npc& npc(const GORM_PB_TABLE* msg);
   static const ::gorm::GORM_PB_Table_role& role(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_scene& scene(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_skill& skill(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_interaction& interaction(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_user& user(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_roles& roles(const GORM_PB_TABLE* msg);
 };
 
 const ::gorm::GORM_PB_CUSTEM_COLUMNS&
 GORM_PB_TABLE::_Internal::custom_columns(const GORM_PB_TABLE* msg) {
   return *msg->custom_columns_;
 }
+const ::gorm::GORM_PB_Table_currency&
+GORM_PB_TABLE::_Internal::currency(const GORM_PB_TABLE* msg) {
+  return *msg->currency_;
+}
+const ::gorm::GORM_PB_Table_cycleevent&
+GORM_PB_TABLE::_Internal::cycleevent(const GORM_PB_TABLE* msg) {
+  return *msg->cycleevent_;
+}
+const ::gorm::GORM_PB_Table_equip&
+GORM_PB_TABLE::_Internal::equip(const GORM_PB_TABLE* msg) {
+  return *msg->equip_;
+}
+const ::gorm::GORM_PB_Table_food&
+GORM_PB_TABLE::_Internal::food(const GORM_PB_TABLE* msg) {
+  return *msg->food_;
+}
+const ::gorm::GORM_PB_Table_hero&
+GORM_PB_TABLE::_Internal::hero(const GORM_PB_TABLE* msg) {
+  return *msg->hero_;
+}
+const ::gorm::GORM_PB_Table_mail&
+GORM_PB_TABLE::_Internal::mail(const GORM_PB_TABLE* msg) {
+  return *msg->mail_;
+}
+const ::gorm::GORM_PB_Table_material&
+GORM_PB_TABLE::_Internal::material(const GORM_PB_TABLE* msg) {
+  return *msg->material_;
+}
+const ::gorm::GORM_PB_Table_npc&
+GORM_PB_TABLE::_Internal::npc(const GORM_PB_TABLE* msg) {
+  return *msg->npc_;
+}
 const ::gorm::GORM_PB_Table_role&
 GORM_PB_TABLE::_Internal::role(const GORM_PB_TABLE* msg) {
   return *msg->role_;
+}
+const ::gorm::GORM_PB_Table_scene&
+GORM_PB_TABLE::_Internal::scene(const GORM_PB_TABLE* msg) {
+  return *msg->scene_;
+}
+const ::gorm::GORM_PB_Table_skill&
+GORM_PB_TABLE::_Internal::skill(const GORM_PB_TABLE* msg) {
+  return *msg->skill_;
+}
+const ::gorm::GORM_PB_Table_interaction&
+GORM_PB_TABLE::_Internal::interaction(const GORM_PB_TABLE* msg) {
+  return *msg->interaction_;
+}
+const ::gorm::GORM_PB_Table_user&
+GORM_PB_TABLE::_Internal::user(const GORM_PB_TABLE* msg) {
+  return *msg->user_;
+}
+const ::gorm::GORM_PB_Table_roles&
+GORM_PB_TABLE::_Internal::roles(const GORM_PB_TABLE* msg) {
+  return *msg->roles_;
+}
+void GORM_PB_TABLE::clear_currency() {
+  if (GetArena() == nullptr && currency_ != nullptr) {
+    delete currency_;
+  }
+  currency_ = nullptr;
+}
+void GORM_PB_TABLE::clear_cycleevent() {
+  if (GetArena() == nullptr && cycleevent_ != nullptr) {
+    delete cycleevent_;
+  }
+  cycleevent_ = nullptr;
+}
+void GORM_PB_TABLE::clear_equip() {
+  if (GetArena() == nullptr && equip_ != nullptr) {
+    delete equip_;
+  }
+  equip_ = nullptr;
+}
+void GORM_PB_TABLE::clear_food() {
+  if (GetArena() == nullptr && food_ != nullptr) {
+    delete food_;
+  }
+  food_ = nullptr;
+}
+void GORM_PB_TABLE::clear_hero() {
+  if (GetArena() == nullptr && hero_ != nullptr) {
+    delete hero_;
+  }
+  hero_ = nullptr;
+}
+void GORM_PB_TABLE::clear_mail() {
+  if (GetArena() == nullptr && mail_ != nullptr) {
+    delete mail_;
+  }
+  mail_ = nullptr;
+}
+void GORM_PB_TABLE::clear_material() {
+  if (GetArena() == nullptr && material_ != nullptr) {
+    delete material_;
+  }
+  material_ = nullptr;
+}
+void GORM_PB_TABLE::clear_npc() {
+  if (GetArena() == nullptr && npc_ != nullptr) {
+    delete npc_;
+  }
+  npc_ = nullptr;
 }
 void GORM_PB_TABLE::clear_role() {
   if (GetArena() == nullptr && role_ != nullptr) {
     delete role_;
   }
   role_ = nullptr;
+}
+void GORM_PB_TABLE::clear_scene() {
+  if (GetArena() == nullptr && scene_ != nullptr) {
+    delete scene_;
+  }
+  scene_ = nullptr;
+}
+void GORM_PB_TABLE::clear_skill() {
+  if (GetArena() == nullptr && skill_ != nullptr) {
+    delete skill_;
+  }
+  skill_ = nullptr;
+}
+void GORM_PB_TABLE::clear_interaction() {
+  if (GetArena() == nullptr && interaction_ != nullptr) {
+    delete interaction_;
+  }
+  interaction_ = nullptr;
+}
+void GORM_PB_TABLE::clear_user() {
+  if (GetArena() == nullptr && user_ != nullptr) {
+    delete user_;
+  }
+  user_ = nullptr;
+}
+void GORM_PB_TABLE::clear_roles() {
+  if (GetArena() == nullptr && roles_ != nullptr) {
+    delete roles_;
+  }
+  roles_ = nullptr;
 }
 GORM_PB_TABLE::GORM_PB_TABLE(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
@@ -1098,10 +1715,75 @@ GORM_PB_TABLE::GORM_PB_TABLE(const GORM_PB_TABLE& from)
   } else {
     custom_columns_ = nullptr;
   }
+  if (from._internal_has_currency()) {
+    currency_ = new ::gorm::GORM_PB_Table_currency(*from.currency_);
+  } else {
+    currency_ = nullptr;
+  }
+  if (from._internal_has_cycleevent()) {
+    cycleevent_ = new ::gorm::GORM_PB_Table_cycleevent(*from.cycleevent_);
+  } else {
+    cycleevent_ = nullptr;
+  }
+  if (from._internal_has_equip()) {
+    equip_ = new ::gorm::GORM_PB_Table_equip(*from.equip_);
+  } else {
+    equip_ = nullptr;
+  }
+  if (from._internal_has_food()) {
+    food_ = new ::gorm::GORM_PB_Table_food(*from.food_);
+  } else {
+    food_ = nullptr;
+  }
+  if (from._internal_has_hero()) {
+    hero_ = new ::gorm::GORM_PB_Table_hero(*from.hero_);
+  } else {
+    hero_ = nullptr;
+  }
+  if (from._internal_has_mail()) {
+    mail_ = new ::gorm::GORM_PB_Table_mail(*from.mail_);
+  } else {
+    mail_ = nullptr;
+  }
+  if (from._internal_has_material()) {
+    material_ = new ::gorm::GORM_PB_Table_material(*from.material_);
+  } else {
+    material_ = nullptr;
+  }
+  if (from._internal_has_npc()) {
+    npc_ = new ::gorm::GORM_PB_Table_npc(*from.npc_);
+  } else {
+    npc_ = nullptr;
+  }
   if (from._internal_has_role()) {
     role_ = new ::gorm::GORM_PB_Table_role(*from.role_);
   } else {
     role_ = nullptr;
+  }
+  if (from._internal_has_scene()) {
+    scene_ = new ::gorm::GORM_PB_Table_scene(*from.scene_);
+  } else {
+    scene_ = nullptr;
+  }
+  if (from._internal_has_skill()) {
+    skill_ = new ::gorm::GORM_PB_Table_skill(*from.skill_);
+  } else {
+    skill_ = nullptr;
+  }
+  if (from._internal_has_interaction()) {
+    interaction_ = new ::gorm::GORM_PB_Table_interaction(*from.interaction_);
+  } else {
+    interaction_ = nullptr;
+  }
+  if (from._internal_has_user()) {
+    user_ = new ::gorm::GORM_PB_Table_user(*from.user_);
+  } else {
+    user_ = nullptr;
+  }
+  if (from._internal_has_roles()) {
+    roles_ = new ::gorm::GORM_PB_Table_roles(*from.roles_);
+  } else {
+    roles_ = nullptr;
   }
   tableid_ = from.tableid_;
   // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_TABLE)
@@ -1123,7 +1805,20 @@ GORM_PB_TABLE::~GORM_PB_TABLE() {
 void GORM_PB_TABLE::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete custom_columns_;
+  if (this != internal_default_instance()) delete currency_;
+  if (this != internal_default_instance()) delete cycleevent_;
+  if (this != internal_default_instance()) delete equip_;
+  if (this != internal_default_instance()) delete food_;
+  if (this != internal_default_instance()) delete hero_;
+  if (this != internal_default_instance()) delete mail_;
+  if (this != internal_default_instance()) delete material_;
+  if (this != internal_default_instance()) delete npc_;
   if (this != internal_default_instance()) delete role_;
+  if (this != internal_default_instance()) delete scene_;
+  if (this != internal_default_instance()) delete skill_;
+  if (this != internal_default_instance()) delete interaction_;
+  if (this != internal_default_instance()) delete user_;
+  if (this != internal_default_instance()) delete roles_;
 }
 
 void GORM_PB_TABLE::ArenaDtor(void* object) {
@@ -1151,10 +1846,62 @@ void GORM_PB_TABLE::Clear() {
     delete custom_columns_;
   }
   custom_columns_ = nullptr;
+  if (GetArena() == nullptr && currency_ != nullptr) {
+    delete currency_;
+  }
+  currency_ = nullptr;
+  if (GetArena() == nullptr && cycleevent_ != nullptr) {
+    delete cycleevent_;
+  }
+  cycleevent_ = nullptr;
+  if (GetArena() == nullptr && equip_ != nullptr) {
+    delete equip_;
+  }
+  equip_ = nullptr;
+  if (GetArena() == nullptr && food_ != nullptr) {
+    delete food_;
+  }
+  food_ = nullptr;
+  if (GetArena() == nullptr && hero_ != nullptr) {
+    delete hero_;
+  }
+  hero_ = nullptr;
+  if (GetArena() == nullptr && mail_ != nullptr) {
+    delete mail_;
+  }
+  mail_ = nullptr;
+  if (GetArena() == nullptr && material_ != nullptr) {
+    delete material_;
+  }
+  material_ = nullptr;
+  if (GetArena() == nullptr && npc_ != nullptr) {
+    delete npc_;
+  }
+  npc_ = nullptr;
   if (GetArena() == nullptr && role_ != nullptr) {
     delete role_;
   }
   role_ = nullptr;
+  if (GetArena() == nullptr && scene_ != nullptr) {
+    delete scene_;
+  }
+  scene_ = nullptr;
+  if (GetArena() == nullptr && skill_ != nullptr) {
+    delete skill_;
+  }
+  skill_ = nullptr;
+  if (GetArena() == nullptr && interaction_ != nullptr) {
+    delete interaction_;
+  }
+  interaction_ = nullptr;
+  if (GetArena() == nullptr && user_ != nullptr) {
+    delete user_;
+  }
+  user_ = nullptr;
+  if (GetArena() == nullptr && roles_ != nullptr) {
+    delete roles_;
+  }
+  roles_ = nullptr;
   tableid_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -1181,10 +1928,101 @@ const char* GORM_PB_TABLE::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .gorm.GORM_PB_Table_role role = 3;
+      // .gorm.GORM_PB_Table_currency currency = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(_internal_mutable_currency(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_cycleevent cycleevent = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ctx->ParseMessage(_internal_mutable_cycleevent(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_equip equip = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_equip(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_food food = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr = ctx->ParseMessage(_internal_mutable_food(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_hero hero = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_hero(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_mail mail = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          ptr = ctx->ParseMessage(_internal_mutable_mail(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_material material = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
+          ptr = ctx->ParseMessage(_internal_mutable_material(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_npc npc = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr = ctx->ParseMessage(_internal_mutable_npc(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_role role = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
           ptr = ctx->ParseMessage(_internal_mutable_role(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_scene scene = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr = ctx->ParseMessage(_internal_mutable_scene(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_skill skill = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
+          ptr = ctx->ParseMessage(_internal_mutable_skill(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_interaction interaction = 14;
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 114)) {
+          ptr = ctx->ParseMessage(_internal_mutable_interaction(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_user user = 15;
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 122)) {
+          ptr = ctx->ParseMessage(_internal_mutable_user(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_roles roles = 16;
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 130)) {
+          ptr = ctx->ParseMessage(_internal_mutable_roles(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1230,12 +2068,116 @@ failure:
         2, _Internal::custom_columns(this), target, stream);
   }
 
-  // .gorm.GORM_PB_Table_role role = 3;
+  // .gorm.GORM_PB_Table_currency currency = 3;
+  if (this->has_currency()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        3, _Internal::currency(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_cycleevent cycleevent = 4;
+  if (this->has_cycleevent()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        4, _Internal::cycleevent(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_equip equip = 5;
+  if (this->has_equip()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        5, _Internal::equip(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_food food = 6;
+  if (this->has_food()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        6, _Internal::food(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_hero hero = 7;
+  if (this->has_hero()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::hero(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_mail mail = 8;
+  if (this->has_mail()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        8, _Internal::mail(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_material material = 9;
+  if (this->has_material()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        9, _Internal::material(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_npc npc = 10;
+  if (this->has_npc()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        10, _Internal::npc(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_role role = 11;
   if (this->has_role()) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
-        3, _Internal::role(this), target, stream);
+        11, _Internal::role(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_scene scene = 12;
+  if (this->has_scene()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        12, _Internal::scene(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_skill skill = 13;
+  if (this->has_skill()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        13, _Internal::skill(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_interaction interaction = 14;
+  if (this->has_interaction()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        14, _Internal::interaction(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_user user = 15;
+  if (this->has_user()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        15, _Internal::user(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_roles roles = 16;
+  if (this->has_roles()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        16, _Internal::roles(this), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1261,11 +2203,102 @@ size_t GORM_PB_TABLE::ByteSizeLong() const {
         *custom_columns_);
   }
 
-  // .gorm.GORM_PB_Table_role role = 3;
+  // .gorm.GORM_PB_Table_currency currency = 3;
+  if (this->has_currency()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *currency_);
+  }
+
+  // .gorm.GORM_PB_Table_cycleevent cycleevent = 4;
+  if (this->has_cycleevent()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *cycleevent_);
+  }
+
+  // .gorm.GORM_PB_Table_equip equip = 5;
+  if (this->has_equip()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *equip_);
+  }
+
+  // .gorm.GORM_PB_Table_food food = 6;
+  if (this->has_food()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *food_);
+  }
+
+  // .gorm.GORM_PB_Table_hero hero = 7;
+  if (this->has_hero()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *hero_);
+  }
+
+  // .gorm.GORM_PB_Table_mail mail = 8;
+  if (this->has_mail()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *mail_);
+  }
+
+  // .gorm.GORM_PB_Table_material material = 9;
+  if (this->has_material()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *material_);
+  }
+
+  // .gorm.GORM_PB_Table_npc npc = 10;
+  if (this->has_npc()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *npc_);
+  }
+
+  // .gorm.GORM_PB_Table_role role = 11;
   if (this->has_role()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *role_);
+  }
+
+  // .gorm.GORM_PB_Table_scene scene = 12;
+  if (this->has_scene()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *scene_);
+  }
+
+  // .gorm.GORM_PB_Table_skill skill = 13;
+  if (this->has_skill()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *skill_);
+  }
+
+  // .gorm.GORM_PB_Table_interaction interaction = 14;
+  if (this->has_interaction()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *interaction_);
+  }
+
+  // .gorm.GORM_PB_Table_user user = 15;
+  if (this->has_user()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *user_);
+  }
+
+  // .gorm.GORM_PB_Table_roles roles = 16;
+  if (this->has_roles()) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *roles_);
   }
 
   // int32 TableId = 1;
@@ -1309,8 +2342,47 @@ void GORM_PB_TABLE::MergeFrom(const GORM_PB_TABLE& from) {
   if (from.has_custom_columns()) {
     _internal_mutable_custom_columns()->::gorm::GORM_PB_CUSTEM_COLUMNS::MergeFrom(from._internal_custom_columns());
   }
+  if (from.has_currency()) {
+    _internal_mutable_currency()->::gorm::GORM_PB_Table_currency::MergeFrom(from._internal_currency());
+  }
+  if (from.has_cycleevent()) {
+    _internal_mutable_cycleevent()->::gorm::GORM_PB_Table_cycleevent::MergeFrom(from._internal_cycleevent());
+  }
+  if (from.has_equip()) {
+    _internal_mutable_equip()->::gorm::GORM_PB_Table_equip::MergeFrom(from._internal_equip());
+  }
+  if (from.has_food()) {
+    _internal_mutable_food()->::gorm::GORM_PB_Table_food::MergeFrom(from._internal_food());
+  }
+  if (from.has_hero()) {
+    _internal_mutable_hero()->::gorm::GORM_PB_Table_hero::MergeFrom(from._internal_hero());
+  }
+  if (from.has_mail()) {
+    _internal_mutable_mail()->::gorm::GORM_PB_Table_mail::MergeFrom(from._internal_mail());
+  }
+  if (from.has_material()) {
+    _internal_mutable_material()->::gorm::GORM_PB_Table_material::MergeFrom(from._internal_material());
+  }
+  if (from.has_npc()) {
+    _internal_mutable_npc()->::gorm::GORM_PB_Table_npc::MergeFrom(from._internal_npc());
+  }
   if (from.has_role()) {
     _internal_mutable_role()->::gorm::GORM_PB_Table_role::MergeFrom(from._internal_role());
+  }
+  if (from.has_scene()) {
+    _internal_mutable_scene()->::gorm::GORM_PB_Table_scene::MergeFrom(from._internal_scene());
+  }
+  if (from.has_skill()) {
+    _internal_mutable_skill()->::gorm::GORM_PB_Table_skill::MergeFrom(from._internal_skill());
+  }
+  if (from.has_interaction()) {
+    _internal_mutable_interaction()->::gorm::GORM_PB_Table_interaction::MergeFrom(from._internal_interaction());
+  }
+  if (from.has_user()) {
+    _internal_mutable_user()->::gorm::GORM_PB_Table_user::MergeFrom(from._internal_user());
+  }
+  if (from.has_roles()) {
+    _internal_mutable_roles()->::gorm::GORM_PB_Table_roles::MergeFrom(from._internal_roles());
   }
   if (from.tableid() != 0) {
     _internal_set_tableid(from._internal_tableid());
@@ -1359,19 +2431,84 @@ class GORM_PB_TABLES::_Internal {
  public:
 };
 
+void GORM_PB_TABLES::clear_currency() {
+  currency_.Clear();
+}
+void GORM_PB_TABLES::clear_cycleevent() {
+  cycleevent_.Clear();
+}
+void GORM_PB_TABLES::clear_equip() {
+  equip_.Clear();
+}
+void GORM_PB_TABLES::clear_food() {
+  food_.Clear();
+}
+void GORM_PB_TABLES::clear_hero() {
+  hero_.Clear();
+}
+void GORM_PB_TABLES::clear_mail() {
+  mail_.Clear();
+}
+void GORM_PB_TABLES::clear_material() {
+  material_.Clear();
+}
+void GORM_PB_TABLES::clear_npc() {
+  npc_.Clear();
+}
 void GORM_PB_TABLES::clear_role() {
   role_.Clear();
 }
+void GORM_PB_TABLES::clear_scene() {
+  scene_.Clear();
+}
+void GORM_PB_TABLES::clear_skill() {
+  skill_.Clear();
+}
+void GORM_PB_TABLES::clear_interaction() {
+  interaction_.Clear();
+}
+void GORM_PB_TABLES::clear_user() {
+  user_.Clear();
+}
+void GORM_PB_TABLES::clear_roles() {
+  roles_.Clear();
+}
 GORM_PB_TABLES::GORM_PB_TABLES(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  role_(arena) {
+  currency_(arena),
+  cycleevent_(arena),
+  equip_(arena),
+  food_(arena),
+  hero_(arena),
+  mail_(arena),
+  material_(arena),
+  npc_(arena),
+  role_(arena),
+  scene_(arena),
+  skill_(arena),
+  interaction_(arena),
+  user_(arena),
+  roles_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_TABLES)
 }
 GORM_PB_TABLES::GORM_PB_TABLES(const GORM_PB_TABLES& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      role_(from.role_) {
+      currency_(from.currency_),
+      cycleevent_(from.cycleevent_),
+      equip_(from.equip_),
+      food_(from.food_),
+      hero_(from.hero_),
+      mail_(from.mail_),
+      material_(from.material_),
+      npc_(from.npc_),
+      role_(from.role_),
+      scene_(from.scene_),
+      skill_(from.skill_),
+      interaction_(from.interaction_),
+      user_(from.user_),
+      roles_(from.roles_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_TABLES)
 }
@@ -1411,7 +2548,20 @@ void GORM_PB_TABLES::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  currency_.Clear();
+  cycleevent_.Clear();
+  equip_.Clear();
+  food_.Clear();
+  hero_.Clear();
+  mail_.Clear();
+  material_.Clear();
+  npc_.Clear();
   role_.Clear();
+  scene_.Clear();
+  skill_.Clear();
+  interaction_.Clear();
+  user_.Clear();
+  roles_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1423,16 +2573,172 @@ const char* GORM_PB_TABLES::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // repeated .gorm.GORM_PB_Table_role role = 1;
+      // repeated .gorm.GORM_PB_Table_currency currency = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_currency(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_cycleevent cycleevent = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_cycleevent(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_equip equip = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_equip(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_food food = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_food(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_hero hero = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_hero(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<42>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_mail mail = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_mail(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_material material = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_material(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_npc npc = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_npc(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<66>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_role role = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_role(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<74>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_scene scene = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_scene(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<82>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_skill skill = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_skill(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<90>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_interaction interaction = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_interaction(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<98>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_user user = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_user(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<106>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_roles roles = 14;
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 114)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_roles(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<114>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -1463,12 +2769,116 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .gorm.GORM_PB_Table_role role = 1;
+  // repeated .gorm.GORM_PB_Table_currency currency = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_currency_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, this->_internal_currency(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_cycleevent cycleevent = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_cycleevent_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(2, this->_internal_cycleevent(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_equip equip = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_equip_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, this->_internal_equip(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_food food = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_food_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(4, this->_internal_food(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_hero hero = 5;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_hero_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(5, this->_internal_hero(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_mail mail = 6;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_mail_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(6, this->_internal_mail(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_material material = 7;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_material_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(7, this->_internal_material(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_npc npc = 8;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_npc_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(8, this->_internal_npc(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_role role = 9;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_role_size()); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, this->_internal_role(i), target, stream);
+      InternalWriteMessage(9, this->_internal_role(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_scene scene = 10;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_scene_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(10, this->_internal_scene(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_skill skill = 11;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_skill_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(11, this->_internal_skill(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_interaction interaction = 12;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_interaction_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(12, this->_internal_interaction(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_user user = 13;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_user_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(13, this->_internal_user(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_roles roles = 14;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_roles_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(14, this->_internal_roles(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1487,9 +2897,100 @@ size_t GORM_PB_TABLES::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .gorm.GORM_PB_Table_role role = 1;
+  // repeated .gorm.GORM_PB_Table_currency currency = 1;
+  total_size += 1UL * this->_internal_currency_size();
+  for (const auto& msg : this->currency_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_cycleevent cycleevent = 2;
+  total_size += 1UL * this->_internal_cycleevent_size();
+  for (const auto& msg : this->cycleevent_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_equip equip = 3;
+  total_size += 1UL * this->_internal_equip_size();
+  for (const auto& msg : this->equip_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_food food = 4;
+  total_size += 1UL * this->_internal_food_size();
+  for (const auto& msg : this->food_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_hero hero = 5;
+  total_size += 1UL * this->_internal_hero_size();
+  for (const auto& msg : this->hero_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_mail mail = 6;
+  total_size += 1UL * this->_internal_mail_size();
+  for (const auto& msg : this->mail_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_material material = 7;
+  total_size += 1UL * this->_internal_material_size();
+  for (const auto& msg : this->material_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_npc npc = 8;
+  total_size += 1UL * this->_internal_npc_size();
+  for (const auto& msg : this->npc_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_role role = 9;
   total_size += 1UL * this->_internal_role_size();
   for (const auto& msg : this->role_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_scene scene = 10;
+  total_size += 1UL * this->_internal_scene_size();
+  for (const auto& msg : this->scene_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_skill skill = 11;
+  total_size += 1UL * this->_internal_skill_size();
+  for (const auto& msg : this->skill_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_interaction interaction = 12;
+  total_size += 1UL * this->_internal_interaction_size();
+  for (const auto& msg : this->interaction_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_user user = 13;
+  total_size += 1UL * this->_internal_user_size();
+  for (const auto& msg : this->user_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_roles roles = 14;
+  total_size += 1UL * this->_internal_roles_size();
+  for (const auto& msg : this->roles_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -1525,7 +3026,20 @@ void GORM_PB_TABLES::MergeFrom(const GORM_PB_TABLES& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  currency_.MergeFrom(from.currency_);
+  cycleevent_.MergeFrom(from.cycleevent_);
+  equip_.MergeFrom(from.equip_);
+  food_.MergeFrom(from.food_);
+  hero_.MergeFrom(from.hero_);
+  mail_.MergeFrom(from.mail_);
+  material_.MergeFrom(from.material_);
+  npc_.MergeFrom(from.npc_);
   role_.MergeFrom(from.role_);
+  scene_.MergeFrom(from.scene_);
+  skill_.MergeFrom(from.skill_);
+  interaction_.MergeFrom(from.interaction_);
+  user_.MergeFrom(from.user_);
+  roles_.MergeFrom(from.roles_);
 }
 
 void GORM_PB_TABLES::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1549,7 +3063,20 @@ bool GORM_PB_TABLES::IsInitialized() const {
 void GORM_PB_TABLES::InternalSwap(GORM_PB_TABLES* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  currency_.InternalSwap(&other->currency_);
+  cycleevent_.InternalSwap(&other->cycleevent_);
+  equip_.InternalSwap(&other->equip_);
+  food_.InternalSwap(&other->food_);
+  hero_.InternalSwap(&other->hero_);
+  mail_.InternalSwap(&other->mail_);
+  material_.InternalSwap(&other->material_);
+  npc_.InternalSwap(&other->npc_);
   role_.InternalSwap(&other->role_);
+  scene_.InternalSwap(&other->scene_);
+  skill_.InternalSwap(&other->skill_);
+  interaction_.InternalSwap(&other->interaction_);
+  user_.InternalSwap(&other->user_);
+  roles_.InternalSwap(&other->roles_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_TABLES::GetMetadata() const {

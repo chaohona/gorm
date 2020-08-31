@@ -84,8 +84,21 @@ namespace gorm {
 
 enum GORM_PB_TABLE_INDEX : int {
   GORM_PB_TABLE_IDX_MIN__ = 0,
-  GORM_PB_TABLE_IDX_ROLE = 1,
-  GORM_PB_TABLE_IDX_MAX__ = 2,
+  GORM_PB_TABLE_IDX_CURRENCY = 1,
+  GORM_PB_TABLE_IDX_CYCLEEVENT = 2,
+  GORM_PB_TABLE_IDX_EQUIP = 3,
+  GORM_PB_TABLE_IDX_FOOD = 4,
+  GORM_PB_TABLE_IDX_HERO = 5,
+  GORM_PB_TABLE_IDX_MAIL = 6,
+  GORM_PB_TABLE_IDX_MATERIAL = 7,
+  GORM_PB_TABLE_IDX_NPC = 8,
+  GORM_PB_TABLE_IDX_ROLE = 9,
+  GORM_PB_TABLE_IDX_SCENE = 10,
+  GORM_PB_TABLE_IDX_SKILL = 11,
+  GORM_PB_TABLE_IDX_INTERACTION = 12,
+  GORM_PB_TABLE_IDX_USER = 13,
+  GORM_PB_TABLE_IDX_ROLES = 14,
+  GORM_PB_TABLE_IDX_MAX__ = 15,
   GORM_PB_TABLE_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   GORM_PB_TABLE_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
@@ -107,6 +120,238 @@ inline bool GORM_PB_TABLE_INDEX_Parse(
     const std::string& name, GORM_PB_TABLE_INDEX* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_TABLE_INDEX>(
     GORM_PB_TABLE_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_CURRENCY_FIELD_INDEX : int {
+  GORM_PB_FIELD_CURRENCY_VERSION = 0,
+  GORM_PB_FIELD_CURRENCY_ROLEID = 1,
+  GORM_PB_FIELD_CURRENCY_SNAKEID = 2,
+  GORM_PB_FIELD_CURRENCY_CURRENCY1 = 3,
+  GORM_PB_FIELD_CURRENCY_CURRENCY2 = 4,
+  GORM_PB_FIELD_CURRENCY_CURRENCY3 = 5,
+  GORM_PB_FIELD_CURRENCY_CURRENCY4 = 6,
+  GORM_PB_CURRENCY_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_CURRENCY_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_CURRENCY_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_CURRENCY_FIELD_INDEX GORM_PB_CURRENCY_FIELD_INDEX_MIN = GORM_PB_FIELD_CURRENCY_VERSION;
+constexpr GORM_PB_CURRENCY_FIELD_INDEX GORM_PB_CURRENCY_FIELD_INDEX_MAX = GORM_PB_FIELD_CURRENCY_CURRENCY4;
+constexpr int GORM_PB_CURRENCY_FIELD_INDEX_ARRAYSIZE = GORM_PB_CURRENCY_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_CURRENCY_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_CURRENCY_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_CURRENCY_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_CURRENCY_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_CURRENCY_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_CURRENCY_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_CURRENCY_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_CURRENCY_FIELD_INDEX>(
+    GORM_PB_CURRENCY_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_CYCLEEVENT_FIELD_INDEX : int {
+  GORM_PB_FIELD_CYCLEEVENT_VERSION = 0,
+  GORM_PB_FIELD_CYCLEEVENT_ROLEID = 1,
+  GORM_PB_FIELD_CYCLEEVENT_EVENTS = 2,
+  GORM_PB_CYCLEEVENT_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_CYCLEEVENT_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_CYCLEEVENT_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_CYCLEEVENT_FIELD_INDEX GORM_PB_CYCLEEVENT_FIELD_INDEX_MIN = GORM_PB_FIELD_CYCLEEVENT_VERSION;
+constexpr GORM_PB_CYCLEEVENT_FIELD_INDEX GORM_PB_CYCLEEVENT_FIELD_INDEX_MAX = GORM_PB_FIELD_CYCLEEVENT_EVENTS;
+constexpr int GORM_PB_CYCLEEVENT_FIELD_INDEX_ARRAYSIZE = GORM_PB_CYCLEEVENT_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_CYCLEEVENT_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_CYCLEEVENT_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_CYCLEEVENT_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_CYCLEEVENT_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_CYCLEEVENT_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_CYCLEEVENT_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_CYCLEEVENT_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_CYCLEEVENT_FIELD_INDEX>(
+    GORM_PB_CYCLEEVENT_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_EQUIP_FIELD_INDEX : int {
+  GORM_PB_FIELD_EQUIP_VERSION = 0,
+  GORM_PB_FIELD_EQUIP_ROLEID = 1,
+  GORM_PB_FIELD_EQUIP_SNAKEID = 2,
+  GORM_PB_FIELD_EQUIP_EQUIP1 = 3,
+  GORM_PB_FIELD_EQUIP_EQUIP2 = 4,
+  GORM_PB_FIELD_EQUIP_EQUIP3 = 5,
+  GORM_PB_FIELD_EQUIP_EQUIP4 = 6,
+  GORM_PB_EQUIP_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_EQUIP_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_EQUIP_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_EQUIP_FIELD_INDEX GORM_PB_EQUIP_FIELD_INDEX_MIN = GORM_PB_FIELD_EQUIP_VERSION;
+constexpr GORM_PB_EQUIP_FIELD_INDEX GORM_PB_EQUIP_FIELD_INDEX_MAX = GORM_PB_FIELD_EQUIP_EQUIP4;
+constexpr int GORM_PB_EQUIP_FIELD_INDEX_ARRAYSIZE = GORM_PB_EQUIP_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_EQUIP_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_EQUIP_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_EQUIP_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_EQUIP_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_EQUIP_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_EQUIP_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_EQUIP_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_EQUIP_FIELD_INDEX>(
+    GORM_PB_EQUIP_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_FOOD_FIELD_INDEX : int {
+  GORM_PB_FIELD_FOOD_VERSION = 0,
+  GORM_PB_FIELD_FOOD_ROLEID = 1,
+  GORM_PB_FIELD_FOOD_SNAKEID = 2,
+  GORM_PB_FIELD_FOOD_FOOD1 = 3,
+  GORM_PB_FIELD_FOOD_FOOD2 = 4,
+  GORM_PB_FIELD_FOOD_FOOD3 = 5,
+  GORM_PB_FIELD_FOOD_FOOD4 = 6,
+  GORM_PB_FOOD_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_FOOD_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_FOOD_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_FOOD_FIELD_INDEX GORM_PB_FOOD_FIELD_INDEX_MIN = GORM_PB_FIELD_FOOD_VERSION;
+constexpr GORM_PB_FOOD_FIELD_INDEX GORM_PB_FOOD_FIELD_INDEX_MAX = GORM_PB_FIELD_FOOD_FOOD4;
+constexpr int GORM_PB_FOOD_FIELD_INDEX_ARRAYSIZE = GORM_PB_FOOD_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_FOOD_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_FOOD_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_FOOD_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_FOOD_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_FOOD_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_FOOD_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_FOOD_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_FOOD_FIELD_INDEX>(
+    GORM_PB_FOOD_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_HERO_FIELD_INDEX : int {
+  GORM_PB_FIELD_HERO_VERSION = 0,
+  GORM_PB_FIELD_HERO_ROLEID = 1,
+  GORM_PB_FIELD_HERO_SNAKEID = 2,
+  GORM_PB_FIELD_HERO_HEROS = 3,
+  GORM_PB_HERO_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_HERO_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_HERO_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_HERO_FIELD_INDEX GORM_PB_HERO_FIELD_INDEX_MIN = GORM_PB_FIELD_HERO_VERSION;
+constexpr GORM_PB_HERO_FIELD_INDEX GORM_PB_HERO_FIELD_INDEX_MAX = GORM_PB_FIELD_HERO_HEROS;
+constexpr int GORM_PB_HERO_FIELD_INDEX_ARRAYSIZE = GORM_PB_HERO_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_HERO_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_HERO_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_HERO_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_HERO_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_HERO_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_HERO_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_HERO_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_HERO_FIELD_INDEX>(
+    GORM_PB_HERO_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_MAIL_FIELD_INDEX : int {
+  GORM_PB_FIELD_MAIL_VERSION = 0,
+  GORM_PB_FIELD_MAIL_ROLEID = 1,
+  GORM_PB_FIELD_MAIL_MAIL1 = 2,
+  GORM_PB_FIELD_MAIL_MAIL2 = 3,
+  GORM_PB_FIELD_MAIL_MAIL3 = 4,
+  GORM_PB_FIELD_MAIL_MAIL4 = 5,
+  GORM_PB_FIELD_MAIL_MAIL5 = 6,
+  GORM_PB_FIELD_MAIL_LASTMAILID = 7,
+  GORM_PB_FIELD_MAIL_SNAKEID = 8,
+  GORM_PB_MAIL_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_MAIL_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_MAIL_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_MAIL_FIELD_INDEX GORM_PB_MAIL_FIELD_INDEX_MIN = GORM_PB_FIELD_MAIL_VERSION;
+constexpr GORM_PB_MAIL_FIELD_INDEX GORM_PB_MAIL_FIELD_INDEX_MAX = GORM_PB_FIELD_MAIL_SNAKEID;
+constexpr int GORM_PB_MAIL_FIELD_INDEX_ARRAYSIZE = GORM_PB_MAIL_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_MAIL_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_MAIL_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_MAIL_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_MAIL_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_MAIL_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_MAIL_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_MAIL_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_MAIL_FIELD_INDEX>(
+    GORM_PB_MAIL_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_MATERIAL_FIELD_INDEX : int {
+  GORM_PB_FIELD_MATERIAL_VERSION = 0,
+  GORM_PB_FIELD_MATERIAL_ROLEID = 1,
+  GORM_PB_FIELD_MATERIAL_SNAKEID = 2,
+  GORM_PB_FIELD_MATERIAL_MATERIAL1 = 3,
+  GORM_PB_FIELD_MATERIAL_MATERIAL2 = 4,
+  GORM_PB_FIELD_MATERIAL_MATERIAL3 = 5,
+  GORM_PB_FIELD_MATERIAL_MATERIAL4 = 6,
+  GORM_PB_MATERIAL_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_MATERIAL_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_MATERIAL_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_MATERIAL_FIELD_INDEX GORM_PB_MATERIAL_FIELD_INDEX_MIN = GORM_PB_FIELD_MATERIAL_VERSION;
+constexpr GORM_PB_MATERIAL_FIELD_INDEX GORM_PB_MATERIAL_FIELD_INDEX_MAX = GORM_PB_FIELD_MATERIAL_MATERIAL4;
+constexpr int GORM_PB_MATERIAL_FIELD_INDEX_ARRAYSIZE = GORM_PB_MATERIAL_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_MATERIAL_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_MATERIAL_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_MATERIAL_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_MATERIAL_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_MATERIAL_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_MATERIAL_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_MATERIAL_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_MATERIAL_FIELD_INDEX>(
+    GORM_PB_MATERIAL_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_NPC_FIELD_INDEX : int {
+  GORM_PB_FIELD_NPC_VERSION = 0,
+  GORM_PB_FIELD_NPC_ROLEID = 1,
+  GORM_PB_FIELD_NPC_SNAKEID = 2,
+  GORM_PB_FIELD_NPC_NPCS = 3,
+  GORM_PB_NPC_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_NPC_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_NPC_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_NPC_FIELD_INDEX GORM_PB_NPC_FIELD_INDEX_MIN = GORM_PB_FIELD_NPC_VERSION;
+constexpr GORM_PB_NPC_FIELD_INDEX GORM_PB_NPC_FIELD_INDEX_MAX = GORM_PB_FIELD_NPC_NPCS;
+constexpr int GORM_PB_NPC_FIELD_INDEX_ARRAYSIZE = GORM_PB_NPC_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_NPC_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_NPC_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_NPC_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_NPC_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_NPC_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_NPC_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_NPC_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_NPC_FIELD_INDEX>(
+    GORM_PB_NPC_FIELD_INDEX_descriptor(), name, value);
 }
 enum GORM_PB_ROLE_FIELD_INDEX : int {
   GORM_PB_FIELD_ROLE_VERSION = 0,
@@ -143,18 +388,175 @@ inline bool GORM_PB_ROLE_FIELD_INDEX_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_ROLE_FIELD_INDEX>(
     GORM_PB_ROLE_FIELD_INDEX_descriptor(), name, value);
 }
+enum GORM_PB_SCENE_FIELD_INDEX : int {
+  GORM_PB_FIELD_SCENE_VERSION = 0,
+  GORM_PB_FIELD_SCENE_ROLEID = 1,
+  GORM_PB_FIELD_SCENE_SCENEID = 2,
+  GORM_PB_FIELD_SCENE_COLLECTS = 3,
+  GORM_PB_SCENE_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_SCENE_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_SCENE_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_SCENE_FIELD_INDEX GORM_PB_SCENE_FIELD_INDEX_MIN = GORM_PB_FIELD_SCENE_VERSION;
+constexpr GORM_PB_SCENE_FIELD_INDEX GORM_PB_SCENE_FIELD_INDEX_MAX = GORM_PB_FIELD_SCENE_COLLECTS;
+constexpr int GORM_PB_SCENE_FIELD_INDEX_ARRAYSIZE = GORM_PB_SCENE_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_SCENE_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_SCENE_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_SCENE_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_SCENE_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_SCENE_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_SCENE_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_SCENE_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_SCENE_FIELD_INDEX>(
+    GORM_PB_SCENE_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_SKILL_FIELD_INDEX : int {
+  GORM_PB_FIELD_SKILL_VERSION = 0,
+  GORM_PB_FIELD_SKILL_ROLEID = 1,
+  GORM_PB_FIELD_SKILL_SNAKEID = 2,
+  GORM_PB_FIELD_SKILL_SKILL1 = 3,
+  GORM_PB_FIELD_SKILL_SKILL2 = 4,
+  GORM_PB_FIELD_SKILL_SKILL3 = 5,
+  GORM_PB_FIELD_SKILL_SKILL4 = 6,
+  GORM_PB_SKILL_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_SKILL_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_SKILL_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_SKILL_FIELD_INDEX GORM_PB_SKILL_FIELD_INDEX_MIN = GORM_PB_FIELD_SKILL_VERSION;
+constexpr GORM_PB_SKILL_FIELD_INDEX GORM_PB_SKILL_FIELD_INDEX_MAX = GORM_PB_FIELD_SKILL_SKILL4;
+constexpr int GORM_PB_SKILL_FIELD_INDEX_ARRAYSIZE = GORM_PB_SKILL_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_SKILL_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_SKILL_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_SKILL_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_SKILL_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_SKILL_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_SKILL_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_SKILL_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_SKILL_FIELD_INDEX>(
+    GORM_PB_SKILL_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_INTERACTION_FIELD_INDEX : int {
+  GORM_PB_FIELD_INTERACTION_VERSION = 0,
+  GORM_PB_FIELD_INTERACTION_ROLEID = 1,
+  GORM_PB_FIELD_INTERACTION_SNAKEID = 2,
+  GORM_PB_FIELD_INTERACTION_INTERACTION1 = 3,
+  GORM_PB_FIELD_INTERACTION_INTERACTION2 = 4,
+  GORM_PB_FIELD_INTERACTION_INTERACTION3 = 5,
+  GORM_PB_FIELD_INTERACTION_INTERACTION4 = 6,
+  GORM_PB_INTERACTION_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_INTERACTION_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_INTERACTION_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_INTERACTION_FIELD_INDEX GORM_PB_INTERACTION_FIELD_INDEX_MIN = GORM_PB_FIELD_INTERACTION_VERSION;
+constexpr GORM_PB_INTERACTION_FIELD_INDEX GORM_PB_INTERACTION_FIELD_INDEX_MAX = GORM_PB_FIELD_INTERACTION_INTERACTION4;
+constexpr int GORM_PB_INTERACTION_FIELD_INDEX_ARRAYSIZE = GORM_PB_INTERACTION_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_INTERACTION_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_INTERACTION_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_INTERACTION_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_INTERACTION_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_INTERACTION_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_INTERACTION_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_INTERACTION_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_INTERACTION_FIELD_INDEX>(
+    GORM_PB_INTERACTION_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_USER_FIELD_INDEX : int {
+  GORM_PB_FIELD_USER_VERSION = 0,
+  GORM_PB_FIELD_USER_USERID = 1,
+  GORM_PB_FIELD_USER_PTID = 2,
+  GORM_PB_FIELD_USER_PTTYPE = 3,
+  GORM_PB_FIELD_USER_CREATETIME = 4,
+  GORM_PB_USER_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_USER_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_USER_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_USER_FIELD_INDEX GORM_PB_USER_FIELD_INDEX_MIN = GORM_PB_FIELD_USER_VERSION;
+constexpr GORM_PB_USER_FIELD_INDEX GORM_PB_USER_FIELD_INDEX_MAX = GORM_PB_FIELD_USER_CREATETIME;
+constexpr int GORM_PB_USER_FIELD_INDEX_ARRAYSIZE = GORM_PB_USER_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_USER_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_USER_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_USER_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_USER_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_USER_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_USER_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_USER_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_USER_FIELD_INDEX>(
+    GORM_PB_USER_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_ROLES_FIELD_INDEX : int {
+  GORM_PB_FIELD_ROLES_VERSION = 0,
+  GORM_PB_FIELD_ROLES_ROLEID = 1,
+  GORM_PB_FIELD_ROLES_USERID = 2,
+  GORM_PB_FIELD_ROLES_WORLDID = 3,
+  GORM_PB_FIELD_ROLES_DBID = 4,
+  GORM_PB_FIELD_ROLES_NAME = 5,
+  GORM_PB_FIELD_ROLES_CHARID = 6,
+  GORM_PB_FIELD_ROLES_FACE = 7,
+  GORM_PB_FIELD_ROLES_CREATETIME = 8,
+  GORM_PB_ROLES_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_ROLES_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_ROLES_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_ROLES_FIELD_INDEX GORM_PB_ROLES_FIELD_INDEX_MIN = GORM_PB_FIELD_ROLES_VERSION;
+constexpr GORM_PB_ROLES_FIELD_INDEX GORM_PB_ROLES_FIELD_INDEX_MAX = GORM_PB_FIELD_ROLES_CREATETIME;
+constexpr int GORM_PB_ROLES_FIELD_INDEX_ARRAYSIZE = GORM_PB_ROLES_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_ROLES_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_ROLES_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_ROLES_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_ROLES_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_ROLES_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_ROLES_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_ROLES_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_ROLES_FIELD_INDEX>(
+    GORM_PB_ROLES_FIELD_INDEX_descriptor(), name, value);
+}
 enum GORM_PB_COLUMN_TYPE : int {
   GORM_PB_COLUMN_TYPE_INVALID = 0,
   GORM_PB_COLUMN_TYPE_INT = 1,
   GORM_PB_COLUMN_TYPE_UINT = 2,
   GORM_PB_COLUMN_TYPE_DOUBLE = 3,
   GORM_PB_COLUMN_TYPE_STRING = 4,
+  GORM_PB_COLUMN_TYPE_INT8 = 5,
+  GORM_PB_COLUMN_TYPE_INT16 = 6,
+  GORM_PB_COLUMN_TYPE_INT32 = 7,
+  GORM_PB_COLUMN_TYPE_INT64 = 8,
+  GORM_PB_COLUMN_TYPE_UINT8 = 9,
+  GORM_PB_COLUMN_TYPE_UINT16 = 10,
+  GORM_PB_COLUMN_TYPE_UINT32 = 11,
+  GORM_PB_COLUMN_TYPE_UINT64 = 12,
+  GORM_PB_COLUMN_TYPE_BLOB = 13,
+  GORM_PB_COLUMN_TYPE_CHAR = 14,
   GORM_PB_COLUMN_TYPE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   GORM_PB_COLUMN_TYPE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool GORM_PB_COLUMN_TYPE_IsValid(int value);
 constexpr GORM_PB_COLUMN_TYPE GORM_PB_COLUMN_TYPE_MIN = GORM_PB_COLUMN_TYPE_INVALID;
-constexpr GORM_PB_COLUMN_TYPE GORM_PB_COLUMN_TYPE_MAX = GORM_PB_COLUMN_TYPE_STRING;
+constexpr GORM_PB_COLUMN_TYPE GORM_PB_COLUMN_TYPE_MAX = GORM_PB_COLUMN_TYPE_CHAR;
 constexpr int GORM_PB_COLUMN_TYPE_ARRAYSIZE = GORM_PB_COLUMN_TYPE_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_COLUMN_TYPE_descriptor();
@@ -803,7 +1205,20 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
 
   enum : int {
     kCustomColumnsFieldNumber = 2,
-    kRoleFieldNumber = 3,
+    kCurrencyFieldNumber = 3,
+    kCycleeventFieldNumber = 4,
+    kEquipFieldNumber = 5,
+    kFoodFieldNumber = 6,
+    kHeroFieldNumber = 7,
+    kMailFieldNumber = 8,
+    kMaterialFieldNumber = 9,
+    kNpcFieldNumber = 10,
+    kRoleFieldNumber = 11,
+    kSceneFieldNumber = 12,
+    kSkillFieldNumber = 13,
+    kInteractionFieldNumber = 14,
+    kUserFieldNumber = 15,
+    kRolesFieldNumber = 16,
     kTableIdFieldNumber = 1,
   };
   // .gorm.GORM_PB_CUSTEM_COLUMNS custom_columns = 2;
@@ -824,7 +1239,151 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
       ::gorm::GORM_PB_CUSTEM_COLUMNS* custom_columns);
   ::gorm::GORM_PB_CUSTEM_COLUMNS* unsafe_arena_release_custom_columns();
 
-  // .gorm.GORM_PB_Table_role role = 3;
+  // .gorm.GORM_PB_Table_currency currency = 3;
+  bool has_currency() const;
+  private:
+  bool _internal_has_currency() const;
+  public:
+  void clear_currency();
+  const ::gorm::GORM_PB_Table_currency& currency() const;
+  ::gorm::GORM_PB_Table_currency* release_currency();
+  ::gorm::GORM_PB_Table_currency* mutable_currency();
+  void set_allocated_currency(::gorm::GORM_PB_Table_currency* currency);
+  private:
+  const ::gorm::GORM_PB_Table_currency& _internal_currency() const;
+  ::gorm::GORM_PB_Table_currency* _internal_mutable_currency();
+  public:
+  void unsafe_arena_set_allocated_currency(
+      ::gorm::GORM_PB_Table_currency* currency);
+  ::gorm::GORM_PB_Table_currency* unsafe_arena_release_currency();
+
+  // .gorm.GORM_PB_Table_cycleevent cycleevent = 4;
+  bool has_cycleevent() const;
+  private:
+  bool _internal_has_cycleevent() const;
+  public:
+  void clear_cycleevent();
+  const ::gorm::GORM_PB_Table_cycleevent& cycleevent() const;
+  ::gorm::GORM_PB_Table_cycleevent* release_cycleevent();
+  ::gorm::GORM_PB_Table_cycleevent* mutable_cycleevent();
+  void set_allocated_cycleevent(::gorm::GORM_PB_Table_cycleevent* cycleevent);
+  private:
+  const ::gorm::GORM_PB_Table_cycleevent& _internal_cycleevent() const;
+  ::gorm::GORM_PB_Table_cycleevent* _internal_mutable_cycleevent();
+  public:
+  void unsafe_arena_set_allocated_cycleevent(
+      ::gorm::GORM_PB_Table_cycleevent* cycleevent);
+  ::gorm::GORM_PB_Table_cycleevent* unsafe_arena_release_cycleevent();
+
+  // .gorm.GORM_PB_Table_equip equip = 5;
+  bool has_equip() const;
+  private:
+  bool _internal_has_equip() const;
+  public:
+  void clear_equip();
+  const ::gorm::GORM_PB_Table_equip& equip() const;
+  ::gorm::GORM_PB_Table_equip* release_equip();
+  ::gorm::GORM_PB_Table_equip* mutable_equip();
+  void set_allocated_equip(::gorm::GORM_PB_Table_equip* equip);
+  private:
+  const ::gorm::GORM_PB_Table_equip& _internal_equip() const;
+  ::gorm::GORM_PB_Table_equip* _internal_mutable_equip();
+  public:
+  void unsafe_arena_set_allocated_equip(
+      ::gorm::GORM_PB_Table_equip* equip);
+  ::gorm::GORM_PB_Table_equip* unsafe_arena_release_equip();
+
+  // .gorm.GORM_PB_Table_food food = 6;
+  bool has_food() const;
+  private:
+  bool _internal_has_food() const;
+  public:
+  void clear_food();
+  const ::gorm::GORM_PB_Table_food& food() const;
+  ::gorm::GORM_PB_Table_food* release_food();
+  ::gorm::GORM_PB_Table_food* mutable_food();
+  void set_allocated_food(::gorm::GORM_PB_Table_food* food);
+  private:
+  const ::gorm::GORM_PB_Table_food& _internal_food() const;
+  ::gorm::GORM_PB_Table_food* _internal_mutable_food();
+  public:
+  void unsafe_arena_set_allocated_food(
+      ::gorm::GORM_PB_Table_food* food);
+  ::gorm::GORM_PB_Table_food* unsafe_arena_release_food();
+
+  // .gorm.GORM_PB_Table_hero hero = 7;
+  bool has_hero() const;
+  private:
+  bool _internal_has_hero() const;
+  public:
+  void clear_hero();
+  const ::gorm::GORM_PB_Table_hero& hero() const;
+  ::gorm::GORM_PB_Table_hero* release_hero();
+  ::gorm::GORM_PB_Table_hero* mutable_hero();
+  void set_allocated_hero(::gorm::GORM_PB_Table_hero* hero);
+  private:
+  const ::gorm::GORM_PB_Table_hero& _internal_hero() const;
+  ::gorm::GORM_PB_Table_hero* _internal_mutable_hero();
+  public:
+  void unsafe_arena_set_allocated_hero(
+      ::gorm::GORM_PB_Table_hero* hero);
+  ::gorm::GORM_PB_Table_hero* unsafe_arena_release_hero();
+
+  // .gorm.GORM_PB_Table_mail mail = 8;
+  bool has_mail() const;
+  private:
+  bool _internal_has_mail() const;
+  public:
+  void clear_mail();
+  const ::gorm::GORM_PB_Table_mail& mail() const;
+  ::gorm::GORM_PB_Table_mail* release_mail();
+  ::gorm::GORM_PB_Table_mail* mutable_mail();
+  void set_allocated_mail(::gorm::GORM_PB_Table_mail* mail);
+  private:
+  const ::gorm::GORM_PB_Table_mail& _internal_mail() const;
+  ::gorm::GORM_PB_Table_mail* _internal_mutable_mail();
+  public:
+  void unsafe_arena_set_allocated_mail(
+      ::gorm::GORM_PB_Table_mail* mail);
+  ::gorm::GORM_PB_Table_mail* unsafe_arena_release_mail();
+
+  // .gorm.GORM_PB_Table_material material = 9;
+  bool has_material() const;
+  private:
+  bool _internal_has_material() const;
+  public:
+  void clear_material();
+  const ::gorm::GORM_PB_Table_material& material() const;
+  ::gorm::GORM_PB_Table_material* release_material();
+  ::gorm::GORM_PB_Table_material* mutable_material();
+  void set_allocated_material(::gorm::GORM_PB_Table_material* material);
+  private:
+  const ::gorm::GORM_PB_Table_material& _internal_material() const;
+  ::gorm::GORM_PB_Table_material* _internal_mutable_material();
+  public:
+  void unsafe_arena_set_allocated_material(
+      ::gorm::GORM_PB_Table_material* material);
+  ::gorm::GORM_PB_Table_material* unsafe_arena_release_material();
+
+  // .gorm.GORM_PB_Table_npc npc = 10;
+  bool has_npc() const;
+  private:
+  bool _internal_has_npc() const;
+  public:
+  void clear_npc();
+  const ::gorm::GORM_PB_Table_npc& npc() const;
+  ::gorm::GORM_PB_Table_npc* release_npc();
+  ::gorm::GORM_PB_Table_npc* mutable_npc();
+  void set_allocated_npc(::gorm::GORM_PB_Table_npc* npc);
+  private:
+  const ::gorm::GORM_PB_Table_npc& _internal_npc() const;
+  ::gorm::GORM_PB_Table_npc* _internal_mutable_npc();
+  public:
+  void unsafe_arena_set_allocated_npc(
+      ::gorm::GORM_PB_Table_npc* npc);
+  ::gorm::GORM_PB_Table_npc* unsafe_arena_release_npc();
+
+  // .gorm.GORM_PB_Table_role role = 11;
   bool has_role() const;
   private:
   bool _internal_has_role() const;
@@ -841,6 +1400,96 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
   void unsafe_arena_set_allocated_role(
       ::gorm::GORM_PB_Table_role* role);
   ::gorm::GORM_PB_Table_role* unsafe_arena_release_role();
+
+  // .gorm.GORM_PB_Table_scene scene = 12;
+  bool has_scene() const;
+  private:
+  bool _internal_has_scene() const;
+  public:
+  void clear_scene();
+  const ::gorm::GORM_PB_Table_scene& scene() const;
+  ::gorm::GORM_PB_Table_scene* release_scene();
+  ::gorm::GORM_PB_Table_scene* mutable_scene();
+  void set_allocated_scene(::gorm::GORM_PB_Table_scene* scene);
+  private:
+  const ::gorm::GORM_PB_Table_scene& _internal_scene() const;
+  ::gorm::GORM_PB_Table_scene* _internal_mutable_scene();
+  public:
+  void unsafe_arena_set_allocated_scene(
+      ::gorm::GORM_PB_Table_scene* scene);
+  ::gorm::GORM_PB_Table_scene* unsafe_arena_release_scene();
+
+  // .gorm.GORM_PB_Table_skill skill = 13;
+  bool has_skill() const;
+  private:
+  bool _internal_has_skill() const;
+  public:
+  void clear_skill();
+  const ::gorm::GORM_PB_Table_skill& skill() const;
+  ::gorm::GORM_PB_Table_skill* release_skill();
+  ::gorm::GORM_PB_Table_skill* mutable_skill();
+  void set_allocated_skill(::gorm::GORM_PB_Table_skill* skill);
+  private:
+  const ::gorm::GORM_PB_Table_skill& _internal_skill() const;
+  ::gorm::GORM_PB_Table_skill* _internal_mutable_skill();
+  public:
+  void unsafe_arena_set_allocated_skill(
+      ::gorm::GORM_PB_Table_skill* skill);
+  ::gorm::GORM_PB_Table_skill* unsafe_arena_release_skill();
+
+  // .gorm.GORM_PB_Table_interaction interaction = 14;
+  bool has_interaction() const;
+  private:
+  bool _internal_has_interaction() const;
+  public:
+  void clear_interaction();
+  const ::gorm::GORM_PB_Table_interaction& interaction() const;
+  ::gorm::GORM_PB_Table_interaction* release_interaction();
+  ::gorm::GORM_PB_Table_interaction* mutable_interaction();
+  void set_allocated_interaction(::gorm::GORM_PB_Table_interaction* interaction);
+  private:
+  const ::gorm::GORM_PB_Table_interaction& _internal_interaction() const;
+  ::gorm::GORM_PB_Table_interaction* _internal_mutable_interaction();
+  public:
+  void unsafe_arena_set_allocated_interaction(
+      ::gorm::GORM_PB_Table_interaction* interaction);
+  ::gorm::GORM_PB_Table_interaction* unsafe_arena_release_interaction();
+
+  // .gorm.GORM_PB_Table_user user = 15;
+  bool has_user() const;
+  private:
+  bool _internal_has_user() const;
+  public:
+  void clear_user();
+  const ::gorm::GORM_PB_Table_user& user() const;
+  ::gorm::GORM_PB_Table_user* release_user();
+  ::gorm::GORM_PB_Table_user* mutable_user();
+  void set_allocated_user(::gorm::GORM_PB_Table_user* user);
+  private:
+  const ::gorm::GORM_PB_Table_user& _internal_user() const;
+  ::gorm::GORM_PB_Table_user* _internal_mutable_user();
+  public:
+  void unsafe_arena_set_allocated_user(
+      ::gorm::GORM_PB_Table_user* user);
+  ::gorm::GORM_PB_Table_user* unsafe_arena_release_user();
+
+  // .gorm.GORM_PB_Table_roles roles = 16;
+  bool has_roles() const;
+  private:
+  bool _internal_has_roles() const;
+  public:
+  void clear_roles();
+  const ::gorm::GORM_PB_Table_roles& roles() const;
+  ::gorm::GORM_PB_Table_roles* release_roles();
+  ::gorm::GORM_PB_Table_roles* mutable_roles();
+  void set_allocated_roles(::gorm::GORM_PB_Table_roles* roles);
+  private:
+  const ::gorm::GORM_PB_Table_roles& _internal_roles() const;
+  ::gorm::GORM_PB_Table_roles* _internal_mutable_roles();
+  public:
+  void unsafe_arena_set_allocated_roles(
+      ::gorm::GORM_PB_Table_roles* roles);
+  ::gorm::GORM_PB_Table_roles* unsafe_arena_release_roles();
 
   // int32 TableId = 1;
   void clear_tableid();
@@ -859,7 +1508,20 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::gorm::GORM_PB_CUSTEM_COLUMNS* custom_columns_;
+  ::gorm::GORM_PB_Table_currency* currency_;
+  ::gorm::GORM_PB_Table_cycleevent* cycleevent_;
+  ::gorm::GORM_PB_Table_equip* equip_;
+  ::gorm::GORM_PB_Table_food* food_;
+  ::gorm::GORM_PB_Table_hero* hero_;
+  ::gorm::GORM_PB_Table_mail* mail_;
+  ::gorm::GORM_PB_Table_material* material_;
+  ::gorm::GORM_PB_Table_npc* npc_;
   ::gorm::GORM_PB_Table_role* role_;
+  ::gorm::GORM_PB_Table_scene* scene_;
+  ::gorm::GORM_PB_Table_skill* skill_;
+  ::gorm::GORM_PB_Table_interaction* interaction_;
+  ::gorm::GORM_PB_Table_user* user_;
+  ::gorm::GORM_PB_Table_roles* roles_;
   ::PROTOBUF_NAMESPACE_ID::int32 tableid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_5fpb_5ftables_5finc_2eproto;
@@ -979,9 +1641,166 @@ class GORM_PB_TABLES PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRoleFieldNumber = 1,
+    kCurrencyFieldNumber = 1,
+    kCycleeventFieldNumber = 2,
+    kEquipFieldNumber = 3,
+    kFoodFieldNumber = 4,
+    kHeroFieldNumber = 5,
+    kMailFieldNumber = 6,
+    kMaterialFieldNumber = 7,
+    kNpcFieldNumber = 8,
+    kRoleFieldNumber = 9,
+    kSceneFieldNumber = 10,
+    kSkillFieldNumber = 11,
+    kInteractionFieldNumber = 12,
+    kUserFieldNumber = 13,
+    kRolesFieldNumber = 14,
   };
-  // repeated .gorm.GORM_PB_Table_role role = 1;
+  // repeated .gorm.GORM_PB_Table_currency currency = 1;
+  int currency_size() const;
+  private:
+  int _internal_currency_size() const;
+  public:
+  void clear_currency();
+  ::gorm::GORM_PB_Table_currency* mutable_currency(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_currency >*
+      mutable_currency();
+  private:
+  const ::gorm::GORM_PB_Table_currency& _internal_currency(int index) const;
+  ::gorm::GORM_PB_Table_currency* _internal_add_currency();
+  public:
+  const ::gorm::GORM_PB_Table_currency& currency(int index) const;
+  ::gorm::GORM_PB_Table_currency* add_currency();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_currency >&
+      currency() const;
+
+  // repeated .gorm.GORM_PB_Table_cycleevent cycleevent = 2;
+  int cycleevent_size() const;
+  private:
+  int _internal_cycleevent_size() const;
+  public:
+  void clear_cycleevent();
+  ::gorm::GORM_PB_Table_cycleevent* mutable_cycleevent(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_cycleevent >*
+      mutable_cycleevent();
+  private:
+  const ::gorm::GORM_PB_Table_cycleevent& _internal_cycleevent(int index) const;
+  ::gorm::GORM_PB_Table_cycleevent* _internal_add_cycleevent();
+  public:
+  const ::gorm::GORM_PB_Table_cycleevent& cycleevent(int index) const;
+  ::gorm::GORM_PB_Table_cycleevent* add_cycleevent();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_cycleevent >&
+      cycleevent() const;
+
+  // repeated .gorm.GORM_PB_Table_equip equip = 3;
+  int equip_size() const;
+  private:
+  int _internal_equip_size() const;
+  public:
+  void clear_equip();
+  ::gorm::GORM_PB_Table_equip* mutable_equip(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_equip >*
+      mutable_equip();
+  private:
+  const ::gorm::GORM_PB_Table_equip& _internal_equip(int index) const;
+  ::gorm::GORM_PB_Table_equip* _internal_add_equip();
+  public:
+  const ::gorm::GORM_PB_Table_equip& equip(int index) const;
+  ::gorm::GORM_PB_Table_equip* add_equip();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_equip >&
+      equip() const;
+
+  // repeated .gorm.GORM_PB_Table_food food = 4;
+  int food_size() const;
+  private:
+  int _internal_food_size() const;
+  public:
+  void clear_food();
+  ::gorm::GORM_PB_Table_food* mutable_food(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_food >*
+      mutable_food();
+  private:
+  const ::gorm::GORM_PB_Table_food& _internal_food(int index) const;
+  ::gorm::GORM_PB_Table_food* _internal_add_food();
+  public:
+  const ::gorm::GORM_PB_Table_food& food(int index) const;
+  ::gorm::GORM_PB_Table_food* add_food();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_food >&
+      food() const;
+
+  // repeated .gorm.GORM_PB_Table_hero hero = 5;
+  int hero_size() const;
+  private:
+  int _internal_hero_size() const;
+  public:
+  void clear_hero();
+  ::gorm::GORM_PB_Table_hero* mutable_hero(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_hero >*
+      mutable_hero();
+  private:
+  const ::gorm::GORM_PB_Table_hero& _internal_hero(int index) const;
+  ::gorm::GORM_PB_Table_hero* _internal_add_hero();
+  public:
+  const ::gorm::GORM_PB_Table_hero& hero(int index) const;
+  ::gorm::GORM_PB_Table_hero* add_hero();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_hero >&
+      hero() const;
+
+  // repeated .gorm.GORM_PB_Table_mail mail = 6;
+  int mail_size() const;
+  private:
+  int _internal_mail_size() const;
+  public:
+  void clear_mail();
+  ::gorm::GORM_PB_Table_mail* mutable_mail(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mail >*
+      mutable_mail();
+  private:
+  const ::gorm::GORM_PB_Table_mail& _internal_mail(int index) const;
+  ::gorm::GORM_PB_Table_mail* _internal_add_mail();
+  public:
+  const ::gorm::GORM_PB_Table_mail& mail(int index) const;
+  ::gorm::GORM_PB_Table_mail* add_mail();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mail >&
+      mail() const;
+
+  // repeated .gorm.GORM_PB_Table_material material = 7;
+  int material_size() const;
+  private:
+  int _internal_material_size() const;
+  public:
+  void clear_material();
+  ::gorm::GORM_PB_Table_material* mutable_material(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_material >*
+      mutable_material();
+  private:
+  const ::gorm::GORM_PB_Table_material& _internal_material(int index) const;
+  ::gorm::GORM_PB_Table_material* _internal_add_material();
+  public:
+  const ::gorm::GORM_PB_Table_material& material(int index) const;
+  ::gorm::GORM_PB_Table_material* add_material();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_material >&
+      material() const;
+
+  // repeated .gorm.GORM_PB_Table_npc npc = 8;
+  int npc_size() const;
+  private:
+  int _internal_npc_size() const;
+  public:
+  void clear_npc();
+  ::gorm::GORM_PB_Table_npc* mutable_npc(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_npc >*
+      mutable_npc();
+  private:
+  const ::gorm::GORM_PB_Table_npc& _internal_npc(int index) const;
+  ::gorm::GORM_PB_Table_npc* _internal_add_npc();
+  public:
+  const ::gorm::GORM_PB_Table_npc& npc(int index) const;
+  ::gorm::GORM_PB_Table_npc* add_npc();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_npc >&
+      npc() const;
+
+  // repeated .gorm.GORM_PB_Table_role role = 9;
   int role_size() const;
   private:
   int _internal_role_size() const;
@@ -999,6 +1818,96 @@ class GORM_PB_TABLES PROTOBUF_FINAL :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_role >&
       role() const;
 
+  // repeated .gorm.GORM_PB_Table_scene scene = 10;
+  int scene_size() const;
+  private:
+  int _internal_scene_size() const;
+  public:
+  void clear_scene();
+  ::gorm::GORM_PB_Table_scene* mutable_scene(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_scene >*
+      mutable_scene();
+  private:
+  const ::gorm::GORM_PB_Table_scene& _internal_scene(int index) const;
+  ::gorm::GORM_PB_Table_scene* _internal_add_scene();
+  public:
+  const ::gorm::GORM_PB_Table_scene& scene(int index) const;
+  ::gorm::GORM_PB_Table_scene* add_scene();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_scene >&
+      scene() const;
+
+  // repeated .gorm.GORM_PB_Table_skill skill = 11;
+  int skill_size() const;
+  private:
+  int _internal_skill_size() const;
+  public:
+  void clear_skill();
+  ::gorm::GORM_PB_Table_skill* mutable_skill(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_skill >*
+      mutable_skill();
+  private:
+  const ::gorm::GORM_PB_Table_skill& _internal_skill(int index) const;
+  ::gorm::GORM_PB_Table_skill* _internal_add_skill();
+  public:
+  const ::gorm::GORM_PB_Table_skill& skill(int index) const;
+  ::gorm::GORM_PB_Table_skill* add_skill();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_skill >&
+      skill() const;
+
+  // repeated .gorm.GORM_PB_Table_interaction interaction = 12;
+  int interaction_size() const;
+  private:
+  int _internal_interaction_size() const;
+  public:
+  void clear_interaction();
+  ::gorm::GORM_PB_Table_interaction* mutable_interaction(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_interaction >*
+      mutable_interaction();
+  private:
+  const ::gorm::GORM_PB_Table_interaction& _internal_interaction(int index) const;
+  ::gorm::GORM_PB_Table_interaction* _internal_add_interaction();
+  public:
+  const ::gorm::GORM_PB_Table_interaction& interaction(int index) const;
+  ::gorm::GORM_PB_Table_interaction* add_interaction();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_interaction >&
+      interaction() const;
+
+  // repeated .gorm.GORM_PB_Table_user user = 13;
+  int user_size() const;
+  private:
+  int _internal_user_size() const;
+  public:
+  void clear_user();
+  ::gorm::GORM_PB_Table_user* mutable_user(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user >*
+      mutable_user();
+  private:
+  const ::gorm::GORM_PB_Table_user& _internal_user(int index) const;
+  ::gorm::GORM_PB_Table_user* _internal_add_user();
+  public:
+  const ::gorm::GORM_PB_Table_user& user(int index) const;
+  ::gorm::GORM_PB_Table_user* add_user();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user >&
+      user() const;
+
+  // repeated .gorm.GORM_PB_Table_roles roles = 14;
+  int roles_size() const;
+  private:
+  int _internal_roles_size() const;
+  public:
+  void clear_roles();
+  ::gorm::GORM_PB_Table_roles* mutable_roles(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_roles >*
+      mutable_roles();
+  private:
+  const ::gorm::GORM_PB_Table_roles& _internal_roles(int index) const;
+  ::gorm::GORM_PB_Table_roles* _internal_add_roles();
+  public:
+  const ::gorm::GORM_PB_Table_roles& roles(int index) const;
+  ::gorm::GORM_PB_Table_roles* add_roles();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_roles >&
+      roles() const;
+
   // @@protoc_insertion_point(class_scope:gorm.GORM_PB_TABLES)
  private:
   class _Internal;
@@ -1006,7 +1915,20 @@ class GORM_PB_TABLES PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_currency > currency_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_cycleevent > cycleevent_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_equip > equip_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_food > food_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_hero > hero_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mail > mail_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_material > material_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_npc > npc_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_role > role_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_scene > scene_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_skill > skill_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_interaction > interaction_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user > user_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_roles > roles_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_5fpb_5ftables_5finc_2eproto;
 };
@@ -1496,7 +2418,607 @@ inline void GORM_PB_TABLE::set_allocated_custom_columns(::gorm::GORM_PB_CUSTEM_C
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.custom_columns)
 }
 
-// .gorm.GORM_PB_Table_role role = 3;
+// .gorm.GORM_PB_Table_currency currency = 3;
+inline bool GORM_PB_TABLE::_internal_has_currency() const {
+  return this != internal_default_instance() && currency_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_currency() const {
+  return _internal_has_currency();
+}
+inline const ::gorm::GORM_PB_Table_currency& GORM_PB_TABLE::_internal_currency() const {
+  const ::gorm::GORM_PB_Table_currency* p = currency_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_currency*>(
+      &::gorm::_GORM_PB_Table_currency_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_currency& GORM_PB_TABLE::currency() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.currency)
+  return _internal_currency();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_currency(
+    ::gorm::GORM_PB_Table_currency* currency) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(currency_);
+  }
+  currency_ = currency;
+  if (currency) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.currency)
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLE::release_currency() {
+  auto temp = unsafe_arena_release_currency();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLE::unsafe_arena_release_currency() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.currency)
+  
+  ::gorm::GORM_PB_Table_currency* temp = currency_;
+  currency_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLE::_internal_mutable_currency() {
+  
+  if (currency_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_currency>(GetArena());
+    currency_ = p;
+  }
+  return currency_;
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLE::mutable_currency() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.currency)
+  return _internal_mutable_currency();
+}
+inline void GORM_PB_TABLE::set_allocated_currency(::gorm::GORM_PB_Table_currency* currency) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(currency_);
+  }
+  if (currency) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(currency)->GetArena();
+    if (message_arena != submessage_arena) {
+      currency = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, currency, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  currency_ = currency;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.currency)
+}
+
+// .gorm.GORM_PB_Table_cycleevent cycleevent = 4;
+inline bool GORM_PB_TABLE::_internal_has_cycleevent() const {
+  return this != internal_default_instance() && cycleevent_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_cycleevent() const {
+  return _internal_has_cycleevent();
+}
+inline const ::gorm::GORM_PB_Table_cycleevent& GORM_PB_TABLE::_internal_cycleevent() const {
+  const ::gorm::GORM_PB_Table_cycleevent* p = cycleevent_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_cycleevent*>(
+      &::gorm::_GORM_PB_Table_cycleevent_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_cycleevent& GORM_PB_TABLE::cycleevent() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.cycleevent)
+  return _internal_cycleevent();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_cycleevent(
+    ::gorm::GORM_PB_Table_cycleevent* cycleevent) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(cycleevent_);
+  }
+  cycleevent_ = cycleevent;
+  if (cycleevent) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.cycleevent)
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLE::release_cycleevent() {
+  auto temp = unsafe_arena_release_cycleevent();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLE::unsafe_arena_release_cycleevent() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.cycleevent)
+  
+  ::gorm::GORM_PB_Table_cycleevent* temp = cycleevent_;
+  cycleevent_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLE::_internal_mutable_cycleevent() {
+  
+  if (cycleevent_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_cycleevent>(GetArena());
+    cycleevent_ = p;
+  }
+  return cycleevent_;
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLE::mutable_cycleevent() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.cycleevent)
+  return _internal_mutable_cycleevent();
+}
+inline void GORM_PB_TABLE::set_allocated_cycleevent(::gorm::GORM_PB_Table_cycleevent* cycleevent) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(cycleevent_);
+  }
+  if (cycleevent) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(cycleevent)->GetArena();
+    if (message_arena != submessage_arena) {
+      cycleevent = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cycleevent, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  cycleevent_ = cycleevent;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.cycleevent)
+}
+
+// .gorm.GORM_PB_Table_equip equip = 5;
+inline bool GORM_PB_TABLE::_internal_has_equip() const {
+  return this != internal_default_instance() && equip_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_equip() const {
+  return _internal_has_equip();
+}
+inline const ::gorm::GORM_PB_Table_equip& GORM_PB_TABLE::_internal_equip() const {
+  const ::gorm::GORM_PB_Table_equip* p = equip_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_equip*>(
+      &::gorm::_GORM_PB_Table_equip_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_equip& GORM_PB_TABLE::equip() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.equip)
+  return _internal_equip();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_equip(
+    ::gorm::GORM_PB_Table_equip* equip) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(equip_);
+  }
+  equip_ = equip;
+  if (equip) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.equip)
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLE::release_equip() {
+  auto temp = unsafe_arena_release_equip();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLE::unsafe_arena_release_equip() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.equip)
+  
+  ::gorm::GORM_PB_Table_equip* temp = equip_;
+  equip_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLE::_internal_mutable_equip() {
+  
+  if (equip_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_equip>(GetArena());
+    equip_ = p;
+  }
+  return equip_;
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLE::mutable_equip() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.equip)
+  return _internal_mutable_equip();
+}
+inline void GORM_PB_TABLE::set_allocated_equip(::gorm::GORM_PB_Table_equip* equip) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(equip_);
+  }
+  if (equip) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(equip)->GetArena();
+    if (message_arena != submessage_arena) {
+      equip = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, equip, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  equip_ = equip;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.equip)
+}
+
+// .gorm.GORM_PB_Table_food food = 6;
+inline bool GORM_PB_TABLE::_internal_has_food() const {
+  return this != internal_default_instance() && food_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_food() const {
+  return _internal_has_food();
+}
+inline const ::gorm::GORM_PB_Table_food& GORM_PB_TABLE::_internal_food() const {
+  const ::gorm::GORM_PB_Table_food* p = food_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_food*>(
+      &::gorm::_GORM_PB_Table_food_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_food& GORM_PB_TABLE::food() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.food)
+  return _internal_food();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_food(
+    ::gorm::GORM_PB_Table_food* food) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(food_);
+  }
+  food_ = food;
+  if (food) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.food)
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLE::release_food() {
+  auto temp = unsafe_arena_release_food();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLE::unsafe_arena_release_food() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.food)
+  
+  ::gorm::GORM_PB_Table_food* temp = food_;
+  food_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLE::_internal_mutable_food() {
+  
+  if (food_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_food>(GetArena());
+    food_ = p;
+  }
+  return food_;
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLE::mutable_food() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.food)
+  return _internal_mutable_food();
+}
+inline void GORM_PB_TABLE::set_allocated_food(::gorm::GORM_PB_Table_food* food) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(food_);
+  }
+  if (food) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(food)->GetArena();
+    if (message_arena != submessage_arena) {
+      food = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, food, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  food_ = food;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.food)
+}
+
+// .gorm.GORM_PB_Table_hero hero = 7;
+inline bool GORM_PB_TABLE::_internal_has_hero() const {
+  return this != internal_default_instance() && hero_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_hero() const {
+  return _internal_has_hero();
+}
+inline const ::gorm::GORM_PB_Table_hero& GORM_PB_TABLE::_internal_hero() const {
+  const ::gorm::GORM_PB_Table_hero* p = hero_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_hero*>(
+      &::gorm::_GORM_PB_Table_hero_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_hero& GORM_PB_TABLE::hero() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.hero)
+  return _internal_hero();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_hero(
+    ::gorm::GORM_PB_Table_hero* hero) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(hero_);
+  }
+  hero_ = hero;
+  if (hero) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.hero)
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLE::release_hero() {
+  auto temp = unsafe_arena_release_hero();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLE::unsafe_arena_release_hero() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.hero)
+  
+  ::gorm::GORM_PB_Table_hero* temp = hero_;
+  hero_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLE::_internal_mutable_hero() {
+  
+  if (hero_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_hero>(GetArena());
+    hero_ = p;
+  }
+  return hero_;
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLE::mutable_hero() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.hero)
+  return _internal_mutable_hero();
+}
+inline void GORM_PB_TABLE::set_allocated_hero(::gorm::GORM_PB_Table_hero* hero) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(hero_);
+  }
+  if (hero) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(hero)->GetArena();
+    if (message_arena != submessage_arena) {
+      hero = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, hero, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  hero_ = hero;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.hero)
+}
+
+// .gorm.GORM_PB_Table_mail mail = 8;
+inline bool GORM_PB_TABLE::_internal_has_mail() const {
+  return this != internal_default_instance() && mail_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_mail() const {
+  return _internal_has_mail();
+}
+inline const ::gorm::GORM_PB_Table_mail& GORM_PB_TABLE::_internal_mail() const {
+  const ::gorm::GORM_PB_Table_mail* p = mail_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_mail*>(
+      &::gorm::_GORM_PB_Table_mail_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_mail& GORM_PB_TABLE::mail() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.mail)
+  return _internal_mail();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_mail(
+    ::gorm::GORM_PB_Table_mail* mail) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mail_);
+  }
+  mail_ = mail;
+  if (mail) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.mail)
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLE::release_mail() {
+  auto temp = unsafe_arena_release_mail();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLE::unsafe_arena_release_mail() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.mail)
+  
+  ::gorm::GORM_PB_Table_mail* temp = mail_;
+  mail_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLE::_internal_mutable_mail() {
+  
+  if (mail_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_mail>(GetArena());
+    mail_ = p;
+  }
+  return mail_;
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLE::mutable_mail() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.mail)
+  return _internal_mutable_mail();
+}
+inline void GORM_PB_TABLE::set_allocated_mail(::gorm::GORM_PB_Table_mail* mail) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(mail_);
+  }
+  if (mail) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mail)->GetArena();
+    if (message_arena != submessage_arena) {
+      mail = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, mail, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  mail_ = mail;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.mail)
+}
+
+// .gorm.GORM_PB_Table_material material = 9;
+inline bool GORM_PB_TABLE::_internal_has_material() const {
+  return this != internal_default_instance() && material_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_material() const {
+  return _internal_has_material();
+}
+inline const ::gorm::GORM_PB_Table_material& GORM_PB_TABLE::_internal_material() const {
+  const ::gorm::GORM_PB_Table_material* p = material_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_material*>(
+      &::gorm::_GORM_PB_Table_material_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_material& GORM_PB_TABLE::material() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.material)
+  return _internal_material();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_material(
+    ::gorm::GORM_PB_Table_material* material) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(material_);
+  }
+  material_ = material;
+  if (material) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.material)
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLE::release_material() {
+  auto temp = unsafe_arena_release_material();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLE::unsafe_arena_release_material() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.material)
+  
+  ::gorm::GORM_PB_Table_material* temp = material_;
+  material_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLE::_internal_mutable_material() {
+  
+  if (material_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_material>(GetArena());
+    material_ = p;
+  }
+  return material_;
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLE::mutable_material() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.material)
+  return _internal_mutable_material();
+}
+inline void GORM_PB_TABLE::set_allocated_material(::gorm::GORM_PB_Table_material* material) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(material_);
+  }
+  if (material) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(material)->GetArena();
+    if (message_arena != submessage_arena) {
+      material = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, material, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  material_ = material;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.material)
+}
+
+// .gorm.GORM_PB_Table_npc npc = 10;
+inline bool GORM_PB_TABLE::_internal_has_npc() const {
+  return this != internal_default_instance() && npc_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_npc() const {
+  return _internal_has_npc();
+}
+inline const ::gorm::GORM_PB_Table_npc& GORM_PB_TABLE::_internal_npc() const {
+  const ::gorm::GORM_PB_Table_npc* p = npc_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_npc*>(
+      &::gorm::_GORM_PB_Table_npc_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_npc& GORM_PB_TABLE::npc() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.npc)
+  return _internal_npc();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_npc(
+    ::gorm::GORM_PB_Table_npc* npc) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(npc_);
+  }
+  npc_ = npc;
+  if (npc) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.npc)
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLE::release_npc() {
+  auto temp = unsafe_arena_release_npc();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLE::unsafe_arena_release_npc() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.npc)
+  
+  ::gorm::GORM_PB_Table_npc* temp = npc_;
+  npc_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLE::_internal_mutable_npc() {
+  
+  if (npc_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_npc>(GetArena());
+    npc_ = p;
+  }
+  return npc_;
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLE::mutable_npc() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.npc)
+  return _internal_mutable_npc();
+}
+inline void GORM_PB_TABLE::set_allocated_npc(::gorm::GORM_PB_Table_npc* npc) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(npc_);
+  }
+  if (npc) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(npc)->GetArena();
+    if (message_arena != submessage_arena) {
+      npc = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, npc, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  npc_ = npc;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.npc)
+}
+
+// .gorm.GORM_PB_Table_role role = 11;
 inline bool GORM_PB_TABLE::_internal_has_role() const {
   return this != internal_default_instance() && role_ != nullptr;
 }
@@ -1571,11 +3093,674 @@ inline void GORM_PB_TABLE::set_allocated_role(::gorm::GORM_PB_Table_role* role) 
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.role)
 }
 
+// .gorm.GORM_PB_Table_scene scene = 12;
+inline bool GORM_PB_TABLE::_internal_has_scene() const {
+  return this != internal_default_instance() && scene_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_scene() const {
+  return _internal_has_scene();
+}
+inline const ::gorm::GORM_PB_Table_scene& GORM_PB_TABLE::_internal_scene() const {
+  const ::gorm::GORM_PB_Table_scene* p = scene_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_scene*>(
+      &::gorm::_GORM_PB_Table_scene_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_scene& GORM_PB_TABLE::scene() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.scene)
+  return _internal_scene();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_scene(
+    ::gorm::GORM_PB_Table_scene* scene) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(scene_);
+  }
+  scene_ = scene;
+  if (scene) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.scene)
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLE::release_scene() {
+  auto temp = unsafe_arena_release_scene();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLE::unsafe_arena_release_scene() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.scene)
+  
+  ::gorm::GORM_PB_Table_scene* temp = scene_;
+  scene_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLE::_internal_mutable_scene() {
+  
+  if (scene_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_scene>(GetArena());
+    scene_ = p;
+  }
+  return scene_;
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLE::mutable_scene() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.scene)
+  return _internal_mutable_scene();
+}
+inline void GORM_PB_TABLE::set_allocated_scene(::gorm::GORM_PB_Table_scene* scene) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(scene_);
+  }
+  if (scene) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(scene)->GetArena();
+    if (message_arena != submessage_arena) {
+      scene = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, scene, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  scene_ = scene;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.scene)
+}
+
+// .gorm.GORM_PB_Table_skill skill = 13;
+inline bool GORM_PB_TABLE::_internal_has_skill() const {
+  return this != internal_default_instance() && skill_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_skill() const {
+  return _internal_has_skill();
+}
+inline const ::gorm::GORM_PB_Table_skill& GORM_PB_TABLE::_internal_skill() const {
+  const ::gorm::GORM_PB_Table_skill* p = skill_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_skill*>(
+      &::gorm::_GORM_PB_Table_skill_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_skill& GORM_PB_TABLE::skill() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.skill)
+  return _internal_skill();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_skill(
+    ::gorm::GORM_PB_Table_skill* skill) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(skill_);
+  }
+  skill_ = skill;
+  if (skill) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.skill)
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLE::release_skill() {
+  auto temp = unsafe_arena_release_skill();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLE::unsafe_arena_release_skill() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.skill)
+  
+  ::gorm::GORM_PB_Table_skill* temp = skill_;
+  skill_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLE::_internal_mutable_skill() {
+  
+  if (skill_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_skill>(GetArena());
+    skill_ = p;
+  }
+  return skill_;
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLE::mutable_skill() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.skill)
+  return _internal_mutable_skill();
+}
+inline void GORM_PB_TABLE::set_allocated_skill(::gorm::GORM_PB_Table_skill* skill) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(skill_);
+  }
+  if (skill) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(skill)->GetArena();
+    if (message_arena != submessage_arena) {
+      skill = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, skill, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  skill_ = skill;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.skill)
+}
+
+// .gorm.GORM_PB_Table_interaction interaction = 14;
+inline bool GORM_PB_TABLE::_internal_has_interaction() const {
+  return this != internal_default_instance() && interaction_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_interaction() const {
+  return _internal_has_interaction();
+}
+inline const ::gorm::GORM_PB_Table_interaction& GORM_PB_TABLE::_internal_interaction() const {
+  const ::gorm::GORM_PB_Table_interaction* p = interaction_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_interaction*>(
+      &::gorm::_GORM_PB_Table_interaction_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_interaction& GORM_PB_TABLE::interaction() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.interaction)
+  return _internal_interaction();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_interaction(
+    ::gorm::GORM_PB_Table_interaction* interaction) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(interaction_);
+  }
+  interaction_ = interaction;
+  if (interaction) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.interaction)
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLE::release_interaction() {
+  auto temp = unsafe_arena_release_interaction();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLE::unsafe_arena_release_interaction() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.interaction)
+  
+  ::gorm::GORM_PB_Table_interaction* temp = interaction_;
+  interaction_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLE::_internal_mutable_interaction() {
+  
+  if (interaction_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_interaction>(GetArena());
+    interaction_ = p;
+  }
+  return interaction_;
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLE::mutable_interaction() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.interaction)
+  return _internal_mutable_interaction();
+}
+inline void GORM_PB_TABLE::set_allocated_interaction(::gorm::GORM_PB_Table_interaction* interaction) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(interaction_);
+  }
+  if (interaction) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(interaction)->GetArena();
+    if (message_arena != submessage_arena) {
+      interaction = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, interaction, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  interaction_ = interaction;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.interaction)
+}
+
+// .gorm.GORM_PB_Table_user user = 15;
+inline bool GORM_PB_TABLE::_internal_has_user() const {
+  return this != internal_default_instance() && user_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_user() const {
+  return _internal_has_user();
+}
+inline const ::gorm::GORM_PB_Table_user& GORM_PB_TABLE::_internal_user() const {
+  const ::gorm::GORM_PB_Table_user* p = user_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_user*>(
+      &::gorm::_GORM_PB_Table_user_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_user& GORM_PB_TABLE::user() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.user)
+  return _internal_user();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_user(
+    ::gorm::GORM_PB_Table_user* user) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(user_);
+  }
+  user_ = user;
+  if (user) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.user)
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLE::release_user() {
+  auto temp = unsafe_arena_release_user();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLE::unsafe_arena_release_user() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.user)
+  
+  ::gorm::GORM_PB_Table_user* temp = user_;
+  user_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLE::_internal_mutable_user() {
+  
+  if (user_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_user>(GetArena());
+    user_ = p;
+  }
+  return user_;
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLE::mutable_user() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.user)
+  return _internal_mutable_user();
+}
+inline void GORM_PB_TABLE::set_allocated_user(::gorm::GORM_PB_Table_user* user) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(user_);
+  }
+  if (user) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(user)->GetArena();
+    if (message_arena != submessage_arena) {
+      user = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, user, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  user_ = user;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.user)
+}
+
+// .gorm.GORM_PB_Table_roles roles = 16;
+inline bool GORM_PB_TABLE::_internal_has_roles() const {
+  return this != internal_default_instance() && roles_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_roles() const {
+  return _internal_has_roles();
+}
+inline const ::gorm::GORM_PB_Table_roles& GORM_PB_TABLE::_internal_roles() const {
+  const ::gorm::GORM_PB_Table_roles* p = roles_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_roles*>(
+      &::gorm::_GORM_PB_Table_roles_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_roles& GORM_PB_TABLE::roles() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.roles)
+  return _internal_roles();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_roles(
+    ::gorm::GORM_PB_Table_roles* roles) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(roles_);
+  }
+  roles_ = roles;
+  if (roles) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.roles)
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLE::release_roles() {
+  auto temp = unsafe_arena_release_roles();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLE::unsafe_arena_release_roles() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.roles)
+  
+  ::gorm::GORM_PB_Table_roles* temp = roles_;
+  roles_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLE::_internal_mutable_roles() {
+  
+  if (roles_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_roles>(GetArena());
+    roles_ = p;
+  }
+  return roles_;
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLE::mutable_roles() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.roles)
+  return _internal_mutable_roles();
+}
+inline void GORM_PB_TABLE::set_allocated_roles(::gorm::GORM_PB_Table_roles* roles) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(roles_);
+  }
+  if (roles) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(roles)->GetArena();
+    if (message_arena != submessage_arena) {
+      roles = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, roles, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  roles_ = roles;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.roles)
+}
+
 // -------------------------------------------------------------------
 
 // GORM_PB_TABLES
 
-// repeated .gorm.GORM_PB_Table_role role = 1;
+// repeated .gorm.GORM_PB_Table_currency currency = 1;
+inline int GORM_PB_TABLES::_internal_currency_size() const {
+  return currency_.size();
+}
+inline int GORM_PB_TABLES::currency_size() const {
+  return _internal_currency_size();
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLES::mutable_currency(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.currency)
+  return currency_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_currency >*
+GORM_PB_TABLES::mutable_currency() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.currency)
+  return &currency_;
+}
+inline const ::gorm::GORM_PB_Table_currency& GORM_PB_TABLES::_internal_currency(int index) const {
+  return currency_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_currency& GORM_PB_TABLES::currency(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.currency)
+  return _internal_currency(index);
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLES::_internal_add_currency() {
+  return currency_.Add();
+}
+inline ::gorm::GORM_PB_Table_currency* GORM_PB_TABLES::add_currency() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.currency)
+  return _internal_add_currency();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_currency >&
+GORM_PB_TABLES::currency() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.currency)
+  return currency_;
+}
+
+// repeated .gorm.GORM_PB_Table_cycleevent cycleevent = 2;
+inline int GORM_PB_TABLES::_internal_cycleevent_size() const {
+  return cycleevent_.size();
+}
+inline int GORM_PB_TABLES::cycleevent_size() const {
+  return _internal_cycleevent_size();
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLES::mutable_cycleevent(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.cycleevent)
+  return cycleevent_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_cycleevent >*
+GORM_PB_TABLES::mutable_cycleevent() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.cycleevent)
+  return &cycleevent_;
+}
+inline const ::gorm::GORM_PB_Table_cycleevent& GORM_PB_TABLES::_internal_cycleevent(int index) const {
+  return cycleevent_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_cycleevent& GORM_PB_TABLES::cycleevent(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.cycleevent)
+  return _internal_cycleevent(index);
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLES::_internal_add_cycleevent() {
+  return cycleevent_.Add();
+}
+inline ::gorm::GORM_PB_Table_cycleevent* GORM_PB_TABLES::add_cycleevent() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.cycleevent)
+  return _internal_add_cycleevent();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_cycleevent >&
+GORM_PB_TABLES::cycleevent() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.cycleevent)
+  return cycleevent_;
+}
+
+// repeated .gorm.GORM_PB_Table_equip equip = 3;
+inline int GORM_PB_TABLES::_internal_equip_size() const {
+  return equip_.size();
+}
+inline int GORM_PB_TABLES::equip_size() const {
+  return _internal_equip_size();
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLES::mutable_equip(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.equip)
+  return equip_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_equip >*
+GORM_PB_TABLES::mutable_equip() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.equip)
+  return &equip_;
+}
+inline const ::gorm::GORM_PB_Table_equip& GORM_PB_TABLES::_internal_equip(int index) const {
+  return equip_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_equip& GORM_PB_TABLES::equip(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.equip)
+  return _internal_equip(index);
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLES::_internal_add_equip() {
+  return equip_.Add();
+}
+inline ::gorm::GORM_PB_Table_equip* GORM_PB_TABLES::add_equip() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.equip)
+  return _internal_add_equip();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_equip >&
+GORM_PB_TABLES::equip() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.equip)
+  return equip_;
+}
+
+// repeated .gorm.GORM_PB_Table_food food = 4;
+inline int GORM_PB_TABLES::_internal_food_size() const {
+  return food_.size();
+}
+inline int GORM_PB_TABLES::food_size() const {
+  return _internal_food_size();
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLES::mutable_food(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.food)
+  return food_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_food >*
+GORM_PB_TABLES::mutable_food() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.food)
+  return &food_;
+}
+inline const ::gorm::GORM_PB_Table_food& GORM_PB_TABLES::_internal_food(int index) const {
+  return food_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_food& GORM_PB_TABLES::food(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.food)
+  return _internal_food(index);
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLES::_internal_add_food() {
+  return food_.Add();
+}
+inline ::gorm::GORM_PB_Table_food* GORM_PB_TABLES::add_food() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.food)
+  return _internal_add_food();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_food >&
+GORM_PB_TABLES::food() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.food)
+  return food_;
+}
+
+// repeated .gorm.GORM_PB_Table_hero hero = 5;
+inline int GORM_PB_TABLES::_internal_hero_size() const {
+  return hero_.size();
+}
+inline int GORM_PB_TABLES::hero_size() const {
+  return _internal_hero_size();
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLES::mutable_hero(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.hero)
+  return hero_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_hero >*
+GORM_PB_TABLES::mutable_hero() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.hero)
+  return &hero_;
+}
+inline const ::gorm::GORM_PB_Table_hero& GORM_PB_TABLES::_internal_hero(int index) const {
+  return hero_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_hero& GORM_PB_TABLES::hero(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.hero)
+  return _internal_hero(index);
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLES::_internal_add_hero() {
+  return hero_.Add();
+}
+inline ::gorm::GORM_PB_Table_hero* GORM_PB_TABLES::add_hero() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.hero)
+  return _internal_add_hero();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_hero >&
+GORM_PB_TABLES::hero() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.hero)
+  return hero_;
+}
+
+// repeated .gorm.GORM_PB_Table_mail mail = 6;
+inline int GORM_PB_TABLES::_internal_mail_size() const {
+  return mail_.size();
+}
+inline int GORM_PB_TABLES::mail_size() const {
+  return _internal_mail_size();
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLES::mutable_mail(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.mail)
+  return mail_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mail >*
+GORM_PB_TABLES::mutable_mail() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.mail)
+  return &mail_;
+}
+inline const ::gorm::GORM_PB_Table_mail& GORM_PB_TABLES::_internal_mail(int index) const {
+  return mail_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_mail& GORM_PB_TABLES::mail(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.mail)
+  return _internal_mail(index);
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLES::_internal_add_mail() {
+  return mail_.Add();
+}
+inline ::gorm::GORM_PB_Table_mail* GORM_PB_TABLES::add_mail() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.mail)
+  return _internal_add_mail();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mail >&
+GORM_PB_TABLES::mail() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.mail)
+  return mail_;
+}
+
+// repeated .gorm.GORM_PB_Table_material material = 7;
+inline int GORM_PB_TABLES::_internal_material_size() const {
+  return material_.size();
+}
+inline int GORM_PB_TABLES::material_size() const {
+  return _internal_material_size();
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLES::mutable_material(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.material)
+  return material_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_material >*
+GORM_PB_TABLES::mutable_material() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.material)
+  return &material_;
+}
+inline const ::gorm::GORM_PB_Table_material& GORM_PB_TABLES::_internal_material(int index) const {
+  return material_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_material& GORM_PB_TABLES::material(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.material)
+  return _internal_material(index);
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLES::_internal_add_material() {
+  return material_.Add();
+}
+inline ::gorm::GORM_PB_Table_material* GORM_PB_TABLES::add_material() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.material)
+  return _internal_add_material();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_material >&
+GORM_PB_TABLES::material() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.material)
+  return material_;
+}
+
+// repeated .gorm.GORM_PB_Table_npc npc = 8;
+inline int GORM_PB_TABLES::_internal_npc_size() const {
+  return npc_.size();
+}
+inline int GORM_PB_TABLES::npc_size() const {
+  return _internal_npc_size();
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLES::mutable_npc(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.npc)
+  return npc_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_npc >*
+GORM_PB_TABLES::mutable_npc() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.npc)
+  return &npc_;
+}
+inline const ::gorm::GORM_PB_Table_npc& GORM_PB_TABLES::_internal_npc(int index) const {
+  return npc_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_npc& GORM_PB_TABLES::npc(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.npc)
+  return _internal_npc(index);
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLES::_internal_add_npc() {
+  return npc_.Add();
+}
+inline ::gorm::GORM_PB_Table_npc* GORM_PB_TABLES::add_npc() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.npc)
+  return _internal_add_npc();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_npc >&
+GORM_PB_TABLES::npc() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.npc)
+  return npc_;
+}
+
+// repeated .gorm.GORM_PB_Table_role role = 9;
 inline int GORM_PB_TABLES::_internal_role_size() const {
   return role_.size();
 }
@@ -1611,6 +3796,186 @@ GORM_PB_TABLES::role() const {
   return role_;
 }
 
+// repeated .gorm.GORM_PB_Table_scene scene = 10;
+inline int GORM_PB_TABLES::_internal_scene_size() const {
+  return scene_.size();
+}
+inline int GORM_PB_TABLES::scene_size() const {
+  return _internal_scene_size();
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLES::mutable_scene(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.scene)
+  return scene_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_scene >*
+GORM_PB_TABLES::mutable_scene() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.scene)
+  return &scene_;
+}
+inline const ::gorm::GORM_PB_Table_scene& GORM_PB_TABLES::_internal_scene(int index) const {
+  return scene_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_scene& GORM_PB_TABLES::scene(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.scene)
+  return _internal_scene(index);
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLES::_internal_add_scene() {
+  return scene_.Add();
+}
+inline ::gorm::GORM_PB_Table_scene* GORM_PB_TABLES::add_scene() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.scene)
+  return _internal_add_scene();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_scene >&
+GORM_PB_TABLES::scene() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.scene)
+  return scene_;
+}
+
+// repeated .gorm.GORM_PB_Table_skill skill = 11;
+inline int GORM_PB_TABLES::_internal_skill_size() const {
+  return skill_.size();
+}
+inline int GORM_PB_TABLES::skill_size() const {
+  return _internal_skill_size();
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLES::mutable_skill(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.skill)
+  return skill_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_skill >*
+GORM_PB_TABLES::mutable_skill() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.skill)
+  return &skill_;
+}
+inline const ::gorm::GORM_PB_Table_skill& GORM_PB_TABLES::_internal_skill(int index) const {
+  return skill_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_skill& GORM_PB_TABLES::skill(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.skill)
+  return _internal_skill(index);
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLES::_internal_add_skill() {
+  return skill_.Add();
+}
+inline ::gorm::GORM_PB_Table_skill* GORM_PB_TABLES::add_skill() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.skill)
+  return _internal_add_skill();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_skill >&
+GORM_PB_TABLES::skill() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.skill)
+  return skill_;
+}
+
+// repeated .gorm.GORM_PB_Table_interaction interaction = 12;
+inline int GORM_PB_TABLES::_internal_interaction_size() const {
+  return interaction_.size();
+}
+inline int GORM_PB_TABLES::interaction_size() const {
+  return _internal_interaction_size();
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLES::mutable_interaction(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.interaction)
+  return interaction_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_interaction >*
+GORM_PB_TABLES::mutable_interaction() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.interaction)
+  return &interaction_;
+}
+inline const ::gorm::GORM_PB_Table_interaction& GORM_PB_TABLES::_internal_interaction(int index) const {
+  return interaction_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_interaction& GORM_PB_TABLES::interaction(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.interaction)
+  return _internal_interaction(index);
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLES::_internal_add_interaction() {
+  return interaction_.Add();
+}
+inline ::gorm::GORM_PB_Table_interaction* GORM_PB_TABLES::add_interaction() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.interaction)
+  return _internal_add_interaction();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_interaction >&
+GORM_PB_TABLES::interaction() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.interaction)
+  return interaction_;
+}
+
+// repeated .gorm.GORM_PB_Table_user user = 13;
+inline int GORM_PB_TABLES::_internal_user_size() const {
+  return user_.size();
+}
+inline int GORM_PB_TABLES::user_size() const {
+  return _internal_user_size();
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLES::mutable_user(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.user)
+  return user_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user >*
+GORM_PB_TABLES::mutable_user() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.user)
+  return &user_;
+}
+inline const ::gorm::GORM_PB_Table_user& GORM_PB_TABLES::_internal_user(int index) const {
+  return user_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_user& GORM_PB_TABLES::user(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.user)
+  return _internal_user(index);
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLES::_internal_add_user() {
+  return user_.Add();
+}
+inline ::gorm::GORM_PB_Table_user* GORM_PB_TABLES::add_user() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.user)
+  return _internal_add_user();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user >&
+GORM_PB_TABLES::user() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.user)
+  return user_;
+}
+
+// repeated .gorm.GORM_PB_Table_roles roles = 14;
+inline int GORM_PB_TABLES::_internal_roles_size() const {
+  return roles_.size();
+}
+inline int GORM_PB_TABLES::roles_size() const {
+  return _internal_roles_size();
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLES::mutable_roles(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.roles)
+  return roles_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_roles >*
+GORM_PB_TABLES::mutable_roles() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.roles)
+  return &roles_;
+}
+inline const ::gorm::GORM_PB_Table_roles& GORM_PB_TABLES::_internal_roles(int index) const {
+  return roles_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_roles& GORM_PB_TABLES::roles(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.roles)
+  return _internal_roles(index);
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLES::_internal_add_roles() {
+  return roles_.Add();
+}
+inline ::gorm::GORM_PB_Table_roles* GORM_PB_TABLES::add_roles() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.roles)
+  return _internal_add_roles();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_roles >&
+GORM_PB_TABLES::roles() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.roles)
+  return roles_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
@@ -1634,10 +3999,75 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_TABLE_INDEX>() {
   return ::gorm::GORM_PB_TABLE_INDEX_descriptor();
 }
+template <> struct is_proto_enum< ::gorm::GORM_PB_CURRENCY_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_CURRENCY_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_CURRENCY_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_CYCLEEVENT_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_CYCLEEVENT_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_CYCLEEVENT_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_EQUIP_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_EQUIP_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_EQUIP_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_FOOD_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_FOOD_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_FOOD_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_HERO_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_HERO_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_HERO_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_MAIL_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_MAIL_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_MAIL_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_MATERIAL_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_MATERIAL_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_MATERIAL_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_NPC_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_NPC_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_NPC_FIELD_INDEX_descriptor();
+}
 template <> struct is_proto_enum< ::gorm::GORM_PB_ROLE_FIELD_INDEX> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_ROLE_FIELD_INDEX>() {
   return ::gorm::GORM_PB_ROLE_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_SCENE_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_SCENE_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_SCENE_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_SKILL_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_SKILL_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_SKILL_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_INTERACTION_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_INTERACTION_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_INTERACTION_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_USER_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_USER_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_USER_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_ROLES_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_ROLES_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_ROLES_FIELD_INDEX_descriptor();
 }
 template <> struct is_proto_enum< ::gorm::GORM_PB_COLUMN_TYPE> : ::std::true_type {};
 template <>

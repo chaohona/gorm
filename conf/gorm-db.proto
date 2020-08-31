@@ -1,6 +1,78 @@
 syntax = "proto3";
 package gorm;
 option go_package = "gorm/gorm";
+message GORM_PB_Table_currency{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string currency1 = 4;
+    string currency2 = 5;
+    string currency3 = 6;
+    string currency4 = 7;
+}
+
+message GORM_PB_Table_cycleevent{
+    uint64 version = 1;
+    int64 roleid = 2;
+    string events = 3;
+}
+
+message GORM_PB_Table_equip{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string equip1 = 4;
+    string equip2 = 5;
+    string equip3 = 6;
+    string equip4 = 7;
+}
+
+message GORM_PB_Table_food{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string food1 = 4;
+    string food2 = 5;
+    string food3 = 6;
+    string food4 = 7;
+}
+
+message GORM_PB_Table_hero{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string heros = 4;
+}
+
+message GORM_PB_Table_mail{
+    uint64 version = 1;
+    int64 roleid = 2;
+    string mail1 = 3;
+    string mail2 = 4;
+    string mail3 = 5;
+    string mail4 = 6;
+    string mail5 = 7;
+    int32 lastmailid = 8;
+    int32 snakeid = 9;
+}
+
+message GORM_PB_Table_material{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string material1 = 4;
+    string material2 = 5;
+    string material3 = 6;
+    string material4 = 7;
+}
+
+message GORM_PB_Table_npc{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string npcs = 4;
+}
+
 message GORM_PB_Table_role{
     uint64 version = 1;
     int64 roleid = 2;
@@ -14,5 +86,52 @@ message GORM_PB_Table_role{
     int64 createtime = 10;
     string face = 11;
     int64 online = 12;
+}
+
+message GORM_PB_Table_scene{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 sceneid = 3;
+    string collects = 4;
+}
+
+message GORM_PB_Table_skill{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string skill1 = 4;
+    string skill2 = 5;
+    string skill3 = 6;
+    string skill4 = 7;
+}
+
+message GORM_PB_Table_interaction{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int32 snakeid = 3;
+    string interaction1 = 4;
+    string interaction2 = 5;
+    string interaction3 = 6;
+    string interaction4 = 7;
+}
+
+message GORM_PB_Table_user{
+    uint64 version = 1;
+    int64 userid = 2;
+    string ptid = 3;
+    int32 pttype = 4;
+    int64 createtime = 5;
+}
+
+message GORM_PB_Table_roles{
+    uint64 version = 1;
+    int64 roleid = 2;
+    int64 userid = 3;
+    int64 worldid = 4;
+    int32 dbid = 5;
+    string name = 6;
+    int32 charid = 7;
+    string face = 8;
+    int64 createtime = 9;
 }
 
