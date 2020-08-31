@@ -34,6 +34,7 @@ private:
     GORM_Ret Verify();
     void FillErrReplyBuffer(GORM_DBRequest *pRequest);
     GORM_Ret HeartBeat();
+    GORM_Ret HandShake(char *szMsg, int iMsgLen);
 public:
     // 请求的缓冲池子,主要此池子中数据个数大于1就说明有pending消息
     shared_ptr<GORM_RingBuffer<GORM_DBRequest>> m_pRequestRing = nullptr;
@@ -50,17 +51,19 @@ public:
 
 
     ///////////////////////////////////往客户端发送相关////////////////////////////////////
-    GORM_DBRequest                              *m_pSendingRequest = nullptr;   // 正在往客户端发的结果
-    char *m_pCurrentWrite = nullptr;            // 当前数据写入开始地址
-    int32  m_iNeedWrite = 0;
+    GORM_DBRequest      *m_pSendingRequest = nullptr;   // 正在往客户端发的结果
+    char                *m_pCurrentWrite = nullptr;            // 当前数据写入开始地址
+    int32               m_iNeedWrite = 0;
     // 当消息编码失败后，用这个组装消息头发送给客户端
-    char    m_szErrorReplyHeader[GORM_RSP_MSG_HEADER_LEN];  
+    char                m_szErrorReplyHeader[GORM_RSP_MSG_HEADER_LEN];  
     ////////////////////////////////////////////////////////////////////////////////////////
     GORM_FrontEndStatus m_iFS = GORM_FS_CONNECTED;
     
     // 事件所在的线程
     GORM_FrontEndThread *m_pFrontThread;
-    uint64 ulHeadBeatTime = 0;
+    uint64              ulHeadBeatTime = 0;
+private:
+    uint64  m_ulClientId = 0;
 };
 
 
