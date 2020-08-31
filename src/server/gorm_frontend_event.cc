@@ -306,8 +306,16 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     // TODO 返回心跳，连接5秒没消息则主动断开
     if (iReqCmd == GORM_CMD_HEART)
     {
-        this->HeartBeat();
-        return GORM_OK;
+        return this->HeartBeat();
+    } 
+    else if (iReqCmd == GORM_CMD_HAND_SHAKE)
+    {
+        if (this->m_ulClientId  != 0)
+        {
+            GORM_LOGW("has make hand shake.");
+            return GORM_OK;
+        }
+        return this->HandShake(szMsg, iMsgLen);
     }
 
     if (iReqCmd > GORM_CMD_MAX || iReqCmd <= GORM_CMD_INVALID)
@@ -404,5 +412,12 @@ GORM_Ret GORM_FrontEndEvent::HeartBeat()
     this->ulHeadBeatTime = GORM_GetNowMS();
     this->m_pRequestRing->AddData(pHeartBeat);
     this->ReadyWrite();
+
+    return GORM_OK;
+}
+
+GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
+{
+    return GORM_OK;
 }
 
