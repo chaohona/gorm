@@ -60,6 +60,7 @@ public:
     int PackUpdateResult();
     int PackGetByNonPrimaryKeyResult();
     int PackHeartBeatResult();
+    int PackHandShakeResult(int iRet, uint64 ulClientId = 0);
     int PackGetToInsertResult();
 
     void Release();

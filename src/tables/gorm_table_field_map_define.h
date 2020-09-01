@@ -8,6 +8,7 @@
 
 // 保存表中字段的名字与宏的相互映射关系
 namespace gorm{
+GORM_DLL_DECL int GORM_InitTableSchemaInfo(PB_MSG_PTR pMsgPtr);
 
 GORM_DLL_DECL int GORM_SetTableFieldId2Name(int iTableId, OUT FieldId2Name &mapId2Name);
 GORM_DLL_DECL int GORM_SetTableFieldName2Id(int iTableId, OUT FieldName2Id &mapName2Id);

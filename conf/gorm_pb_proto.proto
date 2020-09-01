@@ -109,7 +109,7 @@ message GORM_PB_HEART_REQ
 message GORM_PB_HEART_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-}
+} 
 
 message GORM_PB_TABLE_SCHEMA_INFO_COLUMN
 {
@@ -138,7 +138,7 @@ message GORM_PB_HAND_SHAKE_REQ
 message GORM_PB_HAND_SHAKE_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	uint64					ClientId = 2;
+	uint64	ClientId	= 2;	// 客户端ID
 }
 
 // 插入暂时只能支持单挑记录插入

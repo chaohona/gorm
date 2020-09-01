@@ -36,6 +36,760 @@ int GORM_SetTableROLESId2Name(OUT FieldId2Name &mapId2Name);
 int GORM_SetTableROLESName2Id(OUT FieldName2Id &mapName2Id);
 
 
+int GORM_InitTableSchemaInfo(PB_MSG_PTR pMsgPtr)
+{
+    GORM_PB_HAND_SHAKE_REQ *pHandShake = dynamic_cast<GORM_PB_HAND_SHAKE_REQ*>(pMsgPtr);
+    if (pHandShake == nullptr)
+        return GORM_ERROR;
+    GORM_PB_TABLE_SCHEMA_INFO *pInfo;
+    GORM_PB_TABLE_SCHEMA_INFO_COLUMN *pColumn;
+    pHandShake->mutable_header();
+    pHandShake->Version = 1;
+    pHandShake->Md5 = 1;
+    // for table currency
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("currency");
+    pInfo->set_tableidx(1);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("currency1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("currency2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("currency3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("currency4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table cycleevent
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("cycleevent");
+    pInfo->set_tableidx(2);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("events");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table equip
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("equip");
+    pInfo->set_tableidx(3);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("equip1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("equip2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("equip3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("equip4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table food
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("food");
+    pInfo->set_tableidx(4);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("food1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("food2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("food3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("food4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table hero
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("hero");
+    pInfo->set_tableidx(5);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("heros");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table mail
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("mail");
+    pInfo->set_tableidx(6);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("mail1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("mail2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("mail3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("mail4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("mail5");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("lastmailid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    // for table material
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("material");
+    pInfo->set_tableidx(7);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("material1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("material2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("material3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("material4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table npc
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("npc");
+    pInfo->set_tableidx(8);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("npcs");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table role
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("role");
+    pInfo->set_tableidx(9);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("rolename");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("level");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("exp");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("characterid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("gold");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("offlinetime");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("inited");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("createtime");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("face");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("online");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    // for table scene
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("scene");
+    pInfo->set_tableidx(10);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("sceneid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("collects");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table skill
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("skill");
+    pInfo->set_tableidx(11);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("skill1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("skill2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("skill3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("skill4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table interaction
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("interaction");
+    pInfo->set_tableidx(12);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("snakeid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("interaction1");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("interaction2");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("interaction3");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("interaction4");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    // for table user
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("user");
+    pInfo->set_tableidx(13);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("userid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("ptid");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("pttype");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("createtime");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    // for table roles
+    pInfo = pHandShake->add_schemas();
+    if (pInfo == nullptr)
+        return GORM_ERROR;
+    pInfo->set_version(1);
+    pInfo->set_tablename("roles");
+    pInfo->set_tableidx(14);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("version");
+    pColumn->set_typedesc("uint64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_UINT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("roleid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("userid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("worldid");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("dbid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("name");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("charid");
+    pColumn->set_typedesc("int32");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT32);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("face");
+    pColumn->set_typedesc("string");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_STRING);
+    pColumn = pInfo->add_columns();
+    if (pColumn == nullptr)
+        return GORM_ERROR;
+    pColumn->set_version(0);
+    pColumn->set_name("createtime");
+    pColumn->set_typedesc("int64");
+    pColumn->set_type(GORM_PB_COLUMN_TYPE_INT64);
+    return GORM_OK;
+}
 uint32 GORM_TableHash(int iTableId, const GORM_PB_TABLE &pbTable)
 {
     switch (iTableId)

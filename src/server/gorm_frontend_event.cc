@@ -316,9 +316,8 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
             return GORM_OK;
         }
         return this->HandShake(szMsg, iMsgLen);
-    }
-
-    if (iReqCmd > GORM_CMD_MAX || iReqCmd <= GORM_CMD_INVALID)
+    } 
+    else if (iReqCmd > GORM_CMD_MAX || iReqCmd <= GORM_CMD_INVALID)
     {
         this->Close();
         GORM_LOGE("got invalid request command, cmd id:%d", iReqCmd);
@@ -329,6 +328,8 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     if (pCurrentRequest == nullptr)
     {
         // TODO 返回错误
+        GORM_LOGE("malloc request got failed.");
+        this->Close();
         return GORM_ERROR;
     }
     pCurrentRequest->pFrontendEvent = this;
@@ -338,6 +339,9 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     if (!this->m_pRequestRing->AddData(pCurrentRequest))
     {
         ASSERT(false);
+        GORM_LOGE("add request to request ring failed.");
+        this->Close();
+        return GORM_OK;
     }
 
     // 获取请求的路由
@@ -347,6 +351,13 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         pCurrentRequest->GetResult(iRet, 0, nullptr);
         this->ReadyWrite();
         return iRet;
+    }
+    if (this->m_ulClientId == 0)
+    {
+        GORM_LOGE("client send request before make hand shake.");
+        pCurrentRequest->GetResult(GORM_NEED_HAND_SHAKE, 0, nullptr);
+        this->ReadyWrite();
+        return GORM_OK;
     }
 
     int iPendingNum = this->m_pRequestRing->GetNum();
@@ -404,20 +415,98 @@ GORM_Ret GORM_FrontEndEvent::HeartBeat()
     if (pHeartBeat == nullptr)
     {
         pHeartBeat = new GORM_MySQLRequest();
+        if (pHeartBeat == nullptr)
+        {
+            // TODO 退出
+        }
         pHeartBeat->staticRequest = 1;
-        pHeartBeat->PackHeartBeatResult();
+        if (GORM_OK != pHeartBeat->PackHeartBeatResult())
+        {
+            // TODO 退出
+        }
         pHeartBeat->iWaitDone = 1;
         pHeartBeat->iPreGood = 1;
     }
     this->ulHeadBeatTime = GORM_GetNowMS();
-    this->m_pRequestRing->AddData(pHeartBeat);
+    if (!this->m_pRequestRing->AddData(pHeartBeat))
+    {
+        GORM_LOGE("add request to request ring failed.");
+        this->Close();
+        return GORM_OK;
+    }
     this->ReadyWrite();
 
     return GORM_OK;
 }
 
+#define GORM_HAND_SHAKE_RESULT(code, client)                    \
+if (GORM_OK != pHandShake->PackHandShakeResult(code, client))   \
+{                                                               \
+}                                                               \
+pHandShake->iWaitDone = 1;                                      \
+pHandShake->iPreGood = 1;                                       \
+if (!this->m_pRequestRing->AddData(pHandShake))                 \
+{                                                               \
+    GORM_LOGE("add request to request ring failed.");           \
+    this->Close();                                              \
+    return GORM_OK;                                             \
+}                                                               \
+this->ReadyWrite();
+
+
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
 {
+    GORM_MySQLRequest *pHandShake = new GORM_MySQLRequest();
+    GORM_PB_HAND_SHAKE_REQ *pHandShakeReq = new GORM_PB_HAND_SHAKE_REQ();
+    if (pHandShakeReq == nullptr)
+    {
+        GORM_LOGE("malloc hand shake message failed.");
+        this->Close();
+        return GORM_ERROR;
+    }
+
+    if (!pHandShakeReq->ParseFromArray(szMsg, iMsgLen-GORM_REQ_MSG_HEADER_LEN))
+    {                                                                   
+        GORM_LOGE("parse input buffer failed.");
+        this->Close();
+        return GORM_UNPACK_REQ;                                         
+    } 
+
+    // 比对请求版本与服务器版本差异
+    GORM_PB_HAND_SHAKE_REQ *pServerData = GORM_TableFieldMapInstance::Instance()->pTableInfo;
+    if (pHandShakeReq->md5() != pServerData->md5())
+    {
+        GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+        return GORM_ERROR;
+    }
+    if (pHandShakeReq->schemas_size() != pServerData->schemas_size())
+    {
+        GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+        return GORM_ERROR;
+    }
+    for(int i=0; i<pHandShakeReq->schemas_size(); i++)
+    {
+        const GORM_PB_TABLE_SCHEMA_INFO &reqInfo = pHandShakeReq->schemas(i);
+        const GORM_PB_TABLE_SCHEMA_INFO &svrInfo = pServerData->schemas(i);
+        if (reqInfo.columns_size() != svrInfo.columns_size())
+        {
+            GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+            return GORM_ERROR;
+        }
+        for (int j=0; j<reqInfo.columns_size(); j++)
+        {
+            GORM_PB_TABLE_SCHEMA_INFO_COLUMN &reqColumn = reqInfo.columns(j);
+            GORM_PB_TABLE_SCHEMA_INFO_COLUMN &svrColumn = svrInfo.columns(j);
+            if (reqColumn.type() != svrColumn.type())
+            {
+                GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+                return GORM_ERROR;
+            }
+        }
+    }
+
+    this->m_ulClientId = 1;
+    GORM_HAND_SHAKE_RESULT(GORM_OK, this->m_ulClientId);
     return GORM_OK;
 }
 

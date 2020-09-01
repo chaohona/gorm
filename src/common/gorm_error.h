@@ -38,6 +38,8 @@ using GORM_Ret=int;
 #define     GORM_CACHE_ERROR            -28 // 操作缓存错误
 #define     GORM_NO_VALUE               -29 // 没有对应的值
 #define     GORM_INVALID_VALUE_TYPE     -30 // 无效的类型
+#define     GORM_NEED_HAND_SHAKE        -31 // 客户端没有握手直接发送消息
+#define     GORM_VERSION_NOT_MATCH        -32 // 客户端没有握手直接发送消息
 
 
 

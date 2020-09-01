@@ -563,9 +563,12 @@ int GORM_MySQLRequest::PackHeartBeatResult()
     }
     int iLen = GORM_RSP_MSG_HEADER_LEN;
 
-    GORM_PB_UPDATE_RSP *pRspPackPbMsg = new GORM_PB_UPDATE_RSP();
+    GORM_PB_HEART_RSP *pRspPackPbMsg = new GORM_PB_HEART_RSP();
     if (pRspPackPbMsg == nullptr)
+    {
+        GORM_LOGE("malloc heart beat message failed.");
         return GORM_ERROR;
+    }
     GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
     this->PackPbRetCode(retCode);
     iLen += pRspPackPbMsg->ByteSizeLong();
@@ -573,6 +576,7 @@ int GORM_MySQLRequest::PackHeartBeatResult()
     if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
     {
         delete pRspPackPbMsg;
+        GORM_LOGE("pack heart beat message failed.");
         return GORM_ERROR;
     }
     
@@ -581,6 +585,35 @@ int GORM_MySQLRequest::PackHeartBeatResult()
     
     return GORM_OK;
 }
+
+int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
+{
+    int iLen = GORM_RSP_MSG_HEADER_LEN;
+
+    GORM_PB_HAND_SHAKE_RSP *pRspPackPbMsg = new GORM_PB_HAND_SHAKE_RSP();
+    if (pRspPackPbMsg == nullptr)
+    {
+        GORM_LOGE("malloc heart beat message failed.");
+        return GORM_ERROR;
+    }
+    GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
+    this->PackPbRetCode(retCode);
+    pRspPackPbMsg->set_clientid(ulClientId);
+    iLen += pRspPackPbMsg->ByteSizeLong();
+    pRspData = GORM_MemPool::Instance()->GetData(iLen);
+    if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
+    {
+        delete pRspPackPbMsg;
+        GORM_LOGE("pack heart beat message failed.");
+        return GORM_ERROR;
+    }
+    
+    pRspData->m_sUsedSize = iLen;
+    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HEART, 0, GORM_OK, 0);
+    
+    return GORM_OK;
+}
+
 
 void GORM_MySQLRequest::Release()
 {

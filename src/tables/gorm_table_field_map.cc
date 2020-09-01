@@ -524,6 +524,14 @@ int GORM_TableFieldMapInstance::Init(GORM_Log *pLogger)
     }
     mapTableVersion= new TableVersionMap();
 
+    if (pTableInfo != nullptr)
+    {
+        delete pTableInfo;
+    }
+    pTableInfo = new GORM_PB_HAND_SHAKE_REQ();
+    if (GORM_OK != GORM_InitTableSchemaInfo(pTableInfo))
+        return GORM_ERROR;
+
     // 设置每一个表明的映射关系
     for (int i=1; i<GORM_PB_TABLE_IDX_MAX__; i++)
     {
