@@ -485,7 +485,7 @@ FieldName2Id *GORM_TableFieldMapInstance::mapName2Id = nullptr;
 TableName2Id *GORM_TableFieldMapInstance::mapTableName2Id = nullptr;
 TableId2Name *GORM_TableFieldMapInstance::mapTableId2Name = nullptr;
 TableVersionMap *GORM_TableFieldMapInstance::mapTableVersion = nullptr;
-GORM_PB_HAND_SHAKE_REQ *GORM_TableFieldMapInstance::pTableInfo = nullptr;
+PB_MSG_PTR GORM_TableFieldMapInstance::pTableInfo = nullptr;
 
 GORM_TableFieldMapInstance* GORM_TableFieldMapInstance::pInstance = new GORM_TableFieldMapInstance;
 

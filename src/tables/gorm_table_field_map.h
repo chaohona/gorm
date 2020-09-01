@@ -70,7 +70,7 @@ public:
     static TableName2Id *mapTableName2Id;
     static TableId2Name *mapTableId2Name;
     static TableVersionMap *mapTableVersion;
-    static PB_MSG_PTR *pTableInfo;
+    static PB_MSG_PTR pTableInfo;
 private:
 	static GORM_TableFieldMapInstance* pInstance;
 };
