@@ -3,6 +3,7 @@
 #include "gorm_work_thread.h"
 #include "gorm_msg_helper.h"
 #include "gorm_frontend_thread.h"
+#include "gorm_table_field_map.h"
 
 using namespace gorm;
 GORM_FrontEndEvent::GORM_FrontEndEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>       pEpoll, GORM_FrontEndThread *pThread) : 
@@ -449,6 +450,7 @@ if (!this->m_pRequestRing->AddData(pHandShake))                 \
 {                                                               \
     GORM_LOGE("add request to request ring failed.");           \
     this->Close();                                              \
+    delete pHandShake;                                          \
     return GORM_OK;                                             \
 }                                                               \
 this->ReadyWrite();
@@ -457,10 +459,11 @@ this->ReadyWrite();
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
 {
     GORM_MySQLRequest *pHandShake = new GORM_MySQLRequest();
-    GORM_PB_HAND_SHAKE_REQ *pHandShakeReq = new GORM_PB_HAND_SHAKE_REQ();
+    shared_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_shared<GORM_PB_HAND_SHAKE_REQ>();
     if (pHandShakeReq == nullptr)
     {
         GORM_LOGE("malloc hand shake message failed.");
+        delete pHandShake;
         this->Close();
         return GORM_ERROR;
     }
@@ -468,18 +471,19 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
     if (!pHandShakeReq->ParseFromArray(szMsg, iMsgLen-GORM_REQ_MSG_HEADER_LEN))
     {                                                                   
         GORM_LOGE("parse input buffer failed.");
+        delete pHandShake;
         this->Close();
         return GORM_UNPACK_REQ;                                         
     } 
 
     // 比对请求版本与服务器版本差异
-    GORM_PB_HAND_SHAKE_REQ *pServerData = GORM_TableFieldMapInstance::Instance()->pTableInfo;
-    if (pHandShakeReq->md5() != pServerData->md5())
+    GORM_PB_HAND_SHAKE_REQ *pSvrHandShake = dynamic_cast<GORM_PB_HAND_SHAKE_REQ*>(GORM_TableFieldMapInstance::pTableInfo);
+    if (pHandShakeReq->md5() != pSvrHandShake->md5())
     {
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
         return GORM_ERROR;
     }
-    if (pHandShakeReq->schemas_size() != pServerData->schemas_size())
+    if (pHandShakeReq->schemas_size() != pSvrHandShake->schemas_size())
     {
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
         return GORM_ERROR;
@@ -487,7 +491,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
     for(int i=0; i<pHandShakeReq->schemas_size(); i++)
     {
         const GORM_PB_TABLE_SCHEMA_INFO &reqInfo = pHandShakeReq->schemas(i);
-        const GORM_PB_TABLE_SCHEMA_INFO &svrInfo = pServerData->schemas(i);
+        const GORM_PB_TABLE_SCHEMA_INFO &svrInfo = pSvrHandShake->schemas(i);
         if (reqInfo.columns_size() != svrInfo.columns_size())
         {
             GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
@@ -495,8 +499,8 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
         }
         for (int j=0; j<reqInfo.columns_size(); j++)
         {
-            GORM_PB_TABLE_SCHEMA_INFO_COLUMN &reqColumn = reqInfo.columns(j);
-            GORM_PB_TABLE_SCHEMA_INFO_COLUMN &svrColumn = svrInfo.columns(j);
+            const GORM_PB_TABLE_SCHEMA_INFO_COLUMN &reqColumn = reqInfo.columns(j);
+            const GORM_PB_TABLE_SCHEMA_INFO_COLUMN &svrColumn = svrInfo.columns(j);
             if (reqColumn.type() != svrColumn.type())
             {
                 GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);

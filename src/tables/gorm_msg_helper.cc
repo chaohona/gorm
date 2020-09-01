@@ -98,9 +98,9 @@ int GetPbReqMsg(GORM_CMD cmd, OUT PB_MSG_PTR &pMsgPtr)
        ptr->mutable_header();
        break; 
     } 
-    case GORM_CMD_GET_CLIENT_ID:
+    case GORM_CMD_HAND_SHAKE:
     {
-       auto ptr = new GORM_PB_GET_CLIENT_ID_REQ();
+       auto ptr = new GORM_PB_HAND_SHAKE_REQ();
        pMsgPtr = ptr;
        ptr->mutable_header();
        break; 
@@ -186,9 +186,9 @@ int GetPbRspMsg(GORM_CMD cmd, OUT PB_MSG_PTR &pMsgPtr)
        ptr->mutable_retcode();
        break; 
     } 
-    case GORM_CMD_GET_CLIENT_ID:
+    case GORM_CMD_HAND_SHAKE:
     {
-       auto ptr = new GORM_PB_GET_CLIENT_ID_RSP();
+       auto ptr = new GORM_PB_HAND_SHAKE_RSP();
        pMsgPtr = ptr;
        ptr->mutable_retcode();
        break; 

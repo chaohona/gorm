@@ -4,6 +4,7 @@
 #include "gorm_table_field_map_define.h"
 #include "gorm_pb_proto.pb.h"
 #include "gorm_define.h"
+#include "gorm_msg_helper.h"
 
 namespace gorm{
 
@@ -484,6 +485,7 @@ FieldName2Id *GORM_TableFieldMapInstance::mapName2Id = nullptr;
 TableName2Id *GORM_TableFieldMapInstance::mapTableName2Id = nullptr;
 TableId2Name *GORM_TableFieldMapInstance::mapTableId2Name = nullptr;
 TableVersionMap *GORM_TableFieldMapInstance::mapTableVersion = nullptr;
+GORM_PB_HAND_SHAKE_REQ *GORM_TableFieldMapInstance::pTableInfo = nullptr;
 
 GORM_TableFieldMapInstance* GORM_TableFieldMapInstance::pInstance = new GORM_TableFieldMapInstance;
 
@@ -527,8 +529,9 @@ int GORM_TableFieldMapInstance::Init(GORM_Log *pLogger)
     if (pTableInfo != nullptr)
     {
         delete pTableInfo;
+        pTableInfo = nullptr;
     }
-    pTableInfo = new GORM_PB_HAND_SHAKE_REQ();
+    pTableInfo = GetPbReqMsg(GORM_CMD_HAND_SHAKE, pTableInfo);
     if (GORM_OK != GORM_InitTableSchemaInfo(pTableInfo))
         return GORM_ERROR;
 
