@@ -66,6 +66,10 @@ class GORM_PB_HAND_SHAKE_REQDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_HAND_SHAKE_REQ> _instance;
 } _GORM_PB_HAND_SHAKE_REQ_default_instance_;
+class GORM_PB_HAND_SHAKE_RSPDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_HAND_SHAKE_RSP> _instance;
+} _GORM_PB_HAND_SHAKE_RSP_default_instance_;
 class GORM_PB_INSERT_REQDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_INSERT_REQ> _instance;
@@ -313,6 +317,21 @@ static void InitDefaultsscc_info_GORM_PB_HAND_SHAKE_REQ_gorm_5fpb_5fproto_2eprot
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_GORM_PB_HAND_SHAKE_REQ_gorm_5fpb_5fproto_2eproto}, {
       &scc_info_GORM_PB_REQ_HEADER_gorm_5fpb_5fproto_2eproto.base,
       &scc_info_GORM_PB_TABLE_SCHEMA_INFO_gorm_5fpb_5fproto_2eproto.base,}};
+
+static void InitDefaultsscc_info_GORM_PB_HAND_SHAKE_RSP_gorm_5fpb_5fproto_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::gorm::_GORM_PB_HAND_SHAKE_RSP_default_instance_;
+    new (ptr) ::gorm::GORM_PB_HAND_SHAKE_RSP();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::gorm::GORM_PB_HAND_SHAKE_RSP::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GORM_PB_HAND_SHAKE_RSP_gorm_5fpb_5fproto_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_GORM_PB_HAND_SHAKE_RSP_gorm_5fpb_5fproto_2eproto}, {
+      &scc_info_GORM_PB_Ret_Code_gorm_5fpb_5fproto_2eproto.base,}};
 
 static void InitDefaultsscc_info_GORM_PB_HEART_REQ_gorm_5fpb_5fproto_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -589,7 +608,7 @@ static void InitDefaultsscc_info_GORM_PB_UPDATE_RSP_gorm_5fpb_5fproto_2eproto() 
       &scc_info_GORM_PB_Ret_Code_gorm_5fpb_5fproto_2eproto.base,
       &scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto.base,}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gorm_5fpb_5fproto_2eproto[29];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gorm_5fpb_5fproto_2eproto[30];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gorm_5fpb_5fproto_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gorm_5fpb_5fproto_2eproto = nullptr;
 
@@ -680,6 +699,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5fproto_2eproto::off
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HAND_SHAKE_REQ, version_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HAND_SHAKE_REQ, md5_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HAND_SHAKE_REQ, schemas_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HAND_SHAKE_RSP, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HAND_SHAKE_RSP, retcode_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HAND_SHAKE_RSP, clientid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_INSERT_REQ, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -828,24 +854,25 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 59, -1, sizeof(::gorm::GORM_PB_TABLE_SCHEMA_INFO_COLUMN)},
   { 68, -1, sizeof(::gorm::GORM_PB_TABLE_SCHEMA_INFO)},
   { 77, -1, sizeof(::gorm::GORM_PB_HAND_SHAKE_REQ)},
-  { 86, -1, sizeof(::gorm::GORM_PB_INSERT_REQ)},
-  { 93, -1, sizeof(::gorm::GORM_PB_INSERT_RSP)},
-  { 101, -1, sizeof(::gorm::GORM_PB_UPDATE_REQ)},
-  { 108, -1, sizeof(::gorm::GORM_PB_UPDATE_RSP)},
-  { 116, -1, sizeof(::gorm::GORM_PB_REPLACE_REQ)},
-  { 123, -1, sizeof(::gorm::GORM_PB_REPLACE_RSP)},
-  { 131, -1, sizeof(::gorm::GORM_PB_GET_REQ)},
-  { 139, -1, sizeof(::gorm::GORM_PB_GET_RSP)},
-  { 148, -1, sizeof(::gorm::GORM_PB_BATCH_GET_REQ)},
-  { 155, -1, sizeof(::gorm::GORM_PB_BATCH_GET_RSP)},
-  { 162, -1, sizeof(::gorm::GORM_PB_INCREASE_REQ)},
-  { 171, -1, sizeof(::gorm::GORM_PB_INCREASE_RSP)},
-  { 179, -1, sizeof(::gorm::GORM_PB_DELETE_REQ)},
-  { 186, -1, sizeof(::gorm::GORM_PB_DELETE_RSP)},
-  { 193, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_REQ)},
-  { 200, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_RSP)},
-  { 207, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ)},
-  { 214, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP)},
+  { 86, -1, sizeof(::gorm::GORM_PB_HAND_SHAKE_RSP)},
+  { 93, -1, sizeof(::gorm::GORM_PB_INSERT_REQ)},
+  { 100, -1, sizeof(::gorm::GORM_PB_INSERT_RSP)},
+  { 108, -1, sizeof(::gorm::GORM_PB_UPDATE_REQ)},
+  { 115, -1, sizeof(::gorm::GORM_PB_UPDATE_RSP)},
+  { 123, -1, sizeof(::gorm::GORM_PB_REPLACE_REQ)},
+  { 130, -1, sizeof(::gorm::GORM_PB_REPLACE_RSP)},
+  { 138, -1, sizeof(::gorm::GORM_PB_GET_REQ)},
+  { 146, -1, sizeof(::gorm::GORM_PB_GET_RSP)},
+  { 155, -1, sizeof(::gorm::GORM_PB_BATCH_GET_REQ)},
+  { 162, -1, sizeof(::gorm::GORM_PB_BATCH_GET_RSP)},
+  { 169, -1, sizeof(::gorm::GORM_PB_INCREASE_REQ)},
+  { 178, -1, sizeof(::gorm::GORM_PB_INCREASE_RSP)},
+  { 186, -1, sizeof(::gorm::GORM_PB_DELETE_REQ)},
+  { 193, -1, sizeof(::gorm::GORM_PB_DELETE_RSP)},
+  { 200, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_REQ)},
+  { 207, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_RSP)},
+  { 214, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ)},
+  { 221, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -860,6 +887,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_TABLE_SCHEMA_INFO_COLUMN_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_TABLE_SCHEMA_INFO_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_HAND_SHAKE_REQ_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_HAND_SHAKE_RSP_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_INSERT_REQ_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_INSERT_RSP_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_UPDATE_REQ_default_instance_),
@@ -910,99 +938,102 @@ const char descriptor_table_protodef_gorm_5fpb_5fproto_2eproto[] PROTOBUF_SECTIO
   "EQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HE"
   "ADER\022\017\n\007Version\030\002 \001(\004\022\013\n\003Md5\030\003 \001(\r\0220\n\007Sc"
   "hemas\030\004 \003(\0132\037.gorm.GORM_PB_TABLE_SCHEMA_"
-  "INFO\"c\n\022GORM_PB_INSERT_REQ\022(\n\006Header\030\001 \001"
-  "(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006Tables\030\002"
-  " \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\022GORM_PB_INS"
-  "ERT_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_"
-  "Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_"
-  "TABLE\022\024\n\014LastInsertId\030\003 \001(\004\"c\n\022GORM_PB_U"
-  "PDATE_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB"
-  "_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_"
-  "PB_TABLE\"w\n\022GORM_PB_UPDATE_RSP\022\'\n\007RetCod"
-  "e\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006Table"
-  "s\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013Affected"
-  "Num\030\003 \001(\005\"d\n\023GORM_PB_REPLACE_REQ\022(\n\006Head"
-  "er\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006Ta"
-  "bles\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\023GORM_"
-  "PB_REPLACE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.G"
-  "ORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.G"
-  "ORM_PB_TABLE\022\023\n\013AffectedNum\030\003 \001(\005\"p\n\017GOR"
-  "M_PB_GET_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM"
-  "_PB_REQ_HEADER\022\"\n\005Table\030\002 \001(\0132\023.gorm.GOR"
-  "M_PB_TABLE\022\017\n\007GetFlag\030\003 \001(\005\"\207\001\n\017GORM_PB_"
-  "GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_"
-  "Ret_Code\022\"\n\005Table\030\002 \001(\0132\023.gorm.GORM_PB_T"
-  "ABLE\022\021\n\tNewInsert\030\003 \001(\005\022\024\n\014LastInsertId\030"
-  "\004 \001(\004\"f\n\025GORM_PB_BATCH_GET_REQ\022(\n\006Header"
-  "\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006Tabl"
-  "es\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"e\n\025GORM_PB"
-  "_BATCH_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.G"
-  "ORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.G"
-  "ORM_PB_TABLE\"\220\001\n\024GORM_PB_INCREASE_REQ\022(\n"
+  "INFO\"S\n\026GORM_PB_HAND_SHAKE_RSP\022\'\n\007RetCod"
+  "e\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022\020\n\010Clien"
+  "tId\030\002 \001(\004\"c\n\022GORM_PB_INSERT_REQ\022(\n\006Heade"
+  "r\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006Tab"
+  "les\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\022GORM_P"
+  "B_INSERT_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GOR"
+  "M_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GOR"
+  "M_PB_TABLE\022\024\n\014LastInsertId\030\003 \001(\004\"c\n\022GORM"
+  "_PB_UPDATE_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GO"
+  "RM_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm."
+  "GORM_PB_TABLE\"w\n\022GORM_PB_UPDATE_RSP\022\'\n\007R"
+  "etCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006"
+  "Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013Aff"
+  "ectedNum\030\003 \001(\005\"d\n\023GORM_PB_REPLACE_REQ\022(\n"
   "\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022"
-  "#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013"
-  "PlusColumns\030\003 \001(\t\022\024\n\014MinusColumns\030\004 \001(\t\""
-  "y\n\024GORM_PB_INCREASE_RSP\022\'\n\007RetCode\030\001 \001(\013"
-  "2\026.gorm.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\013"
-  "2\023.gorm.GORM_PB_TABLE\022\023\n\013AffectedNum\030\003 \001"
-  "(\005\"b\n\022GORM_PB_DELETE_REQ\022(\n\006Header\030\001 \001(\013"
-  "2\030.gorm.GORM_PB_REQ_HEADER\022\"\n\005Table\030\002 \001("
-  "\0132\023.gorm.GORM_PB_TABLE\"R\n\022GORM_PB_DELETE"
-  "_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret"
-  "_Code\022\023\n\013AffectedNum\030\002 \001(\005\"k\n\032GORM_PB_GE"
-  "T_BY_PARTKEY_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm."
-  "GORM_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gor"
-  "m.GORM_PB_TABLE\"j\n\032GORM_PB_GET_BY_PARTKE"
-  "Y_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_Re"
-  "t_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TA"
-  "BLE\"s\n\"GORM_PB_GET_BY_NON_PRIMARY_KEY_RE"
-  "Q\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEA"
-  "DER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE"
-  "\"r\n\"GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP\022\'"
-  "\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022"
-  "#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE*\367\010\n"
-  "\tGORM_CODE\022\020\n\014GORM_CODE_OK\020\000\022\034\n\017GORM_COD"
-  "E_ERROR\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020GORM_CODE_EAGAIN\020\376"
-  "\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CODE_INVALID_CLIENT\020\375\377"
-  "\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_PART_FAILED\020\374\377\377\377\377\377"
-  "\377\377\377\001\022$\n\027GORM_CODE_INVALID_TABLE\020\373\377\377\377\377\377\377\377"
-  "\377\001\022\034\n\017GORM_CODE_RESET\020\372\377\377\377\377\377\377\377\377\001\022&\n\031GORM"
-  "_CODE_TOO_MUCH_RECORD\020\371\377\377\377\377\377\377\377\377\001\022\"\n\025GORM"
-  "_CODE_INIT_RECORD\020\370\377\377\377\377\377\377\377\377\001\022$\n\027GORM_COD"
-  "E_INVALID_FIELD\020\367\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CODE_"
-  "PACK_REQ_ERROR\020\366\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CODE_R"
-  "EQ_NO_RECORDS\020\365\377\377\377\377\377\377\377\377\001\022#\n\026GORM_CODE_MU"
-  "LTI_TABLES\020\364\377\377\377\377\377\377\377\377\001\022(\n\033GORM_CODE_RSP_U"
-  "NPACK_FAILED\020\363\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_CON"
-  "N_CLOSED\020\362\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_CONN_FA"
-  "ILED\020\361\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_CODE_DB_ERROR\020\360\377"
-  "\377\377\377\377\377\377\377\001\022\034\n\017GORM_CODE_NO_DB\020\357\377\377\377\377\377\377\377\377\001\022$"
-  "\n\027GORM_CODE_REQ_MSG_ERROR\020\356\377\377\377\377\377\377\377\377\001\022&\n\031"
-  "GORM_CODE_NOT_SUPPORT_CMD\020\355\377\377\377\377\377\377\377\377\001\022!\n\024"
-  "GORM_CODE_UNPACK_REQ\020\354\377\377\377\377\377\377\377\377\001\022%\n\030GORM_"
-  "CODE_PACK_RSP_ERROR\020\353\377\377\377\377\377\377\377\377\001\022(\n\033GORM_C"
-  "ODE_REQ_MSG_NO_HEADER\020\352\377\377\377\377\377\377\377\377\001\022%\n\030GORM"
-  "_CODE_REQ_NEED_SPLIT\020\351\377\377\377\377\377\377\377\377\001\022$\n\027GORM_"
-  "CODE_REQ_TOO_LARGE\020\350\377\377\377\377\377\377\377\377\001\022(\n\033GORM_CO"
-  "DE_DB_2_STRUCT_ERROR\020\347\377\377\377\377\377\377\377\377\001\022%\n\030GORM_"
-  "CODE_NO_MORE_RECORD\020\346\377\377\377\377\377\377\377\377\001\022&\n\031GORM_C"
-  "ODE_VERSION_NOT_SET\020\345\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_C"
-  "ODE_CACHE_ERROR\020\344\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_CODE_"
-  "NO_VALUE\020\343\377\377\377\377\377\377\377\377\001\022)\n\034GORM_CODE_INVALID"
-  "_VALUE_TYPE\020\342\377\377\377\377\377\377\377\377\001*\245\002\n\010GORM_CMD\022\024\n\020G"
-  "ORM_CMD_INVALID\020\000\022\022\n\016GORM_CMD_HEART\020\001\022\027\n"
-  "\023GORM_CMD_HAND_SHAKE\020\002\022\023\n\017GORM_CMD_INSER"
-  "T\020\003\022\024\n\020GORM_CMD_REPLACE\020\004\022\025\n\021GORM_CMD_IN"
-  "CREASE\020\005\022\020\n\014GORM_CMD_GET\020\006\022\023\n\017GORM_CMD_D"
-  "ELETE\020\007\022\026\n\022GORM_CMD_BATCH_GET\020\010\022\033\n\027GORM_"
-  "CMD_GET_BY_PARTKEY\020\t\022\023\n\017GORM_CMD_UPDATE\020"
-  "\n\022#\n\037GORM_CMD_GET_BY_NON_PRIMARY_KEY\020\013B\013"
-  "Z\tgorm/gormb\006proto3"
+  "#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\023"
+  "GORM_PB_REPLACE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.g"
+  "orm.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.g"
+  "orm.GORM_PB_TABLE\022\023\n\013AffectedNum\030\003 \001(\005\"p"
+  "\n\017GORM_PB_GET_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm"
+  ".GORM_PB_REQ_HEADER\022\"\n\005Table\030\002 \001(\0132\023.gor"
+  "m.GORM_PB_TABLE\022\017\n\007GetFlag\030\003 \001(\005\"\207\001\n\017GOR"
+  "M_PB_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GOR"
+  "M_PB_Ret_Code\022\"\n\005Table\030\002 \001(\0132\023.gorm.GORM"
+  "_PB_TABLE\022\021\n\tNewInsert\030\003 \001(\005\022\024\n\014LastInse"
+  "rtId\030\004 \001(\004\"f\n\025GORM_PB_BATCH_GET_REQ\022(\n\006H"
+  "eader\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n"
+  "\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"e\n\025GO"
+  "RM_PB_BATCH_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.g"
+  "orm.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.g"
+  "orm.GORM_PB_TABLE\"\220\001\n\024GORM_PB_INCREASE_R"
+  "EQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HE"
+  "ADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABL"
+  "E\022\023\n\013PlusColumns\030\003 \001(\t\022\024\n\014MinusColumns\030\004"
+  " \001(\t\"y\n\024GORM_PB_INCREASE_RSP\022\'\n\007RetCode\030"
+  "\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006Tables\030"
+  "\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013AffectedNu"
+  "m\030\003 \001(\005\"b\n\022GORM_PB_DELETE_REQ\022(\n\006Header\030"
+  "\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022\"\n\005Table"
+  "\030\002 \001(\0132\023.gorm.GORM_PB_TABLE\"R\n\022GORM_PB_D"
+  "ELETE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_P"
+  "B_Ret_Code\022\023\n\013AffectedNum\030\002 \001(\005\"k\n\032GORM_"
+  "PB_GET_BY_PARTKEY_REQ\022(\n\006Header\030\001 \001(\0132\030."
+  "gorm.GORM_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132"
+  "\023.gorm.GORM_PB_TABLE\"j\n\032GORM_PB_GET_BY_P"
+  "ARTKEY_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_"
+  "PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_"
+  "PB_TABLE\"s\n\"GORM_PB_GET_BY_NON_PRIMARY_K"
+  "EY_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_RE"
+  "Q_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_"
+  "TABLE\"r\n\"GORM_PB_GET_BY_NON_PRIMARY_KEY_"
+  "RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret_"
+  "Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABL"
+  "E*\237\t\n\tGORM_CODE\022\020\n\014GORM_CODE_OK\020\000\022\034\n\017GOR"
+  "M_CODE_ERROR\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020GORM_CODE_EAG"
+  "AIN\020\376\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CODE_INVALID_CLIE"
+  "NT\020\375\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_PART_FAILED\020\374"
+  "\377\377\377\377\377\377\377\377\001\022$\n\027GORM_CODE_INVALID_TABLE\020\373\377\377"
+  "\377\377\377\377\377\377\001\022\034\n\017GORM_CODE_RESET\020\372\377\377\377\377\377\377\377\377\001\022&\n"
+  "\031GORM_CODE_TOO_MUCH_RECORD\020\371\377\377\377\377\377\377\377\377\001\022\"\n"
+  "\025GORM_CODE_INIT_RECORD\020\370\377\377\377\377\377\377\377\377\001\022$\n\027GOR"
+  "M_CODE_INVALID_FIELD\020\367\377\377\377\377\377\377\377\377\001\022%\n\030GORM_"
+  "CODE_PACK_REQ_ERROR\020\366\377\377\377\377\377\377\377\377\001\022%\n\030GORM_C"
+  "ODE_REQ_NO_RECORDS\020\365\377\377\377\377\377\377\377\377\001\022#\n\026GORM_CO"
+  "DE_MULTI_TABLES\020\364\377\377\377\377\377\377\377\377\001\022(\n\033GORM_CODE_"
+  "RSP_UNPACK_FAILED\020\363\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_COD"
+  "E_CONN_CLOSED\020\362\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_CO"
+  "NN_FAILED\020\361\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_CODE_DB_ERR"
+  "OR\020\360\377\377\377\377\377\377\377\377\001\022\034\n\017GORM_CODE_NO_DB\020\357\377\377\377\377\377\377"
+  "\377\377\001\022$\n\027GORM_CODE_REQ_MSG_ERROR\020\356\377\377\377\377\377\377\377\377"
+  "\001\022&\n\031GORM_CODE_NOT_SUPPORT_CMD\020\355\377\377\377\377\377\377\377\377"
+  "\001\022!\n\024GORM_CODE_UNPACK_REQ\020\354\377\377\377\377\377\377\377\377\001\022%\n\030"
+  "GORM_CODE_PACK_RSP_ERROR\020\353\377\377\377\377\377\377\377\377\001\022(\n\033G"
+  "ORM_CODE_REQ_MSG_NO_HEADER\020\352\377\377\377\377\377\377\377\377\001\022%\n"
+  "\030GORM_CODE_REQ_NEED_SPLIT\020\351\377\377\377\377\377\377\377\377\001\022$\n\027"
+  "GORM_CODE_REQ_TOO_LARGE\020\350\377\377\377\377\377\377\377\377\001\022(\n\033GO"
+  "RM_CODE_DB_2_STRUCT_ERROR\020\347\377\377\377\377\377\377\377\377\001\022%\n\030"
+  "GORM_CODE_NO_MORE_RECORD\020\346\377\377\377\377\377\377\377\377\001\022&\n\031G"
+  "ORM_CODE_VERSION_NOT_SET\020\345\377\377\377\377\377\377\377\377\001\022\"\n\025G"
+  "ORM_CODE_CACHE_ERROR\020\344\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_"
+  "CODE_NO_VALUE\020\343\377\377\377\377\377\377\377\377\001\022)\n\034GORM_CODE_IN"
+  "VALID_VALUE_TYPE\020\342\377\377\377\377\377\377\377\377\001\022&\n\031GORM_CODE"
+  "_NEED_HAND_SHAKE\020\341\377\377\377\377\377\377\377\377\001*\245\002\n\010GORM_CMD"
+  "\022\024\n\020GORM_CMD_INVALID\020\000\022\022\n\016GORM_CMD_HEART"
+  "\020\001\022\027\n\023GORM_CMD_HAND_SHAKE\020\002\022\023\n\017GORM_CMD_"
+  "INSERT\020\003\022\024\n\020GORM_CMD_REPLACE\020\004\022\025\n\021GORM_C"
+  "MD_INCREASE\020\005\022\020\n\014GORM_CMD_GET\020\006\022\023\n\017GORM_"
+  "CMD_DELETE\020\007\022\026\n\022GORM_CMD_BATCH_GET\020\010\022\033\n\027"
+  "GORM_CMD_GET_BY_PARTKEY\020\t\022\023\n\017GORM_CMD_UP"
+  "DATE\020\n\022#\n\037GORM_CMD_GET_BY_NON_PRIMARY_KE"
+  "Y\020\013B\013Z\tgorm/gormb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_gorm_5fpb_5fproto_2eproto_deps[1] = {
   &::descriptor_table_gorm_5fpb_5ftables_5finc_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gorm_5fpb_5fproto_2eproto_sccs[29] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gorm_5fpb_5fproto_2eproto_sccs[30] = {
   &scc_info_GORM_PB_BATCH_GET_REQ_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_BATCH_GET_RSP_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_DELETE_REQ_gorm_5fpb_5fproto_2eproto.base,
@@ -1014,6 +1045,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gor
   &scc_info_GORM_PB_GET_REQ_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_GET_RSP_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_HAND_SHAKE_REQ_gorm_5fpb_5fproto_2eproto.base,
+  &scc_info_GORM_PB_HAND_SHAKE_RSP_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_HEART_REQ_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_HEART_RSP_gorm_5fpb_5fproto_2eproto.base,
   &scc_info_GORM_PB_INCREASE_REQ_gorm_5fpb_5fproto_2eproto.base,
@@ -1035,10 +1067,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gorm_5fpb_5fproto_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gorm_5fpb_5fproto_2eproto = {
-  false, false, descriptor_table_protodef_gorm_5fpb_5fproto_2eproto, "gorm_pb_proto.proto", 4659,
-  &descriptor_table_gorm_5fpb_5fproto_2eproto_once, descriptor_table_gorm_5fpb_5fproto_2eproto_sccs, descriptor_table_gorm_5fpb_5fproto_2eproto_deps, 29, 1,
+  false, false, descriptor_table_protodef_gorm_5fpb_5fproto_2eproto, "gorm_pb_proto.proto", 4784,
+  &descriptor_table_gorm_5fpb_5fproto_2eproto_once, descriptor_table_gorm_5fpb_5fproto_2eproto_sccs, descriptor_table_gorm_5fpb_5fproto_2eproto_deps, 30, 1,
   schemas, file_default_instances, TableStruct_gorm_5fpb_5fproto_2eproto::offsets,
-  file_level_metadata_gorm_5fpb_5fproto_2eproto, 29, file_level_enum_descriptors_gorm_5fpb_5fproto_2eproto, file_level_service_descriptors_gorm_5fpb_5fproto_2eproto,
+  file_level_metadata_gorm_5fpb_5fproto_2eproto, 30, file_level_enum_descriptors_gorm_5fpb_5fproto_2eproto, file_level_service_descriptors_gorm_5fpb_5fproto_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1050,6 +1082,7 @@ const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_CODE_descriptor() {
 }
 bool GORM_CODE_IsValid(int value) {
   switch (value) {
+    case -31:
     case -30:
     case -29:
     case -28:
@@ -4020,6 +4053,253 @@ void GORM_PB_HAND_SHAKE_REQ::InternalSwap(GORM_PB_HAND_SHAKE_REQ* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_HAND_SHAKE_REQ::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void GORM_PB_HAND_SHAKE_RSP::InitAsDefaultInstance() {
+  ::gorm::_GORM_PB_HAND_SHAKE_RSP_default_instance_._instance.get_mutable()->retcode_ = const_cast< ::gorm::GORM_PB_Ret_Code*>(
+      ::gorm::GORM_PB_Ret_Code::internal_default_instance());
+}
+class GORM_PB_HAND_SHAKE_RSP::_Internal {
+ public:
+  static const ::gorm::GORM_PB_Ret_Code& retcode(const GORM_PB_HAND_SHAKE_RSP* msg);
+};
+
+const ::gorm::GORM_PB_Ret_Code&
+GORM_PB_HAND_SHAKE_RSP::_Internal::retcode(const GORM_PB_HAND_SHAKE_RSP* msg) {
+  return *msg->retcode_;
+}
+GORM_PB_HAND_SHAKE_RSP::GORM_PB_HAND_SHAKE_RSP(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_HAND_SHAKE_RSP)
+}
+GORM_PB_HAND_SHAKE_RSP::GORM_PB_HAND_SHAKE_RSP(const GORM_PB_HAND_SHAKE_RSP& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_retcode()) {
+    retcode_ = new ::gorm::GORM_PB_Ret_Code(*from.retcode_);
+  } else {
+    retcode_ = nullptr;
+  }
+  clientid_ = from.clientid_;
+  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_HAND_SHAKE_RSP)
+}
+
+void GORM_PB_HAND_SHAKE_RSP::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_HAND_SHAKE_RSP_gorm_5fpb_5fproto_2eproto.base);
+  ::memset(&retcode_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&clientid_) -
+      reinterpret_cast<char*>(&retcode_)) + sizeof(clientid_));
+}
+
+GORM_PB_HAND_SHAKE_RSP::~GORM_PB_HAND_SHAKE_RSP() {
+  // @@protoc_insertion_point(destructor:gorm.GORM_PB_HAND_SHAKE_RSP)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GORM_PB_HAND_SHAKE_RSP::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  if (this != internal_default_instance()) delete retcode_;
+}
+
+void GORM_PB_HAND_SHAKE_RSP::ArenaDtor(void* object) {
+  GORM_PB_HAND_SHAKE_RSP* _this = reinterpret_cast< GORM_PB_HAND_SHAKE_RSP* >(object);
+  (void)_this;
+}
+void GORM_PB_HAND_SHAKE_RSP::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GORM_PB_HAND_SHAKE_RSP::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GORM_PB_HAND_SHAKE_RSP& GORM_PB_HAND_SHAKE_RSP::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_HAND_SHAKE_RSP_gorm_5fpb_5fproto_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GORM_PB_HAND_SHAKE_RSP::Clear() {
+// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArena() == nullptr && retcode_ != nullptr) {
+    delete retcode_;
+  }
+  retcode_ = nullptr;
+  clientid_ = PROTOBUF_ULONGLONG(0);
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GORM_PB_HAND_SHAKE_RSP::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .gorm.GORM_PB_Ret_Code RetCode = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_retcode(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 ClientId = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          clientid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_HAND_SHAKE_RSP::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .gorm.GORM_PB_Ret_Code RetCode = 1;
+  if (this->has_retcode()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        1, _Internal::retcode(this), target, stream);
+  }
+
+  // uint64 ClientId = 2;
+  if (this->clientid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->_internal_clientid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_HAND_SHAKE_RSP)
+  return target;
+}
+
+size_t GORM_PB_HAND_SHAKE_RSP::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .gorm.GORM_PB_Ret_Code RetCode = 1;
+  if (this->has_retcode()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *retcode_);
+  }
+
+  // uint64 ClientId = 2;
+  if (this->clientid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->_internal_clientid());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GORM_PB_HAND_SHAKE_RSP::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GORM_PB_HAND_SHAKE_RSP* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_HAND_SHAKE_RSP>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_HAND_SHAKE_RSP)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_HAND_SHAKE_RSP)
+    MergeFrom(*source);
+  }
+}
+
+void GORM_PB_HAND_SHAKE_RSP::MergeFrom(const GORM_PB_HAND_SHAKE_RSP& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_retcode()) {
+    _internal_mutable_retcode()->::gorm::GORM_PB_Ret_Code::MergeFrom(from._internal_retcode());
+  }
+  if (from.clientid() != 0) {
+    _internal_set_clientid(from._internal_clientid());
+  }
+}
+
+void GORM_PB_HAND_SHAKE_RSP::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GORM_PB_HAND_SHAKE_RSP::CopyFrom(const GORM_PB_HAND_SHAKE_RSP& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_HAND_SHAKE_RSP)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GORM_PB_HAND_SHAKE_RSP::IsInitialized() const {
+  return true;
+}
+
+void GORM_PB_HAND_SHAKE_RSP::InternalSwap(GORM_PB_HAND_SHAKE_RSP* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GORM_PB_HAND_SHAKE_RSP, clientid_)
+      + sizeof(GORM_PB_HAND_SHAKE_RSP::clientid_)
+      - PROTOBUF_FIELD_OFFSET(GORM_PB_HAND_SHAKE_RSP, retcode_)>(
+          reinterpret_cast<char*>(&retcode_),
+          reinterpret_cast<char*>(&other->retcode_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_HAND_SHAKE_RSP::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -8897,6 +9177,9 @@ template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_TABLE_SCHEMA_INFO* Arena::CreateMay
 }
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_HAND_SHAKE_REQ* Arena::CreateMaybeMessage< ::gorm::GORM_PB_HAND_SHAKE_REQ >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_HAND_SHAKE_REQ >(arena);
+}
+template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_HAND_SHAKE_RSP* Arena::CreateMaybeMessage< ::gorm::GORM_PB_HAND_SHAKE_RSP >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gorm::GORM_PB_HAND_SHAKE_RSP >(arena);
 }
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_INSERT_REQ* Arena::CreateMaybeMessage< ::gorm::GORM_PB_INSERT_REQ >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_INSERT_REQ >(arena);

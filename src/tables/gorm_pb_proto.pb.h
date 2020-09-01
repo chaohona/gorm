@@ -49,7 +49,7 @@ struct TableStruct_gorm_5fpb_5fproto_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[29]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[30]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -90,6 +90,9 @@ extern GORM_PB_GET_RSPDefaultTypeInternal _GORM_PB_GET_RSP_default_instance_;
 class GORM_PB_HAND_SHAKE_REQ;
 class GORM_PB_HAND_SHAKE_REQDefaultTypeInternal;
 extern GORM_PB_HAND_SHAKE_REQDefaultTypeInternal _GORM_PB_HAND_SHAKE_REQ_default_instance_;
+class GORM_PB_HAND_SHAKE_RSP;
+class GORM_PB_HAND_SHAKE_RSPDefaultTypeInternal;
+extern GORM_PB_HAND_SHAKE_RSPDefaultTypeInternal _GORM_PB_HAND_SHAKE_RSP_default_instance_;
 class GORM_PB_HEART_REQ;
 class GORM_PB_HEART_REQDefaultTypeInternal;
 extern GORM_PB_HEART_REQDefaultTypeInternal _GORM_PB_HEART_REQ_default_instance_;
@@ -157,6 +160,7 @@ template<> ::gorm::GORM_PB_GET_BY_PARTKEY_RSP* Arena::CreateMaybeMessage<::gorm:
 template<> ::gorm::GORM_PB_GET_REQ* Arena::CreateMaybeMessage<::gorm::GORM_PB_GET_REQ>(Arena*);
 template<> ::gorm::GORM_PB_GET_RSP* Arena::CreateMaybeMessage<::gorm::GORM_PB_GET_RSP>(Arena*);
 template<> ::gorm::GORM_PB_HAND_SHAKE_REQ* Arena::CreateMaybeMessage<::gorm::GORM_PB_HAND_SHAKE_REQ>(Arena*);
+template<> ::gorm::GORM_PB_HAND_SHAKE_RSP* Arena::CreateMaybeMessage<::gorm::GORM_PB_HAND_SHAKE_RSP>(Arena*);
 template<> ::gorm::GORM_PB_HEART_REQ* Arena::CreateMaybeMessage<::gorm::GORM_PB_HEART_REQ>(Arena*);
 template<> ::gorm::GORM_PB_HEART_RSP* Arena::CreateMaybeMessage<::gorm::GORM_PB_HEART_RSP>(Arena*);
 template<> ::gorm::GORM_PB_INCREASE_REQ* Arena::CreateMaybeMessage<::gorm::GORM_PB_INCREASE_REQ>(Arena*);
@@ -210,11 +214,12 @@ enum GORM_CODE : int {
   GORM_CODE_CACHE_ERROR = -28,
   GORM_CODE_NO_VALUE = -29,
   GORM_CODE_INVALID_VALUE_TYPE = -30,
+  GORM_CODE_NEED_HAND_SHAKE = -31,
   GORM_CODE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   GORM_CODE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool GORM_CODE_IsValid(int value);
-constexpr GORM_CODE GORM_CODE_MIN = GORM_CODE_INVALID_VALUE_TYPE;
+constexpr GORM_CODE GORM_CODE_MIN = GORM_CODE_NEED_HAND_SHAKE;
 constexpr GORM_CODE GORM_CODE_MAX = GORM_CODE_OK;
 constexpr int GORM_CODE_ARRAYSIZE = GORM_CODE_MAX + 1;
 
@@ -2175,6 +2180,163 @@ class GORM_PB_HAND_SHAKE_REQ PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class GORM_PB_HAND_SHAKE_RSP PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_HAND_SHAKE_RSP) */ {
+ public:
+  inline GORM_PB_HAND_SHAKE_RSP() : GORM_PB_HAND_SHAKE_RSP(nullptr) {};
+  virtual ~GORM_PB_HAND_SHAKE_RSP();
+
+  GORM_PB_HAND_SHAKE_RSP(const GORM_PB_HAND_SHAKE_RSP& from);
+  GORM_PB_HAND_SHAKE_RSP(GORM_PB_HAND_SHAKE_RSP&& from) noexcept
+    : GORM_PB_HAND_SHAKE_RSP() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_HAND_SHAKE_RSP& operator=(const GORM_PB_HAND_SHAKE_RSP& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_HAND_SHAKE_RSP& operator=(GORM_PB_HAND_SHAKE_RSP&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_HAND_SHAKE_RSP& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_HAND_SHAKE_RSP* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_HAND_SHAKE_RSP*>(
+               &_GORM_PB_HAND_SHAKE_RSP_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(GORM_PB_HAND_SHAKE_RSP& a, GORM_PB_HAND_SHAKE_RSP& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_HAND_SHAKE_RSP* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_HAND_SHAKE_RSP* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_HAND_SHAKE_RSP* New() const final {
+    return CreateMaybeMessage<GORM_PB_HAND_SHAKE_RSP>(nullptr);
+  }
+
+  GORM_PB_HAND_SHAKE_RSP* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_HAND_SHAKE_RSP>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_HAND_SHAKE_RSP& from);
+  void MergeFrom(const GORM_PB_HAND_SHAKE_RSP& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_HAND_SHAKE_RSP* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_HAND_SHAKE_RSP";
+  }
+  protected:
+  explicit GORM_PB_HAND_SHAKE_RSP(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_5fpb_5fproto_2eproto);
+    return ::descriptor_table_gorm_5fpb_5fproto_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRetCodeFieldNumber = 1,
+    kClientIdFieldNumber = 2,
+  };
+  // .gorm.GORM_PB_Ret_Code RetCode = 1;
+  bool has_retcode() const;
+  private:
+  bool _internal_has_retcode() const;
+  public:
+  void clear_retcode();
+  const ::gorm::GORM_PB_Ret_Code& retcode() const;
+  ::gorm::GORM_PB_Ret_Code* release_retcode();
+  ::gorm::GORM_PB_Ret_Code* mutable_retcode();
+  void set_allocated_retcode(::gorm::GORM_PB_Ret_Code* retcode);
+  private:
+  const ::gorm::GORM_PB_Ret_Code& _internal_retcode() const;
+  ::gorm::GORM_PB_Ret_Code* _internal_mutable_retcode();
+  public:
+  void unsafe_arena_set_allocated_retcode(
+      ::gorm::GORM_PB_Ret_Code* retcode);
+  ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
+
+  // uint64 ClientId = 2;
+  void clear_clientid();
+  ::PROTOBUF_NAMESPACE_ID::uint64 clientid() const;
+  void set_clientid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_clientid() const;
+  void _internal_set_clientid(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_HAND_SHAKE_RSP)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::gorm::GORM_PB_Ret_Code* retcode_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 clientid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_5fpb_5fproto_2eproto;
+};
+// -------------------------------------------------------------------
+
 class GORM_PB_INSERT_REQ PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_INSERT_REQ) */ {
  public:
@@ -2217,7 +2379,7 @@ class GORM_PB_INSERT_REQ PROTOBUF_FINAL :
                &_GORM_PB_INSERT_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(GORM_PB_INSERT_REQ& a, GORM_PB_INSERT_REQ& b) {
     a.Swap(&b);
@@ -2383,7 +2545,7 @@ class GORM_PB_INSERT_RSP PROTOBUF_FINAL :
                &_GORM_PB_INSERT_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(GORM_PB_INSERT_RSP& a, GORM_PB_INSERT_RSP& b) {
     a.Swap(&b);
@@ -2560,7 +2722,7 @@ class GORM_PB_UPDATE_REQ PROTOBUF_FINAL :
                &_GORM_PB_UPDATE_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   friend void swap(GORM_PB_UPDATE_REQ& a, GORM_PB_UPDATE_REQ& b) {
     a.Swap(&b);
@@ -2726,7 +2888,7 @@ class GORM_PB_UPDATE_RSP PROTOBUF_FINAL :
                &_GORM_PB_UPDATE_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(GORM_PB_UPDATE_RSP& a, GORM_PB_UPDATE_RSP& b) {
     a.Swap(&b);
@@ -2903,7 +3065,7 @@ class GORM_PB_REPLACE_REQ PROTOBUF_FINAL :
                &_GORM_PB_REPLACE_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(GORM_PB_REPLACE_REQ& a, GORM_PB_REPLACE_REQ& b) {
     a.Swap(&b);
@@ -3069,7 +3231,7 @@ class GORM_PB_REPLACE_RSP PROTOBUF_FINAL :
                &_GORM_PB_REPLACE_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   friend void swap(GORM_PB_REPLACE_RSP& a, GORM_PB_REPLACE_RSP& b) {
     a.Swap(&b);
@@ -3246,7 +3408,7 @@ class GORM_PB_GET_REQ PROTOBUF_FINAL :
                &_GORM_PB_GET_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    18;
 
   friend void swap(GORM_PB_GET_REQ& a, GORM_PB_GET_REQ& b) {
     a.Swap(&b);
@@ -3423,7 +3585,7 @@ class GORM_PB_GET_RSP PROTOBUF_FINAL :
                &_GORM_PB_GET_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    19;
 
   friend void swap(GORM_PB_GET_RSP& a, GORM_PB_GET_RSP& b) {
     a.Swap(&b);
@@ -3611,7 +3773,7 @@ class GORM_PB_BATCH_GET_REQ PROTOBUF_FINAL :
                &_GORM_PB_BATCH_GET_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   friend void swap(GORM_PB_BATCH_GET_REQ& a, GORM_PB_BATCH_GET_REQ& b) {
     a.Swap(&b);
@@ -3777,7 +3939,7 @@ class GORM_PB_BATCH_GET_RSP PROTOBUF_FINAL :
                &_GORM_PB_BATCH_GET_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    21;
 
   friend void swap(GORM_PB_BATCH_GET_RSP& a, GORM_PB_BATCH_GET_RSP& b) {
     a.Swap(&b);
@@ -3943,7 +4105,7 @@ class GORM_PB_INCREASE_REQ PROTOBUF_FINAL :
                &_GORM_PB_INCREASE_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    22;
 
   friend void swap(GORM_PB_INCREASE_REQ& a, GORM_PB_INCREASE_REQ& b) {
     a.Swap(&b);
@@ -4163,7 +4325,7 @@ class GORM_PB_INCREASE_RSP PROTOBUF_FINAL :
                &_GORM_PB_INCREASE_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    23;
 
   friend void swap(GORM_PB_INCREASE_RSP& a, GORM_PB_INCREASE_RSP& b) {
     a.Swap(&b);
@@ -4340,7 +4502,7 @@ class GORM_PB_DELETE_REQ PROTOBUF_FINAL :
                &_GORM_PB_DELETE_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    24;
 
   friend void swap(GORM_PB_DELETE_REQ& a, GORM_PB_DELETE_REQ& b) {
     a.Swap(&b);
@@ -4506,7 +4668,7 @@ class GORM_PB_DELETE_RSP PROTOBUF_FINAL :
                &_GORM_PB_DELETE_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    25;
 
   friend void swap(GORM_PB_DELETE_RSP& a, GORM_PB_DELETE_RSP& b) {
     a.Swap(&b);
@@ -4663,7 +4825,7 @@ class GORM_PB_GET_BY_PARTKEY_REQ PROTOBUF_FINAL :
                &_GORM_PB_GET_BY_PARTKEY_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    26;
 
   friend void swap(GORM_PB_GET_BY_PARTKEY_REQ& a, GORM_PB_GET_BY_PARTKEY_REQ& b) {
     a.Swap(&b);
@@ -4829,7 +4991,7 @@ class GORM_PB_GET_BY_PARTKEY_RSP PROTOBUF_FINAL :
                &_GORM_PB_GET_BY_PARTKEY_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    27;
 
   friend void swap(GORM_PB_GET_BY_PARTKEY_RSP& a, GORM_PB_GET_BY_PARTKEY_RSP& b) {
     a.Swap(&b);
@@ -4995,7 +5157,7 @@ class GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ PROTOBUF_FINAL :
                &_GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    28;
 
   friend void swap(GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ& a, GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ& b) {
     a.Swap(&b);
@@ -5161,7 +5323,7 @@ class GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP PROTOBUF_FINAL :
                &_GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    29;
 
   friend void swap(GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP& a, GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP& b) {
     a.Swap(&b);
@@ -6741,6 +6903,111 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_TABLE_SC
 GORM_PB_HAND_SHAKE_REQ::schemas() const {
   // @@protoc_insertion_point(field_list:gorm.GORM_PB_HAND_SHAKE_REQ.Schemas)
   return schemas_;
+}
+
+// -------------------------------------------------------------------
+
+// GORM_PB_HAND_SHAKE_RSP
+
+// .gorm.GORM_PB_Ret_Code RetCode = 1;
+inline bool GORM_PB_HAND_SHAKE_RSP::_internal_has_retcode() const {
+  return this != internal_default_instance() && retcode_ != nullptr;
+}
+inline bool GORM_PB_HAND_SHAKE_RSP::has_retcode() const {
+  return _internal_has_retcode();
+}
+inline void GORM_PB_HAND_SHAKE_RSP::clear_retcode() {
+  if (GetArena() == nullptr && retcode_ != nullptr) {
+    delete retcode_;
+  }
+  retcode_ = nullptr;
+}
+inline const ::gorm::GORM_PB_Ret_Code& GORM_PB_HAND_SHAKE_RSP::_internal_retcode() const {
+  const ::gorm::GORM_PB_Ret_Code* p = retcode_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Ret_Code*>(
+      &::gorm::_GORM_PB_Ret_Code_default_instance_);
+}
+inline const ::gorm::GORM_PB_Ret_Code& GORM_PB_HAND_SHAKE_RSP::retcode() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_HAND_SHAKE_RSP.RetCode)
+  return _internal_retcode();
+}
+inline void GORM_PB_HAND_SHAKE_RSP::unsafe_arena_set_allocated_retcode(
+    ::gorm::GORM_PB_Ret_Code* retcode) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(retcode_);
+  }
+  retcode_ = retcode;
+  if (retcode) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_HAND_SHAKE_RSP.RetCode)
+}
+inline ::gorm::GORM_PB_Ret_Code* GORM_PB_HAND_SHAKE_RSP::release_retcode() {
+  auto temp = unsafe_arena_release_retcode();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Ret_Code* GORM_PB_HAND_SHAKE_RSP::unsafe_arena_release_retcode() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_HAND_SHAKE_RSP.RetCode)
+  
+  ::gorm::GORM_PB_Ret_Code* temp = retcode_;
+  retcode_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Ret_Code* GORM_PB_HAND_SHAKE_RSP::_internal_mutable_retcode() {
+  
+  if (retcode_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Ret_Code>(GetArena());
+    retcode_ = p;
+  }
+  return retcode_;
+}
+inline ::gorm::GORM_PB_Ret_Code* GORM_PB_HAND_SHAKE_RSP::mutable_retcode() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_HAND_SHAKE_RSP.RetCode)
+  return _internal_mutable_retcode();
+}
+inline void GORM_PB_HAND_SHAKE_RSP::set_allocated_retcode(::gorm::GORM_PB_Ret_Code* retcode) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete retcode_;
+  }
+  if (retcode) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(retcode);
+    if (message_arena != submessage_arena) {
+      retcode = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, retcode, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  retcode_ = retcode;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_HAND_SHAKE_RSP.RetCode)
+}
+
+// uint64 ClientId = 2;
+inline void GORM_PB_HAND_SHAKE_RSP::clear_clientid() {
+  clientid_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_HAND_SHAKE_RSP::_internal_clientid() const {
+  return clientid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_HAND_SHAKE_RSP::clientid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_HAND_SHAKE_RSP.ClientId)
+  return _internal_clientid();
+}
+inline void GORM_PB_HAND_SHAKE_RSP::_internal_set_clientid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  clientid_ = value;
+}
+inline void GORM_PB_HAND_SHAKE_RSP::set_clientid(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_clientid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_HAND_SHAKE_RSP.ClientId)
 }
 
 // -------------------------------------------------------------------
@@ -9327,6 +9594,8 @@ GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP::tables() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

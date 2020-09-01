@@ -43,6 +43,7 @@ enum GORM_CODE
 	GORM_CODE_CACHE_ERROR        = -28; // 操作缓存错误
 	GORM_CODE_NO_VALUE           = -29; // 没有对应的值
 	GORM_CODE_INVALID_VALUE_TYPE = -30; // 无效的类型
+	GORM_CODE_NEED_HAND_SHAKE    = -31; // 客户端没有握手直接发送消息
 }
 
 enum GORM_CMD
