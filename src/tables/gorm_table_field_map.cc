@@ -531,7 +531,8 @@ int GORM_TableFieldMapInstance::Init(GORM_Log *pLogger)
         delete pTableInfo;
         pTableInfo = nullptr;
     }
-    pTableInfo = GetPbReqMsg(GORM_CMD_HAND_SHAKE, pTableInfo);
+    if (GORM_OK != GetPbReqMsg(GORM_CMD_HAND_SHAKE, pTableInfo))
+        return GORM_ERROR;
     if (GORM_OK != GORM_InitTableSchemaInfo(pTableInfo))
         return GORM_ERROR;
 

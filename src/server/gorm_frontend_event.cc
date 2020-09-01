@@ -481,12 +481,12 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
     if (pHandShakeReq->md5() != pSvrHandShake->md5())
     {
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-        return GORM_ERROR;
+        return GORM_OK;
     }
     if (pHandShakeReq->schemas_size() != pSvrHandShake->schemas_size())
     {
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-        return GORM_ERROR;
+        return GORM_OK;
     }
     for(int i=0; i<pHandShakeReq->schemas_size(); i++)
     {
@@ -495,7 +495,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
         if (reqInfo.columns_size() != svrInfo.columns_size())
         {
             GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-            return GORM_ERROR;
+            return GORM_OK;
         }
         for (int j=0; j<reqInfo.columns_size(); j++)
         {
@@ -504,7 +504,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
             if (reqColumn.type() != svrColumn.type())
             {
                 GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-                return GORM_ERROR;
+                return GORM_OK;
             }
         }
     }

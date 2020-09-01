@@ -590,12 +590,7 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
 {
     int iLen = GORM_RSP_MSG_HEADER_LEN;
 
-    GORM_PB_HAND_SHAKE_RSP *pRspPackPbMsg = new GORM_PB_HAND_SHAKE_RSP();
-    if (pRspPackPbMsg == nullptr)
-    {
-        GORM_LOGE("malloc heart beat message failed.");
-        return GORM_ERROR;
-    }
+    shared_ptr<GORM_PB_HAND_SHAKE_RSP> pRspPackPbMsg = make_shared<GORM_PB_HAND_SHAKE_RSP>();
     GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
     this->PackPbRetCode(retCode);
     pRspPackPbMsg->set_clientid(ulClientId);
@@ -603,13 +598,12 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
     pRspData = GORM_MemPool::Instance()->GetData(iLen);
     if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
     {
-        delete pRspPackPbMsg;
         GORM_LOGE("pack heart beat message failed.");
         return GORM_ERROR;
     }
     
     pRspData->m_sUsedSize = iLen;
-    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HEART, 0, GORM_OK, 0);
+    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HAND_SHAKE, 0, GORM_OK, 0);
     
     return GORM_OK;
 }

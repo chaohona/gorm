@@ -46,18 +46,19 @@ GORM_Ret PreRun()
         cout << "parse config file failed." << endl;
         return GORM_ERROR;
     }
-    // 加载db路由等信息
-    if (GORM_OK != ReloadRoute(GORM_Config::Instance()->m_strDbCfg.c_str()))
-    {
-        cout << "parse database config failed" << endl;
-        return GORM_ERROR;
-    }
 
     GORM_DefaultLog::Instance()->SetLogLevel(GORM_Config::Instance()->m_iLogLevel);
 
     if (GORM_OK != GORM_TableFieldMapInstance::Instance()->Init(GORM_DefaultLog::Instance()))
     {
         cout << "init table field map failed." << endl;
+        return GORM_ERROR;
+    }
+
+    // 加载db路由等信息
+    if (GORM_OK != ReloadRoute(GORM_Config::Instance()->m_strDbCfg.c_str()))
+    {
+        cout << "parse database config failed" << endl;
         return GORM_ERROR;
     }
     // 2、设置后台运行

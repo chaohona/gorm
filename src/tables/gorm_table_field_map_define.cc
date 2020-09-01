@@ -44,8 +44,8 @@ int GORM_InitTableSchemaInfo(PB_MSG_PTR pMsgPtr)
     GORM_PB_TABLE_SCHEMA_INFO *pInfo;
     GORM_PB_TABLE_SCHEMA_INFO_COLUMN *pColumn;
     pHandShake->mutable_header();
-    pHandShake->Version = 1;
-    pHandShake->Md5 = 1;
+    pHandShake->set_version(1);
+    pHandShake->set_md5(1);
     // for table currency
     pInfo = pHandShake->add_schemas();
     if (pInfo == nullptr)
