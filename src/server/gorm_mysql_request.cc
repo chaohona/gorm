@@ -590,7 +590,8 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
 {
     int iLen = GORM_RSP_MSG_HEADER_LEN;
 
-    shared_ptr<GORM_PB_HAND_SHAKE_RSP> pRspPackPbMsg = make_shared<GORM_PB_HAND_SHAKE_RSP>();
+    this->iErrCode = iRet;
+    unique_ptr<GORM_PB_HAND_SHAKE_RSP> pRspPackPbMsg = make_shared<GORM_PB_HAND_SHAKE_RSP>();
     GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
     this->PackPbRetCode(retCode);
     pRspPackPbMsg->set_clientid(ulClientId);
