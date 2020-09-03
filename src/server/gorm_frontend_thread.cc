@@ -131,13 +131,13 @@ GORM_FrontEndThread::~GORM_FrontEndThread()
         close(this->m_iListenFD);
         this->m_iListenFD = 0;
     }
-    this->m_pMemPool = nullptr;
 }
 
 int GORM_FrontEndThread::AcceptClient(GORM_FD iFD)
 {
     GORM_LOGD("fornt thread got new client:%d", iFD);
     GORM_FrontEndEvent *pEvent = new GORM_FrontEndEvent(iFD, this->m_pEpoll, this);
+    pEvent->SetMemPool(this->pMemPool)
     this->m_pEpoll->AddEventRead(pEvent);
     this->m_mapFrontEndEvents[pEvent->m_uiEventId] = pEvent;
     return GORM_OK;
@@ -173,8 +173,9 @@ void GORM_FrontEndThread::ResponseProc()
         return;
     list<GORM_DBRequest*> requestList;
     this->m_ResponseList.Take(requestList);
-    for (auto pReq : requestList)
+    for (GORM_DBRequest *pReq : requestList)
     {
+        pReq->ResetMemPool(this->m_pMemPool);
         // TODO 回收request
         if (pReq->pFrontendEvent == nullptr)
         {
@@ -200,8 +201,6 @@ void GORM_FrontEndThread::ResponseProc()
 
 void GORM_FrontEndThread::Work(mutex *m)
 {
-    
-    this->m_pMemPool= make_shared<GORM_MemPool>();
     // 1.创建epoll
     this->m_pEpoll = make_shared<GORM_Epoll>();
     if (!this->m_pEpoll->Init(MAX_EVENT_POOLS))

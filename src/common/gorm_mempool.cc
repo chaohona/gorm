@@ -15,7 +15,7 @@ bool GORM_MemPoolData::Release()
         return true;
     }
     ASSERT(this->m_uszData != nullptr && this->m_uszEnd != nullptr && this->m_sCapacity != 0);
-    GORM_MemPool::Instance()->Release(this);
+    this->m_pMemPool->Release(this);
     return true;
 }
 
@@ -31,7 +31,6 @@ GORM_MemPoolData *GORM_MemPool::GetData(char *szData, int iLen, size_t iSize)
     ASSERT(iSize>iLen);
     if (iSize < iLen)
         iSize = iLen;
-    unique_lock<mutex> locker(m_Mutex);
     GORM_MemPoolData *pData = this->GetData(iSize);
     if (pData == nullptr)
     {
@@ -44,7 +43,6 @@ GORM_MemPoolData *GORM_MemPool::GetData(char *szData, int iLen, size_t iSize)
 
 GORM_MemPoolData *GORM_MemPool::GetData(size_t sSize)
 {
-    unique_lock<mutex> locker(m_Mutex);
     int iIndex = POOL_DATA_INVALID_IDX;
     int iNewSize = sSize;
     // 计算index
@@ -112,7 +110,6 @@ GORM_MemPool::~GORM_MemPool()
 
 bool GORM_MemPool::Release(GORM_MemPoolData * pData)
 {
-    unique_lock<mutex> locker(m_Mutex);
     ASSERT(pData != nullptr && pData->m_uiIndex<=POOL_DATA_TOTAL_TYPE && pData->m_uszData!=nullptr && 
         pData->m_cStaticFlag==0 );
     if (pData == nullptr)

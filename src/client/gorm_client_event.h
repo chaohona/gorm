@@ -19,6 +19,7 @@ public:
     virtual ~GORM_ClientEvent();
 
     void SetLogger(GORM_Log *pLogger);
+    void SetMemPool(GORM_MemPool *pMemPool);
 
 public:
     virtual int Write();
@@ -51,6 +52,7 @@ private:
     atomic<bool>    m_bNewResponse;
     bool    m_bFinish = false;      // 进程结束，不需要
     mutex   m_Mutex;
+    GORM_MemPool *m_pMemPool = nullptr;
 };
 
 }

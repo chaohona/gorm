@@ -3,7 +3,6 @@
 #include "gorm_sys_inc.h"
 #include "gorm_define.h"
 #include "gorm_array.h"
-#include "gorm_singleton.h"
 
 // TODO 目前为全局共享，TODO改成一个线程一个内存池
 
@@ -20,6 +19,7 @@ if (POOL_DATA->m_cStaticFlag != 1)              \
     GORM_MEMPOOL_INSTANCE()->Release(POOL_DATA);  \
 }
 
+class GORM_MemPool;
 // 内存
 struct GORM_MemPoolData {
 public:
@@ -34,17 +34,18 @@ public:
     size_t          m_sCapacity = 0;    // 内存容量
     size_t          m_sUsedSize = 0;    // 有效内容的使用量
     GORM_MemPoolData  *m_pNext = nullptr;//   下一个
+    shared_ptr<GORM_MemPool> m_pMemPool;
 };
 
 
-#define GORM_MEMPOOL_GETDATA(len)\
-GORM_MemPool::m_pInstance->GetData((len))
-
+#define GORM_MallocFromSharedPool(sharedPool, data, len)\
+data = sharedPool->GetData(len);                        \
+data->m_pMemPool = sharedPool;
 
 // 由于要适用网络层数据包缓存与命令缓存两种规格的内存使用场景
 // 内存规格较多的较多小内存给命令使用，大内存给网络层使用
 #define MAX_FREE_META_DATA 0xFFFF
-class GORM_MemPool : public GORM_Singleton<GORM_MemPool>
+class GORM_MemPool
 {
 public:
     GORM_MemPool();

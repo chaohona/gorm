@@ -20,7 +20,7 @@ class GORM_MySQLEvent;
 class GORM_MySQLRequest : public GORM_DBRequest
 {
 public:
-    GORM_MySQLRequest();
+    GORM_MySQLRequest(shared_ptr<GORM_MemPool> &pMemPool);
     virtual ~GORM_MySQLRequest();
 
     // 获取到了一个结果，此函数负责从mysql到内存数据的转换

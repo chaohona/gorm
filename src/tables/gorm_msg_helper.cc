@@ -287,7 +287,7 @@ void DelPbTableMsg(int iTableId, PB_MSG_PTR &pMsgPtr)
     pMsgPtr = nullptr;
 }
 
-int GORM_PackRequestBuff(GORM_Log *pLogger, GORM_MemPool *pMemPool, PB_MSG_PTR pPbMsg, GORM_MemPoolData *&pMsgBuffer, 
+int GORM_PackRequestBuff(GORM_Log *pLogger, shared_ptr<GORM_MemPool> pMemPool, PB_MSG_PTR pPbMsg, GORM_MemPoolData *&pMsgBuffer, 
     GORM_CMD iReqCmd, uint32 ulSeqId, uint8 reqPreFlag)
 {
     // 3、打包数据到buffer

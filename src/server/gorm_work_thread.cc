@@ -15,7 +15,6 @@ GORM_WorkThread::GORM_WorkThread(shared_ptr<GORM_ThreadPool> pPool, string &strT
 
 GORM_WorkThread::~GORM_WorkThread()
 {
-    this->m_pMemPool = nullptr;
     this->Exist();
 }
 
@@ -40,8 +39,6 @@ void GORM_WorkThread::Work(mutex *m)
 {
     try
     {
-        //
-        this->m_pMemPool= make_shared<GORM_MemPool>();
         if (GORM_OK != this->Init(m, GORM_Config::Instance()))
         {
             GORM_LOGE("database work thread init failed.");
@@ -88,6 +85,7 @@ int GORM_WorkThread::RequestPreProc()
     int iRet = GORM_OK;
     for(GORM_DBRequest *pReq : listRequest)
     {
+        pReq->ResetMemPool(this->m_pMemPool);
         //pReq->pCacheOpt = this->m_pCacheOpt;
         // 判断是否在缓存中操作成功，如果需要则继续操作数据库
         bGotResult = false;

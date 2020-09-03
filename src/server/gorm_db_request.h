@@ -6,6 +6,7 @@
 #include "gorm_define.h"
 #include "gorm_msg_helper.h"
 #include "gorm_pb_proto.pb.h"
+#include "gorm_mempool.h"
 
 // TODO 做成模板，按请求的类型
 using namespace gorm;
@@ -15,11 +16,21 @@ class GORM_DBConnPool;
 class GORM_FrontEndThread;
 class GORM_WorkThread;
 class GORM_CacheOpt;
+
+#define GORM_SetRequestSourceInfo(request, reqid, reqcmd, frontevent, frontthread)  \
+request->pFrontendEvent = frontevent;                                               \
+request->uiReqID = reqid;                                                           \
+request->iReqCmd = reqcmd;                                                          \
+request->pFrontThread = frontthread;
+
 class GORM_DBRequest
 {
 public:
-    GORM_DBRequest();
+    GORM_DBRequest(shared_ptr<GORM_MemPool> &pMemPool);
     virtual ~GORM_DBRequest();
+
+    // 转换属主线程之后重新设置MemPool
+    void ResetMemPool(shared_ptr<GORM_MemPool> &pMemPool);
 
     int SendToWorkThread();
     int ParseReqMsg(char *szMsg = nullptr, int iMsgLen = 0);
@@ -68,6 +79,7 @@ public:
 
     uint32              uiReqFlag = 0;
     GORM_MemPoolData    *pReqData = nullptr;    // 组装的请求SQL语句
+    shared_ptr<GORM_MemPool> pMemPool;
     int                 iReqTableId = GORM_PB_TABLE_IDX_MIN__;          // 请求的表编号
     uint32              uiReqID = 0;
     int                 iErrCode = 0;

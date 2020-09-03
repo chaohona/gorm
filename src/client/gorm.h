@@ -22,7 +22,6 @@
 #include "gorm_list.h"
 #include "gorm_log.h"
 #include "gorm_mempool.h"
-#include "gorm_msgbuffer.h"
 #include "gorm_noncopyable.h"
 #include "gorm_object_pool.h"
 #include "gorm_options.h"

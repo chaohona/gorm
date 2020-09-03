@@ -39,7 +39,6 @@ public:
     // 线程内部使用的变量
     unordered_map<uint64, GORM_Event*>      m_mapFrontEndEvents;    // 客户端的连接
     GORM_DBConnMgr                          m_dbMgr;    // 每个线程单独使用一个数据库连接器
-    shared_ptr<GORM_MemPool>                m_pMemPool; // 此工作线程管理的内存池
     GORM_ObjectPool<GORM_MySQLRequest, 1024>  m_vRequestParse; // 目前只支持mysql协议,每个线程一个内存池
 public:
     // 线程需要和外部交互的变量///////////////////////////////////////////////

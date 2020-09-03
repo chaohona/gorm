@@ -6,6 +6,7 @@
 #include "gorm_event.h"
 #include "gorm_frontend_event.h"
 #include "gorm_list.h"
+#include "gorm_mempool.h"
 
 class GORM_FrontEndThread;
 class GORM_ListenEvent : public GORM_Event
@@ -45,7 +46,6 @@ public:
     shared_ptr<GORM_ListenEvent>    m_pListenEvent;
     shared_ptr<GORM_Epoll>          m_pEpoll;
 
-    shared_ptr<GORM_MemPool>            m_pMemPool; // 此工作线程管理的内存池
     unordered_map<uint64, GORM_Event*>  m_mapFrontEndEvents;    // 客户端的连接
 
     // 响应统一交给前端线程之后，由前端线程自己处理，避免多线程锁问题

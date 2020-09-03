@@ -41,6 +41,11 @@ GORM_FrontEndEvent::~GORM_FrontEndEvent()
     }
 }
 
+void GORM_FrontEndEvent::SetMemPool(shared_ptr<GORM_MemPool> &pMemPool)
+{
+    this->pMemPool = pMemPool;
+}
+
 #define GORM_FRONT_EVENT_GET_NEXT_SENDING()                                     \
 GORM_DBRequest *pRequest = this->m_pRequestRing->GetFront();                    \
 if (pRequest == nullptr)                                                        \
@@ -316,7 +321,7 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
             GORM_LOGW("has make hand shake.");
             return GORM_OK;
         }
-        return this->HandShake(szMsg, iMsgLen);
+        return this->HandShake(szMsg, iMsgLen, iReqID);
     } 
     else if (iReqCmd > GORM_CMD_MAX || iReqCmd <= GORM_CMD_INVALID)
     {
@@ -324,7 +329,7 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         GORM_LOGE("got invalid request command, cmd id:%d", iReqCmd);
         return GORM_OK;
     }
-    GORM_DBRequest  *pCurrentRequest = new GORM_MySQLRequest();
+    GORM_DBRequest  *pCurrentRequest = new GORM_MySQLRequest(this->pMemPool);
     // 读取到一个请求之后传给解析器解析,如果当前的请求和前一个请求的事务id一样，则需要等前一个请求返回之后再接收下一个请求
     if (pCurrentRequest == nullptr)
     {
@@ -333,10 +338,7 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         this->Close();
         return GORM_ERROR;
     }
-    pCurrentRequest->pFrontendEvent = this;
-    pCurrentRequest->uiReqID = iReqID;
-    pCurrentRequest->iReqCmd = iReqCmd;
-    pCurrentRequest->pFrontThread = this->m_pFrontThread;
+    GORM_SetRequestSourceInfo(pCurrentRequest, iReqID, iReqCmd, this, this->m_pFrontThread);
     if (!this->m_pRequestRing->AddData(pCurrentRequest))
     {
         ASSERT(false);
@@ -415,7 +417,7 @@ GORM_Ret GORM_FrontEndEvent::HeartBeat()
     static GORM_MySQLRequest *pHeartBeat = nullptr;
     if (pHeartBeat == nullptr)
     {
-        pHeartBeat = new GORM_MySQLRequest();
+        pHeartBeat = new GORM_MySQLRequest(this->pMemPool);
         if (pHeartBeat == nullptr)
         {
             // TODO 退出
@@ -456,10 +458,10 @@ if (!this->m_pRequestRing->AddData(pHandShake))                 \
 this->ReadyWrite();
 
 
-GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
+GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
 {
-    GORM_MySQLRequest *pHandShake = new GORM_MySQLRequest();
-    shared_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_shared<GORM_PB_HAND_SHAKE_REQ>();
+    GORM_MySQLRequest *pHandShake = new GORM_MySQLRequest(this->pMemPool);
+    unique_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_unique<GORM_PB_HAND_SHAKE_REQ>();
     if (pHandShakeReq == nullptr)
     {
         GORM_LOGE("malloc hand shake message failed.");
@@ -467,6 +469,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen)
         this->Close();
         return GORM_ERROR;
     }
+    GORM_SetRequestSourceInfo(pHandShake, iReqID, GORM_CMD_HAND_SHAKE, this, this->m_pFrontThread);
 
     if (!pHandShakeReq->ParseFromArray(szMsg, iMsgLen-GORM_REQ_MSG_HEADER_LEN))
     {                                                                   

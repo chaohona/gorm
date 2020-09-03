@@ -9,7 +9,7 @@ namespace gorm{
 GORM_ClientEvent::GORM_ClientEvent(GORM_Log *pLogger, shared_ptr<GORM_Epoll> pEpoll):GORM_Event(0, pEpoll)
 {
     this->pLogger = pLogger;
-    this->m_pReadingBuffer = GORM_MemPool::Instance()->GetData(1024*1024);
+    this->m_pReadingBuffer = this->m_pMemPool->GetData(1024*1024);
     this->m_szBeginPos = this->m_pReadingBuffer->m_uszData;
 }
 
@@ -20,6 +20,11 @@ GORM_ClientEvent::~GORM_ClientEvent()
 void GORM_ClientEvent::SetLogger(GORM_Log *pLogger)
 {
     this->pLogger = pLogger;
+}
+
+void GORM_ClientEvent::SetMemPool(GORM_MemPool *pMemPool)
+{
+    this->m_pMemPool = pMemPool;
 }
 
 int GORM_ClientEvent::Read()
@@ -120,7 +125,7 @@ int GORM_ClientEvent::BeginReadNextMsg()
             if (m_iNeedLen > m_pReadingBuffer->m_sCapacity)
             {
                 GORM_MemPoolData *pOldData = m_pReadingBuffer;
-                m_pReadingBuffer = GORM_MemPool::Instance()->GetData(m_szBeginPos, m_iReadedLen, m_iNeedLen);
+                m_pReadingBuffer = this->m_pMemPool->GetData(m_szBeginPos, m_iReadedLen, m_iNeedLen);
                 pOldData->Release();
             }
             else // 将消息拷贝到开始的地方

@@ -3,8 +3,9 @@
 
 namespace gorm{
 
-GORM_ClientSvrMgr::GORM_ClientSvrMgr(GORM_Log *pLogger)
+GORM_ClientSvrMgr::GORM_ClientSvrMgr(GORM_MemPool *pMemPool, GORM_Log *pLogger = nullptr)
 {
+    this->pMemPool = pMemPool;
     this->pLogger = pLogger;
     if (this->pLogger == nullptr)
     {
@@ -140,6 +141,7 @@ shared_ptr<GORM_Epoll> GORM_ClientSvrMgr::ConnectToServer(int &iRet)
     pEpoll->Init(32);
     this->svrEvent = new GORM_ClientEvent(this->pLogger, pEpoll);
     this->svrEvent->SetLogger(this->pLogger);
+    this->svrEvent->SetMemPool(this->pMemPool);
     this->svrEvent->m_pClientMgr = this;
     iRet = this->svrEvent->ConnectToServer(this->szServerIP, this->uiServerPort);
     if (iRet != GORM_OK)

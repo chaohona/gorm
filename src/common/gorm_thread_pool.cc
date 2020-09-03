@@ -4,12 +4,14 @@
 GORM_Thread::GORM_Thread(shared_ptr<GORM_ThreadPool>& pPool, string &strThreadName):m_strThreadName(strThreadName), 
                         m_pPool(pPool), m_bJoined(false), m_bDetached(false)
 {
+    this->m_pMemPool = make_shared<GORM_MemPool>();
 }
 
 GORM_Thread::~GORM_Thread()
 {
     this->m_pPool = nullptr;
     this->m_pSysThread = nullptr;
+    this->m_pMemPool = nullptr;
 }
 
 void GORM_Thread::Join()

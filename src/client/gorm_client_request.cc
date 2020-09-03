@@ -401,312 +401,52 @@ int GORM_ClientRequest::PackRequest()
     }
     }
 
-    //(GORM_Log *pLogger, GORM_MemPool *pMemPool, PB_MSG_PTR pPbMsg, GORM_MemPoolData *&pMsgBuffer, 
-    //    GORM_CMD iReqCmd, uint32 ulSeqId, uint8 reqPreFlag)
-
-    if (GORM_OK != GORM_PackRequestBuff(pLogger, GORM_MemPool::Instance(), this->pPbMsg, this->pMsgBuffer, this->iReqCmd, this->ulSeqId, reqPreFlag))
+    if (GORM_OK != GORM_PackRequestBuff(pLogger, this->pMemPool, this->pPbMsg, this->pMsgBuffer, this->iReqCmd, this->ulSeqId, reqPreFlag))
     {
         GORM_CUSTOM_LOGE(pLogger, "pack request message failed.");
         return GORM_ERROR;
     }
-    /*
-    // 3、打包数据到buffer
-    size_t sPbSize = this->pPbMsg->ByteSizeLong() + GORM_REQ_MSG_HEADER_LEN;
-    this->pMsgBuffer = GORM_MemPool::Instance()->GetData(sPbSize);
-    if (this->pMsgBuffer == nullptr)
-    {
-        GORM_CUSTOM_LOGE(pLogger, "pack request, get buffer failed, buffer size:%d", sPbSize);
-        return GORM_ERROR;
-    }
-
-    // 设置发送消息头
-    //#define GORM_SET_REQ_HEADER(MSG,LEN,REQCMD,REQID,FLAG)
-    GORM_SET_REQ_PRE_HEADER(this->pMsgBuffer->m_uszData, sPbSize, this->iReqCmd, this->ulSeqId, reqPreFlag);
-    // 压缩pb数据到内存
-    if (!this->pPbMsg->SerializeToArray(this->pMsgBuffer->m_uszData + GORM_REQ_MSG_HEADER_LEN, sPbSize-GORM_REQ_MSG_HEADER_LEN))
-    {
-        GORM_CUSTOM_LOGD(pLogger, "serialize msg to buffer failed.");
-        return GORM_ERROR;
-    }
-    this->pMsgBuffer->m_sUsedSize = sPbSize;
-    */
     return GORM_OK;
 }
 
-/*
-#define GORM_CLIENTREQUEST_SETHEADER()                                              \
-GORM_PB_REQ_HEADER *header = pPbReq->mutable_header();                              \
-header->set_reqflag(uiReqFlag);                                                     \
-header->set_fieldmode(this->fieldMode.szFieldCollections, this->fieldMode.iUsedIdx);\
-header->set_tableid(iTableId);                                                      \
-header->set_verpolice(this->iVerPolicy);
-*/
-
 int GORM_ClientRequest::PackInsert()
 {
-    //(PB_MSG_PTR pPbMsg, uint32 uiReqFlag, GORM_FieldsOpt &fieldMode, int iTableId, GORM_CheckDataVerType iVerPolicy,
-    //                int iNowRecordNum, GORM_Record **vRecords)
     return GORM_PackInsertReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    // TODO 打包头
-    /*GORM_PB_INSERT_REQ  *pPbReq = dynamic_cast<GORM_PB_INSERT_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-    
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->add_tables();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-        break;
-    }
-    return GORM_OK;*/
 }
 
 int GORM_ClientRequest::PackReplace()
 {
     return GORM_PackReplaceReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    /*GORM_PB_REPLACE_REQ  *pPbReq = dynamic_cast<GORM_PB_REPLACE_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->add_tables();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-        // TODO 确认重复设置会不会造成内存泄露
-        header->set_fieldmode(pRecord->requestField.szFieldCollections);
-        break;
-    }
-    
-    return GORM_OK;*/
 }
 
 int GORM_ClientRequest::PackIncrease()
 {
     return GORM_PackIncreaseReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    /*GORM_PB_INCREASE_REQ  *pPbReq = dynamic_cast<GORM_PB_INCREASE_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->add_tables();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-        // TODO 确认重复设置会不会造成内存泄露
-        header->set_fieldmode(pRecord->requestField.szFieldCollections);
-        pPbReq->set_minuscolumns(pRecord->minusField.szFieldCollections, pRecord->minusField.iUsedIdx);
-        break;
-    }
-    
-    return GORM_OK;*/
 }
 
 int GORM_ClientRequest::PackGet()
 {
     return GORM_PackGetReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    /*GORM_PB_GET_REQ  *pPbReq = dynamic_cast<GORM_PB_GET_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->mutable_table();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-        // TODO 确认重复设置会不会造成内存泄露
-        header->set_fieldmode(pRecord->requestField.szFieldCollections);
-        break;
-    }
-    return GORM_OK;*/
 }
 int GORM_ClientRequest::PackDelete()
 {
     return GORM_PackDeleteReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    /*GORM_PB_DELETE_REQ  *pPbReq = dynamic_cast<GORM_PB_DELETE_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-
-    // 打包包体
-    if (iNowRecordNum < 1)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    if (iNowRecordNum > 1)
-        return GORM_TOO_MUCH_RECORD;
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->mutable_table();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-        // TODO 确认重复设置会不会造成内存泄露
-        header->set_fieldmode(pRecord->requestField.szFieldCollections);
-        break;
-    }
-    return GORM_OK;*/
 }
 
 int GORM_ClientRequest::PackBatchGet()
 {
     return GORM_PackBatchGetReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    // 打包头
-    /*GORM_PB_BATCH_GET_REQ  *pPbReq = dynamic_cast<GORM_PB_BATCH_GET_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-    
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->add_tables();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-    }
-    return GORM_OK;*/
 }
 
 int GORM_ClientRequest::PackGetByPartKey()
 {
     return GORM_PackGetByPartKeyReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    // 打包头
-    /*GORM_PB_GET_BY_PARTKEY_REQ  *pPbReq = dynamic_cast<GORM_PB_GET_BY_PARTKEY_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-    
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->add_tables();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-    }
-    return GORM_OK;*/
 }
 
 
 int GORM_ClientRequest::PackUpdate()
 {
     return GORM_PackUpdateReq(pPbMsg, uiReqFlag, fieldMode, iTableId, iVerPolicy, iNowRecordNum, vRecords);
-    // TODO 打包头
-    /*GORM_PB_UPDATE_REQ  *pPbReq = dynamic_cast<GORM_PB_UPDATE_REQ*>(pPbMsg);
-    GORM_CLIENTREQUEST_SETHEADER();
-    
-    // 打包包体
-    if (iNowRecordNum == 0)
-    {
-        return GORM_REQ_NO_RECORDS;
-    }
-    int iRet = 0;
-    GORM_Record *pRecord = nullptr;
-    for (int i=0; i<iNowRecordNum; i++)
-    {
-        pRecord = vRecords[i];
-        if (pRecord == nullptr)
-        {
-            break;
-        }
-        GORM_PB_TABLE *pTable = pPbReq->add_tables();
-        iRet = GORM_AddRecordToReqPbMsgDefine(iTableId, pTable, pRecord->pPbMsg);
-        if (iRet != GORM_OK)
-        {
-            return iRet;
-        }
-        // TODO 确认重复设置会不会造成内存泄露
-        header->set_fieldmode(pRecord->requestField.szFieldCollections);
-        break;
-    }
-    return GORM_OK;*/
 }
 
 int GORM_ClientRequest::PackGetByNonPrimaryKey()

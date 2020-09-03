@@ -10,12 +10,19 @@
 #include "gorm_redis_define.h"
 
 using namespace gorm;
-GORM_DBRequest::GORM_DBRequest()
+GORM_DBRequest::GORM_DBRequest(shared_ptr<GORM_MemPool> &pMemPool):pMemPool(pMemPool)
 {
 }
 
 GORM_DBRequest::~GORM_DBRequest()
 {
+    this->pMemPool = nullptr;
+}
+
+void GORM_DBRequest::ResetMemPool(shared_ptr<GORM_MemPool> &pMemPool)
+{
+    this->pMemPool = nullptr;
+    this->pMemPool = pMemPool;
 }
 
 #define GORM_PARSE_REQ_PB_MSG()                                     \
@@ -702,7 +709,7 @@ void GORM_DBRequest::SetDbErrInfo(int iErrCode, int iDBErrNo, char *szErrInfo)
     if (iDBErrNo != 0 && szErrInfo != nullptr)
     {
         int iLen = strlen(szErrInfo);
-        this->pDbErrorInfo = GORM_MemPool::Instance()->GetData(iLen);
+        this->pDbErrorInfo = this->pMemPool->GetData(iLen);
         strncpy(this->pDbErrorInfo->m_uszData, szErrInfo, iLen);
         this->pDbErrorInfo->m_sUsedSize = iLen;
     }

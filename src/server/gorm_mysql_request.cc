@@ -8,12 +8,12 @@
 #include "gorm_server_table_define.h"
 
 using namespace gorm;
-GORM_MySQLRequest::GORM_MySQLRequest()
-{}
+GORM_MySQLRequest::GORM_MySQLRequest(shared_ptr<GORM_MemPool> &pMemPool):GORM_DBRequest(pMemPool)
+{
+}
 
 GORM_MySQLRequest::~GORM_MySQLRequest()
 {
-    this->Release();
 }
 
 int GORM_MySQLRequest::GetOneRow(MYSQL_ROW row, unsigned long *lengths)
@@ -224,7 +224,7 @@ int GORM_MySQLRequest::PackInsertResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -243,7 +243,7 @@ int GORM_MySQLRequest::PackInsertResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -262,7 +262,7 @@ int GORM_MySQLRequest::PackReplaceResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -280,7 +280,7 @@ int GORM_MySQLRequest::PackReplaceResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -299,7 +299,7 @@ int GORM_MySQLRequest::PackIncreaseResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -317,7 +317,7 @@ int GORM_MySQLRequest::PackIncreaseResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -361,7 +361,7 @@ int GORM_MySQLRequest::PackGetResult()
             PackGetToInsertResult();
         }
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -375,7 +375,7 @@ int GORM_MySQLRequest::PackGetResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -394,7 +394,7 @@ int GORM_MySQLRequest::PackGetByNonPrimaryKeyResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -408,7 +408,7 @@ int GORM_MySQLRequest::PackGetByNonPrimaryKeyResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -428,7 +428,7 @@ int GORM_MySQLRequest::PackDeleteResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -442,7 +442,7 @@ int GORM_MySQLRequest::PackDeleteResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -463,7 +463,7 @@ int GORM_MySQLRequest::PackBatchGetResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -478,7 +478,7 @@ int GORM_MySQLRequest::PackBatchGetResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -498,7 +498,7 @@ int GORM_MySQLRequest::PackGetByPartkeyResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -512,7 +512,7 @@ int GORM_MySQLRequest::PackGetByPartkeyResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -532,7 +532,7 @@ int GORM_MySQLRequest::PackUpdateResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = GORM_MemPool::Instance()->GetData(iLen);
+        pRspData = this->pMemPool->GetData(iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -546,7 +546,7 @@ int GORM_MySQLRequest::PackUpdateResult()
     }
     else
     {
-        pRspData = GORM_MemPool::Instance()->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -572,7 +572,7 @@ int GORM_MySQLRequest::PackHeartBeatResult()
     GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
     this->PackPbRetCode(retCode);
     iLen += pRspPackPbMsg->ByteSizeLong();
-    pRspData = GORM_MemPool::Instance()->GetData(iLen);
+    pRspData = this->pMemPool->GetData(iLen);
     if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
     {
         delete pRspPackPbMsg;
@@ -596,7 +596,7 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
     this->PackPbRetCode(retCode);
     pRspPackPbMsg->set_clientid(ulClientId);
     iLen += pRspPackPbMsg->ByteSizeLong();
-    pRspData = GORM_MemPool::Instance()->GetData(iLen);
+    pRspData = this->pMemPool->GetData(iLen);
     if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
     {
         GORM_LOGE("pack heart beat message failed.");
@@ -604,7 +604,7 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
     }
     
     pRspData->m_sUsedSize = iLen;
-    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HAND_SHAKE, 0, GORM_OK, 0);
+    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HAND_SHAKE, this->uiReqID, GORM_OK, 0);
     
     return GORM_OK;
 }
@@ -788,7 +788,7 @@ int GORM_MySQLRequest::InsertReq()
     if (nullptr == this->pNowReqProcTable)
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
     
-    if (GORM_OK != GORM_PackInsertSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackInsertSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -814,7 +814,7 @@ int GORM_MySQLRequest::ReplaceReq()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
 
     
-    if (GORM_OK != GORM_PackReplaceSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackReplaceSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack replace sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -839,7 +839,7 @@ int GORM_MySQLRequest::IncreaseReq()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
     
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackIncreaseSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackIncreaseSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -869,7 +869,7 @@ int GORM_MySQLRequest::GetReq()
     
     // TODO 放在dbpool中做，也就是放在work线程中做
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackGetSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackGetSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -885,7 +885,7 @@ int GORM_MySQLRequest::DeleteReq()
     ASSERT(pReqMsg!=nullptr);
 
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackDeleteSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackDeleteSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -941,7 +941,7 @@ int GORM_MySQLRequest::BatchGetNext()
     if (nullptr == this->pNowReqProcTable)
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(this->iGotRspNum));
 
-    if (GORM_OK != GORM_PackGetSQLTable(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, table, pReqData))
+    if (GORM_OK != GORM_PackGetSQLTable(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, table, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -996,7 +996,7 @@ int GORM_MySQLRequest::UpdateReq()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
 
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackUpdateSQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackUpdateSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
@@ -1026,7 +1026,7 @@ int GORM_MySQLRequest::GetByNonPrimaryKey()
         this->pNowReqProcTable = (gorm::GORM_PB_TABLE*)&(pReqMsg->tables(0));
 
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
-    if (GORM_OK != GORM_PackGet_By_Non_Primary_KeySQL(pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
+    if (GORM_OK != GORM_PackGet_By_Non_Primary_KeySQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
         GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;

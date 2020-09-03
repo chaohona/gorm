@@ -5,6 +5,7 @@
 #include "gorm_client_request.h"
 #include "gorm_sys_inc.h"
 #include "gorm_client_response.h"
+#include "gorm_mempool.h"
 namespace gorm{
 
 // 管理客户端和服务器的连接
@@ -12,7 +13,7 @@ class GORM_Server;
 class GORM_ClientSvrMgr
 {
 public:
-    GORM_ClientSvrMgr(GORM_Log *pLogger = nullptr);
+    GORM_ClientSvrMgr(GORM_MemPool *pMemPool, GORM_Log *pLogger = nullptr);
     ~GORM_ClientSvrMgr();
 public:
     int Start();
@@ -42,6 +43,7 @@ private:
     atomic<bool>        bNewRequest;
     // 防止epoll被释放
     shared_ptr<GORM_Epoll>  pEpoll;
+    GORM_MemPool        *pMemPool = nullptr;
 };
 
 }

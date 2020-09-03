@@ -22,6 +22,8 @@ public:
     GORM_FrontEndEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>       pEpoll, GORM_FrontEndThread *pThread);
     virtual ~GORM_FrontEndEvent();
 
+    void SetMemPool(shared_ptr<GORM_MemPool> &pMemPool);
+
     virtual int Write();
     virtual int Read();
     virtual int Error();
@@ -34,7 +36,7 @@ private:
     GORM_Ret Verify();
     void FillErrReplyBuffer(GORM_DBRequest *pRequest);
     GORM_Ret HeartBeat();
-    GORM_Ret HandShake(char *szMsg, int iMsgLen);
+    GORM_Ret HandShake(char *szMsg, int iMsgLen, uint32 iReqID);
 public:
     // 请求的缓冲池子,主要此池子中数据个数大于1就说明有pending消息
     shared_ptr<GORM_RingBuffer<GORM_DBRequest>> m_pRequestRing = nullptr;
@@ -62,6 +64,7 @@ public:
     // 事件所在的线程
     GORM_FrontEndThread *m_pFrontThread;
     uint64              ulHeadBeatTime = 0;
+    shared_ptr<GORM_MemPool> pMemPool;
 private:
     uint64  m_ulClientId = 0;
 };

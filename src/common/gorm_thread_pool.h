@@ -6,6 +6,7 @@
 #include "gorm_sys_inc.h"
 #include "gorm_thread.h"
 #include "gorm_type.h"
+#include "gorm_mempool.h"
 class GORM_ThreadPool;
 class GORM_Thread
 {
@@ -26,6 +27,7 @@ public:
     atomic_bool             m_bJoined;
     atomic_bool             m_bDetached;
     std::thread::id         m_threadId;
+    shared_ptr<GORM_MemPool> m_pMemPool;
 };
 
 class GORM_ThreadPool

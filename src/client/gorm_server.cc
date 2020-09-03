@@ -14,12 +14,14 @@ GORM_Server::~GORM_Server()
 {
     try
     {
-        //if (this->pLogger != nullptr)
-        //    delete this->pLogger;
         if (this->pSvrMgr != nullptr)
         {
             this->pSvrMgr->Stop();
             delete this->pSvrMgr;
+        }
+        if (this->pMemPool != nullptr)
+        {
+            delete this->pMemPool;
         }
     }
     catch(exception &e)
@@ -30,6 +32,7 @@ GORM_Server::~GORM_Server()
 
 int GORM_Server::Init(GORM_Log *pLogger, const char* szCfgVersion, const char *szUrl)
 {
+    this->pMemPool = new GORM_MemPool();
     this->pLogger = pLogger;
     if (pLogger == nullptr)
     {
@@ -40,7 +43,7 @@ int GORM_Server::Init(GORM_Log *pLogger, const char* szCfgVersion, const char *s
         cout << "gorm server init failed." << endl;
         return GORM_ERROR;
     }
-    this->pSvrMgr = new GORM_ClientSvrMgr();
+    this->pSvrMgr = new GORM_ClientSvrMgr(this->pMemPool);
     if (szUrl != nullptr)
     {
         if (GORM_OK != this->SetServerUrl(szUrl))
@@ -121,6 +124,7 @@ GORM_ClientRequest *GORM_Server::GetRequest(GORM_CMD cmd, int iTableId)
         delete pRequest;
         return nullptr;
     }
+    pRequest->pMemPool = this->pMemPool;
 
     return pRequest;
 }

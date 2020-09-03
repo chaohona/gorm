@@ -9,6 +9,7 @@
 #include "gorm_client_request.h"
 #include "gorm_client_response.h"
 #include "gorm_event.h"
+#include "gorm_mempool.h"
 
 namespace gorm{
 
@@ -158,6 +159,7 @@ private:
     std::once_flag      onceCallFlag;
     GORM_ClientSvrMgr   *pSvrMgr = nullptr;             // 和GORMSvr连接的管理器
     char                szSignature[GORM_DB_PW_MAX_LEN];
+    GORM_MemPool        *pMemPool = nullptr;
 };
 
 }

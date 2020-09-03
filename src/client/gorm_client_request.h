@@ -229,6 +229,7 @@ private:
     char *szSendPos = nullptr;  // 已经发送到的位置
     GORM_FieldsOpt fieldMode;
     GORM_Log *pLogger = nullptr;
+    GORM_MemPool *pMemPool = nullptr;
 };
 
 }
