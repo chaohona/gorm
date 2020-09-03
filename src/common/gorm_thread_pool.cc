@@ -5,6 +5,7 @@ GORM_Thread::GORM_Thread(shared_ptr<GORM_ThreadPool>& pPool, string &strThreadNa
                         m_pPool(pPool), m_bJoined(false), m_bDetached(false)
 {
     this->m_pMemPool = make_shared<GORM_MemPool>();
+    this->m_pMemPool->m_pMySelf = this->m_pMemPool;
 }
 
 GORM_Thread::~GORM_Thread()

@@ -19,6 +19,13 @@ if (POOL_DATA->m_cStaticFlag != 1)              \
     GORM_MEMPOOL_INSTANCE()->Release(POOL_DATA);  \
 }
 
+#define GORM_Reset_MemData_MemPool(memdata, newpool)\
+if (memdata != nullptr)                             \
+{                                                   \
+    memdata->m_pMemPool = nullptr;                  \
+    memdata->m_pMemPool = newpool;                  \
+}
+
 class GORM_MemPool;
 // 内存
 struct GORM_MemPoolData {
@@ -65,6 +72,7 @@ private:
     GORM_MemPoolData*        m_pFreeMetaData[MAX_FREE_META_DATA];// 缓存一万条数据(TODO和内存数据放在一起，不用单独管理)
     int                     m_iFreeMetaNum;
     mutex   m_Mutex;
+    shared_ptr<GORM_MemPool> m_pMySelf;
 };
 
 

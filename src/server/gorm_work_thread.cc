@@ -65,7 +65,7 @@ void GORM_WorkThread::Work(mutex *m)
             }
             this->RequestPreProc();
             //if (this->m_dbMgr.RequestNum() > 0)
-                this->m_dbMgr.Loop();
+            this->m_dbMgr.Loop();
         }
     }
     catch(exception &e)

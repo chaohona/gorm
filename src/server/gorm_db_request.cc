@@ -23,6 +23,9 @@ void GORM_DBRequest::ResetMemPool(shared_ptr<GORM_MemPool> &pMemPool)
 {
     this->pMemPool = nullptr;
     this->pMemPool = pMemPool;
+    GORM_Reset_MemData_MemPool(this->pReqData, pMemPool);
+    GORM_Reset_MemData_MemPool(this->pDbErrorInfo, pMemPool);
+    GORM_Reset_MemData_MemPool(this->pRspData, pMemPool);
 }
 
 #define GORM_PARSE_REQ_PB_MSG()                                     \

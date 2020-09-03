@@ -78,6 +78,7 @@ GORM_MemPoolData *GORM_MemPool::GetData(size_t sSize)
         pData = new GORM_MemPoolData();
     }
 
+    pData->m_pMemPool = this->m_pMySelf;
     pData->m_uiIndex = iIndex;
     pData->m_uszData = new char[iNewSize];
     pData->m_uszEnd = pData->m_uszData + iNewSize;

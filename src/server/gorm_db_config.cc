@@ -250,7 +250,7 @@ int GORM_RouteInfo::ParseRouteList(GORM_RouteTable *pTable, YAML::Node &node)
         auto vDatas = split(strRoute, ":");
         if (vDatas.size() != 2)
         {
-            GORM_LOGE("invalid config table_route.router - :%d", i);
+            GORM_LOGE("invalid config table_route.router - :%d, routeinfo:%s", i, (char*)strRoute.c_str());
             return GORM_ERROR;
         }
         strncpy(pRoute->szDBSymbol, vDatas[0].c_str(), GORM_DB_IDENTY_MAX_LEN);
