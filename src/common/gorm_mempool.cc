@@ -8,6 +8,11 @@ GORM_MemPoolData::GORM_MemPoolData(char cStaticFlag)
     this->m_cStaticFlag = cStaticFlag;
 }
 
+GORM_MemPoolData::~GORM_MemPoolData()
+{
+    this->m_pMemPool = nullptr;
+}
+
 bool GORM_MemPoolData::Release()
 {
     if (this->m_cStaticFlag == 1)

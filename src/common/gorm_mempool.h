@@ -24,6 +24,7 @@ class GORM_MemPool;
 struct GORM_MemPoolData {
 public:
     GORM_MemPoolData(char cStaticFlag=0);
+    ~GORM_MemPoolData();
     bool Release();           // 回收内存到内存池
     int ReInit();
 public:

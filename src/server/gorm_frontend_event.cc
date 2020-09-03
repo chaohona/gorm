@@ -259,7 +259,7 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
             if (this->m_pReadCache->m_sCapacity < this->m_uiMsgLen)
             {
                 GORM_MemPoolData *pOldData = this->m_pReadCache;
-                this->m_pReadCache = GORM_MemPool::Instance()->GetData(this->m_uiMsgLen);
+                this->m_pReadCache = this->pMemPool->GetData(this->m_uiMsgLen);
                 memcpy(this->m_pReadCache->m_uszData, this->m_pStartPtr, m_pCurrentReadPtr - this->m_pStartPtr);
                 m_pCurrentReadPtr += this->m_pReadCache->m_uszData -pOldData->m_uszData;
                 m_pStartPtr += this->m_pReadCache->m_uszData - pOldData->m_uszData;
@@ -461,7 +461,7 @@ this->ReadyWrite();
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
 {
     GORM_MySQLRequest *pHandShake = new GORM_MySQLRequest(this->pMemPool);
-    unique_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_unique<GORM_PB_HAND_SHAKE_REQ>();
+    shared_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_shared<GORM_PB_HAND_SHAKE_REQ>();
     if (pHandShakeReq == nullptr)
     {
         GORM_LOGE("malloc hand shake message failed.");

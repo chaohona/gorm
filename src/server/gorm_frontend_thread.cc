@@ -137,7 +137,7 @@ int GORM_FrontEndThread::AcceptClient(GORM_FD iFD)
 {
     GORM_LOGD("fornt thread got new client:%d", iFD);
     GORM_FrontEndEvent *pEvent = new GORM_FrontEndEvent(iFD, this->m_pEpoll, this);
-    pEvent->SetMemPool(this->pMemPool)
+    pEvent->SetMemPool(this->m_pMemPool);
     this->m_pEpoll->AddEventRead(pEvent);
     this->m_mapFrontEndEvents[pEvent->m_uiEventId] = pEvent;
     return GORM_OK;
