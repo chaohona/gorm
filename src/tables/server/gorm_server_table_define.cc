@@ -1325,7 +1325,7 @@ int GORM_PackReplaceSQLCURRENCY(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEv
 #ifdef GORM_DEBUG
         GORM_MySQLUpdateTableSchema(pMySQLEvent, "currency", table.custom_columns());
 #endif
-        return GORM_PackReplaceSQLCURRENCY_One(mysql, iTableIndex, table_currency, pReqData);
+        return GORM_PackReplaceSQLCURRENCY_One(pMemPool, mysql, iTableIndex, table_currency, pReqData);
     }
     return GORM_OK;
 }
@@ -1379,7 +1379,7 @@ int GORM_PackReplaceSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQL
 #ifdef GORM_DEBUG
         GORM_MySQLUpdateTableSchema(pMySQLEvent, "cycleevent", table.custom_columns());
 #endif
-        return GORM_PackReplaceSQLCYCLEEVENT_One(mysql, iTableIndex, table_cycleevent, pReqData);
+        return GORM_PackReplaceSQLCYCLEEVENT_One(pMemPool, mysql, iTableIndex, table_cycleevent, pReqData);
     }
     return GORM_OK;
 }
@@ -1406,7 +1406,7 @@ int GORM_PackGetSQLTable(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pM
         if (!table.has_currency())
             return GORM_REQ_NO_RECORDS;
 #ifdef GORM_DEBUG
-        GORM_MySQLUpdateTableSchema(pMemPool, pMySQLEvent, "currency", table.custom_columns());
+        GORM_MySQLUpdateTableSchema(pMySQLEvent, "currency", table.custom_columns());
 #endif
         return GORM_PackGetSQLCURRENCY_ONE(pMemPool, pMemPool, mysql, uiHashValue, table.currency(), pReqData);
     }
@@ -1415,7 +1415,7 @@ int GORM_PackGetSQLTable(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pM
         if (!table.has_cycleevent())
             return GORM_REQ_NO_RECORDS;
 #ifdef GORM_DEBUG
-        GORM_MySQLUpdateTableSchema(pMemPool, pMySQLEvent, "cycleevent", table.custom_columns());
+        GORM_MySQLUpdateTableSchema(pMySQLEvent, "cycleevent", table.custom_columns());
 #endif
         return GORM_PackGetSQLCYCLEEVENT_ONE(pMemPool, pMemPool, mysql, uiHashValue, table.cycleevent(), pReqData);
     }
