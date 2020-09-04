@@ -871,10 +871,10 @@ int GORM_MySQLRequest::GetReq()
     GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
     if (GORM_OK != GORM_PackGetSQL(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, iReqTableId, this->iTableIndex, pReqMsg, pReqData))
     {
-        GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
+        GORM_LOGE("pack get sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
         return GORM_ERROR;
     }
-    GORM_LOGD("insert sql:%s", this->pReqData->m_uszData);
+    GORM_LOGD("get sql:%s", this->pReqData->m_uszData);
     return GORM_OK;
 }
 

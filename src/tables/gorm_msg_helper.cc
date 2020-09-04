@@ -20,18 +20,18 @@ void GORM_SetMsgLen(char *szMsg, uint32 uiLen)
 
 uint32 GORM_GetReqType(char *szMsg)
 {
-    return uint32(szMsg[0]);
+    return uint32(szMsg[0])&0xFF;
 }
 
 uint32 GORM_GetReqID(char *szMsg)
 {
-    return (uint32(szMsg[0])<<16 & 0xFF0000) | (uint32(szMsg[1])<<8 & 0xFF00) | szMsg[2];
+    return (uint32(szMsg[0])<<16 & 0xFF0000) | (uint32(szMsg[1])<<8 & 0xFF00) | (uint32(szMsg[2])&0xFF);
 }
 
 char* GORM_GetReqHeader(IN char *szMsg, OUT GORM_CMD &iReqCmd, OUT uint32 &iReqID, OUT uint8 &flag)
 {
     iReqCmd = GORM_CMD(szMsg[0]);
-    iReqID = (uint32(szMsg[1])<<16 & 0xFF0000) | (uint32(szMsg[2])<<8 & 0xFF00) | szMsg[3];
+    iReqID = (uint32(szMsg[1])<<16 & 0xFF0000) | (uint32(szMsg[2])<<8 & 0xFF00) | (uint32(szMsg[3])&0xFF);
     flag = uint8(szMsg[4]);
 
     return szMsg+5;
