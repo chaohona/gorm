@@ -46,8 +46,10 @@ private:
     int DBErrNo();
     void GotResults(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
     void FinishReading();
+    void FinishWriting();
     void WriteError(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
     int GetMySQLTableInfo();
+    
 public:
     friend class GORM_MySQLRequest;
     net_async_status m_iMySQLNetStatus = NET_ASYNC_ERROR;    // 网络状态

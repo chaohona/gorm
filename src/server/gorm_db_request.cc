@@ -23,7 +23,7 @@ void GORM_DBRequest::ResetMemPool(shared_ptr<GORM_MemPool> &pMemPool)
 {
     this->pMemPool = nullptr;
     this->pMemPool = pMemPool;
-    GORM_Reset_MemData_MemPool(this->pReqData, pMemPool);
+    GORM_Reset_MemData_MemPool(this->pReqSQLData, pMemPool);
     GORM_Reset_MemData_MemPool(this->pDbErrorInfo, pMemPool);
     GORM_Reset_MemData_MemPool(this->pRspData, pMemPool);
 }
@@ -682,6 +682,7 @@ void GORM_DBRequest::GetAllResult(int iErrCode, int iDBErrNo, char *szErrInfo)
 
     // 将响应交给前端处理线程
     this->pFrontThread->m_ResponseList.Put(this);
+    this->pFrontThread->ResponseSignal();
 }
 
 // 打包，给前端线程返回响应
@@ -718,6 +719,15 @@ void GORM_DBRequest::SetDbErrInfo(int iErrCode, int iDBErrNo, char *szErrInfo)
     }
 }
 
+void GORM_DBRequest::FinishSending2DB()
+{
+    if (pReqSQLData != nullptr)
+    {
+        pReqSQLData->Release();
+        pReqSQLData = nullptr;
+    }
+}
+
 void GORM_DBRequest::Release()
 {
     if (this->staticRequest == 1)
@@ -725,10 +735,10 @@ void GORM_DBRequest::Release()
     DelPbReqMsg(this->iReqCmd, this->pReqPbMsg);
     DelPbReqMsg(this->iReqCmd, this->pRspPbMsg);
 
-    if (pReqData != nullptr)
+    if (pReqSQLData != nullptr)
     {
-        pReqData->Release();
-        pReqData = nullptr;
+        pReqSQLData->Release();
+        pReqSQLData = nullptr;
     }
         
     if (pRspData != nullptr)

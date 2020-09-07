@@ -81,6 +81,7 @@ int GORM_MySQLEvent::Write()
             return GORM_OK;
         }
         GORM_LOGD("sending message to mysql:%s", GORM_SQL_REQ(this->m_pSendingRequest));
+        this->FinishWriting();
     }
     pRequest = this->m_pSendingRequest;
     if (pRequest == nullptr)
@@ -101,16 +102,16 @@ int GORM_MySQLEvent::Write()
         {
             this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
         }
-        this->m_pSendingRequest = nullptr;
         GORM_LOGE("sending message to mysql failed:%s, error:%s", GORM_SQL_REQ(pRequest), this->DBError());
+        this->FinishWriting();
         return GORM_ERROR;
     }
     if (m_iMySQLNetStatus == NET_ASYNC_COMPLETE)
     {   
-        this->m_pSendingRequest = nullptr;
         // 每次只发送一个消息，待获取到响应之后再发送下一个消息
         this->m_iOptStep = MYSQL_STORE_RESULT;
         GORM_LOGD("sending message success:%s", GORM_SQL_REQ(pRequest));
+        this->FinishWriting();
         return GORM_OK;
     }
 
@@ -590,6 +591,16 @@ void GORM_MySQLEvent::FinishReading()
     this->m_iReadedRows = 0;
     this->m_iReadingRows = 0;
 }
+
+void GORM_MySQLEvent::FinishWriting()
+{
+    if (this->m_pSendingRequest != nullptr)
+    {
+        this->m_pSendingRequest->FinishSending2DB();
+        this->m_pSendingRequest = nullptr;
+    }
+}
+
 
 void GORM_MySQLEvent::WriteError(int iErrCode, int iDBErrNo, char *szErrInfo)
 {

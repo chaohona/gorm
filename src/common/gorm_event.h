@@ -58,6 +58,7 @@ public:
     bool ConnectOK();
     bool IsClosed();
     void SetRemoveAddr();
+    void SetFD(GORM_FD iFD);
 public:
     uint16                  m_uiPort = 0;           // 端口号
     char                    m_szIP[NET_IP_STR_LEN]; // ip地址

@@ -144,6 +144,11 @@ bool GORM_Event::IsClosed()
     return this->m_Status == GORM_CONNECT_CLOSED || this->m_Status == GORM_CONNECT_FORCE_CLOSED;
 }
 
+void GORM_Event::SetFD(GORM_FD iFD)
+{
+    this->m_iFD = iFD;
+}
+
 void GORM_Event::SetRemoveAddr()
 {
 #ifdef _WIN32

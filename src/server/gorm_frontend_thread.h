@@ -7,6 +7,7 @@
 #include "gorm_frontend_event.h"
 #include "gorm_list.h"
 #include "gorm_mempool.h"
+#include "gorm_signal_event.h"
 
 class GORM_FrontEndThread;
 class GORM_ListenEvent : public GORM_Event
@@ -38,9 +39,11 @@ public:
     virtual void Work(mutex *m);
 
     int AcceptClient(GORM_FD iFD);
+    void ResponseProc();
+    void ResponseSignal();
 private:
     void EventCheck();
-    void ResponseProc();
+    int InitTransferEvent();
 public:
     GORM_FD                         m_iListenFD = 0;    // 监听端口句柄
     shared_ptr<GORM_ListenEvent>    m_pListenEvent;
@@ -49,7 +52,8 @@ public:
     unordered_map<uint64, GORM_Event*>  m_mapFrontEndEvents;    // 客户端的连接
 
     // 响应统一交给前端线程之后，由前端线程自己处理，避免多线程锁问题
-    GORM_SyncList<GORM_DBRequest*> m_ResponseList;
+    GORM_SyncList<GORM_DBRequest*>  m_ResponseList;
+    shared_ptr<GORM_SignalEvent>  m_pSignalEvent;
 };
 
 class GORM_FrontEndThreadPool : public GORM_ThreadPool, 

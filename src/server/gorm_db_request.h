@@ -55,6 +55,7 @@ public:
     virtual int PackResult() = 0;
     int GetResult(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
     void GetAllResult(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
+    void FinishSending2DB(); // 消息已经发送到DB，将请求的buff释放
 
     void Release();
 
@@ -78,7 +79,7 @@ public:
     int32 iReqNum = 1;      // 发出的请求的数量
 
     uint32              uiReqFlag = 0;
-    GORM_MemPoolData    *pReqData = nullptr;    // 组装的请求SQL语句
+    GORM_MemPoolData    *pReqSQLData = nullptr;    // 组装的请求SQL语句
     shared_ptr<GORM_MemPool> pMemPool;
     int                 iReqTableId = GORM_PB_TABLE_IDX_MIN__;          // 请求的表编号
     uint32              uiReqID = 0;

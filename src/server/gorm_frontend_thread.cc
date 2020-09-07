@@ -143,6 +143,7 @@ int GORM_FrontEndThread::AcceptClient(GORM_FD iFD)
     return GORM_OK;
 }
 
+// 客户端检查
 void GORM_FrontEndThread::EventCheck()
 {
     try
@@ -165,6 +166,11 @@ void GORM_FrontEndThread::EventCheck()
     {
         GORM_LOGE("event check got exception:%s", e.what());
     }
+}
+
+void GORM_FrontEndThread::ResponseSignal()
+{
+    this->m_pSignalEvent->Single();
 }
 
 void GORM_FrontEndThread::ResponseProc()
@@ -201,6 +207,11 @@ void GORM_FrontEndThread::ResponseProc()
 
 void GORM_FrontEndThread::Work(mutex *m)
 {
+    if (GORM_OK != this->InitTransferEvent())
+    {
+        GORM_LOGE("init transfer event failed.");
+        return;
+    }
     // 1.创建epoll
     this->m_pEpoll = make_shared<GORM_Epoll>();
     if (!this->m_pEpoll->Init(MAX_EVENT_POOLS))
@@ -226,9 +237,21 @@ void GORM_FrontEndThread::Work(mutex *m)
     {
         this->m_pEpoll->EventLoopProcess(5);
         this->m_pEpoll->ProcAllEvents();
-        this->ResponseProc();
         this->EventCheck();
     }
+}
+
+int GORM_FrontEndThread::InitTransferEvent()
+{
+    this->m_pSignalEvent = make_shared<GORM_TransferEvent>();
+    if (GORM_OK != this->m_pSignalEvent->Init())
+    {
+        GORM_LOGE("init transfer event failed.");
+        return GORM_ERROR;
+    }
+    this->m_pEpoll->AddEventRead(this->m_pSignalEvent);
+
+    return GORM_OK;
 }
 
 GORM_FrontEndThreadPool::GORM_FrontEndThreadPool() : GORM_ThreadPool(string("frontend-thread"))
