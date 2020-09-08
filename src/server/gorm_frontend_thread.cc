@@ -207,16 +207,16 @@ void GORM_FrontEndThread::ResponseProc()
 
 void GORM_FrontEndThread::Work(mutex *m)
 {
-    if (GORM_OK != this->InitTransferEvent())
-    {
-        GORM_LOGE("init transfer event failed.");
-        return;
-    }
     // 1.创建epoll
     this->m_pEpoll = make_shared<GORM_Epoll>();
     if (!this->m_pEpoll->Init(MAX_EVENT_POOLS))
     {
         GORM_LOGE("epoll init failed.");
+        return;
+    }
+    if (GORM_OK != this->InitTransferEvent())
+    {
+        GORM_LOGE("init transfer event failed.");
         return;
     }
 

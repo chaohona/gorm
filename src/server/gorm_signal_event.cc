@@ -43,7 +43,6 @@ int GORM_SignalEvent::Write()
 
 int GORM_SignalEvent::Read()
 {
-    this->m_iDataFlag = 0;
     #define SIGNAL_READ_BUFF_LEN 64
     char readBuffer[SIGNAL_READ_BUFF_LEN];
     int iNum;
@@ -51,7 +50,9 @@ int GORM_SignalEvent::Read()
         iNum = read(this->m_iReadFD, readBuffer, SIGNAL_READ_BUFF_LEN);
     }while(iNum == SIGNAL_READ_BUFF_LEN);
 
+    this->m_iDataFlag = 0;
     this->m_pFrontThread->ResponseProc();
+    
     return GORM_OK;
 }
 
@@ -77,12 +78,12 @@ void GORM_SignalEvent::Single(bool bForce)
     char cSend = 0;
     // 往管道中写数据
     int iSendNum = 0;
+    this->m_iDataFlag = 1;
     do
     {
         iSendNum = write(this->m_iWriteFD, (char*)&cSend, 1);
     }
     while (iSendNum < 1);
     
-    this->m_iDataFlag = 1;
 }
 
