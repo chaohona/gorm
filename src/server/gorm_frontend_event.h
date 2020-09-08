@@ -37,6 +37,13 @@ private:
     void FillErrReplyBuffer(GORM_DBRequest *pRequest);
     GORM_Ret HeartBeat();
     GORM_Ret HandShake(char *szMsg, int iMsgLen, uint32 iReqID);
+    inline void MoveMsg2Start()
+    {
+        int iCurrentLen = m_pCurrentReadPtr - this->m_pStartPtr;
+        memmove(this->m_pReadCache->m_uszData, this->m_pStartPtr, iCurrentLen);
+        this->m_pStartPtr = this->m_pReadCache->m_uszData;
+        this->m_pCurrentReadPtr = this->m_pStartPtr + iCurrentLen;
+    }
 public:
     // 请求的缓冲池子,主要此池子中数据个数大于1就说明有pending消息
     shared_ptr<GORM_RingBuffer<GORM_DBRequest>> m_pRequestRing = nullptr;

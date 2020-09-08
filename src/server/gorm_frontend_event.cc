@@ -244,6 +244,11 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
         // 1、检查是否获取到消息头
         if (this->m_uiMsgLen == 0)
         {
+            if (this->m_pReadCache->m_uszEnd - m_pStartPtr < GORM_REQ_MSG_HEADER_LEN)
+            {
+                MoveMsg2Start();
+                return GORM_EAGAIN;
+            }
             if (m_pCurrentReadPtr - this->m_pStartPtr < GORM_REQ_MSG_HEADER_LEN)
             {
                 return GORM_OK;
@@ -258,21 +263,18 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
             // 分配一个大小至少为消息体大小的buffer
             if (this->m_pReadCache->m_sCapacity < this->m_uiMsgLen)
             {
-                GORM_MemPoolData *pOldData = this->m_pReadCache;
+                char *szOldStart = this->m_pStartPtr;
                 this->m_pReadCache = this->pMemPool->GetData(this->m_uiMsgLen);
                 memcpy(this->m_pReadCache->m_uszData, this->m_pStartPtr, m_pCurrentReadPtr - this->m_pStartPtr);
-                m_pCurrentReadPtr += this->m_pReadCache->m_uszData -pOldData->m_uszData;
-                m_pStartPtr += this->m_pReadCache->m_uszData - pOldData->m_uszData;
+                m_pCurrentReadPtr += this->m_pReadCache->m_uszData - szOldStart;
+                m_pStartPtr += this->m_pReadCache->m_uszData - szOldStart;
             }
         }
         
         // 2、如果空间比消息长度小则将消息移动到开头
         if (this->m_pReadCache->m_uszEnd - m_pStartPtr < this->m_uiMsgLen)
         {
-            int iCurrentLen = m_pCurrentReadPtr - this->m_pStartPtr;
-            memmove(this->m_pReadCache->m_uszData, this->m_pStartPtr, iCurrentLen);
-            this->m_pStartPtr = this->m_pReadCache->m_uszData;
-            this->m_pCurrentReadPtr = this->m_pStartPtr + iCurrentLen;
+            MoveMsg2Start();
             return GORM_EAGAIN;
         }
         // 3、检查是否接收到一整条消息了
