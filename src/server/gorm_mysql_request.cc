@@ -653,7 +653,7 @@ int GORM_MySQLRequest::PackSQL()
             GORM_MySQLConnPool *pMySQLPool = dynamic_cast<GORM_MySQLConnPool*>(this->pDbPool);
             // uiHashValue = GORM_TableHash(iReqTableId, *pNowReqProcTable);
             if (GORM_OK != GORM_PackInsertSQLTable(this->pMemPool, pMySQLPool->m_pEvent, pMySQLPool->m_pEvent->m_pMySQL, 
-                    iReqTableId, this->iTableIndex, *pNowReqProcTable, this->pReqSQLData->Release();))
+                    iReqTableId, this->iTableIndex, *pNowReqProcTable, this->pReqSQLData))
             {
                 GORM_LOGE("pack insert sql failed, tableid:%d, reqid:%ud", iReqTableId, uiReqID);
                 return GORM_ERROR;

@@ -11,10 +11,10 @@
 // GORM_MySQLPackage[Update|Delete]主要是起到一个路由的作用，根据不同的表结构调用不同的表的处理函数
 
 #define GORM_SQL_REQ(request)\
-(request->pReqData->m_uszData)
+(request->pReqSQLData->m_uszData)
 
 #define GORM_SQL_REQ_LEN(request)\
-(request->pReqData->m_sUsedSize)
+(request->pReqSQLData->m_sUsedSize)
 
 class GORM_MySQLEvent;
 class GORM_MySQLRequest : public GORM_DBRequest

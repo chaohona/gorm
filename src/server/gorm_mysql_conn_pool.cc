@@ -78,15 +78,16 @@ int GORM_MySQLEvent::Write()
         {
             GORM_LOGE("pack sql failed, return error to client, table:%d, seqid:%d", this->m_pReadingRequest->iReqTableId, this->m_pReadingRequest->uiReqID);
             this->WriteError(iRet);
+            this->FinishWriting();
             return GORM_OK;
         }
         GORM_LOGD("sending message to mysql:%s", GORM_SQL_REQ(this->m_pSendingRequest));
-        this->FinishWriting();
     }
     pRequest = this->m_pSendingRequest;
     if (pRequest == nullptr)
     {
         this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
+        this->FinishWriting();
         return GORM_OK;
     }
     this->m_iOptStep = MYSQL_SENDING_REQ;
