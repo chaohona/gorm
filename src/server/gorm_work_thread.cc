@@ -82,44 +82,23 @@ void GORM_WorkThread::Work(mutex *m)
 // 此处的请求是不需要顺序的,先获取到缓存的则直接返回
 int GORM_WorkThread::RequestPreProc()
 {
-    list<GORM_DBRequest*> listRequest;
-    this->m_pResponseList->Take(listRequest);
-    bool bGotResult = false;
+    GORM_DBRequest *pReq = nullptr;
+    int64 leftNum = 0;
     int iRet = GORM_OK;
-    for(GORM_DBRequest *pReq : listRequest)
-    {
+    do{
+        if (!this->m_pResponseList->Take(pReq, leftNum))
+            break;
+        if (pReq == nullptr)
+            break;
         // 跨线程，防止没有读取到值
         pReq->pWorkThread = this;
         pReq->ResetMemPool(this->m_pMemPool);
-        //pReq->pCacheOpt = this->m_pCacheOpt;
-        // 判断是否在缓存中操作成功，如果需要则继续操作数据库
-        bGotResult = false;
-        /*iRet = pReq->AddTableToRsp(); // TODO 在需要的时候再做
-        if (GORM_OK != iRet)
-        {
-            pReq->GetResult(iRet);
-            continue;
-        }*/
         iRet = pReq->SetNowReqProcTable();
         if (GORM_OK != iRet)
         {
             pReq->GetResult(iRet);
             continue;
         }
-        /*if (this->m_pCacheOpt != nullptr)
-        {
-            iRet = this->m_pCacheOpt->GetResultFromCache(pReq, bGotResult);
-            if (GORM_OK != iRet)
-            {
-                pReq->GetResult(iRet);
-                continue;
-            }
-            if (bGotResult)
-            {
-                pReq->GetResult();
-                continue;
-            }
-        }*/
 
         // 根据路由，获取到响应的mysql句柄，传给mysql
         int iRet = this->m_dbMgr.GetDBPool(pReq);
@@ -136,7 +115,7 @@ int GORM_WorkThread::RequestPreProc()
             GORM_LOGE("send request to db opt failed.");
             continue;
         }
-    }
+    } while(leftNum > 0);
     
     return GORM_OK;
 }

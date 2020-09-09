@@ -212,7 +212,7 @@ void GORM_FrontEndThread::ResponseProc()
                     pEvent->SendMsgToWorkThread(pReq);
                 }
             }
-        }while (leftNum > 0)
+        }while (leftNum > 0);
         
     }
     

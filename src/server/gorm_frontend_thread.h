@@ -43,10 +43,10 @@ public:
     int AcceptClient(GORM_FD iFD);
     void ResponseProc();
     void ResponseSignal();
+    void GotResult(GORM_DBRequest *pRequest);
 private:
     void EventCheck();
     int InitTransferEvent();
-    void GotResult(GORM_DBRequest *pRequest);
 public:
     GORM_FD                         m_iListenFD = 0;    // 监听端口句柄
     shared_ptr<GORM_ListenEvent>    m_pListenEvent;
@@ -55,7 +55,7 @@ public:
     unordered_map<uint64, GORM_Event*>  m_mapFrontEndEvents;    // 客户端的连接
 
     // 响应统一交给前端线程之后，由前端线程自己处理，避免多线程锁问题
-    GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *m_pResponseList[GORM_MAX_WORK_THREAD_NUM];
+    GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *m_pResponseList;
     int m_iWorkThreadNum = 0;
     shared_ptr<GORM_SignalEvent>  m_pSignalEvent;
 };
