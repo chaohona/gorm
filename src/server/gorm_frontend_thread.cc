@@ -118,12 +118,16 @@ int GORM_ListenEvent::Close()
 }
 
 GORM_FrontEndThread::GORM_FrontEndThread(shared_ptr<GORM_ThreadPool> pPool, string &strThreadName) : GORM_Thread(pPool, strThreadName),
-    m_pListenEvent(nullptr), m_pEpoll(nullptr), m_ResponseList(10240)
+    m_pListenEvent(nullptr), m_pEpoll(nullptr)
 {
+    m_pResponseList = new GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN>[GORM_MAX_WORK_THREAD_NUM];
+    this->m_iWorkThreadNum = GORM_Config::Instance()->m_iWorkThreadNum;
 }
 
 GORM_FrontEndThread::~GORM_FrontEndThread()
 {
+    if (this->m_pResponseList != nullptr)
+        delete []this->m_pResponseList;
     this->m_pListenEvent = nullptr;
     this->m_pEpoll = nullptr;
     if (this->m_iListenFD > 0)
@@ -175,7 +179,44 @@ void GORM_FrontEndThread::ResponseSignal()
 
 void GORM_FrontEndThread::ResponseProc()
 {
-    if (this->m_ResponseList.Empty())
+    GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *pQueue = nullptr;
+    for(int i=0; i<this->m_iWorkThreadNum; i++)
+    {
+        pQueue = &this->m_pResponseList[i];
+        if (pQueue->m_nowNum == 0)
+            continue;
+        int64 leftNum = 0;
+        GORM_DBRequest* pReq;
+        do
+        {
+            if (!pQueue->Take(pReq, leftNum))
+                break;
+            pReq->ResetMemPool(this->m_pMemPool);
+            // TODO 回收request
+            if (pReq->pFrontendEvent == nullptr)
+            {
+                pReq->Release();
+            }
+            else 
+            {
+                if (pReq->iWaitDone == 1)
+                    pReq->pFrontendEvent->ReadyWrite();
+                else    // 针对批量请求，再接着发送下一个请求
+                {
+                    GORM_FrontEndEvent *pEvent = dynamic_cast<GORM_FrontEndEvent*>(pReq->pFrontendEvent);
+                    if (pEvent == nullptr)
+                    {
+                        pReq->pFrontendEvent->ReadyWrite();
+                        continue;
+                    }
+                    pEvent->SendMsgToWorkThread(pReq);
+                }
+            }
+        }while (leftNum > 0)
+        
+    }
+    
+    /*if (this->m_ResponseList.Empty())
         return;
     list<GORM_DBRequest*> requestList;
     this->m_ResponseList.Take(requestList);
@@ -202,7 +243,7 @@ void GORM_FrontEndThread::ResponseProc()
                 pEvent->SendMsgToWorkThread(pReq);
             }
         }
-    }
+    }*/
 }
 
 void GORM_FrontEndThread::Work(mutex *m)
@@ -251,6 +292,13 @@ int GORM_FrontEndThread::InitTransferEvent()
     }
 
     return GORM_OK;
+}
+
+void GORM_FrontEndThread::GotResult(GORM_DBRequest *pRequest)
+{
+    int iIdx = pRequest->pWorkThread->m_iInnerIdx;
+    this->m_pResponseList[iIdx].Put(pRequest);
+    this->ResponseSignal();
 }
 
 GORM_FrontEndThreadPool::GORM_FrontEndThreadPool() : GORM_ThreadPool(string("frontend-thread"))

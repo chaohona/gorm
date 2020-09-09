@@ -681,8 +681,7 @@ void GORM_DBRequest::GetAllResult(int iErrCode, int iDBErrNo, char *szErrInfo)
     }
 
     // 将响应交给前端处理线程
-    this->pFrontThread->m_ResponseList.Put(this);
-    this->pFrontThread->ResponseSignal();
+    this->pFrontThread->GotResult(this);
 }
 
 // 打包，给前端线程返回响应

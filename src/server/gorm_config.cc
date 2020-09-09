@@ -29,7 +29,7 @@ bool GORM_Config::Init(char *szCfgFile)
             else if (content == "work-threads")
             {
                 this->m_iWorkThreadNum = c->second.as<int>();
-                if (this->m_iWorkThreadNum < 1)
+                if (this->m_iWorkThreadNum < 1 || this->m_iWorkThreadNum > GORM_MAX_WORK_THREAD_NUM)
                 {
                     cout << "invalid work-threads configure:" << this->m_iWorkThreadNum << endl;
                     return false;

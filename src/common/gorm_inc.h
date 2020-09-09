@@ -8,5 +8,6 @@
 #include "gorm_type.h"
 #include "gorm_define.h"
 #include "gorm_error.h"
+#include "gorm_ss_queue.h"
 
 #endif

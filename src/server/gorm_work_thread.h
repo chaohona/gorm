@@ -20,7 +20,7 @@ class GORM_DBConnMgr;
 class GORM_WorkThread : public GORM_Thread
 {
 public:
-    GORM_WorkThread(shared_ptr<GORM_ThreadPool> pPool, string &strThreadName, uint64 ulThreadID);
+    GORM_WorkThread(shared_ptr<GORM_ThreadPool> pPool, string &strThreadName, uint64 ulThreadID, int iInnerIdx);
     virtual ~GORM_WorkThread();
 
     virtual void Work(mutex *m);
@@ -44,16 +44,14 @@ public:
     // 线程需要和外部交互的变量///////////////////////////////////////////////
     atomic_long             m_lClientNum;       // 线程服务的客户端连接数
     uint64                  m_ulThreadID;       // 本线程id
-    GORM_SyncList<GORM_FD>  m_listNeedAccess;       //  需要被接受的客户端连接
     ///////////////////////////////////////////////////////////////////////////
 
     mutex                   m_mutexRequestCondition;
     condition_variable_any  m_conditionRequest;
     atomic_bool             m_bWaitReq;         // 是否获取到新的客户端连接
 
-    GORM_SyncList<GORM_DBRequest*> m_RequestList;   // 交给此线程处理的请求
-
-    //GORM_CacheOpt *m_pCacheOpt;
+    GORM_SSQueue<GORM_DBRequest*, GORM_WORK_REQUEST_QUEUE_LEN> *m_pResponseList;
+    int m_iInnerIdx = -1;
 };
 
 class GORM_WorkThreadPool : public GORM_ThreadPool,

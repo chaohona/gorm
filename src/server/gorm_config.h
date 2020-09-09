@@ -8,6 +8,7 @@
 #include "gorm_type.h"
 #include "gorm_define.h"
 
+
 using namespace gorm;
 class GORM_Config: public GORM_Singleton<GORM_Config>
 {

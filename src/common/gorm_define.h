@@ -48,6 +48,14 @@ namespace gorm{
 
 #define GORM_CACHE_SWITCH 0
 
+// 最多不超过128个工作线程
+#define GORM_MAX_WORK_THREAD_NUM 128
+
+// 前端接入线程最多不能积攒超过1000万个请求
+#define GORM_FRONT_REQUEST_QUEUE_LEN 0x7FFFFF
+#define GORM_WORK_REQUEST_QUEUE_LEN 0x7FFFF
+
+
 enum GORM_CacheType
 {
     GORM_CacheType_None     = 0,    // 不带缓存

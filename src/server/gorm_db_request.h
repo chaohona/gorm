@@ -75,8 +75,8 @@ public:
     uint8           iWaitDone = 0;        // 已经得到响应了
     uint8           iRspDone = 0;         // 响应是否发送完成
 
-    int32 iGotRspNum = 0;   // 获取到的响应的条数
-    int32 iReqNum = 1;      // 发出的请求的数量
+    volatile int32 iGotRspNum = 0;   // 获取到的响应的条数
+    volatile int32 iReqNum = 1;      // 发出的请求的数量
 
     uint32              uiReqFlag = 0;
     GORM_MemPoolData    *pReqSQLData = nullptr;    // 组装的请求SQL语句
@@ -89,8 +89,8 @@ public:
     GORM_GET_FLAG       iGetFlag   = GORM_GET_FLAG_NON_RETURN;
     int                 iDBErrCode = 0;
     GORM_MemPoolData    *pDbErrorInfo = nullptr;
-    GORM_CMD            iReqCmd = GORM_CMD_INVALID;
-    GORM_CMD            iRedirectCmd = GORM_CMD_INVALID;    // 重新发起命令，目前有两种情况，1:get的时候如果没有数据则插入一条，2:需要会带数据的情况
+    volatile GORM_CMD            iReqCmd = GORM_CMD_INVALID;
+    volatile GORM_CMD            iRedirectCmd = GORM_CMD_INVALID;    // 重新发起命令，目前有两种情况，1:get的时候如果没有数据则插入一条，2:需要会带数据的情况
     PB_MSG_PTR          pReqPbMsg = nullptr;              // 收到的前端的pb请求消息
     PB_MSG_PTR          pRspPbMsg = nullptr;
     GORM_MemPoolData    *pRspData = nullptr;
@@ -105,7 +105,7 @@ public:
 
     gorm::GORM_PB_TABLE         *pNowRspProcTable = nullptr;            // 当前响应需要填充的table
 
-    uint32  uiHashValue = 0;
+    volatile uint32  uiHashValue = 0;
     int     iTableIndex = -1;   // 表下标
     int     staticRequest = 0;      // 此标记为1，则不会被回收
 };

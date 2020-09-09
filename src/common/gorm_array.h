@@ -37,9 +37,9 @@ public:
         return GORM_OK;
     }
 public:
-    T *m_pTArray = nullptr;
+    volatile T *m_pTArray = nullptr;
     int m_iMaxTotal = 0;
-    int m_iIndex = 0;
+    volatile int m_iIndex = 0;
 };
 
 #define GORM_ARRAY_PUSH_PTR(array, data)\

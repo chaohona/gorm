@@ -8,14 +8,17 @@
 #include "gorm_config.h"
 
 using namespace gorm;
-GORM_WorkThread::GORM_WorkThread(shared_ptr<GORM_ThreadPool> pPool, string &strThreadName, uint64 ulThreadID) : GORM_Thread(pPool, strThreadName),
-    m_lClientNum(0), m_ulThreadID(ulThreadID), m_bWaitReq(false), m_listNeedAccess(1024)
+GORM_WorkThread::GORM_WorkThread(shared_ptr<GORM_ThreadPool> pPool, string &strThreadName, uint64 ulThreadID, int iInnerIdx) : GORM_Thread(pPool, strThreadName),
+    m_lClientNum(0), m_ulThreadID(ulThreadID), m_bWaitReq(false), m_iInnerIdx(iInnerIdx)
 {
+    m_pResponseList = new GORM_SSQueue<GORM_DBRequest*, GORM_WORK_REQUEST_QUEUE_LEN>();
 }
 
 GORM_WorkThread::~GORM_WorkThread()
 {
     this->Exist();
+    if (this->m_pResponseList != nullptr)
+        delete m_pResponseList;
 }
 
 void GORM_WorkThread::Exist()
@@ -80,11 +83,13 @@ void GORM_WorkThread::Work(mutex *m)
 int GORM_WorkThread::RequestPreProc()
 {
     list<GORM_DBRequest*> listRequest;
-    this->m_RequestList.Take(listRequest);
+    this->m_pResponseList->Take(listRequest);
     bool bGotResult = false;
     int iRet = GORM_OK;
     for(GORM_DBRequest *pReq : listRequest)
     {
+        // 跨线程，防止没有读取到值
+        pReq->pWorkThread = this;
         pReq->ResetMemPool(this->m_pMemPool);
         //pReq->pCacheOpt = this->m_pCacheOpt;
         // 判断是否在缓存中操作成功，如果需要则继续操作数据库
@@ -151,7 +156,7 @@ void GORM_WorkThread::NotifyNewRequest()
 
 int GORM_WorkThread::AccepNewRequest(GORM_DBRequest *pRequest)
 {
-    this->m_RequestList.Put(pRequest);
+    this->m_pResponseList->Put(pRequest);
     // 向工作线程发送通知
     this->NotifyNewRequest();
     return GORM_OK;
@@ -278,7 +283,7 @@ int GORM_WorkThreadPool::CreateThread(int iNum)
         {
             std::unique_lock<std::mutex> lock(m_Mutex);
             ++this->m_iThreadIDSeed;
-            shared_ptr<GORM_WorkThread> pThread = make_shared<GORM_WorkThread>(GORM_WorkThreadPool::SharedPtr(), this->m_strThreadType, this->m_iThreadIDSeed);
+            shared_ptr<GORM_WorkThread> pThread = make_shared<GORM_WorkThread>(GORM_WorkThreadPool::SharedPtr(), this->m_strThreadType, this->m_iThreadIDSeed, i);
             this->StartWork(pThread);
             m_vThreads[i] = pThread;
         }

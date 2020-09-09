@@ -11,7 +11,7 @@ template<typename T>
 class GORM_SyncList
 {
 public:
-    GORM_SyncList(int iMaxSize = 1024):m_iMaxSize(iMaxSize), m_bNeedStop(false)
+    GORM_SyncList(int iMaxSize = 65535):m_iMaxSize(iMaxSize), m_bNeedStop(false)
     {
     }
 
