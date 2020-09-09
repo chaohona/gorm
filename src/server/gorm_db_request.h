@@ -75,8 +75,8 @@ public:
     uint8           iWaitDone = 0;        // 已经得到响应了
     uint8           iRspDone = 0;         // 响应是否发送完成
 
-    atomic<int32> iGotRspNum = 0;   // 获取到的响应的条数
-    atomic<int32> iReqNum = 1;      // 发出的请求的数量
+    atomic<int32> iGotRspNum;   // 获取到的响应的条数
+    atomic<int32> iReqNum;      // 发出的请求的数量
 
     uint32              uiReqFlag = 0;
     GORM_MemPoolData    *pReqSQLData = nullptr;    // 组装的请求SQL语句
@@ -105,7 +105,7 @@ public:
 
     gorm::GORM_PB_TABLE         *pNowRspProcTable = nullptr;            // 当前响应需要填充的table
 
-    atomic<uint32>  uiHashValue = 0;
+    atomic<uint32>  uiHashValue;
     int     iTableIndex = -1;   // 表下标
     int     staticRequest = 0;      // 此标记为1，则不会被回收
 

@@ -12,6 +12,9 @@
 using namespace gorm;
 GORM_DBRequest::GORM_DBRequest(shared_ptr<GORM_MemPool> &pMemPool):pMemPool(pMemPool)
 {
+    iGotRspNum = 0;
+    iReqNum = 1;
+    uiHashValue = 0;
 }
 
 GORM_DBRequest::~GORM_DBRequest()
