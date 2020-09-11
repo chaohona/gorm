@@ -96,14 +96,13 @@ int GORM_MySQLEvent::Write()
                                     (unsigned long)GORM_SQL_REQ_LEN(pRequest));
     if (m_iMySQLNetStatus == NET_ASYNC_ERROR)
     {
-        // TODO 给客户端出错响应
+        GORM_LOGE("sending message to mysql failed:%s, error:%s", GORM_SQL_REQ(pRequest), this->DBError());               
         this->WriteError(GORM_DB_ERROR, this->DBErrNo(), this->DBError());
         // 判断是否还有消息，如果没有其它消息需要发送则删除
         if (this->m_pSendingToMySQLRing->GetNum() == 0)
         {
             this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
         }
-        GORM_LOGE("sending message to mysql failed:%s, error:%s", GORM_SQL_REQ(pRequest), this->DBError());
         this->FinishWriting();
         return GORM_ERROR;
     }
@@ -444,6 +443,7 @@ int GORM_MySQLEvent::MySQLTableInfoUpdate(MYSQL_ROW row, unsigned long *lengths)
 int GORM_MySQLEvent::ConnectSuccessCB()
 {
     this->m_iOptStep = MYSQL_OPT_WAITING_REQ; // 需要处理数据
+    GORM_GET_MYSQL_FD(this->m_pMySQL, this->m_iMySQLFD);
 #ifdef GORM_DEBUG // 从数据库中获取表的信息
     if (GORM_OK != this->GetMySQLTableInfo())
     {

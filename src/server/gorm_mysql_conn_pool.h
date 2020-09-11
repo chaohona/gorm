@@ -10,6 +10,10 @@
 #include "gorm_mysql_request.h"
 #include "gorm_tables.h"
 
+
+#define GORM_GET_MYSQL_FD(MYSQL, FD)\
+FD=MYSQL->net.vio->mysql_socket.fd
+
 enum MySQLOptStep
 {
     MYSQL_OPT_CONNECTING,       // 正在和后端建立连接
@@ -56,6 +60,7 @@ public:
     MySQLOptStep     m_iOptStep;                            // 当前event状态机状态
     MYSQL_RES       *m_pReadingMySQLResult = nullptr;        // 从mysql获取的结果
     MYSQL           *m_pMySQL = nullptr;
+    int             m_iMySQLFD = 0;
     GORM_DBInfo     *m_pDbCfg = nullptr;
     GORM_MySQLConnPool  *m_pMySQLConnPool;
 
