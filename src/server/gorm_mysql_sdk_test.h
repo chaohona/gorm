@@ -1,4 +1,5 @@
-#ifdef GORM_MYSQL_TEST
+#ifndef GORM_MYSQL_TEST
+#define GORM_MYSQL_TEST
 
 #include "gorm_sys_inc.h"
 #include "gorm_server_instance.h"
@@ -39,6 +40,7 @@ MYSQL *Connect2MySQL(GORM_DBInfo *pDbCfg)
         mysql_close(pMySQL);
         return nullptr;
     }
+    cout << "connecto to mysql success" << endl;
     return pMySQL;
 }
 
@@ -51,19 +53,19 @@ public:
     }
     virtual int Write()
     {
-        net_async_status iStatus = mysql_real_query_nonblocking(this->m_pMySQL, m_sql,
+        m_iStatus = mysql_real_query_nonblocking(this->m_pMySQL, m_sql,
                                     (unsigned long)strlen(m_sql));
-        if (iStatus == NET_ASYNC_NOT_READY)
+        if (m_iStatus == NET_ASYNC_NOT_READY)
         {
             return 0;
         }
-        else if (iStatus == NET_ASYNC_ERROR)
+        else if (m_iStatus == NET_ASYNC_ERROR)
         {
             cout << "send message 2 mysql failed:" << mysql_error(m_pMySQL) << endl;
             this->DelWrite();
             return GORM_ERROR;
         }
-        else if (iStatus == NET_ASYNC_COMPLETE)
+        else if (m_iStatus == NET_ASYNC_COMPLETE)
         {
             this->ReadyRead();
         }
@@ -71,18 +73,18 @@ public:
     }
     virtual int Read()
     {
-        net_async_status iStatus = mysql_store_result_nonblocking(this->m_pMySQL, &m_pReadingMySQLResult);
-        if (iStatus == NET_ASYNC_NOT_READY)
+        m_iStatus = mysql_store_result_nonblocking(this->m_pMySQL, &m_pReadingMySQLResult);
+        if (m_iStatus == NET_ASYNC_NOT_READY)
         {
             return 0;
         }
-        else if (iStatus == NET_ASYNC_ERROR)
+        else if (m_iStatus == NET_ASYNC_ERROR)
         {
             cout << "get message from mysql failed:" << mysql_error(m_pMySQL) << endl;
             this->DelWrite();
             return GORM_ERROR;
         }
-        else if (iStatus == NET_ASYNC_COMPLETE)
+        else if (m_iStatus == NET_ASYNC_COMPLETE)
         {
             *this->iFinishNum += 1;
             this->DelRead();
@@ -92,16 +94,17 @@ public:
     }
 public:
     MYSQL *m_pMySQL = nullptr;
-    char *m_sql = "select * from user_2;"
+    char *m_sql = "select * from user_2;";
     int *iFinishNum;
     MYSQL_RES *m_pReadingMySQLResult;
+    net_async_status m_iStatus;
 };
 
 
 int GORM_MySQLSDKTest(int argc, char** argv)
 {
     shared_ptr<GORM_Epoll> pEpool = make_shared<GORM_Epoll>();
-    if (0 != pEpool->Init(1024))
+    if (!pEpool->Init(1024))
     {
         cout << "init epool failed." << endl;
         return -1;
@@ -115,10 +118,14 @@ int GORM_MySQLSDKTest(int argc, char** argv)
     int dbPort = 3306; 
     #define MYSQL_CONN_NUM 20
     GORM_DBInfo dbInfo;
-    memcpy(dbInfo.szHost, dbHost, strlen(dbHost));
-    memcpy(dbInfo.szUser, dbUser, strlen(dbUser));
-    memcpy(dbInfo.szPW, dbPwd, strlen(dbPwd));
-    memcpy(dbInfo.szDB, dbDatabase, strlen(dbDatabase));
+    strncpy(dbInfo.szHost, dbHost, strlen(dbHost));
+    dbInfo.szHost[strlen(dbHost)] = '\0';
+    strncpy(dbInfo.szUser, dbUser, strlen(dbUser));
+    dbInfo.szUser[strlen(dbUser)] = '\0';
+    strncpy(dbInfo.szPW, dbPwd, strlen(dbPwd));
+    dbInfo.szPW[strlen(dbPwd)] = '\0';
+    strncpy(dbInfo.szDB, dbDatabase, strlen(dbDatabase));
+    dbInfo.szDB[strlen(dbDatabase)] = '\0';
     dbInfo.uiPort = dbPort;
 
     int iFinishNum = 0;

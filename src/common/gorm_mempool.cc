@@ -89,14 +89,6 @@ GORM_MemPoolData *GORM_MemPool::GetData(size_t sSize)
 
 GORM_MemPool::GORM_MemPool()
 {
-    for(int i=0; i<POOL_DATA_TOTAL_TYPE; i++)
-    {
-        auto pPool = m_FreePoolList+i;
-        if (GORM_OK != pPool->Init(2048/(i+1)))
-        {
-            throw("init mempool failed.");
-        }
-    }
     this->m_iFreeMetaNum = 0;
     // 预计算4个规格的池子可以申请内存的大小
     int iSize = POOL_DATA_MIN_LEN;

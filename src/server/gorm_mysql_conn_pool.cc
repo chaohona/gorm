@@ -702,7 +702,7 @@ void GORM_MySQLConnPool::Loop()
     this->m_pEvent->Loop();
 }
 
-bool GORM_MySQLConnPool::ConnectoMySQL(GORM_MySQLEvent &*pEvent, GORM_DBInfo *pDbCfg, const mutex *m)
+bool GORM_MySQLConnPool::ConnectoMySQL(GORM_MySQLEvent *&pEvent, GORM_DBInfo *pDbCfg, const mutex *m)
 {
     MYSQL *pMySQL = nullptr;
     try

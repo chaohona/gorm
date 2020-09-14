@@ -91,7 +91,7 @@ public:
 
 private:
     bool GetMYSQL(GORM_DBInfo *pDbCfg, const    mutex *m, MYSQL *&pMySQL, net_async_status &iConnectStatus);
-    bool ConnectoMySQL(GORM_MySQLEvent &*pEvent, GORM_DBInfo *pDbCfg, const mutex *m);
+    bool ConnectoMySQL(GORM_MySQLEvent *&pEvent, GORM_DBInfo *pDbCfg, const mutex *m);
 public:
     GORM_MySQLEvent *m_pEvent = nullptr; // TODO 改成连接池
     GORM_MySQLEvent *m_EventList[GOMR_MAX_CONNECT_NUM_PER_THREAD];

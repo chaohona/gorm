@@ -68,7 +68,7 @@ public:
     shared_ptr<GORM_MemPool> m_pMySelf;
 private:
     int                     m_aSize[POOL_DATA_TOTAL_TYPE];
-    GORM_Array<GORM_MemPoolData*> m_FreePoolList[POOL_DATA_TOTAL_TYPE];
+    GORM_Array<GORM_MemPoolData*, 128> m_FreePoolList[POOL_DATA_TOTAL_TYPE];
     int                     m_iMax;
 
     GORM_MemPoolData*        m_pFreeMetaData[MAX_FREE_META_DATA];// 缓存一万条数据(TODO和内存数据放在一起，不用单独管理)
