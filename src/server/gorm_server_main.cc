@@ -9,6 +9,7 @@
 #include "gorm_frontend_thread.h"
 #include "gorm_db_config.h"
 #include "gorm_table_field_map.h"
+#include "gorm_mysql_sdk_test.h"
 
 static bool bGlobalStopFlag = false;
 

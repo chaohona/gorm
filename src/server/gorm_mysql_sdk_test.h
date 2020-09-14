@@ -53,6 +53,10 @@ public:
     }
     virtual int Write()
     {
+        if (this->m_iStep == 1)
+        {
+            return this->Read();
+        }
         m_iStatus = mysql_real_query_nonblocking(this->m_pMySQL, m_sql,
                                     (unsigned long)strlen(m_sql));
         if (m_iStatus == NET_ASYNC_NOT_READY)
@@ -62,17 +66,20 @@ public:
         else if (m_iStatus == NET_ASYNC_ERROR)
         {
             cout << "send message 2 mysql failed:" << mysql_error(m_pMySQL) << endl;
-            this->DelWrite();
             return GORM_ERROR;
         }
         else if (m_iStatus == NET_ASYNC_COMPLETE)
         {
-            this->ReadyRead();
+            this->m_iStep = 1;
         }
         return 0;
     }
     virtual int Read()
     {
+        if (this->m_iStep == 0)
+        {
+            return this->Write();
+        }
         m_iStatus = mysql_store_result_nonblocking(this->m_pMySQL, &m_pReadingMySQLResult);
         if (m_iStatus == NET_ASYNC_NOT_READY)
         {
@@ -81,28 +88,38 @@ public:
         else if (m_iStatus == NET_ASYNC_ERROR)
         {
             cout << "get message from mysql failed:" << mysql_error(m_pMySQL) << endl;
-            this->DelWrite();
             return GORM_ERROR;
         }
         else if (m_iStatus == NET_ASYNC_COMPLETE)
         {
             *this->iFinishNum += 1;
-            this->DelRead();
-            this->ReadyWrite();
+            //cout << *this->iFinishNum << "    , now:" << GORM_GetNowMS() <<endl;
+            this->m_iStep = 1;
+            mysql_store_result(m_pMySQL);
+            int iReadingRows =mysql_num_rows(this->m_pReadingMySQLResult);
+            MYSQL_ROW stRow;
+            for (int i=0; i<iReadingRows; i++)
+            {
+                stRow = mysql_fetch_row(this->m_pReadingMySQLResult);
+            }
+            mysql_free_result(m_pReadingMySQLResult);
+            this->m_pReadingMySQLResult = nullptr;
         }
+        
         return 0;
     }
 public:
     MYSQL *m_pMySQL = nullptr;
-    char *m_sql = "select * from user_2;";
-    int *iFinishNum;
+    char *m_sql = "select ptid from user_2;";
+    atomic<int> *iFinishNum;
     MYSQL_RES *m_pReadingMySQLResult;
     net_async_status m_iStatus;
+    int m_iStep = 0;    // 0为写，1为读
 };
 
-
-int GORM_MySQLSDKTest(int argc, char** argv)
+int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum)
 {
+    mysql_thread_init();
     shared_ptr<GORM_Epoll> pEpool = make_shared<GORM_Epoll>();
     if (!pEpool->Init(1024))
     {
@@ -116,7 +133,7 @@ int GORM_MySQLSDKTest(int argc, char** argv)
     char *dbUser = "root";
     char *dbDatabase = "daobatu";
     int dbPort = 3306; 
-    #define MYSQL_CONN_NUM 20
+#define MYSQL_CONN_NUM 20
     GORM_DBInfo dbInfo;
     strncpy(dbInfo.szHost, dbHost, strlen(dbHost));
     dbInfo.szHost[strlen(dbHost)] = '\0';
@@ -143,20 +160,32 @@ int GORM_MySQLSDKTest(int argc, char** argv)
         GORM_GET_MYSQL_FD(pMySQL, iMySQLFD);
         GORM_MySQLAsyncEventTest *pEvent = new GORM_MySQLAsyncEventTest(pMySQL, iMySQLFD, pEpool);
         mysqlEventList[i] = pEvent;
-        pEvent->iFinishNum = &iFinishNum;
-        pEvent->ReadyWrite();
+        pEvent->iFinishNum = iFinishNum;
+        pEpool->AddEventRW(pEvent);
     }
 
-    int iLastNum = 0;
     for(;;)
     {
         pEpool->EventLoopProcess(5);
         pEpool->ProcAllEvents();
-        if (iFinishNum - iLastNum > 1000)
-        {
-            iLastNum = iFinishNum;
-            cout << iFinishNum << "    , time:" << GORM_GetNowMS() << endl;
-        }
+    }
+    
+    return 0;
+}
+
+
+
+int GORM_MySQLSDKTest()
+{
+    atomic<int> finishNum;
+    for (int i=0; i<2; i++)
+    {
+        thread d(GORM_MySQLSDKTestThread, &finishNum);
+    }
+
+    for (int i=0; i<1000*60*60; i++)
+    {
+        cout << finishNum << "    , now:" << GORM_GetNowMS() << endl;
     }
     
     return 0;
