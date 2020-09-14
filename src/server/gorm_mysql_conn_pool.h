@@ -56,12 +56,12 @@ private:
     
 public:
     friend class GORM_MySQLRequest;
-    net_async_status m_iMySQLNetStatus = NET_ASYNC_ERROR;    // 网络状态
-    MySQLOptStep     m_iOptStep;                            // 当前event状态机状态
-    MYSQL_RES       *m_pReadingMySQLResult = nullptr;        // 从mysql获取的结果
-    MYSQL           *m_pMySQL = nullptr;
-    int             m_iMySQLFD = 0;
-    GORM_DBInfo     *m_pDbCfg = nullptr;
+    net_async_status    m_iMySQLNetStatus = NET_ASYNC_ERROR;    // 网络状态
+    MySQLOptStep        m_iOptStep;                            // 当前event状态机状态
+    MYSQL_RES           *m_pReadingMySQLResult = nullptr;        // 从mysql获取的结果
+    MYSQL               *m_pMySQL = nullptr;
+    int                 m_iMySQLFD = 0;
+    GORM_DBInfo         *m_pDbCfg = nullptr;
     GORM_MySQLConnPool  *m_pMySQLConnPool;
 
     // 需要被发送的SQL消息池子
@@ -91,8 +91,11 @@ public:
 
 private:
     bool GetMYSQL(GORM_DBInfo *pDbCfg, const    mutex *m, MYSQL *&pMySQL, net_async_status &iConnectStatus);
+    bool ConnectoMySQL(GORM_MySQLEvent &*pEvent, GORM_DBInfo *pDbCfg, const mutex *m);
 public:
-    GORM_MySQLEvent* m_pEvent = nullptr; // TODO 改成连接池
+    GORM_MySQLEvent *m_pEvent = nullptr; // TODO 改成连接池
+    GORM_MySQLEvent *m_EventList[GOMR_MAX_CONNECT_NUM_PER_THREAD];
+    
 };
 
 #endif

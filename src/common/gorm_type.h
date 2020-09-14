@@ -22,6 +22,9 @@
 #include <string>
 #include <stdlib.h>
 
+#include "my_inttypes.h"
+
+/*
 typedef unsigned char   uchar;
 typedef char            int8;
 typedef unsigned char   uint8;
@@ -31,7 +34,7 @@ typedef unsigned int        uint32;
 typedef int         int32;
 typedef unsigned long long int        uint64;
 typedef long long int         int64; 
-
+*/
 
 
 typedef int GORM_FD;

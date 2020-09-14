@@ -22,9 +22,10 @@ private:
     bool ParseRedisInfo(YAML::Node &node);
 
 public:
-    bool               m_bDaemonize = true;                           // 是否以后台进程运行
+    bool               m_bDaemonize = true;                     // 是否以后台进程运行
     int                m_iWorkThreadNum = 1;
-    string             m_strListenAddr;                                // 监听地址
+    int                m_iConnectNum = 5;                       // 每个线程和每个库建立的连接数
+    string             m_strListenAddr;                         // 监听地址
     GORM_LOG_LEVEL     m_iLogLevel = GORM_LOG_LEVEL_DEBUG;
 
     string      m_strListenIP = string("0.0.0.0");

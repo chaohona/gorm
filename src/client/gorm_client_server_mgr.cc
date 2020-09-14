@@ -3,7 +3,7 @@
 
 namespace gorm{
 
-GORM_ClientSvrMgr::GORM_ClientSvrMgr(GORM_MemPool *pMemPool, GORM_Log *pLogger = nullptr)
+GORM_ClientSvrMgr::GORM_ClientSvrMgr(GORM_MemPool *pMemPool, GORM_Log *pLogger)
 {
     this->pMemPool = pMemPool;
     this->pLogger = pLogger;

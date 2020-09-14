@@ -1,6 +1,6 @@
 #include "gorm_db_conn_pool.h"
 
-GORM_DBConnPool::GORM_DBConnPool(int iMaxPool)
+GORM_DBConnPool::GORM_DBConnPool(int iMaxPool):m_iMaxPoolSize(iMaxPool)
 {
 }
 

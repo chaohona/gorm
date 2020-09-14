@@ -610,6 +610,7 @@ void GORM_MySQLEvent::WriteError(int iErrCode, int iDBErrNo, char *szErrInfo)
 
 GORM_MySQLConnPool::GORM_MySQLConnPool(int iMaxPoolSize):GORM_DBConnPool(iMaxPoolSize)
 {
+    bzero(m_EventList, sizeof(GORM_MySQLEvent*)*GOMR_MAX_CONNECT_NUM_PER_THREAD);
 }
 
 GORM_MySQLConnPool::~GORM_MySQLConnPool()
@@ -619,54 +620,36 @@ GORM_MySQLConnPool::~GORM_MySQLConnPool()
         delete this->m_pEvent;
         this->m_pEvent = nullptr;
     }
+    GORM_MySQLEvent *pEvent = nullptr;
+    for (int i=0; i<this->m_iMaxPoolSize; i++)
+    {
+        pEvent = this->m_EventList[i];
+        if (pEvent == nullptr)
+            continue;
+        delete pEvent;
+    }
 }
 
 bool GORM_MySQLConnPool::Init(GORM_DBInfo *pDbCfg, const mutex *m)
 {
-    MYSQL *pMySQL = nullptr;
-    try
+    if (!this->GeneralUrl(pDbCfg))
     {
-        if (!this->GeneralUrl(pDbCfg))
-        {
-            GORM_LOGE("generate database url failed.");
-            return false;
-        }
-
-    
-        net_async_status iConnectStatus;
-        if (!this->GetMYSQL(pDbCfg, m, pMySQL, iConnectStatus))
-        {
-            return false;
-        }
-
-        
-        this->m_pEvent = new GORM_MySQLEvent(pMySQL, pDbCfg, this);
-        if (iConnectStatus != NET_ASYNC_NOT_READY)
-        {
-            // 连接mysql成功
-            GORM_LOGI("connect to mysql success:%s", this->m_szUrl);
-            this->m_pEvent->m_iOptStep = MYSQL_OPT_WAITING_REQ;
-            this->m_pEvent->ConnectSuccessCB();
-        }
-        else 
-        {
-            this->m_pEvent->m_iOptStep = MYSQL_OPT_CONNECTING;
-        }
-    }
-    catch(exception &e)
-    {
-        GORM_LOGE("init work thread got exception:%s", e.what());
-        if (this->m_pEvent != nullptr)
-        {
-            delete this->m_pEvent;
-        }
-        else if (pMySQL != nullptr)
-        {
-            mysql_close(pMySQL);
-        }
+        GORM_LOGE("generate database url failed.");
         return false;
     }
+
     
+    GORM_MySQLEvent *pEvent = nullptr;
+    for (int i=0; i<this->m_iMaxPoolSize; i++)
+    {
+        pEvent = nullptr;
+        if (!this->ConnectoMySQL(pEvent, pDbCfg, m))
+        {
+            return false;
+        }
+        this->m_EventList[i] = pEvent;
+    }
+
     return true;
 }
 
@@ -718,4 +701,47 @@ void GORM_MySQLConnPool::Loop()
 {
     this->m_pEvent->Loop();
 }
+
+bool GORM_MySQLConnPool::ConnectoMySQL(GORM_MySQLEvent &*pEvent, GORM_DBInfo *pDbCfg, const mutex *m)
+{
+    MYSQL *pMySQL = nullptr;
+    try
+    {
+        net_async_status iConnectStatus;
+        if (!this->GetMYSQL(pDbCfg, m, pMySQL, iConnectStatus))
+        {
+            return false;
+        }
+
+        pEvent = new GORM_MySQLEvent(pMySQL, pDbCfg, this);
+        if (iConnectStatus != NET_ASYNC_NOT_READY)
+        {
+            // 连接mysql成功
+            GORM_LOGI("connect to mysql success:%s", this->m_szUrl);
+            pEvent->m_iOptStep = MYSQL_OPT_WAITING_REQ;
+            pEvent->ConnectSuccessCB();
+        }
+        else 
+        {
+            pEvent->m_iOptStep = MYSQL_OPT_CONNECTING;
+        }
+    }
+    catch(exception &e)
+    {
+        GORM_LOGE("init work thread, connect to mysql failed, mysql address:%s, got exception:%s", this->m_szUrl, e.what());
+        if (pEvent != nullptr)
+        {
+            delete pEvent;
+            pEvent = nullptr;
+        }
+        else if (pMySQL != nullptr)
+        {
+            mysql_close(pMySQL);
+        }
+        return false;
+    }
+    
+    return true;
+}
+
 

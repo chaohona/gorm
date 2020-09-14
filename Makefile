@@ -106,11 +106,15 @@ proxy: prepare $(GORMProxy)
 client: $(GORMClient)
 	@echo "make client"
 
-lib: $(STATICClient) $(SHAREClient) $(STATICTABLES) $(SHARETABLES) pack_inc
+lib: $(STATICTABLES) $(SHARETABLES) pack_inc
 	@echo "make client"
 
 test: $(ASYNC_TEST) $(COMMON_SRC)
 	@echo $(ASYNC_TEST)
+	
+TEST_MYTQL_FLAGS=$(SVRCXXFLAGS) -DGORM_MYSQL_TEST=1
+test_mysql: $(COMMON_OBJ) $(GORM_SVR_OBJ)
+	$(CXX) $(TEST_MYTQL_FLAGS) -o $@ $^ $(DEPS) $(SERVER_LIBS) -L$(PWD)/lib/gorm -lgorm-tables $(RUN_LIB_PATH)
 
 $(ASYNC_TEST) : $(ASYNC_TEST_SRC)
 	@echo $(ASYNC_TEST_OBJ)

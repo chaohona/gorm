@@ -48,6 +48,15 @@ int GORM_Event::DelWrite()
     return this->m_pEpoll->DelEventWrite(this);    
 }
 
+int GORM_Event::ReadyRead()
+{
+    return this->m_pEpoll->AddEventRead(this);
+}
+int GORM_Event::DelRead()
+{
+    return this->m_pEpoll->DelEventRead(this);
+}
+
 int GORM_Event::Close()
 {
     try

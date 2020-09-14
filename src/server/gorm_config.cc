@@ -35,6 +35,15 @@ bool GORM_Config::Init(char *szCfgFile)
                     return false;
                 }
             }
+            else if (content == "connect-num")
+            {
+                this->m_iConnectNum = c->second.as<int>();
+                if (this->m_iConnectNum < 1 || this->m_iConnectNum > GOMR_MAX_CONNECT_NUM_PER_THREAD)
+                {
+                    cout << "invalid connect-num configure:" << this->m_iConnectNum << endl;
+                    return false;
+                }
+            }
             else if (content == "listen-address")
             {
                 this->m_strListenAddr = c->second.as<string>();

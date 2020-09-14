@@ -1,5 +1,6 @@
 #include "gorm_db_conn_mgr.h"
 #include "gorm_db_config.h"
+#include "gorm_config.h"
 #include "gorm_log.h"
 #include "gorm_mysql_conn_pool.h"
 #include "gorm_table_field_map.h"
@@ -151,11 +152,8 @@ GORM_Ret GORM_DBConnMgr::CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m)
     {
         if (this->m_iDBType == DBType_MySQL)
         {
-            pPool = new GORM_MySQLConnPool(8);
+            pPool = new GORM_MySQLConnPool(GORM_Config::Instance()->m_iConnectNum);
         }
-        //else if (this->m_iDBType == DBType_MGO)
-        //{
-        //}
         else
         {
             GORM_LOGE("invalid db type, %s, %s", pDbInfo->szDBSymbol, pDbInfo->szType);
@@ -197,7 +195,7 @@ int GORM_DBConnMgr::GetDBPool(GORM_DBRequest *pDBReq)
     GORM_RouteMgr &route = this->m_vTableRouteInfo[pDBReq->iReqTableId];
     pDBReq->iTableIndex = pDBReq->uiHashValue%route.iSpilitMode;
     pDBReq->pDbPool = route.vDbConn[pDBReq->iTableIndex];
-    //pDbPool = m_pDBPool[0];
+
     return GORM_OK;
 }
 

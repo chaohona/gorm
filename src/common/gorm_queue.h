@@ -8,14 +8,13 @@
 
 using namespace std;
 
-template<typename T>
+template<typename T, int MAXSIZE>
 
 class GORM_SyncQueue
 {
 public:
-    GORM_SyncQueue(int iMaxSize):m_iMaxSize(iMaxSize), m_bNeedStop(false)
+    GORM_SyncQueue(int iMaxSize):m_iMaxSize(MAXSIZE), m_bNeedStop(false)
     {
-        m_vQueue.Init(iMaxSize);
     }
 
     void Put(const T& x)
@@ -115,11 +114,11 @@ private:
         return GORM_ARRAY_EMPTY(m_vQueue);
     }
 private:
-    int m_iMaxSize;
+    int m_iMaxSize = MAXSIZE;
     mutex m_Mutex;
     condition_variable m_cvNotEmpty;
     condition_variable m_cvNotFull;
-    GORM_Array<T> m_vQueue;
+    GORM_Array<T, MAXSIZE> m_vQueue;
 
     bool m_bNeedStop;
 };

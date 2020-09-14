@@ -51,6 +51,8 @@ public:
     virtual int Close();
     int ReadyWrite();
     int DelWrite();
+    int ReadyRead();
+    int DelRead();
 #ifndef _WIN32
     int DoSendv(iovec *iov, int iovcnt);
 #endif

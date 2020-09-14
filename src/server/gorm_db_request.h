@@ -66,7 +66,6 @@ private:
 public:
     GORM_Event      *pFrontendEvent = nullptr;
     GORM_DBConnPool *pDbPool = nullptr;
-    //GORM_CacheOpt   *pCacheOpt = nullptr;
     
     GORM_DBConnMgr *pDBMgr = nullptr;
     uint8           iSentToWorkThread = 0;  // 是否已经发送给工作线程

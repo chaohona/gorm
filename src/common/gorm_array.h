@@ -5,40 +5,12 @@
 #include "gorm_error.h"
 #include "gorm_sys_inc.h"
 
-template<class T>
+template<class T, int MAXSIZE>
 class GORM_Array
 {
 public:
-    ~GORM_Array()
-    {
-        try
-        {
-            if (this->m_pTArray != nullptr)
-            {
-                delete []this->m_pTArray;
-            }
-        }
-        catch(exception &e)
-        {
-        }
-    }
-    int Init(int iMax)
-    {
-        try
-        {
-            this->m_pTArray = new T[iMax];
-            this->m_iMaxTotal = iMax;
-        }
-        catch(exception &e)
-        {
-            cout << "init array got exception:%s" << e.what() << endl;
-            return GORM_ERROR;
-        }
-        return GORM_OK;
-    }
-public:
-    volatile T *m_pTArray = nullptr;
-    int m_iMaxTotal = 0;
+    T m_pTArray[MAXSIZE];
+    int m_iMaxTotal = MAXSIZE;
     volatile int m_iIndex = 0;
 };
 

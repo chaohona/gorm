@@ -50,6 +50,7 @@ namespace gorm{
 
 // 最多不超过128个工作线程
 #define GORM_MAX_WORK_THREAD_NUM 128
+#define GOMR_MAX_CONNECT_NUM_PER_THREAD 128
 
 // 前端接入线程最多不能积攒超过1000万个请求
 #define GORM_FRONT_REQUEST_QUEUE_LEN 0x7FFFFF
