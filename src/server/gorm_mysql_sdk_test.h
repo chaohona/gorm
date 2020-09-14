@@ -117,7 +117,7 @@ public:
     int m_iStep = 0;    // 0为写，1为读
 };
 
-int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum)
+int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
 {
     mysql_thread_init();
     shared_ptr<GORM_Epoll> pEpool = make_shared<GORM_Epoll>();
@@ -146,6 +146,7 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum)
     dbInfo.uiPort = dbPort;
 
     int iFinishNum = 0;
+    m->lock();
     GORM_MySQLAsyncEventTest *mysqlEventList[MYSQL_CONN_NUM];
     MYSQL *pMySQL = nullptr;
     for (int i=0; i<MYSQL_CONN_NUM; i++)
@@ -163,6 +164,7 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum)
         pEvent->iFinishNum = iFinishNum;
         pEpool->AddEventRW(pEvent);
     }
+    m->unlock();
 
     for(;;)
     {
@@ -177,14 +179,16 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum)
 
 int GORM_MySQLSDKTest()
 {
-    atomic<int> finishNum;
+    atomic<int> finishNum = 0;
+    mutex m;
     for (int i=0; i<2; i++)
     {
-        thread d(GORM_MySQLSDKTestThread, &finishNum);
+        thread d(GORM_MySQLSDKTestThread, &finishNum, &m);
     }
 
     for (int i=0; i<1000*60*60; i++)
     {
+        ThreadSleepMilliSeconds(10);
         cout << finishNum << "    , now:" << GORM_GetNowMS() << endl;
     }
     
