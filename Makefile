@@ -32,6 +32,7 @@ DEPS=$(LIB)
 GORM_SERVER_DEBUG=$(PWD)/bin/gorm-serverd
 
 GORMServer=$(PWD)/bin/gorm-server
+GORMTest=$(PWD)/bin/gorm-test
 GORMClient=$(PWD)/bin/gorm-client
 GORMProxy=$(PWD)/bin/gorm-proxy
 SHAREClient=$(PWD)/lib/gorm/libgorm-client.so
@@ -61,10 +62,6 @@ ASYNC_TEST_SRC=$(wildcard $(PWD)/src/test/*.cc)
 ASYNC_TEST_OBJ=$(ASYNC_TEST_SRC:%.cc=%.o)
 
 SHARE_TABLES_OBJ=$(TABLES_SRC:%.cc=%.o)
-
-#test: /root/gorm/src/test/test.pb.h
-#	@echo $(ASYNC_TEST)
-#	@echo $(ASYNC_TEST_OBJ)
 
 # 编译服务器需要的库
 SERVER_LIBS=$(LIB_PATH)/redis/libhiredis.a -L$(LIB_PATH)/yaml/ -lyaml-cpp
@@ -109,11 +106,10 @@ client: $(GORMClient)
 lib: $(STATICTABLES) $(SHARETABLES) pack_inc
 	@echo "make client"
 
-test: $(ASYNC_TEST) $(COMMON_SRC)
-	@echo $(ASYNC_TEST)
+test: $(GORMTest)
 	
 TEST_MYTQL_FLAGS=$(SVRCXXFLAGS) -DGORM_MYSQL_TEST=1
-test_mysql: $(COMMON_OBJ) $(GORM_SVR_OBJ)
+$(GORMTest): $(COMMON_OBJ) $(GORM_SVR_OBJ)
 	$(CXX) $(TEST_MYTQL_FLAGS) -o $@ $^ $(DEPS) $(SERVER_LIBS) -L$(PWD)/lib/gorm -lgorm-tables $(RUN_LIB_PATH)
 
 $(ASYNC_TEST) : $(ASYNC_TEST_SRC)
