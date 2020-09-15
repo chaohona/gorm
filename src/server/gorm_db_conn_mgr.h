@@ -12,14 +12,14 @@
 using namespace gorm;
 // 先做成一个线程一个连接池，TODO改成所有线程共享一个连接池
 
-struct GORM_RouteMgr
+struct GORM_TableRouteMgr
 {
 public:
     
 public:
-    int iSpilitMode = 0;
-    int iTableId = 0;
-    GORM_DBConnPool **vDbConn;
+    int iSpilitMode = 0;        // 分片数
+    int iTableId = 0;           // 此路由处理的表信息
+    GORM_DBConnPool **vDbConn;  // 表可以路由到的数据库集合,每个分片对应的db连接
 };
 class GORM_WorkThread;
 class GORM_DBConnMgr 
@@ -38,14 +38,14 @@ private:
     int InitRoute(mutex *m);
     int InitDB(mutex *m);
 private:
-    mutex       m_Mutex;
-    int m_iPoolNum = 0;
-    GORM_DBConnPool **m_pDBPool = nullptr;
+    mutex                               m_Mutex;
+    int                                 m_iPoolNum = 0;
+    GORM_DBConnPool                     **m_pDBPool = nullptr;  // 一个database对应一个dbpool
     unordered_map<string, GORM_DBConnPool*> m_mapDB2Conn;
-    GORM_WorkThread *m_pWorkThread = nullptr;
-    DBType          m_iDBType = DBType_NONE;
-    int iMaxTableId = 0;
-    GORM_RouteMgr   *m_vTableRouteInfo = nullptr;
+    GORM_WorkThread                     *m_pWorkThread = nullptr;
+    DBType                              m_iDBType = DBType_NONE;
+    int                                 iMaxTableId = 0;
+    GORM_TableRouteMgr                  *m_vTableRouteInfo = nullptr;   // 一个表对应一个GORM_RouteMgr
 };
 
 

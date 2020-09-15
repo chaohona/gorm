@@ -72,15 +72,15 @@ int GORM_DBConnMgr::InitRoute(mutex *m)
         if (iNowId > this->iMaxTableId)
             this->iMaxTableId = iNowId;
     }
-    this->m_vTableRouteInfo = new GORM_RouteMgr[this->iMaxTableId+1];
+    this->m_vTableRouteInfo = new GORM_TableRouteMgr[this->iMaxTableId+1];
     for (int i=0; i<pRoute->routes.iTableNum; i++)
     {
         GORM_RouteTable &table = pRoute->routes.vRouteTables[i];
-        GORM_RouteMgr &routeMgr = this->m_vTableRouteInfo[i];
+        GORM_TableRouteMgr &routeMgr = this->m_vTableRouteInfo[i];
         routeMgr.iSpilitMode = table.iSplitMode;
         routeMgr.iTableId = table.iTableId;
         routeMgr.vDbConn = new GORM_DBConnPool*[routeMgr.iSpilitMode];
-        int splitIdx = 0;
+        int splitIdx = 0;   // 每个表分片的下标对应的db连接
         for (int j=0; j<table.iDBNum; j++)
         {
             GORM_RouteDB &routeDB = table.vRouteDB[j];
@@ -152,7 +152,7 @@ GORM_Ret GORM_DBConnMgr::CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m)
     {
         if (this->m_iDBType == DBType_MySQL)
         {
-            pPool = new GORM_MySQLConnPool(GORM_Config::Instance()->m_iConnectNum);
+            pPool = new GORM_MySQLConnPool(GORM_Config::Instance()->m_iConnectNumPerPool);
         }
         else
         {
@@ -192,7 +192,7 @@ int GORM_DBConnMgr::GetDBPool(GORM_DBRequest *pDBReq)
         GORM_LOGE("invalid table id:%d", pDBReq->iReqTableId);
         return GORM_INVALID_TABLE;
     }
-    GORM_RouteMgr &route = this->m_vTableRouteInfo[pDBReq->iReqTableId];
+    GORM_TableRouteMgr &route = this->m_vTableRouteInfo[pDBReq->iReqTableId];
     pDBReq->iTableIndex = pDBReq->uiHashValue%route.iSpilitMode;
     pDBReq->pDbPool = route.vDbConn[pDBReq->iTableIndex];
 

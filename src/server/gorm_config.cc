@@ -37,10 +37,10 @@ bool GORM_Config::Init(char *szCfgFile)
             }
             else if (content == "connect-num")
             {
-                this->m_iConnectNum = c->second.as<int>();
-                if (this->m_iConnectNum < 1 || this->m_iConnectNum > GOMR_MAX_CONNECT_NUM_PER_THREAD)
+                this->m_iConnectNumPerPool = c->second.as<int>();
+                if (this->m_iConnectNumPerPool < 1 || this->m_iConnectNumPerPool > GOMR_MAX_CONNECT_NUM_PER_THREAD)
                 {
-                    cout << "invalid connect-num configure:" << this->m_iConnectNum << endl;
+                    cout << "invalid connect-num configure:" << this->m_iConnectNumPerPool << endl;
                     return false;
                 }
             }

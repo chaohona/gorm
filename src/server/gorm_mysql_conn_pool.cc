@@ -5,8 +5,8 @@
 
 using namespace gorm;
 
-GORM_MySQLEvent::GORM_MySQLEvent(MYSQL *pMySQL, GORM_DBInfo *pDbCfg,  GORM_MySQLConnPool *pPool) :
-    m_pMySQL(pMySQL), m_pDbCfg(pDbCfg), m_pMySQLConnPool(pPool)
+GORM_MySQLEvent::GORM_MySQLEvent(shared_ptr<GORM_Epoll> &pEpoll, MYSQL *pMySQL, int iFD, GORM_DBInfo *pDbCfg,  GORM_MySQLConnPool *pPool) :
+    GORM_Event(iFD, pEpoll), m_pMySQL(pMySQL), m_pDbCfg(pDbCfg), m_pMySQLConnPool(pPool)
 {
     m_pSendingToMySQLRing = make_shared<GORM_RingBuffer<GORM_MySQLRequest>>(1024);
     this->m_strDBName = pDbCfg->szDB;
@@ -65,13 +65,28 @@ int GORM_MySQLEvent::MySQLSyncQuery(char *szSQL, int iLen)
 
 int GORM_MySQLEvent::Write()
 {
+    return this->Loop();
+}
+
+int GORM_MySQLEvent::Read()
+{
+    return this->Loop();
+}
+
+int GORM_MySQLEvent::SendMsg2MySQL()
+{
     GORM_DBRequest *pRequest = nullptr;
     // 1、获取需要发送的SQL请求
     // 判断是否有需要发送的旧的消息
     if (this->m_pSendingRequest == nullptr)
     {
         this->m_pSendingRequest = this->m_pSendingToMySQLRing->PopFront();
-        this->m_pSendingRequest->m_pMySqlEvent = this;
+        if (this->m_pSendingRequest == nullptr)
+        {
+            this->FinishReading();
+            return GORM_OK;
+        }
+        this->m_pSendingRequest->pDbEvent = this;
         this->m_pReadingRequest = this->m_pSendingRequest;
         int iRet = this->m_pSendingRequest->PackSQL();
         if (iRet != GORM_OK)
@@ -118,7 +133,7 @@ int GORM_MySQLEvent::Write()
     return GORM_OK;
 }
 
-int GORM_MySQLEvent::Read()
+int GORM_MySQLEvent::ReadFromMySQL()
 {
     if (this->m_iOptStep == MYSQL_OPT_CONNECTING)
     {
@@ -443,7 +458,7 @@ int GORM_MySQLEvent::MySQLTableInfoUpdate(MYSQL_ROW row, unsigned long *lengths)
 int GORM_MySQLEvent::ConnectSuccessCB()
 {
     this->m_iOptStep = MYSQL_OPT_WAITING_REQ; // 需要处理数据
-    GORM_GET_MYSQL_FD(this->m_pMySQL, this->m_iMySQLFD);
+    GORM_GET_MYSQL_FD(this->m_pMySQL, this->m_iFD);
 #ifdef GORM_DEBUG // 从数据库中获取表的信息
     if (GORM_OK != this->GetMySQLTableInfo())
     {
@@ -460,24 +475,20 @@ int GORM_MySQLEvent::Loop()
     {
     case MYSQL_OPT_WAITING_REQ:
     {
-        if (this->m_pSendingToMySQLRing->GetNum() == 0)
-        {
-            return GORM_OK;
-        }
         // 有新的请求则将请求发送给mysql
-        this->Write();
+        this->SendMsg2MySQL();
         return GORM_OK;
     }
     case MYSQL_SENDING_REQ:
     {
-        this->Write();
+        this->SendMsg2MySQL();
         return GORM_OK;
     }
     case MYSQL_STORE_RESULT:
     case MYSQL_FETCH_ROW:
     case MYSQL_OPT_CONNECTING:
     {
-        this->Read();
+        this->ReadFromMySQL();
         return GORM_OK; 
     }
     // 发送结果给客户端
@@ -490,18 +501,6 @@ int GORM_MySQLEvent::Loop()
         ASSERT(false);
     }
 
-    return GORM_OK;
-}
-
-int GORM_MySQLEvent::SendRequest2DB(GORM_MySQLRequest *pRequest)
-{
-    if (!this->m_pSendingToMySQLRing->AddData(pRequest))
-    {
-        if (this->m_pSendingToMySQLRing->Full())
-            return GORM_RING_FULL;
-        GORM_LOGE("add request to sending list failed.");
-        return GORM_ERROR;
-    }
     return GORM_OK;
 }
 
@@ -591,6 +590,11 @@ void GORM_MySQLEvent::FinishReading()
     }
     this->m_iReadedRows = 0;
     this->m_iReadingRows = 0;
+    // 如果没有消息则移出事件触发器
+    if (m_pSendingToMySQLRing->GetNum() == 0)
+    {
+        this->DelRW();
+    }
 }
 
 void GORM_MySQLEvent::FinishWriting()
@@ -630,7 +634,7 @@ GORM_MySQLConnPool::~GORM_MySQLConnPool()
     }
 }
 
-bool GORM_MySQLConnPool::Init(GORM_DBInfo *pDbCfg, const mutex *m)
+bool GORM_MySQLConnPool::Init(shared_ptr<GORM_Epoll> &pEpoll, GORM_DBInfo *pDbCfg, const mutex *m)
 {
     if (!this->GeneralUrl(pDbCfg))
     {
@@ -643,7 +647,7 @@ bool GORM_MySQLConnPool::Init(GORM_DBInfo *pDbCfg, const mutex *m)
     for (int i=0; i<this->m_iMaxPoolSize; i++)
     {
         pEvent = nullptr;
-        if (!this->ConnectoMySQL(pEvent, pDbCfg, m))
+        if (!this->ConnectToMySQL(pEpoll, pEvent, pDbCfg, m))
         {
             return false;
         }
@@ -692,17 +696,12 @@ bool GORM_MySQLConnPool::GeneralUrl(GORM_DBInfo *pDbCfg)
     return true;
 }
 
-int GORM_MySQLConnPool::SendRequest2DB(GORM_DBRequest *pRequest)
-{
-    return this->m_pEvent->SendRequest2DB(dynamic_cast<GORM_MySQLRequest*>(pRequest));
-}
-
 void GORM_MySQLConnPool::Loop()
 {
     this->m_pEvent->Loop();
 }
 
-bool GORM_MySQLConnPool::ConnectoMySQL(GORM_MySQLEvent *&pEvent, GORM_DBInfo *pDbCfg, const mutex *m)
+bool GORM_MySQLConnPool::ConnectToMySQL(shared_ptr<GORM_Epoll> &pEpoll, GORM_MySQLEvent *&pEvent, GORM_DBInfo *pDbCfg, const mutex *m)
 {
     MYSQL *pMySQL = nullptr;
     try
@@ -713,8 +712,10 @@ bool GORM_MySQLConnPool::ConnectoMySQL(GORM_MySQLEvent *&pEvent, GORM_DBInfo *pD
             return false;
         }
 
-        pEvent = new GORM_MySQLEvent(pMySQL, pDbCfg, this);
-        if (iConnectStatus != NET_ASYNC_NOT_READY)
+        int iFD = 0;
+        GORM_GET_MYSQL_FD(pMySQL, iFD);
+        pEvent = new GORM_MySQLEvent(pEpoll, pMySQL, iFD, pDbCfg, this);
+        if (iConnectStatus == NET_ASYNC_COMPLETE)
         {
             // 连接mysql成功
             GORM_LOGI("connect to mysql success:%s", this->m_szUrl);

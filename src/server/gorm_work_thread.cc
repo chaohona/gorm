@@ -9,7 +9,7 @@
 
 using namespace gorm;
 GORM_WorkThread::GORM_WorkThread(shared_ptr<GORM_ThreadPool> pPool, string &strThreadName, uint64 ulThreadID, int iInnerIdx) : GORM_Thread(pPool, strThreadName),
-    m_lClientNum(0), m_ulThreadID(ulThreadID), m_bWaitReq(false), m_iInnerIdx(iInnerIdx)
+    m_lClientNum(0), m_ulThreadID(ulThreadID), m_iInnerIdx(iInnerIdx)
 {
     m_pResponseList = new GORM_SSQueue<GORM_DBRequest*, GORM_WORK_REQUEST_QUEUE_LEN>();
 }
@@ -54,21 +54,10 @@ void GORM_WorkThread::Work(mutex *m)
             // 从DB接收消息，回复客户端
             // 接收客户端消息
             // 接收收到的客户端
-            if (this->m_dbMgr.RequestNum() == 0) // 休眠
-            {
-                std::unique_lock<std::mutex> locker(this->m_mutexRequestCondition);
-                if (this->m_dbMgr.RequestNum() == 0)
-                {
-                    m_bWaitReq = true;
-                    GORM_LOGD("work thread wait for request");
-                    this->m_conditionRequest.wait(this->m_mutexRequestCondition);
-                    m_bWaitReq = false;
-                }
-                GORM_LOGD("work thread got request, begin to process");
-            }
-            this->RequestPreProc();
-            //if (this->m_dbMgr.RequestNum() > 0)
             this->m_dbMgr.Loop();
+
+            this->m_pEpoll->EventLoopProcess(5);
+            this->m_pEpoll->ProcAllEvents();
         }
     }
     catch(exception &e)
@@ -80,7 +69,7 @@ void GORM_WorkThread::Work(mutex *m)
 
 // 预处理请求，如从缓存获取缓存数据
 // 此处的请求是不需要顺序的,先获取到缓存的则直接返回
-int GORM_WorkThread::RequestPreProc()
+int GORM_WorkThread::SignalCB()
 {
     GORM_DBRequest *pReq = nullptr;
     int64 leftNum = 0;
@@ -127,12 +116,6 @@ bool GORM_WorkThread::DBInit(mutex *m)
     return true;
 }
 
-void GORM_WorkThread::NotifyNewRequest()
-{
-    if (m_bWaitReq)
-        this->m_conditionRequest.notify_one();
-}
-
 int GORM_WorkThread::AccepNewRequest(GORM_DBRequest *pRequest)
 {
     this->m_pResponseList->Put(pRequest);
@@ -172,6 +155,20 @@ void GORM_WorkThread::Finish()
 
 int GORM_WorkThread::Init(mutex *m, GORM_Config *pConfig)
 {
+    this->m_pEpoll = make_shared<GORM_Epoll>();
+    if (!this->m_pEpoll->Init(MAX_EVENT_POOLS))
+    {
+        GORM_LOGE("epoll init failed.");
+        return;
+    }
+
+    this->m_pSignalEvent = make_shared<GORM_SignalWorkEvent>(this->m_pEpoll, this);
+    if (GORM_OK != this->m_pSignalEvent->Init())
+    {
+        GORM_LOGE("init transfer event failed.");
+        return GORM_ERROR;
+    }
+    
     // 建立和数据库的连接
     if (!this->DBInit(m))
     {

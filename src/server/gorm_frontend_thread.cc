@@ -177,7 +177,7 @@ void GORM_FrontEndThread::ResponseSignal()
     this->m_pSignalEvent->Single();
 }
 
-void GORM_FrontEndThread::ResponseProc()
+void GORM_FrontEndThread::SignalCB()
 {
     GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *pQueue = nullptr;
     for(int i=0; i<this->m_iWorkThreadNum; i++)
@@ -284,7 +284,7 @@ void GORM_FrontEndThread::Work(mutex *m)
 
 int GORM_FrontEndThread::InitTransferEvent()
 {
-    this->m_pSignalEvent = make_shared<GORM_SignalEvent>(this->m_pEpoll, this);
+    this->m_pSignalEvent = make_shared<GORM_SignalFrontEvent>(this->m_pEpoll, this);
     if (GORM_OK != this->m_pSignalEvent->Init())
     {
         GORM_LOGE("init transfer event failed.");

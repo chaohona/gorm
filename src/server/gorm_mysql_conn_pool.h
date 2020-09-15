@@ -25,24 +25,43 @@ enum MySQLOptStep
 };
 class GORM_MySQLConnPool;
 // 和mysql的操作不会同时有读和写
-class GORM_MySQLEvent
+class GORM_MySQLEvent : public GORM_Event
 {
 public:
-    GORM_MySQLEvent(MYSQL *pMySQL, GORM_DBInfo *pDbCfg, GORM_MySQLConnPool *pPool);
+    GORM_MySQLEvent(shared_ptr<GORM_Epoll> &pEpoll, MYSQL *pMySQL, int iFD, GORM_DBInfo *pDbCfg,  GORM_MySQLConnPool *pPool);
     ~GORM_MySQLEvent();
 
-    int Write();
-    int Read();
-    int Loop();
+    virtual int Write();
+    virtual int Read();
     int ConnectSuccessCB();
     // 将新的请求放到发送队列中等待发送给MYSQL
-    int SendRequest2DB(GORM_MySQLRequest *pRequest);
+    int SendRequest2DB(GORM_MySQLRequest *pRequest)
+    {
+        if (!this->m_pSendingToMySQLRing->AddData(pRequest))
+        {
+            if (this->m_pSendingToMySQLRing->Full())
+                return GORM_RING_FULL;
+            GORM_LOGE("add request to sending list failed.");
+            return GORM_ERROR;
+        }
+
+        return this->AddToEpoll();
+    }
+    inline int AddToEpoll()
+    {
+        if (this->m_iMask != GORM_EVENT_NONE)
+            return GORM_OK;
+        return this->ReadyRW();
+    }
 
     int MySQLSyncQuery(char *szSQL, int iLen);
     int MySQLSyncStoreResult();
     int MySQLSyncFetchRow(MYSQL_ROW &row);
     int MySQLTableInfoUpdate(MYSQL_ROW row, unsigned long *lengths);
 private:
+    int Loop();
+    int SendMsg2MySQL();
+    int ReadFromMySQL();
     void TryNextRequest();
     GORM_Ret StoreResult();
     GORM_Ret FetchRows();
@@ -84,14 +103,20 @@ public:
     virtual ~GORM_MySQLConnPool();
 
     // mysql初始化函数不是线程安全的,mutex必须为全局锁
-    virtual bool Init(GORM_DBInfo *pDbCfg, const mutex *m);
+    virtual bool Init(shared_ptr<GORM_Epoll> &pEpoll, GORM_DBInfo *pDbCfg, const mutex *m);
     virtual bool GeneralUrl(GORM_DBInfo *pDbCfg);
     virtual void Loop();
-    virtual int SendRequest2DB(GORM_DBRequest *pRequest);
+    virtual int SendRequest2DB(GORM_DBRequest *pRequest)
+    {
+        GORM_MySQLEvent *pEvent = this->m_EventList[pRequest->uiHashValue%this->m_iMaxPoolSize];
+        pRequest->pDbEvent = pEvent;
+        return pEvent->SendRequest2DB(dynamic_cast<GORM_MySQLRequest*>(pRequest));
+        //return this->m_pEvent->SendRequest2DB(dynamic_cast<GORM_MySQLRequest*>(pRequest));
+    }
 
 private:
     bool GetMYSQL(GORM_DBInfo *pDbCfg, const    mutex *m, MYSQL *&pMySQL, net_async_status &iConnectStatus);
-    bool ConnectoMySQL(GORM_MySQLEvent *&pEvent, GORM_DBInfo *pDbCfg, const mutex *m);
+    bool ConnectToMySQL(shared_ptr<GORM_Epoll> &pEpoll, GORM_MySQLEvent *&pEvent, GORM_DBInfo *pDbCfg, const mutex *m);
 public:
     GORM_MySQLEvent *m_pEvent = nullptr; // TODO 改成连接池
     GORM_MySQLEvent *m_EventList[GOMR_MAX_CONNECT_NUM_PER_THREAD];

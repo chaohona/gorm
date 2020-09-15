@@ -23,7 +23,7 @@ int GORM_MySQLRequest::GetOneRow(MYSQL_ROW row, unsigned long *lengths)
         return GORM_ERROR;
     }
     pNowRspProcTable->set_tableid(iReqTableId);
-    int iRet = GORM_MySQLResult2PbMSG(this->m_pMySqlEvent, iReqTableId, pNowRspProcTable, row, lengths);
+    int iRet = GORM_MySQLResult2PbMSG(dynamic_cast<GORM_MySQLEvent*>(this->pDbEvent), iReqTableId, pNowRspProcTable, row, lengths);
     pNowRspProcTable = nullptr;
     if (iRet != GORM_OK)
     {
@@ -616,7 +616,7 @@ void GORM_MySQLRequest::Release()
         return;
     GORM_DBRequest::Release();
 
-    this->m_pMySqlEvent = nullptr;
+    this->pDbEvent = nullptr;
 
     // TODO 回收再利用
     delete this;

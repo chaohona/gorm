@@ -39,17 +39,17 @@ struct GORM_RouteDB
 {
 public:
     char    szDBSymbol[GORM_DB_IDENTY_MAX_LEN];   // 对应GORM_DBInfo.szName
-    uint32  iSplitNum;
+    uint32  iSplitNum;  // 表在此库中的份数
 };
 
 struct GORM_RouteTable
 {
 public:
-    char            szTable[GORM_DB_TABLE_MAX_LEN]; // table
-    uint32          iDBNum;
+    char            szTable[GORM_DB_TABLE_MAX_LEN]; // table名字
+    uint32          iDBNum;                     // 表被分在几个数据库中
     GORM_RouteDB    vRouteDB[GORM_DB_MAX_DB_LIST];
-    int             iTableId = 0;
-    int             iSplitMode = 0;
+    int             iTableId = 0;               // 表的标识符
+    int             iSplitMode = 0;             // 表被分成多少份
 };
 
 struct GORM_Routes

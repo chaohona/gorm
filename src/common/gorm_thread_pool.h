@@ -15,6 +15,7 @@ public:
     virtual ~GORM_Thread();
 
     virtual void Work(mutex *m) = 0;
+    virtual void SignalCB() = 0;
     //static void Start(shared_ptr<GORM_Thread> &pThread);
 public:
     virtual void Join();

@@ -17,6 +17,7 @@
 
 class GORM_WorkThreadPool;
 class GORM_DBConnMgr;
+class GORM_SignalWorkEvent;
 class GORM_WorkThread : public GORM_Thread
 {
 public:
@@ -24,15 +25,18 @@ public:
     virtual ~GORM_WorkThread();
 
     virtual void Work(mutex *m);
-    void NotifyNewRequest();
+    inline void NotifyNewRequest()
+    {
+        this->m_pSignalEvent->Single();
+    }
     void Finish();
     int AccepNewRequest(GORM_DBRequest *pRequest);
+    virtual void SignalCB();
 private:
     bool DBInit(mutex *m);
     int CacheInit(GORM_Config *pConfig);
     void EventCheck();
     void Exist();
-    int RequestPreProc();
     int Init(mutex *m, GORM_Config *pConfig);
     
 public:
@@ -46,12 +50,12 @@ public:
     uint64                  m_ulThreadID;       // 本线程id
     ///////////////////////////////////////////////////////////////////////////
 
-    mutex                   m_mutexRequestCondition;
-    condition_variable_any  m_conditionRequest;
-    atomic_bool             m_bWaitReq;         // 是否获取到新的客户端连接
-
     GORM_SSQueue<GORM_DBRequest*, GORM_WORK_REQUEST_QUEUE_LEN> *m_pResponseList;
     int m_iInnerIdx = -1;
+
+    //
+    shared_ptr<GORM_Epoll>              m_pEpoll = nullptr;
+    shared_ptr<GORM_SignalWorkEvent>    m_pSignalEvent = nullptr;
 };
 
 class GORM_WorkThreadPool : public GORM_ThreadPool,

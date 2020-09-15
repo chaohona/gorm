@@ -209,9 +209,6 @@ int GORM_ProtobuffTeset()
         pHeader->set_verpolice(88888);
         pHeader->set_reqflag(444);
         GORM_PB_SPLIT_INFO *pTableInfo = pHeader->mutable_splittableinfo();
-        GORM_PB_SPLIT_INFO_GORM_COLUMN_VALUE *pColumn = pTableInfo->mutable_splitinfo();
-        pColumn->set_column(1);
-        pColumn->set_value("123456");
         GORM_PB_TABLE *pTable = pReq->mutable_table();
         GORM_PB_Table_currency *pCurrency = pTable->mutable_currency();
         pCurrency->set_version(13333);

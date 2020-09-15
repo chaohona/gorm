@@ -23,8 +23,8 @@ private:
 
 public:
     bool               m_bDaemonize = true;                     // 是否以后台进程运行
-    int                m_iWorkThreadNum = 1;
-    int                m_iConnectNum = 5;                       // 每个线程和每个库建立的连接数
+    int                m_iWorkThreadNum = 1;                // 启动的工作线程的总数
+    int                m_iConnectNumPerPool = 5;                       // 每个线程和每个库建立的连接数
     string             m_strListenAddr;                         // 监听地址
     GORM_LOG_LEVEL     m_iLogLevel = GORM_LOG_LEVEL_DEBUG;
 

@@ -64,9 +64,6 @@ public:
     int PackGetToInsertResult();
 
     void Release();
-
-public:
-    GORM_MySQLEvent             *m_pMySqlEvent = nullptr;
 };
 
 #endif

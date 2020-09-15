@@ -3,8 +3,8 @@
 #include "gorm_log.h"
 #include <unistd.h>
 
-GORM_SignalEvent::GORM_SignalEvent(shared_ptr<GORM_Epoll>       pEpoll, GORM_FrontEndThread *pThread):
-    GORM_Event(0, pEpoll), m_pFrontThread(pThread)
+GORM_SignalEvent::GORM_SignalEvent(shared_ptr<GORM_Epoll> pEpoll, GORM_Thread *pThread):
+    GORM_Event(0, pEpoll), m_pThread(pThread)
 {
     m_iDataFlag = 0;
 }
@@ -51,7 +51,7 @@ int GORM_SignalEvent::Read()
     }while(iNum == SIGNAL_READ_BUFF_LEN);
 
     this->m_iDataFlag = 0;
-    this->m_pFrontThread->ResponseProc();
+    this->m_pThread->SignalCB();
     
     return GORM_OK;
 }
@@ -86,4 +86,6 @@ void GORM_SignalEvent::Single(bool bForce)
     while (iSendNum < 1);
     
 }
+
+
 
