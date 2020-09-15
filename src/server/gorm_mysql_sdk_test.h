@@ -14,9 +14,11 @@
 #include "gorm_table_field_map.h"
 #include "gorm_mysql_conn_pool.h"
 #include "gorm_type.h"
+#include "gorm-db.pb.h"
+#include "gorm_pb_proto.pb.h"
 
 using namespace std;
-
+using namespace gorm;
 
 MYSQL *Connect2MySQL(GORM_DBInfo *pDbCfg)
 {
@@ -145,7 +147,6 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
     dbInfo.szDB[strlen(dbDatabase)] = '\0';
     dbInfo.uiPort = dbPort;
 
-    int iFinishNum = 0;
     m->lock();
     GORM_MySQLAsyncEventTest *mysqlEventList[MYSQL_CONN_NUM];
     MYSQL *pMySQL = nullptr;
@@ -184,6 +185,7 @@ int GORM_MySQLSDKTest()
     for (int i=0; i<2; i++)
     {
         thread d(GORM_MySQLSDKTestThread, &finishNum, &m);
+        d.detach();
     }
 
     for (int i=0; i<1000*60*60; i++)
@@ -193,6 +195,20 @@ int GORM_MySQLSDKTest()
     }
     
     return 0;
+}
+
+int GORM_ProtobuffTeset()
+{
+    for(int i=0; i<1000000; i++)
+    {
+        GORM_PB_GET_REQ *pReq = new GORM_PB_GET_REQ();
+        GORM_PB_REQ_HEADER *pHeader = pReq->mutable_header();
+        GORM_PB_SPLIT_INFO *pTableInfo = pHeader->mutable_splittableinfo();
+        GORM_PB_TABLE *pTable = pReq->mutable_table();
+        GORM_PB_Table_currency *pCurrency = pTable->mutable_currency();
+        if (i%1000 == 0)
+            cout << i << "    , now:" << GORM_GetNowMS() << endl;
+    }
 }
 
 #endif
