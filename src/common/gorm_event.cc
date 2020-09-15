@@ -156,6 +156,32 @@ void GORM_Event::SetRemoveAddr()
 #endif
 }
 
+int GORM_Event::ReadyWrite()
+{
+    return this->m_pEpoll->AddEventWrite(this);
+}
+int GORM_Event::DelWrite()
+{
+    return this->m_pEpoll->DelEventWrite(this);    
+}
+int GORM_Event::ReadyRead()
+{
+    return this->m_pEpoll->AddEventRead(this);
+}
+int GORM_Event::DelRead()
+{
+    return this->m_pEpoll->DelEventRead(this);
+}
+int GORM_Event::ReadyRW()
+{
+    return this->m_pEpoll->AddEventRW(this);
+}
+int GORM_Event::DelRW()
+{
+    return this->m_pEpoll->DelEventRW(this);
+}
+
+
 GORM_Epoll::GORM_Epoll()
 {
     this->m_iEpFd = 0;

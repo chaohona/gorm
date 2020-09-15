@@ -49,34 +49,16 @@ public:
     virtual int Read();
     virtual int Error();
     virtual int Close();
-    inline int ReadyWrite()
-    {
-        return this->m_pEpoll->AddEventWrite(this);
-    }
-    inline int DelWrite()
-    {
-        return this->m_pEpoll->DelEventWrite(this);    
-    }
-    inline int ReadyRead()
-    {
-        return this->m_pEpoll->AddEventRead(this);
-    }
-    inline int DelRead()
-    {
-        return this->m_pEpoll->DelEventRead(this);
-    }
-    inline int ReadyRW()
-    {
-        return this->m_pEpoll->AddEventRW(this);
-    }
-    inline int DelRW()
-    {
-        return this->m_pEpoll->DelEventRW(this);
-    }
+    int ReadyWrite();
+    int DelWrite();
+    int ReadyRead();
+    int DelRead();
+    int ReadyRW();
+    int DelRW();
 #ifndef _WIN32
     int DoSendv(iovec *iov, int iovcnt);
 #endif
-    inline int ConnectCheck()
+    inline int ConnectCheck();
     bool ConnectOK();
     bool IsClosed();
     void SetRemoveAddr();
