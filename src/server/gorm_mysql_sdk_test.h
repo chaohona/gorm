@@ -180,7 +180,7 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
 
 int GORM_MySQLSDKTest()
 {
-    atomic<int> finishNum = 0;
+    atomic<int> finishNum(0);
     mutex m;
     for (int i=0; i<2; i++)
     {
@@ -203,9 +203,30 @@ int GORM_ProtobuffTeset()
     {
         GORM_PB_GET_REQ *pReq = new GORM_PB_GET_REQ();
         GORM_PB_REQ_HEADER *pHeader = pReq->mutable_header();
+        pHeader->set_tableid(1204);
+        pHeader->set_fieldmode("12345657890");
+        pHeader->set_businessid(2048);
+        pHeader->set_verpolice(88888);
+        pHeader->set_reqflag(444);
         GORM_PB_SPLIT_INFO *pTableInfo = pHeader->mutable_splittableinfo();
+        GORM_PB_SPLIT_INFO_GORM_COLUMN_VALUE *pColumn = pTableInfo->mutable_splitinfo();
+        pColumn->set_column(1);
+        pColumn->set_value("123456");
         GORM_PB_TABLE *pTable = pReq->mutable_table();
         GORM_PB_Table_currency *pCurrency = pTable->mutable_currency();
+        pCurrency->set_version(13333);
+        pCurrency->set_roleid(22222);
+        pCurrency->set_snakeid(111111);
+        pCurrency->set_currency1("12333333");
+        pCurrency->set_currency2("12333333");
+        pCurrency->set_currency3("12333333");
+        pCurrency->set_currency4("12333333");
+        char protoBuff[128*1024];
+        int iLen = pReq->ByteSizeLong();
+        pReq->SerializeToArray(protoBuff, iLen);
+
+        GORM_PB_GET_REQ *pUnSerialReq = new GORM_PB_GET_REQ();
+        pUnSerialReq->ParseFromArray(protoBuff, iLen);
         if (i%1000 == 0)
             cout << i << "    , now:" << GORM_GetNowMS() << endl;
     }
