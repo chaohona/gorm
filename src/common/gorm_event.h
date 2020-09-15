@@ -4,6 +4,7 @@
 #include "gorm_socket.h"
 #include "gorm_inc.h"
 #include "gorm_sys_inc.h"
+#include "gorm_log.h"
 
 #ifndef _WIN32
 #include <sys/epoll.h>

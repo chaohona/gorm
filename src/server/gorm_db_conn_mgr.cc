@@ -160,7 +160,7 @@ GORM_Ret GORM_DBConnMgr::CreatePool(GORM_DBInfo *pDbInfo, int iIndex, mutex *m)
             GORM_ERROR;
         }
         pPool->pDbInfo = pDbInfo;
-        if (!pPool->Init(pDbInfo, m))
+        if (!pPool->Init(m_pWorkThread->m_pEpoll, pDbInfo, m))
         {
             GORM_LOGE("init db connection failed:%s", pDbInfo->szDBSymbol);
             return GORM_ERROR;

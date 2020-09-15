@@ -69,7 +69,7 @@ void GORM_WorkThread::Work(mutex *m)
 
 // 预处理请求，如从缓存获取缓存数据
 // 此处的请求是不需要顺序的,先获取到缓存的则直接返回
-int GORM_WorkThread::SignalCB()
+void GORM_WorkThread::SignalCB()
 {
     GORM_DBRequest *pReq = nullptr;
     int64 leftNum = 0;

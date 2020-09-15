@@ -57,7 +57,7 @@ public:
     // 响应统一交给前端线程之后，由前端线程自己处理，避免多线程锁问题
     GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *m_pResponseList;
     int m_iWorkThreadNum = 0;
-    shared_ptr<GORM_SignalFrontEvent>  m_pSignalEvent;
+    shared_ptr<GORM_SignalEvent>  m_pSignalEvent;
 };
 
 class GORM_FrontEndThreadPool : public GORM_ThreadPool, 

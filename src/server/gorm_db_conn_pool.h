@@ -20,7 +20,7 @@ public:
     virtual ~GORM_DBConnPool();
 
     // 传入数据库，连接地址列表
-    virtual bool Init(GORM_DBInfo *pDbCfg, const mutex *m) = 0;
+    virtual bool Init(shared_ptr<GORM_Epoll> &pEpoll, GORM_DBInfo *pDbCfg, const mutex *m) = 0;
     virtual bool GeneralUrl(GORM_DBInfo *pDbCfg) = 0;
     virtual void Loop() = 0;
     virtual int SendRequest2DB(GORM_DBRequest *pRequest) = 0;

@@ -12,6 +12,7 @@
 #include "gorm_pb_proto.pb.h"
 #include "gorm_redis.h"
 #include "gorm_config.h"
+#include "gorm_signal_event.h"
 
 #define GORM_MAX_WORK_THREADS 1024
 
@@ -55,7 +56,7 @@ public:
 
     //
     shared_ptr<GORM_Epoll>              m_pEpoll = nullptr;
-    shared_ptr<GORM_SignalWorkEvent>    m_pSignalEvent = nullptr;
+    shared_ptr<GORM_SignalEvent>    m_pSignalEvent = nullptr;
 };
 
 class GORM_WorkThreadPool : public GORM_ThreadPool,
