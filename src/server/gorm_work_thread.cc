@@ -85,6 +85,7 @@ void GORM_WorkThread::SignalCB()
         if (pReq == nullptr)
             break;
         // 跨线程，防止没有读取到值
+        unique_lock<mutex> locker(pReq->m_Mutex);
         pReq->pWorkThread = this;
         pReq->ResetMemPool(this->m_pMemPool);
         iRet = pReq->SetNowReqProcTable();

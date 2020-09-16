@@ -92,7 +92,7 @@ int GORM_MySQLEvent::SendMsg2MySQL()
         int iRet = this->m_pSendingRequest->PackSQL();
         if (iRet != GORM_OK)
         {
-            GORM_LOGE("pack sql failed, return error to client, table:%d, seqid:%d", this->m_pReadingRequest->iReqTableId, this->m_pReadingRequest->uiReqID);
+            GORM_LOGE("pack sql failed, return error to client, table:%d, seqid:%d", uint32(this->m_pReadingRequest->iReqTableId), this->m_pReadingRequest->uiReqID);
             this->WriteError(iRet);
             this->FinishWriting();
             return GORM_OK;

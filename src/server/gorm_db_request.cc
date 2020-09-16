@@ -55,6 +55,7 @@ if ((uiReqFlag&GORM_REQ_FLAG_EMPTY_INCREASE) > 0)                   \
 
 int GORM_DBRequest::SendToWorkThread()
 {
+    unique_lock<mutex> locker(m_Mutex);
     if (this->iGotRspNum >= this->iReqNum)
     {
         return GORM_OK;
@@ -684,6 +685,7 @@ void GORM_DBRequest::GetAllResult(int iErrCode, int iDBErrNo, char *szErrInfo)
     }
 
     // 将响应交给前端处理线程
+    unique_lock<mutex> locker(m_Mutex);
     this->pFrontThread->GotResult(this);
 }
 

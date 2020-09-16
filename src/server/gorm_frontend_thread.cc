@@ -191,6 +191,7 @@ void GORM_FrontEndThread::SignalCB()
         {
             if (!pQueue->Take(pReq, leftNum))
                 break;
+            unique_lock<mutex> locker(pReq->m_Mutex);
             pReq->ResetMemPool(this->m_pMemPool);
             // TODO 回收request
             if (pReq->pFrontendEvent == nullptr)
@@ -209,6 +210,8 @@ void GORM_FrontEndThread::SignalCB()
                         pReq->pFrontendEvent->ReadyWrite();
                         continue;
                     }
+                    // 此处有req锁
+                    pReq->m_Mutex->unlock();
                     pEvent->SendMsgToWorkThread(pReq);
                 }
             }

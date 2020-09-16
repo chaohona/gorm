@@ -365,6 +365,7 @@ int GORM_MySQLRequest::PackGetResult()
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
+            GORM_Assert(false);
             return GORM_ERROR;
         }
         if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
@@ -376,6 +377,12 @@ int GORM_MySQLRequest::PackGetResult()
     else
     {
         pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+        if (pRspData == nullptr)
+        {
+            this->iErrCode = GORM_PACK_RSP_ERROR;
+            GORM_Assert(false);
+            return GORM_ERROR;
+        }
     }
 
     pRspData->m_sUsedSize = iLen;

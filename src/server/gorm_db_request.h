@@ -81,7 +81,7 @@ public:
     uint32              uiReqFlag = 0;
     GORM_MemPoolData    *pReqSQLData = nullptr;    // 组装的请求SQL语句
     shared_ptr<GORM_MemPool> pMemPool;
-    int                 iReqTableId = GORM_PB_TABLE_IDX_MIN__;          // 请求的表编号
+    uint32              iReqTableId = 0;          // 请求的表编号
     uint32              uiReqID = 0;
     int                 iErrCode = 0;
     char                cReplyFlag = GORM_ResultFlag_RETURN_CODE;   // 如果需要获取到最终的结果，会在结果返回之后再执行一遍get请求操作
@@ -105,7 +105,7 @@ public:
 
     gorm::GORM_PB_TABLE         *pNowRspProcTable = nullptr;            // 当前响应需要填充的table
 
-    atomic<uint32>  uiHashValue;
+    uint32  uiHashValue;
     int     iTableIndex = -1;   // 表下标
     int     staticRequest = 0;      // 此标记为1，则不会被回收
 
