@@ -631,6 +631,11 @@ void GORM_MySQLRequest::Release()
 
 int GORM_MySQLRequest::PackSQL()
 {
+    if (pReqPbMsg == nullptr)
+    {
+        GORM_LOGE("PackSQL req message, cmd:%d, reqid:%d", int(this->iReqCmd), int(this->uiReqID));
+        return GORM_REQ_NO_RECORDS;
+    }
     int iReqCmd = this->iReqCmd;
     if (this->iRedirectCmd != GORM_CMD_INVALID)
     {
@@ -860,6 +865,11 @@ int GORM_MySQLRequest::GetReq()
 {
     const gorm::GORM_PB_GET_REQ *pReqMsg = dynamic_cast<GORM_PB_GET_REQ*>(pReqPbMsg);
     ASSERT(pReqMsg!=nullptr);
+    if (pReqPbMsg == nullptr)
+    {
+        GORM_LOGE("get request has no request table.");
+        return GORM_REQ_NO_RECORDS;
+    }
     if (!pReqMsg->has_table())
     {
         GORM_LOGE("get request has no request table.");
