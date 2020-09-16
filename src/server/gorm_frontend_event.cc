@@ -121,44 +121,7 @@ int GORM_FrontEndEvent::Write()
             this->m_pSendingRequest = nullptr;
 
             // 获取请求判断是否已经接收完响应了，接收完响应才会发送
-            GORM_DBRequest *pRequest = this->m_pRequestRing->GetFront();
-            if (pRequest == nullptr)
-            {
-                this->DelWrite();
-                return GORM_OK;
-            }
-            if (pRequest->iWaitDone != 1)
-            {
-                this->DelWrite();
-                if (pRequest->iSentToWorkThread == 0)
-                    this->SendMsgToWorkThread(pRequest);
-                return GORM_OK;
-            }
-            this->m_pSendingRequest = this->m_pRequestRing->PopFront();   
-            if (this->m_pSendingRequest == nullptr)
-            {
-                this->DelWrite();
-                return GORM_OK;
-            }
-            if (this->m_pSendingRequest->iReqCmd == GORM_CMD_BATCH_GET)                     
-                this->m_pSendingRequest->PackBatchGetResult();                              
-            else if( this->m_pSendingRequest->iReqCmd == GORM_CMD_GET_BY_PARTKEY)           
-                this->m_pSendingRequest->PackGetByPartkeyResult();                          
-            auto sendingRequest = this->m_pSendingRequest;                                  
-            if (sendingRequest != nullptr)                                                  
-            {                                                                               
-                if (sendingRequest->pRspData != nullptr)                                    
-                {                                                                           
-                    this->m_pCurrentWrite = sendingRequest->pRspData->m_uszData;            
-                    this->m_iNeedWrite = sendingRequest->pRspData->m_sUsedSize;             
-                }                                                                           
-                else                                                                        
-                {                                                                           
-                    GORM_SetRspHeader(m_szErrorReplyHeader, GORM_RSP_MSG_HEADER_LEN, sendingRequest->iReqCmd, sendingRequest->uiReqID, sendingRequest->iErrCode, sendingRequest->cReplyFlag);
-                    this->m_pCurrentWrite = m_szErrorReplyHeader;                           
-                    this->m_iNeedWrite = GORM_RSP_MSG_HEADER_LEN;                           
-                }                                                                           
-            }
+            GORM_FRONT_EVENT_GET_NEXT_SENDING();
         }
         else
         {
@@ -366,13 +329,13 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         return GORM_OK;
     }
 
-    int iPendingNum = this->m_pRequestRing->GetNum();
+    /*int iPendingNum = this->m_pRequestRing->GetNum();
     // 有没有获取到响应的请求
     if ( iPendingNum > 1)
     {
         return GORM_OK;
-    }
-    
+    }*/
+    unique_lock<mutex> locker(pCurrentRequest->m_Mutex);
     return this->SendMsgToWorkThread(pCurrentRequest);
 }
 

@@ -200,6 +200,8 @@ void GORM_FrontEndThread::SignalCB()
             }
             else 
             {
+                pReq->pFrontendEvent->ReadyWrite();
+                
                 if (pReq->iWaitDone == 1)
                     pReq->pFrontendEvent->ReadyWrite();
                 else    // 针对批量请求，再接着发送下一个请求
@@ -211,7 +213,6 @@ void GORM_FrontEndThread::SignalCB()
                         continue;
                     }
                     // 此处有req锁
-                    pReq->m_Mutex->unlock();
                     pEvent->SendMsgToWorkThread(pReq);
                 }
             }
