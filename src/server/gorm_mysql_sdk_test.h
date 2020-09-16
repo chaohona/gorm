@@ -178,7 +178,7 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
 
 
 
-int GORM_MySQLSDKTest()
+int GORM_MySQLSDKTest(int argc, char** argv)
 {
     atomic<int> finishNum(0);
     mutex m;

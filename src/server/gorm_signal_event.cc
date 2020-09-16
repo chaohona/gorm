@@ -11,11 +11,7 @@ GORM_SignalEvent::GORM_SignalEvent(shared_ptr<GORM_Epoll> pEpoll, GORM_Thread *p
 
 GORM_SignalEvent::~GORM_SignalEvent()
 {
-    if (this->m_iReadFD != 0)
-        close(this->m_iReadFD);
 
-    if (this->m_iWriteFD != 0)
-        close(this->m_iWriteFD);
 }
 
 int GORM_SignalEvent::Init()
@@ -31,8 +27,12 @@ int GORM_SignalEvent::Init()
     this->m_iFD = m_iReadFD;
     GORM_Socket::SetNonBlocking(this->m_iReadFD);
     GORM_Socket::SetNonBlocking(this->m_iWriteFD);
+    this->m_Status = GORM_CONNECT_CONNECTED;
 
-    if (0 != this->m_pEpoll->AddEventRead(this));
+    if (0 != this->m_pEpoll->AddEventRead(this))
+    {
+        return GORM_ERROR;
+    }
     return GORM_OK;
 }
 
@@ -65,27 +65,4 @@ int GORM_SignalEvent::Close()
 {
     return GORM_OK;
 }
-
-void GORM_SignalEvent::Single(bool bForce)
-{
-    // 已经有数据了，则不再往里面写数据了
-    if (!bForce)
-    {
-        if (this->m_iDataFlag.load() == 1)
-            return;
-    }
-
-    char cSend = 0;
-    // 往管道中写数据
-    int iSendNum = 0;
-    this->m_iDataFlag = 1;
-    do
-    {
-        iSendNum = write(this->m_iWriteFD, (char*)&cSend, 1);
-    }
-    while (iSendNum < 1);
-    
-}
-
-
 

@@ -8,8 +8,9 @@ using namespace gorm;
 GORM_MySQLEvent::GORM_MySQLEvent(shared_ptr<GORM_Epoll> &pEpoll, MYSQL *pMySQL, int iFD, GORM_DBInfo *pDbCfg,  GORM_MySQLConnPool *pPool) :
     GORM_Event(iFD, pEpoll), m_pMySQL(pMySQL), m_pDbCfg(pDbCfg), m_pMySQLConnPool(pPool)
 {
-    m_pSendingToMySQLRing = make_shared<GORM_RingBuffer<GORM_MySQLRequest>>(1024);
+    m_pSendingToMySQLRing = make_shared<GORM_RingBuffer<GORM_MySQLRequest>>(GORM_REQUEST_BUFF_LEN);
     this->m_strDBName = pDbCfg->szDB;
+    this->m_Status = GORM_CONNECT_CONNECTED;
 }
 
 GORM_MySQLEvent::~GORM_MySQLEvent()

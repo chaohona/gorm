@@ -6,7 +6,7 @@
 #include "gorm_inc.h"
 #include "gorm_event.h"
 
-class GORM_FrontEndThread;
+class GORM_Thread;
 class GORM_SignalEvent : public GORM_Event
 {
 public:
@@ -22,7 +22,26 @@ public:
     virtual int Close();
 
     // 向管道发送一个消息
-    void Single(bool bForce=false);
+    void Single(bool bForce=false)
+    {
+        // 已经有数据了，则不再往里面写数据了
+        if (!bForce)
+        {
+            if (this->m_iDataFlag.load() == 1)
+                return;
+        }
+
+        char cSend = 0;
+        // 往管道中写数据
+        int iSendNum = 0;
+        this->m_iDataFlag = 1;
+        do
+        {
+            iSendNum = write(this->m_iWriteFD, (char*)&cSend, 1);
+        }
+        while (iSendNum < 1);
+        
+    }
 public:
     GORM_Thread *m_pThread = nullptr;
     GORM_FD m_iReadFD = 0;

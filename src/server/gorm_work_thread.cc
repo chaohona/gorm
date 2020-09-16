@@ -54,10 +54,13 @@ void GORM_WorkThread::Work(mutex *m)
             // 从DB接收消息，回复客户端
             // 接收客户端消息
             // 接收收到的客户端
-            this->m_dbMgr.Loop();
-
             this->m_pEpoll->EventLoopProcess(5);
             this->m_pEpoll->ProcAllEvents();
+            // 如果有消息在请求池子中没有处理，则接着处理
+            if (this->m_iRequestPendingNum > 0)
+            {
+                this->SignalCB();
+            }
         }
     }
     catch(exception &e)
@@ -74,6 +77,8 @@ void GORM_WorkThread::SignalCB()
     GORM_DBRequest *pReq = nullptr;
     int64 leftNum = 0;
     int iRet = GORM_OK;
+    int iLoop = 0;
+    m_iRequestPendingNum = 0;
     do{
         if (!this->m_pResponseList->Take(pReq, leftNum))
             break;
@@ -104,9 +109,10 @@ void GORM_WorkThread::SignalCB()
             GORM_LOGE("send request to db opt failed.");
             continue;
         }
-    } while(leftNum > 0);
-    
-    return GORM_OK;
+        ++iLoop;
+    } while(leftNum > 0 && iLoop < 1024); // 每次最多取1024个消息
+    m_iRequestPendingNum = leftNum;
+    return;
 }
 
 bool GORM_WorkThread::DBInit(mutex *m)
@@ -159,10 +165,10 @@ int GORM_WorkThread::Init(mutex *m, GORM_Config *pConfig)
     if (!this->m_pEpoll->Init(MAX_EVENT_POOLS))
     {
         GORM_LOGE("epoll init failed.");
-        return;
+        return GORM_ERROR;
     }
 
-    this->m_pSignalEvent = make_shared<GORM_SignalWorkEvent>(this->m_pEpoll, this);
+    this->m_pSignalEvent = make_shared<GORM_SignalEvent>(this->m_pEpoll, this);
     if (GORM_OK != this->m_pSignalEvent->Init())
     {
         GORM_LOGE("init transfer event failed.");

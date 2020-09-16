@@ -31,6 +31,7 @@ public:
     GORM_MySQLEvent(shared_ptr<GORM_Epoll> &pEpoll, MYSQL *pMySQL, int iFD, GORM_DBInfo *pDbCfg,  GORM_MySQLConnPool *pPool);
     ~GORM_MySQLEvent();
 
+    int Loop();
     virtual int Write();
     virtual int Read();
     int ConnectSuccessCB();
@@ -59,7 +60,6 @@ public:
     int MySQLSyncFetchRow(MYSQL_ROW &row);
     int MySQLTableInfoUpdate(MYSQL_ROW row, unsigned long *lengths);
 private:
-    int Loop();
     int SendMsg2MySQL();
     int ReadFromMySQL();
     void TryNextRequest();

@@ -18,7 +18,7 @@
 
 class GORM_WorkThreadPool;
 class GORM_DBConnMgr;
-class GORM_SignalWorkEvent;
+class GORM_SignalEvent;
 class GORM_WorkThread : public GORM_Thread
 {
 public:
@@ -57,6 +57,7 @@ public:
     //
     shared_ptr<GORM_Epoll>              m_pEpoll = nullptr;
     shared_ptr<GORM_SignalEvent>    m_pSignalEvent = nullptr;
+    int m_iRequestPendingNum = 0;  // 是否有请求的消息没有处理
 };
 
 class GORM_WorkThreadPool : public GORM_ThreadPool,

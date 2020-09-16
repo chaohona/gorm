@@ -36,6 +36,7 @@ namespace gorm{
 
 #define GORM_DB_MAX_DB_LIST     128
 #define GORM_DB_MAX_TABLE_NUM   4096
+#define GORM_REQUEST_BUFF_LEN   1024*16
 
 #define GORM_DB_MGO             "mongo"
 #define GORM_DB_MYSQL           "mysql"

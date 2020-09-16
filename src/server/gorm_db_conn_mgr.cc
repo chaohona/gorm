@@ -4,6 +4,7 @@
 #include "gorm_log.h"
 #include "gorm_mysql_conn_pool.h"
 #include "gorm_table_field_map.h"
+#include "gorm_work_thread.h"
 
 using namespace gorm;
 

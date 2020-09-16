@@ -15,6 +15,7 @@ GORM_FrontEndEvent::GORM_FrontEndEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>      
     m_pStartPtr = this->m_pCurrentReadPtr;
     this->SetRemoveAddr();
     this->ulHeadBeatTime = GORM_GetNowMS();
+    this->m_Status = GORM_CONNECT_CONNECTED;
 }
 
 // TODO 将所有请求的对应的frontevent置为空
