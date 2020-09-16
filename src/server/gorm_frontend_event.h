@@ -37,6 +37,7 @@ private:
     void FillErrReplyBuffer(GORM_DBRequest *pRequest);
     GORM_Ret HeartBeat();
     GORM_Ret HandShake(char *szMsg, int iMsgLen, uint32 iReqID);
+    GORM_Ret GetNextSending(bool &bContinue);
     inline void MoveMsg2Start()
     {
         int iCurrentLen = m_pCurrentReadPtr - this->m_pStartPtr;
