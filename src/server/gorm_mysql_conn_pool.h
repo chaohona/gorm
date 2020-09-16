@@ -62,7 +62,6 @@ public:
 private:
     int SendMsg2MySQL();
     int ReadFromMySQL();
-    void TryNextRequest();
     GORM_Ret StoreResult();
     GORM_Ret FetchRows();
     char *DBError();

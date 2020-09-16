@@ -145,7 +145,7 @@ int GORM_FrontEndEvent::Write()
         bool bContinue;
         int iRet = GetNextSending(bContinue);
         if (iRet != GORM_OK || !bContinue)
-            return iRet
+            return iRet;
     }
 
     for(;;)
@@ -177,7 +177,7 @@ int GORM_FrontEndEvent::Write()
             bool bContinue;
             int iRet = GetNextSending(bContinue);
             if (iRet != GORM_OK || !bContinue)
-                return iRet
+                return iRet;
         }
         else
         {

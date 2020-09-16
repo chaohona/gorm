@@ -85,6 +85,7 @@ int GORM_MySQLEvent::SendMsg2MySQL()
         if (this->m_pSendingRequest == nullptr)
         {
             this->FinishReading();
+            this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
             return GORM_OK;
         }
         this->m_pSendingRequest->pDbEvent = this;
@@ -94,7 +95,16 @@ int GORM_MySQLEvent::SendMsg2MySQL()
         {
             GORM_LOGE("pack sql failed, return error to client, table:%d, seqid:%d", uint32(this->m_pReadingRequest->iReqTableId), this->m_pReadingRequest->uiReqID);
             this->WriteError(iRet);
+            if (this->m_pSendingToMySQLRing->GetNum() == 0)
+            {
+                this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
+            }
+            else
+            {
+                this->m_iOptStep = MYSQL_SENDING_REQ;
+            }
             this->FinishWriting();
+            this->Close();
             return GORM_OK;
         }
         GORM_LOGD("sending message to mysql:%s", GORM_SQL_REQ(this->m_pSendingRequest));
@@ -118,6 +128,10 @@ int GORM_MySQLEvent::SendMsg2MySQL()
         if (this->m_pSendingToMySQLRing->GetNum() == 0)
         {
             this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
+        }
+        else
+        {
+            this->m_iOptStep = MYSQL_SENDING_REQ;
         }
         this->FinishWriting();
         return GORM_ERROR;
@@ -505,14 +519,6 @@ int GORM_MySQLEvent::Loop()
     return GORM_OK;
 }
 
-void GORM_MySQLEvent::TryNextRequest()
-{
-    this->m_iOptStep = MYSQL_OPT_WAITING_REQ;
-    if (this->m_pSendingToMySQLRing->GetNum() > 0)
-    {
-        this->m_iOptStep = MYSQL_SENDING_REQ;
-    }
-}
 
 #define GORM_GOT_RESULT()                                                           \
 int iRet = this->m_pReadingRequest->GetResult(iErrCode, iDBErrNo, szErrInfo);       \
