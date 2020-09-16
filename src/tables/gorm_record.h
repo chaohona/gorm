@@ -164,7 +164,6 @@ public:
 private:
     // 对record编码
     bool PackRecord();
-#ifdef GORM_DEBUG
     int SetCustomValue(const char* szField, const char * pValue, const size_t sSize);
     int SetCustomValue(const char* szField, const char * pValue);
     int SetCustomValue(const char *szField, int8 i8Value);
@@ -176,7 +175,6 @@ private:
     int SetCustomValue(const char *szField, uint16 i16Value);
     int SetCustomValue(const char *szField, uint32 iValue);
     int SetCustomValue(const char *szField, uint64 lValue);
-#endif
 public:
     PB_MSG_PTR      pPbMsg;             // 记录对应的实际pb数据,结构体为GORM_PB_TABLE
     PB_MSG_PTR      pCustomColumns;     // 存储配置中没有的列

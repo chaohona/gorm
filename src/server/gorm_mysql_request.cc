@@ -365,7 +365,6 @@ int GORM_MySQLRequest::PackGetResult()
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
-            GORM_Assert(false);
             return GORM_ERROR;
         }
         if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
@@ -380,7 +379,6 @@ int GORM_MySQLRequest::PackGetResult()
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
-            GORM_Assert(false);
             return GORM_ERROR;
         }
     }
@@ -636,6 +634,11 @@ int GORM_MySQLRequest::PackSQL()
         GORM_LOGE("PackSQL req message, cmd:%d, reqid:%d", int(this->iReqCmd), int(this->uiReqID));
         return GORM_REQ_NO_RECORDS;
     }
+    if (this->pReqSQLData != nullptr)
+    {
+        this->pReqSQLData->Release();
+        this->pReqSQLData = nullptr;
+    }
     int iReqCmd = this->iReqCmd;
     if (this->iRedirectCmd != GORM_CMD_INVALID)
     {
@@ -670,12 +673,6 @@ int GORM_MySQLRequest::PackSQL()
         }
         
         return GORM_OK;
-    }
-
-    if (this->pReqSQLData != nullptr)
-    {
-        this->pReqSQLData->Release();
-        this->pReqSQLData = nullptr;
     }
         
     switch ((iReqCmd))
