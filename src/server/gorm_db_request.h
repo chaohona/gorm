@@ -109,6 +109,11 @@ public:
     int     iTableIndex = -1;   // 表下标
     int     staticRequest = 0;      // 此标记为1，则不会被回收
 
+#ifdef GORM_DEBUG
+    uint64  ulReqTimeMS = 0; // 性能测试使用
+    uint64  ulRspTimeMS = 0;
+#endif
+
     mutex m_Mutex;
 };
 

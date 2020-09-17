@@ -55,6 +55,9 @@ if ((uiReqFlag&GORM_REQ_FLAG_EMPTY_INCREASE) > 0)                   \
 
 int GORM_DBRequest::SendToWorkThread()
 {
+#ifdef GORM_DEBUG
+    this->lReqTimeMS = GORM_GetNowMS();
+#endif
     if (this->iGotRspNum >= this->iReqNum)
     {
         return GORM_OK;
@@ -683,6 +686,10 @@ void GORM_DBRequest::GetAllResult(int iErrCode, int iDBErrNo, char *szErrInfo)
         GORM_LOGE("pack result failed.");
     }
 
+#ifdef GORM_DEBUG
+    this->ulRspTimeMS = GORM_GetNowMS();
+    GORM_LOGD("duration:%llu", this->ulRspTimeMS-this->ulReqTimeMS);
+#endif
     // 将响应交给前端处理线程
     unique_lock<mutex> locker(m_Mutex);
     this->pFrontThread->GotResult(this);
