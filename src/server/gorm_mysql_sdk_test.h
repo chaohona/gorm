@@ -67,7 +67,7 @@ public:
         }
         if (this->m_iStep == 2)
         {
-            int iRet = GORM_PackGetSQLCURRENCY_ONE(this->m_pMemPool, this->m_pMySQL, GORM_PB_TABLE_IDX_CURRENCY, this->m_TableCurrency, this->m_pMemPool);
+            int iRet = GORM_PackGetSQLCURRENCY_ONE(this->m_pMemPool, this->m_pMySQL, GORM_PB_TABLE_IDX_CURRENCY, this->m_TableCurrency, this->m_pReqSQLData);
             if (iRet != GORM_OK)
             {
                 cout << "pack get sql failed" << endl;
