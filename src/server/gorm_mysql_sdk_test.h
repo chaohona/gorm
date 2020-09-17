@@ -16,6 +16,7 @@
 #include "gorm_type.h"
 #include "gorm-db.pb.h"
 #include "gorm_pb_proto.pb.h"
+#include "gorm_mempool.h"
 
 using namespace std;
 using namespace gorm;
@@ -46,12 +47,17 @@ MYSQL *Connect2MySQL(GORM_DBInfo *pDbCfg)
     return pMySQL;
 }
 
+int GORM_PackGetSQLCURRENCY_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, 
+        const GORM_PB_Table_currency &table_currency, GORM_MemPoolData *&pReqData);
 class GORM_MySQLAsyncEventTest: public GORM_Event
 {
 public:
     GORM_MySQLAsyncEventTest(MYSQL *pMySQL, int iFD, shared_ptr<GORM_Epoll> pEpoll):
         GORM_Event(iFD, pEpoll), m_pMySQL(pMySQL)
     {
+        this->m_Status = GORM_CONNECT_CONNECTED;
+        this->m_pMemPool = make_shared<GORM_MemPool>();
+        m_TableCurrency.set_roleid(1034707);
     }
     virtual int Write()
     {
@@ -59,18 +65,27 @@ public:
         {
             return this->Read();
         }
-        m_iStatus = mysql_real_query_nonblocking(this->m_pMySQL, m_sql,
-                                    (unsigned long)strlen(m_sql));
-        if (m_iStatus == NET_ASYNC_NOT_READY)
+        if (this->m_iStep == 2)
+        {
+            int iRet = GORM_PackGetSQLCURRENCY_ONE(this->m_pMemPool, this->m_pMySQL, GORM_PB_TABLE_IDX_CURRENCY, this->m_TableCurrency, this->m_pMemPool);
+            if (iRet != GORM_OK)
+            {
+                cout << "pack get sql failed" << endl;
+                return GORM_ERROR;
+            }
+            this->m_iStep = 0;
+        }
+        m_iOptStatus = mysql_real_query_nonblocking(this->m_pMySQL, m_pReqSQLData->m_uszData, m_pReqSQLData->m_sUsedSize);
+        if (m_iOptStatus == NET_ASYNC_NOT_READY)
         {
             return 0;
         }
-        else if (m_iStatus == NET_ASYNC_ERROR)
+        else if (m_iOptStatus == NET_ASYNC_ERROR)
         {
             cout << "send message 2 mysql failed:" << mysql_error(m_pMySQL) << endl;
             return GORM_ERROR;
         }
-        else if (m_iStatus == NET_ASYNC_COMPLETE)
+        else if (m_iOptStatus == NET_ASYNC_COMPLETE)
         {
             this->m_iStep = 1;
         }
@@ -78,26 +93,29 @@ public:
     }
     virtual int Read()
     {
-        if (this->m_iStep == 0)
+        if (this->m_iStep != 1)
         {
             return this->Write();
         }
-        m_iStatus = mysql_store_result_nonblocking(this->m_pMySQL, &m_pReadingMySQLResult);
-        if (m_iStatus == NET_ASYNC_NOT_READY)
+        m_iOptStatus = mysql_store_result_nonblocking(this->m_pMySQL, &m_pReadingMySQLResult);
+        if (m_iOptStatus == NET_ASYNC_NOT_READY)
         {
             return 0;
         }
-        else if (m_iStatus == NET_ASYNC_ERROR)
+        else if (m_iOptStatus == NET_ASYNC_ERROR)
         {
             cout << "get message from mysql failed:" << mysql_error(m_pMySQL) << endl;
             return GORM_ERROR;
         }
-        else if (m_iStatus == NET_ASYNC_COMPLETE)
+        else if (m_iOptStatus == NET_ASYNC_COMPLETE)
         {
+            this->m_pReqSQLData->Release();
             *this->iFinishNum += 1;
             //cout << *this->iFinishNum << "    , now:" << GORM_GetNowMS() <<endl;
-            this->m_iStep = 1;
-            mysql_store_result(m_pMySQL);
+            this->m_iStep = 2;
+            this->m_pReadingMySQLResult = mysql_store_result(m_pMySQL);
+            if (this->m_pReadingMySQLResult == nullptr)
+                return 0;
             int iReadingRows =mysql_num_rows(this->m_pReadingMySQLResult);
             MYSQL_ROW stRow;
             for (int i=0; i<iReadingRows; i++)
@@ -111,12 +129,15 @@ public:
         return 0;
     }
 public:
-    MYSQL *m_pMySQL = nullptr;
-    char *m_sql = "select ptid from user_2;";
-    atomic<int> *iFinishNum;
-    MYSQL_RES *m_pReadingMySQLResult;
-    net_async_status m_iStatus;
-    int m_iStep = 0;    // 0为写，1为读
+    MYSQL               *m_pMySQL = nullptr;
+    char                *m_sql = "select * from currency_1 where roleid=1034707;";
+    atomic<int>         *iFinishNum;
+    MYSQL_RES           *m_pReadingMySQLResult;
+    net_async_status    m_iOptStatus;
+    int                 m_iStep = 2;    // 0为写，1为读
+    GORM_MemPoolData    *m_pReqSQLData = nullptr;    // 组装的请求SQL语句
+    shared_ptr<GORM_MemPool>        m_pMemPool = nullptr;
+    GORM_PB_Table_currency m_TableCurrency;
 };
 
 int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
@@ -182,7 +203,7 @@ int GORM_MySQLSDKTest(int argc, char** argv)
 {
     atomic<int> finishNum(0);
     mutex m;
-    for (int i=0; i<2; i++)
+    for (int i=0; i<1; i++)
     {
         thread d(GORM_MySQLSDKTestThread, &finishNum, &m);
         d.detach();
@@ -190,7 +211,7 @@ int GORM_MySQLSDKTest(int argc, char** argv)
 
     for (int i=0; i<1000*60*60; i++)
     {
-        ThreadSleepMilliSeconds(10);
+        ThreadSleepMilliSeconds(100);
         cout << finishNum << "    , now:" << GORM_GetNowMS() << endl;
     }
     

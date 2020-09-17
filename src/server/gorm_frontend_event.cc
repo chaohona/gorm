@@ -385,12 +385,12 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         return GORM_OK;
     }
 
-    /*int iPendingNum = this->m_pRequestRing->GetNum();
+    int iPendingNum = this->m_pRequestRing->GetNum();
     // 有没有获取到响应的请求
     if ( iPendingNum > 1)
     {
         return GORM_OK;
-    }*/
+    }
     unique_lock<mutex> locker(pCurrentRequest->m_Mutex);
     return this->SendMsgToWorkThread(pCurrentRequest);
 }
