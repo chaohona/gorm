@@ -17,7 +17,7 @@ struct GORM_TableRouteMgr
 public:
     
 public:
-    int iSpilitMode = 0;        // 分片数
+    int iSpilitMode = 1;        // 分片数
     int iTableId = 0;           // 此路由处理的表信息
     GORM_DBConnPool **vDbConn;  // 表可以路由到的数据库集合,每个分片对应的db连接
 };

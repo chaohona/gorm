@@ -46,6 +46,8 @@ private:
         this->m_pCurrentReadPtr = this->m_pStartPtr + iCurrentLen;
     }
 public:
+    //
+    iovec               *m_vCiov = nullptr;
     // 请求的缓冲池子,主要此池子中数据个数大于1就说明有pending消息
     shared_ptr<GORM_RingBuffer<GORM_DBRequest>> m_pRequestRing = nullptr;
     /////////////////////////////////接收客户端相关

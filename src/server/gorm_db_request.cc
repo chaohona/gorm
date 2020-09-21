@@ -56,7 +56,7 @@ if ((uiReqFlag&GORM_REQ_FLAG_EMPTY_INCREASE) > 0)                   \
 int GORM_DBRequest::SendToWorkThread()
 {
 #ifdef GORM_DEBUG
-    this->lReqTimeMS = GORM_GetNowMS();
+    this->ulReqTimeMS = GORM_GetNowMS();
 #endif
     if (this->iGotRspNum >= this->iReqNum)
     {

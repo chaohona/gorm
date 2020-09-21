@@ -77,7 +77,7 @@ int GORM_DBConnMgr::InitRoute(mutex *m)
     for (int i=0; i<pRoute->routes.iTableNum; i++)
     {
         GORM_RouteTable &table = pRoute->routes.vRouteTables[i];
-        GORM_TableRouteMgr &routeMgr = this->m_vTableRouteInfo[i];
+        GORM_TableRouteMgr &routeMgr = this->m_vTableRouteInfo[table.iTableId];
         routeMgr.iSpilitMode = table.iSplitMode;
         routeMgr.iTableId = table.iTableId;
         routeMgr.vDbConn = new GORM_DBConnPool*[routeMgr.iSpilitMode];

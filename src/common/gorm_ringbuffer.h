@@ -45,7 +45,7 @@
 result=(result_type)rb->m_pWaitMsgPool[ulNextIndex%(rb->m_iPoolCapacity)];
 
 // 环形池子,不能自动伸缩大小
-template<class T>
+template<class T, int RINGLEN>
 class GORM_RingBuffer
 {
 public:
@@ -263,16 +263,14 @@ public:
 private:
     bool Init(int iPoolLen)
     {
-        this->m_pWaitMsgPool = new T*[iPoolLen];
-        this->m_iPoolCapacity = iPoolLen;
         this->ReInit();
         return true;
     }
 public:
-    int         m_iPoolCapacity = 0;
+    int         m_iPoolCapacity = RINGLEN;
     T        **m_pStart = nullptr;         // 池子的起点(固定的起点)
     T        **m_pEnd = nullptr;           // 池子的尾点(固定的结尾)
-    T        **m_pWaitMsgPool = nullptr;   // 移动的有效数据的起点
+    T        *m_pWaitMsgPool[RINGLEN];   // 移动的有效数据的起点
     T        **m_pWaitMsgEnd = nullptr;    // 移动的有效数据的尾点
     int         m_iDataNum = 0;
 };

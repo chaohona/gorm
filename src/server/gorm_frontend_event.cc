@@ -47,48 +47,6 @@ void GORM_FrontEndEvent::SetMemPool(shared_ptr<GORM_MemPool> &pMemPool)
     this->pMemPool = pMemPool;
 }
 
-#define GORM_FRONT_EVENT_GET_NEXT_SENDING()                                     \
-GORM_DBRequest *pRequest = this->m_pRequestRing->GetFront();                    \
-if (pRequest == nullptr)                                                        \
-{                                                                               \
-    this->DelWrite();                                                           \
-    return GORM_OK;                                                             \
-}                                                                               \
-if (pRequest->iWaitDone != 1)                                                   \
-{                                                                               \
-    this->DelWrite();                                                           \
-    if (pRequest->iSentToWorkThread == 0)                                       \
-    {                                                                           \
-        this->SendMsgToWorkThread(pRequest);                                    \ 
-        return GORM_OK;                                                         \
-    }                                                                           \
-}                                                                               \
-this->m_pSendingRequest = this->m_pRequestRing->PopFront();                     \
-if (this->m_pSendingRequest == nullptr)                                         \
-{                                                                               \
-    this->DelWrite();                                                           \
-    return GORM_OK;                                                             \
-}                                                                               \
-if (this->m_pSendingRequest->iReqCmd == GORM_CMD_BATCH_GET)                     \
-    this->m_pSendingRequest->PackBatchGetResult();                              \
-else if( this->m_pSendingRequest->iReqCmd == GORM_CMD_GET_BY_PARTKEY)           \
-    this->m_pSendingRequest->PackGetByPartkeyResult();                          \
-auto sendingRequest = this->m_pSendingRequest;                                  \
-if (sendingRequest != nullptr)                                                  \
-{                                                                               \
-    if (sendingRequest->pRspData != nullptr)                                    \
-    {                                                                           \
-        this->m_pCurrentWrite = sendingRequest->pRspData->m_uszData;            \
-        this->m_iNeedWrite = sendingRequest->pRspData->m_sUsedSize;             \
-    }                                                                           \
-    else                                                                        \
-    {                                                                           \
-        GORM_SetRspHeader(m_szErrorReplyHeader, GORM_RSP_MSG_HEADER_LEN, sendingRequest->iReqCmd ,sendingRequest->uiReqID, sendingRequest->iErrCode, sendingRequest->cReplyFlag);\
-        this->m_pCurrentWrite = m_szErrorReplyHeader;                           \
-        this->m_iNeedWrite = GORM_RSP_MSG_HEADER_LEN;                           \
-    }                                                                           \
-}
-
 GORM_Ret GORM_FrontEndEvent::GetNextSending(bool &bContinue)
 {
     bContinue = false;
