@@ -83,7 +83,7 @@ public:
     GORM_MySQLConnPool  *m_pMySQLConnPool;
 
     // 需要被发送的SQL消息池子
-    shared_ptr<GORM_RingBuffer<GORM_MySQLRequest>> m_pSendingToMySQLRing;
+    shared_ptr<GORM_RingBuffer<GORM_MySQLRequest, 1024*8>> m_pSendingToMySQLRing;
     GORM_MySQLRequest  *m_pSendingRequest = nullptr;   // 出去发送状态的请求
     GORM_MySQLRequest  *m_pReadingRequest = nullptr;   // 处于接收状态的请求
     int                 m_iReadingRows = 0;     // 一共有几行数据需要被接收

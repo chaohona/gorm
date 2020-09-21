@@ -9,7 +9,7 @@ using namespace gorm;
 GORM_FrontEndEvent::GORM_FrontEndEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>       pEpoll, GORM_FrontEndThread *pThread) : 
     GORM_Event(iFD, pEpoll), m_pFrontThread(pThread)
 {
-    this->m_pRequestRing = make_shared<GORM_RingBuffer<GORM_DBRequest>>();
+    this->m_pRequestRing = make_shared<GORM_RingBuffer<GORM_DBRequest, 1024*8>>();
     this->m_pReadCache = m_pFrontThread->m_pMemPool->GetData(1024*1024);
     m_pCurrentReadPtr = this->m_pReadCache->m_uszData;
     m_pStartPtr = this->m_pCurrentReadPtr;
