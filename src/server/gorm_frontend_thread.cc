@@ -300,7 +300,9 @@ int GORM_FrontEndThread::InitTransferEvent()
 
 void GORM_FrontEndThread::GotResult(GORM_DBRequest *pRequest)
 {
-    int iIdx = pRequest->pWorkThread->m_iInnerIdx;
+    int iIdx = 0;
+    if (pRequest->pWorkThread != nullptr)
+        iIdx = pRequest->pWorkThread->m_iInnerIdx;
     this->m_pResponseList[iIdx].Put(pRequest);
     this->ResponseSignal();
 }

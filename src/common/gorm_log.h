@@ -4,7 +4,7 @@
 #include "gorm_sys_inc.h"
 #include "gorm_define.h"
 
-#define LOG_MAX_LEN 512 /* max length of log message */
+#define LOG_MAX_LEN 1024 /* max length of log message */
 
 
 class GORM_DefaultLog;

@@ -25,6 +25,7 @@ enum MySQLOptStep
 };
 class GORM_MySQLConnPool;
 // 和mysql的操作不会同时有读和写
+#define MYSQL_REQUEST_POOL_SIZE 1024*8
 class GORM_MySQLEvent : public GORM_Event
 {
 public:
@@ -83,7 +84,7 @@ public:
     GORM_MySQLConnPool  *m_pMySQLConnPool;
 
     // 需要被发送的SQL消息池子
-    shared_ptr<GORM_RingBuffer<GORM_MySQLRequest, 1024*8>> m_pSendingToMySQLRing;
+    shared_ptr<GORM_RingBuffer<GORM_MySQLRequest, MYSQL_REQUEST_POOL_SIZE>> m_pSendingToMySQLRing;
     GORM_MySQLRequest  *m_pSendingRequest = nullptr;   // 出去发送状态的请求
     GORM_MySQLRequest  *m_pReadingRequest = nullptr;   // 处于接收状态的请求
     int                 m_iReadingRows = 0;     // 一共有几行数据需要被接收
