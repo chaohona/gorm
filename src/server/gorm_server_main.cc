@@ -70,10 +70,10 @@ GORM_Ret PreRun()
 
 int main(int argc, char** argv)
 {
-#ifdef GORM_MYSQL_TEST
-    GORM_MySQLSDKTest(argc, argv);
-    return 0;
-#endif
+//#ifdef GORM_MYSQL_TEST
+//    GORM_MySQLSDKTest(argc, argv);
+//    return 0;
+//#endif
     // 准备工作
     if (GORM_OK != GORM_GetOptions(argc, argv))
     {

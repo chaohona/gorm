@@ -59,11 +59,6 @@ public:
     }
     ~GORM_RingBuffer()
     {
-        if(this->m_pWaitMsgPool != nullptr)
-        {
-            delete []this->m_pWaitMsgPool;
-            this->m_pWaitMsgPool = nullptr;
-        }
     }
 public:
     // 将返回标记放入pool中

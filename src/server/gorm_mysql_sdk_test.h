@@ -1,6 +1,6 @@
 #ifndef GORM_MYSQL_TEST
 #define GORM_MYSQL_TEST
-
+/*
 #include "gorm_sys_inc.h"
 #include "gorm_server_instance.h"
 #include "gorm_error.h"
@@ -249,5 +249,5 @@ int GORM_ProtobuffTeset()
             cout << i << "    , now:" << GORM_GetNowMS() << endl;
     }
 }
-
+*/
 #endif
