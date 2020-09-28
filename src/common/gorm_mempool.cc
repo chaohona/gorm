@@ -87,6 +87,23 @@ GORM_MemPoolData *GORM_MemPool::GetData(size_t sSize)
     return pData;
 }
 
+GORM_MemPoolData *ReAlloc(GORM_MemPoolData &*pData, int iNeedSize)
+{
+    if (pData == nullptr)
+    {
+        pData = this->GetData(iNeedSize);
+        return pData;
+    }
+    if (pData->m_sUsedSize >= iNeedSize)
+        return pData;
+    else
+    {
+        this->Release(pData);
+        pData = this->GetData(iNeedSize);
+    }
+    return pData;
+}
+
 GORM_MemPool::GORM_MemPool()
 {
     this->m_iFreeMetaNum = 0;

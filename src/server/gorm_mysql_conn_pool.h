@@ -64,7 +64,7 @@ private:
     int SendMsg2MySQL();
     int ReadFromMySQL();
     GORM_Ret StoreResult();
-    GORM_Ret FetchRows();
+    GORM_Ret FetchRows();   // 只负责取结果，取结果过程中有错误，交给调用函数处理
     char *DBError();
     int DBErrNo();
     void GotResults(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
@@ -72,6 +72,7 @@ private:
     void FinishWriting();
     void WriteError(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
     int GetMySQLTableInfo();
+    int Connecting();
     
 public:
     friend class GORM_MySQLRequest;

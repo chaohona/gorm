@@ -64,6 +64,32 @@ int GORM_MySQLEvent::MySQLSyncQuery(char *szSQL, int iLen)
     return GORM_OK;
 }
 
+int GORM_MySQLEvent::Connecting()
+{
+    if (this->m_iOptStep == MYSQL_OPT_CONNECTING)
+    {
+        m_iMySQLNetStatus = mysql_real_connect_nonblocking(this->m_pMySQL, m_pDbCfg->szHost, m_pDbCfg->szUser,
+                                                  m_pDbCfg->szPW, m_pDbCfg->szDB, m_pDbCfg->uiPort,
+                                                  nullptr, CLIENT_COMPRESS|CLIENT_MULTI_STATEMENTS|CLIENT_INTERACTIVE);
+        if (m_iMySQLNetStatus == NET_ASYNC_ERROR)
+        {
+            GORM_LOGE("connect to mysql failed, %s, %s, errinfo:%s", m_pDbCfg->szDBSymbol, m_pMySQLConnPool->m_szUrl, this->DBError());
+            // TODO 线程退出
+            return GORM_ERROR;
+        }
+        if (this->m_iMySQLNetStatus == NET_ASYNC_NOT_READY)
+        {
+            return GORM_OK;
+        }
+        this->m_iMySQLNetStatus = NET_ASYNC_COMPLETE;
+        this->ConnectSuccessCB();
+        // 连接mysql成功
+        GORM_LOGI("connect to mysql success:%s", this->m_pMySQLConnPool->m_szUrl);
+        return GORM_OK;
+    }
+    return GORM_OK;
+}
+
 int GORM_MySQLEvent::Write()
 {
     return this->Loop();
@@ -76,6 +102,10 @@ int GORM_MySQLEvent::Read()
 
 int GORM_MySQLEvent::SendMsg2MySQL()
 {
+    if (this->m_iOptStep == MYSQL_OPT_CONNECTING)
+    {
+        return this->Connecting();
+    }
     GORM_DBRequest *pRequest = nullptr;
     // 1、获取需要发送的SQL请求
     // 判断是否有需要发送的旧的消息
@@ -152,24 +182,7 @@ int GORM_MySQLEvent::ReadFromMySQL()
 {
     if (this->m_iOptStep == MYSQL_OPT_CONNECTING)
     {
-        m_iMySQLNetStatus = mysql_real_connect_nonblocking(this->m_pMySQL, m_pDbCfg->szHost, m_pDbCfg->szUser,
-                                                  m_pDbCfg->szPW, m_pDbCfg->szDB, m_pDbCfg->uiPort,
-                                                  nullptr, CLIENT_COMPRESS|CLIENT_MULTI_STATEMENTS|CLIENT_INTERACTIVE);
-        if (m_iMySQLNetStatus == NET_ASYNC_ERROR)
-        {
-            GORM_LOGE("connect to mysql failed, %s, %s, errinfo:%s", m_pDbCfg->szDBSymbol, m_pMySQLConnPool->m_szUrl, this->DBError());
-            // TODO 线程退出
-            return GORM_ERROR;
-        }
-        if (this->m_iMySQLNetStatus == NET_ASYNC_NOT_READY)
-        {
-            return GORM_OK;
-        }
-        this->m_iMySQLNetStatus = NET_ASYNC_COMPLETE;
-        this->ConnectSuccessCB();
-        // 连接mysql成功
-        GORM_LOGI("connect to mysql success:%s", this->m_pMySQLConnPool->m_szUrl);
-        return GORM_OK;
+        return this->Connecting();
     }
     // 1、检查是否有需要读取的数据
     switch (m_iOptStep)
@@ -223,9 +236,12 @@ GORM_Ret GORM_MySQLEvent::StoreResult()
     case GORM_CMD_INSERT:
     {
         int iAffectRows = mysql_affected_rows(this->m_pMySQL);
-        this->m_pReadingRequest->InsertResult(GORM_OK, iAffectRows);
         if (iAffectRows == 1)
+        {
+            uint64 ulInsertID = mysql_insert_id(this->m_pMySQL);
+            this->m_pReadingRequest->InsertResult(GORM_OK, ulInsertID);
             this->GotResults();
+        }
         else
             this->GotResults(GORM_DB_ERROR, this->DBErrNo(), this->DBError());
         break;
@@ -246,8 +262,8 @@ GORM_Ret GORM_MySQLEvent::StoreResult()
     case GORM_CMD_INCREASE:
     {
         int iAffectedNows = mysql_affected_rows(this->m_pMySQL);
-        // 没有
-        if (iAffectedNows == 0)
+        // TODO 没有则插入操作
+        /*if (iAffectedNows == 0)
         {
             if (this->m_pReadingRequest->increaseFlag == GORM_IncreaseFlag_AutoCreate)
             {
@@ -258,7 +274,7 @@ GORM_Ret GORM_MySQLEvent::StoreResult()
                 
                 return GORM_OK;
             }
-        }
+        }*/
         this->m_pReadingRequest->IncreaseResult(GORM_OK, iAffectedNows);
         this->GotResults();
         break;

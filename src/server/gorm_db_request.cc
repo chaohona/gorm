@@ -15,6 +15,7 @@ GORM_DBRequest::GORM_DBRequest(shared_ptr<GORM_MemPool> &pMemPool):pMemPool(pMem
     iGotRspNum = 0;
     iReqNum = 1;
     uiHashValue = 0;
+    this->pRspData = pMemPool->GetData(GORM_DEFAULT_RSP_DATA_LEN);
 }
 
 GORM_DBRequest::~GORM_DBRequest()

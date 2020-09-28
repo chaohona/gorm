@@ -224,7 +224,7 @@ int GORM_MySQLRequest::PackInsertResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -243,7 +243,7 @@ int GORM_MySQLRequest::PackInsertResult()
     }
     else
     {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -261,8 +261,8 @@ int GORM_MySQLRequest::PackReplaceResult()
         GORM_PB_REPLACE_RSP *pRspPackPbMsg = dynamic_cast<GORM_PB_REPLACE_RSP*>(pRspPbMsg);
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
-        iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        iLen += pRspPackPbMsg->ByteSizeLong(); 
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -279,8 +279,8 @@ int GORM_MySQLRequest::PackReplaceResult()
         }
     }
     else
-    {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+    { 
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -298,8 +298,8 @@ int GORM_MySQLRequest::PackIncreaseResult()
         GORM_PB_INCREASE_RSP *pRspPackPbMsg = dynamic_cast<GORM_PB_INCREASE_RSP*>(pRspPbMsg);
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
-        iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        iLen += pRspPackPbMsg->ByteSizeLong(); 
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -316,8 +316,8 @@ int GORM_MySQLRequest::PackIncreaseResult()
         }
     }
     else
-    {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+    { 
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -360,8 +360,8 @@ int GORM_MySQLRequest::PackGetResult()
         {
             PackGetToInsertResult();
         }
-        iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        iLen += pRspPackPbMsg->ByteSizeLong(); 
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -374,8 +374,8 @@ int GORM_MySQLRequest::PackGetResult()
         }
     }
     else
-    {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+    { 
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -398,8 +398,8 @@ int GORM_MySQLRequest::PackGetByNonPrimaryKeyResult()
         GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP *pRspPackPbMsg = dynamic_cast<GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP*>(pRspPbMsg);
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
-        iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        iLen += pRspPackPbMsg->ByteSizeLong(); 
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -412,8 +412,8 @@ int GORM_MySQLRequest::PackGetByNonPrimaryKeyResult()
         }
     }
     else
-    {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+    { 
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -432,8 +432,8 @@ int GORM_MySQLRequest::PackDeleteResult()
         GORM_PB_DELETE_RSP *pRspPackPbMsg = dynamic_cast<GORM_PB_DELETE_RSP*>(pRspPbMsg);
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
-        iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        iLen += pRspPackPbMsg->ByteSizeLong(); 
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -446,8 +446,8 @@ int GORM_MySQLRequest::PackDeleteResult()
         }
     }
     else
-    {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+    { 
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -467,8 +467,8 @@ int GORM_MySQLRequest::PackBatchGetResult()
         GORM_PB_BATCH_GET_RSP *pRspPackPbMsg = dynamic_cast<GORM_PB_BATCH_GET_RSP*>(pRspPbMsg);
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
-        iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        iLen += pRspPackPbMsg->ByteSizeLong(); 
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -482,8 +482,8 @@ int GORM_MySQLRequest::PackBatchGetResult()
         }
     }
     else
-    {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+    { 
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -503,7 +503,7 @@ int GORM_MySQLRequest::PackGetByPartkeyResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -517,7 +517,7 @@ int GORM_MySQLRequest::PackGetByPartkeyResult()
     }
     else
     {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -537,7 +537,7 @@ int GORM_MySQLRequest::PackUpdateResult()
         GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
         this->PackPbRetCode(retCode);
         iLen += pRspPackPbMsg->ByteSizeLong();
-        pRspData = this->pMemPool->GetData(iLen);
+        pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
         if (pRspData == nullptr)
         {
             this->iErrCode = GORM_PACK_RSP_ERROR;
@@ -551,7 +551,7 @@ int GORM_MySQLRequest::PackUpdateResult()
     }
     else
     {
-        pRspData = this->pMemPool->GetData(GORM_RSP_MSG_HEADER_LEN);
+        pRspData = this->pMemPool->ReAlloc(pRspData, GORM_RSP_MSG_HEADER_LEN);
     }
 
     pRspData->m_sUsedSize = iLen;
@@ -577,7 +577,7 @@ int GORM_MySQLRequest::PackHeartBeatResult()
     GORM_PB_Ret_Code *retCode = pRspPackPbMsg->mutable_retcode();
     this->PackPbRetCode(retCode);
     iLen += pRspPackPbMsg->ByteSizeLong();
-    pRspData = this->pMemPool->GetData(iLen);
+    pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
     if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
     {
         delete pRspPackPbMsg;
@@ -601,7 +601,7 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
     this->PackPbRetCode(retCode);
     pRspPackPbMsg->set_clientid(ulClientId);
     iLen += pRspPackPbMsg->ByteSizeLong();
-    pRspData = this->pMemPool->GetData(iLen);
+    pRspData = this->pMemPool->ReAlloc(pRspData, iLen);
     if (!pRspPackPbMsg->SerializeToArray(pRspData->m_uszData+GORM_RSP_MSG_HEADER_LEN, iLen-GORM_RSP_MSG_HEADER_LEN) )
     {
         GORM_LOGE("pack heart beat message failed.");

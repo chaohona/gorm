@@ -62,6 +62,7 @@ public:
 public:
     GORM_MemPoolData *GetData(char *szData, int iLen, size_t iSize);        // 申请内存，并把szData的数据拷贝到内存中
     GORM_MemPoolData *GetData(size_t iSize);                // 申请sSize大小的内存
+    GORM_MemPoolData *ReAlloc(GORM_MemPoolData &*pData, int iNeedSize);
     bool Release(GORM_MemPoolData *pData);                  // 回收申请的内存池
 
 public:

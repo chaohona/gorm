@@ -26,6 +26,8 @@ namespace gorm{
 #define MAX_HOSTSIZE	128
 #define MAX_URL_LEN     1024
 
+#define GORM_DEFAULT_RSP_DATA_LEN 1024
+
 #define GORM_DB_FIELD_MAX_LEN   256      // 列名最大长度
 #define GORM_DB_TABLE_MAX_LEN   256     // 表名最大长度
 #define GORM_DB_IDENTY_MAX_LEN  256     // 数据库标识
