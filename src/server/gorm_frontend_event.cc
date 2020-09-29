@@ -439,12 +439,13 @@ this->ReadyWrite();
 
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
 {
-    shared_ptr<GORM_MySQLRequest> pHandShake = make_shared<GORM_MySQLRequest>(this->pMemPool);
+    GORM_MySQLRequest* pHandShake = new GORM_MySQLRequest(this->pMemPool);
     shared_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_shared<GORM_PB_HAND_SHAKE_REQ>();
     if (pHandShakeReq == nullptr)
     {
         GORM_LOGE("malloc hand shake message failed.");
         this->Close();
+        delete pHandShake;
         return GORM_ERROR;
     }
     GORM_SetRequestSourceInfo(pHandShake, iReqID, GORM_CMD_HAND_SHAKE, this, this->m_pFrontThread);
@@ -453,6 +454,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     {                                                                   
         GORM_LOGE("parse input buffer failed.");
         this->Close();
+        delete pHandShake;
         return GORM_UNPACK_REQ;                                         
     } 
 
