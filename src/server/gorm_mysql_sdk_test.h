@@ -145,7 +145,7 @@ public:
     int index = 1;
 };
 
-int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m, char *dbname)
+int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m, int dbIdx)
 {
     mysql_thread_init();
     shared_ptr<GORM_Epoll> pEpool = make_shared<GORM_Epoll>();
@@ -161,6 +161,7 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m, char *dbname)
     char *dbUser = "root";
     char *dbDatabase = "test";
     int dbPort = 3306; 
+#define TEST_DB "test%d"
 #define MYSQL_CONN_NUM 20
     GORM_DBInfo dbInfo;
     strncpy(dbInfo.szHost, dbHost, strlen(dbHost));
@@ -169,9 +170,8 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m, char *dbname)
     dbInfo.szUser[strlen(dbUser)] = '\0';
     strncpy(dbInfo.szPW, dbPwd, strlen(dbPwd));
     dbInfo.szPW[strlen(dbPwd)] = '\0';
-    //strncpy(dbInfo.szDB, dbDatabase, strlen(dbDatabase));
-    strncpy(dbInfo.szDB, dbname, strlen(dbname));
-    dbInfo.szDB[strlen(dbname)] = '\0';
+    int iLen = snprintf(dbInfo.szDB, GORM_DB_MAX_LEN, TEST_DB, (dbIdx%5)+1);
+    dbInfo.szDB[iLen] = '\0';
     dbInfo.uiPort = dbPort;
 
     m->lock();
@@ -218,7 +218,7 @@ int GORM_MySQLSDKTest(int argc, char** argv)
     mutex m;
     for (int i=0; i<2; i++)
     {
-        thread d(GORM_MySQLSDKTestThread, &finishNum, &m, GORM_Options::Instance()->dbname);
+        thread d(GORM_MySQLSDKTestThread, &finishNum, &m, rand());
         d.detach();
     }
 

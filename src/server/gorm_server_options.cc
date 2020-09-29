@@ -27,6 +27,9 @@ int GORM_GetOptions(int argc, char **argv)
             GORM_Options::Instance()->daemonize = 1;
             break;
         case 'n':
+        {
+            
+        }
             GORM_Options::Instance()->dbname = optarg;
             break;
         default:
