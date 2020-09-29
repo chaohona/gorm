@@ -87,7 +87,7 @@ GORM_MemPoolData *GORM_MemPool::GetData(size_t sSize)
     return pData;
 }
 
-GORM_MemPoolData *ReAlloc(GORM_MemPoolData &*pData, int iNeedSize)
+GORM_MemPoolData *GORM_MemPool::ReAlloc(GORM_MemPoolData *&pData, int iNeedSize)
 {
     if (pData == nullptr)
     {

@@ -17,6 +17,7 @@ class GORM_FrontEndThread;
 class GORM_WorkThread;
 class GORM_CacheOpt;
 
+// 设置请求源信息
 #define GORM_SetRequestSourceInfo(request, reqid, reqcmd, frontevent, frontthread)  \
 request->pFrontendEvent = frontevent;                                               \
 request->uiReqID = reqid;                                                           \

@@ -463,11 +463,13 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     GORM_PB_HAND_SHAKE_REQ *pSvrHandShake = dynamic_cast<GORM_PB_HAND_SHAKE_REQ*>(GORM_TableFieldMapInstance::pTableInfo);
     if (pHandShakeReq->md5() != pSvrHandShake->md5())
     {
+        GORM_LOGE("hand shake md5 check failed.");
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
         return GORM_OK;
     }
     if (pHandShakeReq->schemas_size() != pSvrHandShake->schemas_size())
     {
+        GORM_LOGE("hand shake schema size check failed.");
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
         return GORM_OK;
     }
@@ -477,6 +479,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
         const GORM_PB_TABLE_SCHEMA_INFO &svrInfo = pSvrHandShake->schemas(i);
         if (reqInfo.columns_size() != svrInfo.columns_size())
         {
+            GORM_LOGE("hand shake column size check failed, table:%s", reqInfo.tablename());
             GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
             return GORM_OK;
         }
@@ -486,6 +489,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
             const GORM_PB_TABLE_SCHEMA_INFO_COLUMN &svrColumn = svrInfo.columns(j);
             if (reqColumn.type() != svrColumn.type())
             {
+                GORM_LOGE("hand shake column type check failed, table:%s, column:%s", reqInfo.tablename(), reqColumn.name());
                 GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
                 return GORM_OK;
             }

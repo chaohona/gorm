@@ -45,41 +45,5 @@
 		<table name="cycleevent" splittablekey="id">
 			<db name="lixiang_game" splittablenum="2"/>
 		</table>
-		<table name="equip" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="food" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="hero" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="mail" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="material" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="npc" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="role" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="scene" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="skill" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="interaction" splittablekey="id">
-			<db name="lixiang_game" splittablenum="2"/>
-		</table>
-		<table name="roles" splittablekey="id">
-			<db name="lixiang_account" splittablenum="2"/>
-		</table>
-		<table name="user" splittablekey="id">
-			<db name="lixiang_account" splittablenum="2"/>
-		</table>
 	</routes>
 </giant-game>
