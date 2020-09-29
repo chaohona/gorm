@@ -30,7 +30,7 @@ int GORM_GetOptions(int argc, char **argv)
             GORM_Options::Instance()->dbname = optarg;
             break;
         default:
-            cout << "gredis: invalid option -- '" << optopt << "'";
+            cout << "gorm: invalid option -- '" << optopt << "'";
             return GORM_ERROR;
         }
 

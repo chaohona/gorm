@@ -139,7 +139,7 @@ public:
     int                 m_iStep = 2;    // 0为写，1为读
     GORM_MemPoolData    *m_pReqSQLData = nullptr;    // 组装的请求SQL语句
     shared_ptr<GORM_MemPool>        m_pMemPool = nullptr;
-    char [128*1024]szSQL;
+    char szSQL[128*1024];
     int iSQLLen = 0;
     //GORM_PB_Table_currency m_TableCurrency;
     int index = 1;
@@ -170,7 +170,7 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m, char *dbname)
     strncpy(dbInfo.szPW, dbPwd, strlen(dbPwd));
     dbInfo.szPW[strlen(dbPwd)] = '\0';
     //strncpy(dbInfo.szDB, dbDatabase, strlen(dbDatabase));
-    strncpy(dbInfo.szDB, dbname, strlen(dbname))
+    strncpy(dbInfo.szDB, dbname, strlen(dbname));
     dbInfo.szDB[strlen(dbname)] = '\0';
     dbInfo.uiPort = dbPort;
 
