@@ -1,6 +1,6 @@
 #ifndef GORM_MYSQL_TEST
 #define GORM_MYSQL_TEST
-/*
+
 #include "gorm_sys_inc.h"
 #include "gorm_server_instance.h"
 #include "gorm_error.h"
@@ -17,6 +17,9 @@
 #include "gorm-db.pb.h"
 #include "gorm_pb_proto.pb.h"
 #include "gorm_mempool.h"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 using namespace gorm;
@@ -49,6 +52,8 @@ MYSQL *Connect2MySQL(GORM_DBInfo *pDbCfg)
 
 int GORM_PackGetSQLCURRENCY_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, 
         const GORM_PB_Table_currency &table_currency, GORM_MemPoolData *&pReqData);
+
+#define CHARBASE_SQL "SELECT `CHARID`, `ACCID`, `NAME`, `TYPE`, `LEVEL`, `FACE`, `HAIR`, `BODYCOLOR`, `GOODNESS`, `PKADDITION`, `MAPID`, `MAPNAME`, `X`, `Y`, `HP`, `MP`, `SP`, `CREATEIP`, `EXP`, `LUCKY`, `SKILLPOINTS`, `POINTS`, `COUNTRY`, `UNIONID`, `CONSORT`, `SEPTID`, `SCHOOLID`, `SYSSET`, `FORBIDTALK`, `BITMASK`, `ONLINETIME`, `AVAILABLE`, `LASTACTIVEDATE`, `MEN`, `ZHENG_INT`, `DEX`, `STR`, `CON`, `RELIVEWEAKTIME`, `GRACE`, `EXPLOIT`, `TIRETIME`, `OFFLINETIME`, `FIVETYPE`, `FIVELEVEL`, `ALLBINARY`, `ANSWERCOUNT`, `MONEY`, `HONOR`, `GOMAPTYPE`, `MAXHONOR`, `MSGTIME`, `ACCPRIV`, `GOLD`, `TICKET`, `CREATETIME`, `GOLDGIVE`, `PETPACK`, `PETPOINT`, `LEVELSEPT`, `PUNISHTIME`, `TRAINTIME`, `CAPTION`, `ZONE_STATE`, `SOURCE_ID`, `SOURCE_ZONE`, `TARGET_ZONE`, `SALARY`, `LASTIP`, `ROUND`, `NUMPASSWD`, `NUMPASSWDCANCELTIME`, `OPENMONEYBOX`, `OBJ_CMD`, `BIND_MONEY`, `DROPTIME`, `TRAVEL`, `LASTTRAVELTIME`, `BACKDATA`, `IMGERRLOCK`, `PHOTOCHECKSTATE`, `NEWWORLDID`, `PROVINCE`, `CITY`, `SOURCE_COUNTRY`, `NEWWORLDID_ZONE`, `ICQMASK`, `FORBIDTIME`, `FORBIDTALKTYPE`, `VIPEXCHTOTAL`, `BUYFUND`, `GETFUNDGOLD`, `TATOLGOLDNUM`, `BODYID`, `ACTIVITY`, `DEPOSIT`, `MASTERPOINT`, `PROMOTERACCID`, `PROMOTERSTATE`, `GETSEVENTYTIME`, `CONTRIBUTE`, `ALIACCOUNT`, `ACTIVITY3`, `FIGHTPOINT`, `CHANGEZONETYPE`, `MERGE_ZONEID`, `LOSTBACK`, `MONEYCARD`, `MACHINECODE`, `NUMPASSWD2`, `NUMPASSWD3`, `NUMPASSWD4`, `NUMPASSWD5`, `NUMPASSWD6`, `QQ_1`, `QQ_2`, `DEPOSIT_SALARY`, `TOTAL_EXCHANGE_MONEY`, `RESOLUTIIONS`, `AMOY_PRIZE_MONEY`, `MONEY_INCOME`, `MONEY_PAY`, `MAC`, `ISMCPRECREATE`, `PRECREATE_POINT`, `PKLEVEL`, `VALUE_MATERIAL`, `VALUE_SALARY`, `VALUE_WARSOUL`, `VALUE_MANTLE`, `VALUE_POINT`, `VOTETIME`, `LASTWEEKLOGIN`, `CURWEEKLOGIN`, `LEVELDEGREE`, `LEVELDEGREEGLOBAL`, `ZHENQI`, `BLOODDIAMOND`, `DCHARGE_POINT`, `DCHARGE_TYPE`, `MAIN_CAREER`, `MAIN_SUBCAREER`, `SECOND_CAREER`, `SECOND_SUBCAREER`, `BLOOD_DIAMOND_OBJ`, `LEVEL_SECSOUL`, `LEVEL_SKYSOUL`, `SYNHOMEGARDEN`, `FIGHTPOINT_TIME`, `TRAVELING`, `BLOOD_DIAMOND_BINDOBJ`, `TARGET_COUNTRY`, `ZT2_POINT`, `ZT2_POINT_OBJ`, `ZT2_POINT_BINDOBJ`, `ZT2_POINT_YICHANGOBJ`, `ZT2_POINT_YICHANGBINDOBJ`, `TARGET_MAP`, `TRAVELSCORE`, `YYCODE`, `ELAPSE_BLOODOBJ`, `ELAPSE_BLOODBINDOBJ`, `MYCACHE_MD5`, `BATI`, `SUPERPACKBINARY`, `SUITLEVEL`, `SUPERPACKVERSION`, `MUTISKILLPOINTS`, `OFFLINEHOOK`, `YEARENDBONUS`, `PKGRADE`, `LOGINGIFT`, `ISBOT`, `ZT2_POINT_HISTORY`, `YEARENDBONUS_1W`, `IS_CERTIFICATION`, `TRAVEL_BY_FUNCION`, `TARGET_POSX`, `TARGET_POSY`, `TARGET_MAPNAME`, `SILVER_CASH`, `TRANSACTIONS`, `BONUS`, `INSURANCE`, `CHATTIME`, `CURUSEFACE` FROM CHARBASE WHERE  `CHARID`=%d;";
 class GORM_MySQLAsyncEventTest: public GORM_Event
 {
 public:
@@ -67,15 +72,13 @@ public:
         }
         if (this->m_iStep == 2)
         {
-            int iRet = GORM_PackGetSQLCURRENCY_ONE(this->m_pMemPool, this->m_pMySQL, GORM_PB_TABLE_IDX_CURRENCY, this->m_TableCurrency, this->m_pReqSQLData);
-            if (iRet != GORM_OK)
-            {
-                cout << "pack get sql failed" << endl;
-                return GORM_ERROR;
-            }
+            this->index += 1;
+            int nowIdx = this->index % 4000000;
+            this->iSQLLen = snprintf(this->szSQL, 128*1024, CHARBASE_SQL, nowIdx);
+            this->szSQL[this->iSQLLen] = '\0';
             this->m_iStep = 0;
         }
-        m_iOptStatus = mysql_real_query_nonblocking(this->m_pMySQL, m_pReqSQLData->m_uszData, m_pReqSQLData->m_sUsedSize);
+        m_iOptStatus = mysql_real_query_nonblocking(this->m_pMySQL, this->szSQL, this->iSQLLen);
         if (m_iOptStatus == NET_ASYNC_NOT_READY)
         {
             return 0;
@@ -130,17 +133,20 @@ public:
     }
 public:
     MYSQL               *m_pMySQL = nullptr;
-    char                *m_sql = "select * from currency_1 where roleid=1034707;";
+    char                *m_sql = "SELECT `CHARID`, `ACCID`, `NAME`, `TYPE`, `LEVEL`, `FACE`, `HAIR`, `BODYCOLOR`, `GOODNESS`, `PKADDITION`, `MAPID`, `MAPNAME`, `X`, `Y`, `HP`, `MP`, `SP`, `CREATEIP`, `EXP`, `LUCKY`, `SKILLPOINTS`, `POINTS`, `COUNTRY`, `UNIONID`, `CONSORT`, `SEPTID`, `SCHOOLID`, `SYSSET`, `FORBIDTALK`, `BITMASK`, `ONLINETIME`, `AVAILABLE`, `LASTACTIVEDATE`, `MEN`, `ZHENG_INT`, `DEX`, `STR`, `CON`, `RELIVEWEAKTIME`, `GRACE`, `EXPLOIT`, `TIRETIME`, `OFFLINETIME`, `FIVETYPE`, `FIVELEVEL`, `ALLBINARY`, `ANSWERCOUNT`, `MONEY`, `HONOR`, `GOMAPTYPE`, `MAXHONOR`, `MSGTIME`, `ACCPRIV`, `GOLD`, `TICKET`, `CREATETIME`, `GOLDGIVE`, `PETPACK`, `PETPOINT`, `LEVELSEPT`, `PUNISHTIME`, `TRAINTIME`, `CAPTION`, `ZONE_STATE`, `SOURCE_ID`, `SOURCE_ZONE`, `TARGET_ZONE`, `SALARY`, `LASTIP`, `ROUND`, `NUMPASSWD`, `NUMPASSWDCANCELTIME`, `OPENMONEYBOX`, `OBJ_CMD`, `BIND_MONEY`, `DROPTIME`, `TRAVEL`, `LASTTRAVELTIME`, `BACKDATA`, `IMGERRLOCK`, `PHOTOCHECKSTATE`, `NEWWORLDID`, `PROVINCE`, `CITY`, `SOURCE_COUNTRY`, `NEWWORLDID_ZONE`, `ICQMASK`, `FORBIDTIME`, `FORBIDTALKTYPE`, `VIPEXCHTOTAL`, `BUYFUND`, `GETFUNDGOLD`, `TATOLGOLDNUM`, `BODYID`, `ACTIVITY`, `DEPOSIT`, `MASTERPOINT`, `PROMOTERACCID`, `PROMOTERSTATE`, `GETSEVENTYTIME`, `CONTRIBUTE`, `ALIACCOUNT`, `ACTIVITY3`, `FIGHTPOINT`, `CHANGEZONETYPE`, `MERGE_ZONEID`, `LOSTBACK`, `MONEYCARD`, `MACHINECODE`, `NUMPASSWD2`, `NUMPASSWD3`, `NUMPASSWD4`, `NUMPASSWD5`, `NUMPASSWD6`, `QQ_1`, `QQ_2`, `DEPOSIT_SALARY`, `TOTAL_EXCHANGE_MONEY`, `RESOLUTIIONS`, `AMOY_PRIZE_MONEY`, `MONEY_INCOME`, `MONEY_PAY`, `MAC`, `ISMCPRECREATE`, `PRECREATE_POINT`, `PKLEVEL`, `VALUE_MATERIAL`, `VALUE_SALARY`, `VALUE_WARSOUL`, `VALUE_MANTLE`, `VALUE_POINT`, `VOTETIME`, `LASTWEEKLOGIN`, `CURWEEKLOGIN`, `LEVELDEGREE`, `LEVELDEGREEGLOBAL`, `ZHENQI`, `BLOODDIAMOND`, `DCHARGE_POINT`, `DCHARGE_TYPE`, `MAIN_CAREER`, `MAIN_SUBCAREER`, `SECOND_CAREER`, `SECOND_SUBCAREER`, `BLOOD_DIAMOND_OBJ`, `LEVEL_SECSOUL`, `LEVEL_SKYSOUL`, `SYNHOMEGARDEN`, `FIGHTPOINT_TIME`, `TRAVELING`, `BLOOD_DIAMOND_BINDOBJ`, `TARGET_COUNTRY`, `ZT2_POINT`, `ZT2_POINT_OBJ`, `ZT2_POINT_BINDOBJ`, `ZT2_POINT_YICHANGOBJ`, `ZT2_POINT_YICHANGBINDOBJ`, `TARGET_MAP`, `TRAVELSCORE`, `YYCODE`, `ELAPSE_BLOODOBJ`, `ELAPSE_BLOODBINDOBJ`, `MYCACHE_MD5`, `BATI`, `SUPERPACKBINARY`, `SUITLEVEL`, `SUPERPACKVERSION`, `MUTISKILLPOINTS`, `OFFLINEHOOK`, `YEARENDBONUS`, `PKGRADE`, `LOGINGIFT`, `ISBOT`, `ZT2_POINT_HISTORY`, `YEARENDBONUS_1W`, `IS_CERTIFICATION`, `TRAVEL_BY_FUNCION`, `TARGET_POSX`, `TARGET_POSY`, `TARGET_MAPNAME`, `SILVER_CASH`, `TRANSACTIONS`, `BONUS`, `INSURANCE`, `CHATTIME`, `CURUSEFACE` FROM CHARBASE WHERE  `CHARID`=%d;";
     atomic<int>         *iFinishNum;
     MYSQL_RES           *m_pReadingMySQLResult;
     net_async_status    m_iOptStatus;
     int                 m_iStep = 2;    // 0为写，1为读
     GORM_MemPoolData    *m_pReqSQLData = nullptr;    // 组装的请求SQL语句
     shared_ptr<GORM_MemPool>        m_pMemPool = nullptr;
+    char [128*1024]szSQL;
+    int iSQLLen = 0;
     GORM_PB_Table_currency m_TableCurrency;
+    int index = 1;
 };
 
-int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
+int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m, int dbIdx)
 {
     mysql_thread_init();
     shared_ptr<GORM_Epoll> pEpool = make_shared<GORM_Epoll>();
@@ -152,10 +158,11 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
 
 
     char *dbHost = "127.0.0.1";
-    char *dbPwd = "ztgame@123";
+    char *dbPwd = "123456";
     char *dbUser = "root";
-    char *dbDatabase = "daobatu";
+    char *dbDatabase = "test";
     int dbPort = 3306; 
+#define TESTNAME "test%d"
 #define MYSQL_CONN_NUM 20
     GORM_DBInfo dbInfo;
     strncpy(dbInfo.szHost, dbHost, strlen(dbHost));
@@ -165,7 +172,8 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
     strncpy(dbInfo.szPW, dbPwd, strlen(dbPwd));
     dbInfo.szPW[strlen(dbPwd)] = '\0';
     strncpy(dbInfo.szDB, dbDatabase, strlen(dbDatabase));
-    dbInfo.szDB[strlen(dbDatabase)] = '\0';
+    int iLen = snprintf(dbInfo.szDB, GORM_DB_MAX_LEN, TESTNAME,  (dbIdx%5)+1);
+    dbInfo.szDB[iLen] = '\0';
     dbInfo.uiPort = dbPort;
 
     m->lock();
@@ -201,17 +209,18 @@ int GORM_MySQLSDKTestThread(atomic<int> *iFinishNum, mutex *m)
 
 int GORM_MySQLSDKTest(int argc, char** argv)
 {
+    srand((int)(time(NULL)));
     atomic<int> finishNum(0);
     mutex m;
-    for (int i=0; i<1; i++)
+    for (int i=0; i<4; i++)
     {
-        thread d(GORM_MySQLSDKTestThread, &finishNum, &m);
+        thread d(GORM_MySQLSDKTestThread, &finishNum, &m, rand());
         d.detach();
     }
 
     for (int i=0; i<1000*60*60; i++)
     {
-        ThreadSleepMilliSeconds(100);
+        ThreadSleepMilliSeconds(1000);
         cout << finishNum << "    , now:" << GORM_GetNowMS() << endl;
     }
     
@@ -249,5 +258,5 @@ int GORM_ProtobuffTeset()
             cout << i << "    , now:" << GORM_GetNowMS() << endl;
     }
 }
-*/
+
 #endif

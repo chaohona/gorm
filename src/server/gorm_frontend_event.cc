@@ -432,7 +432,6 @@ if (!this->m_pRequestRing->AddData(pHandShake))                 \
 {                                                               \
     GORM_LOGE("add request to request ring failed.");           \
     this->Close();                                              \
-    delete pHandShake;                                          \
     return GORM_OK;                                             \
 }                                                               \
 this->ReadyWrite();
@@ -440,12 +439,11 @@ this->ReadyWrite();
 
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
 {
-    GORM_MySQLRequest *pHandShake = new GORM_MySQLRequest(this->pMemPool);
+    shared_ptr<GORM_MySQLRequest> pHandShake = make_shared<GORM_MySQLRequest>(this->pMemPool);
     shared_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_shared<GORM_PB_HAND_SHAKE_REQ>();
     if (pHandShakeReq == nullptr)
     {
         GORM_LOGE("malloc hand shake message failed.");
-        delete pHandShake;
         this->Close();
         return GORM_ERROR;
     }
@@ -454,7 +452,6 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     if (!pHandShakeReq->ParseFromArray(szMsg, iMsgLen-GORM_REQ_MSG_HEADER_LEN))
     {                                                                   
         GORM_LOGE("parse input buffer failed.");
-        delete pHandShake;
         this->Close();
         return GORM_UNPACK_REQ;                                         
     } 
@@ -469,7 +466,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     }
     if (pHandShakeReq->schemas_size() != pSvrHandShake->schemas_size())
     {
-        GORM_LOGE("hand shake schema size check failed.");
+        GORM_LOGE("hand shake schema size check failed, req size:%d, server size:%d", pHandShakeReq->schemas_size(), pSvrHandShake->schemas_size());
         GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
         return GORM_OK;
     }
@@ -479,7 +476,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
         const GORM_PB_TABLE_SCHEMA_INFO &svrInfo = pSvrHandShake->schemas(i);
         if (reqInfo.columns_size() != svrInfo.columns_size())
         {
-            GORM_LOGE("hand shake column size check failed, table:%s", reqInfo.tablename());
+            GORM_LOGE("hand shake column size check failed, table:%s", reqInfo.tablename().c_str());
             GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
             return GORM_OK;
         }
@@ -489,7 +486,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
             const GORM_PB_TABLE_SCHEMA_INFO_COLUMN &svrColumn = svrInfo.columns(j);
             if (reqColumn.type() != svrColumn.type())
             {
-                GORM_LOGE("hand shake column type check failed, table:%s, column:%s", reqInfo.tablename(), reqColumn.name());
+                GORM_LOGE("hand shake column type check failed, table:%s, column:%s", reqInfo.tablename().c_str(), reqColumn.name().c_str());
                 GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
                 return GORM_OK;
             }
