@@ -34,6 +34,15 @@ MYSQL *Connect2MySQL(GORM_DBInfo *pDbCfg)
         return nullptr;
     }
 
+    GORM_RouteInfo *pRoute = GetDatabaseRoute();
+    if (pRoute == nullptr)
+    {
+        GORM_LOGE("get database route failed.");
+        return GORM_ERROR;
+    }
+
+    pDbCfg = &(pRoute->dblist.vDBLists[i]);
+
     net_async_status iConnectStatus = NET_ASYNC_ERROR;
     while ((iConnectStatus = mysql_real_connect_nonblocking(pMySQL, pDbCfg->szHost, pDbCfg->szUser,
                                                   pDbCfg->szPW, pDbCfg->szDB, pDbCfg->uiPort,
@@ -139,8 +148,8 @@ public:
     int                 m_iStep = 2;    // 0为写，1为读
     GORM_MemPoolData    *m_pReqSQLData = nullptr;    // 组装的请求SQL语句
     shared_ptr<GORM_MemPool>        m_pMemPool = nullptr;
-    char szSQL[128*1024];
-    int iSQLLen = 0;
+    char                szSQL[128*1024];
+    int                 iSQLLen = 0;
     //GORM_PB_Table_currency m_TableCurrency;
     int index = 1;
 };
