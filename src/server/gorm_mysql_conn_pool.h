@@ -73,6 +73,7 @@ private:
     void WriteError(int iErrCode = GORM_OK, int iDBErrNo = 0, char *szErrInfo = nullptr);
     int GetMySQLTableInfo();
     int Connecting();
+    int ReconnectCheck(); // 检查和mysql连接的句柄是否有变化，有变化则处理变化
     
 public:
     friend class GORM_MySQLRequest;

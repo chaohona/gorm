@@ -288,7 +288,7 @@ public:
     int         m_iEventNum = 0;        // epoll被触发事件缓存数组大小m_aEpollEvents数组大小
     int         m_iNumEventsActive;     // 实际被触发的事件的个数
 
-    #ifdef _WIN32
+    #ifdef _WIN32   // select 模型
     GORM_Event *m_vEvents[MAX_EVENT_POOLS];
     fd_set rfds, wfds;
     /* We need to have a copy of the fd sets as it's not safe to reuse

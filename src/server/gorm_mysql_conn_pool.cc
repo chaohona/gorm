@@ -90,6 +90,30 @@ int GORM_MySQLEvent::Connecting()
     return GORM_OK;
 }
 
+int GORM_MySQLEvent::ReconnectCheck()
+{
+    int iNowFD = 0;
+    GORM_GET_MYSQL_FD(this->m_pMySQL, iNowFD);
+    if (iNowFD != this->m_iFD)  // FD变更了
+    {
+        // 从时间触发器中删除老的fd
+        int iOldMask = this->m_iMask;
+        this->DelRW();
+        this->m_iFD = iNowFD;
+        // 将新的句柄加到事件触发器中
+        if (iOldMask & GORM_EVENT_READABLE)
+        {
+            this->ReadyRead();
+        }
+        if (iOldMask & GORM_EVENT_WRITABLE)
+        {
+            this->ReadyWrite();
+        }
+    }
+    
+    return GORM_OK;
+}
+
 int GORM_MySQLEvent::Write()
 {
     return this->Loop();
@@ -501,7 +525,11 @@ int GORM_MySQLEvent::ConnectSuccessCB()
 }
 
 int GORM_MySQLEvent::Loop()
-{   
+{
+    if (GORM_OK != this->ReconnectCheck())
+    {
+        return GORM_OK;
+    }
     switch (this->m_iOptStep)
     {
     case MYSQL_OPT_WAITING_REQ:

@@ -216,7 +216,7 @@ bool GORM_Epoll::Init(int iEventNum)
 	WSADATA wsaData;
 	if (WSAStartup(sockVersion, &wsaData) != 0)
 		return false;
-    memset(m_vEvents, 0, MAX_EVENT_POOLS*sizeof(GORM_Event*));
+    bzero(m_vEvents, MAX_EVENT_POOLS*sizeof(GORM_Event*));
     return true;
 #else
     try

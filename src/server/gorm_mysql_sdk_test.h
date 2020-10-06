@@ -38,10 +38,10 @@ MYSQL *Connect2MySQL(GORM_DBInfo *pDbCfg)
     if (pRoute == nullptr)
     {
         GORM_LOGE("get database route failed.");
-        return GORM_ERROR;
+        return nullptr;
     }
 
-    pDbCfg = &(pRoute->dblist.vDBLists[i]);
+    pDbCfg = &(pRoute->dblist.vDBLists[0]);
 
     net_async_status iConnectStatus = NET_ASYNC_ERROR;
     while ((iConnectStatus = mysql_real_connect_nonblocking(pMySQL, pDbCfg->szHost, pDbCfg->szUser,
@@ -120,7 +120,6 @@ public:
         }
         else if (m_iOptStatus == NET_ASYNC_COMPLETE)
         {
-            this->m_pReqSQLData->Release();
             *this->iFinishNum += 1;
             //cout << *this->iFinishNum << "    , now:" << GORM_GetNowMS() <<endl;
             this->m_iStep = 2;
