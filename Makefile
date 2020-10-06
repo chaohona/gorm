@@ -103,7 +103,7 @@ proxy: prepare $(GORMProxy)
 client: $(GORMClient)
 	@echo "make client"
 
-lib: $(STATICTABLES) $(SHARETABLES) pack_inc
+lib: $(STATICTABLES) $(SHARETABLES) pack_inc $(SHAREClient) $(STATICClient)
 	@echo "make client"
 
 test: $(GORMTest)
