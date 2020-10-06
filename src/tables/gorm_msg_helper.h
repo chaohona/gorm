@@ -58,7 +58,7 @@ GORM_DLL_DECL void DelPbRspMsg(GORM_CMD cmd, PB_MSG_PTR &pMsgPtr);
 GORM_DLL_DECL void DelPbTableMsg(int iTableId, PB_MSG_PTR &pMsgPtr);
 
 
-GORM_DLL_DECL int GORM_PackRequestBuff(GORM_Log *pLogger, shared_ptr<GORM_MemPool> pMemPool, PB_MSG_PTR pPbMsg, GORM_MemPoolData *&pMsgBuffer, 
+GORM_DLL_DECL int GORM_PackRequestBuff(GORM_Log *pLogger, GORM_MemPool *pMemPool, PB_MSG_PTR pPbMsg, GORM_MemPoolData *&pMsgBuffer, 
     GORM_CMD iReqCmd, uint32 ulSeqId, uint8 reqPreFlag);
 
 class GORM_Record;
