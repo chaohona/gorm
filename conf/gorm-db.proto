@@ -2,9 +2,9 @@ syntax = "proto3";
 package gorm;
 option go_package = "gorm/gorm";
 message GORM_PB_Table_currency{
-    uint64 version = 1;
-    int64 roleid = 2;
-    int32 snakeid = 3;
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
     string currency1 = 4;
     string currency2 = 5;
     string currency3 = 6;
@@ -12,8 +12,140 @@ message GORM_PB_Table_currency{
 }
 
 message GORM_PB_Table_cycleevent{
-    uint64 version = 1;
-    int64 roleid = 2;
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
     string events = 3;
+}
+
+message GORM_PB_Table_equip{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
+    string equip1 = 4;
+    string equip2 = 5;
+    string equip3 = 6;
+    string equip4 = 7;
+}
+
+message GORM_PB_Table_food{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
+    string food1 = 4;
+    string food2 = 5;
+    string food3 = 6;
+    string food4 = 7;
+}
+
+message GORM_PB_Table_hero{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
+    string heros = 4;
+    string teams = 5;
+}
+
+message GORM_PB_Table_login_log{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 action = 3;
+    sfixed32 online = 4;
+    string ip = 5;
+    string appid = 6;
+    sfixed64 createtime = 7;
+}
+
+message GORM_PB_Table_mail{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    string mail1 = 3;
+    string mail2 = 4;
+    string mail3 = 5;
+    string mail4 = 6;
+    string mail5 = 7;
+    sfixed32 lastmailid = 8;
+    sfixed32 snakeid = 9;
+}
+
+message GORM_PB_Table_material{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
+    string material1 = 4;
+    string material2 = 5;
+    string material3 = 6;
+    string material4 = 7;
+}
+
+message GORM_PB_Table_npc{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
+    string npcs = 4;
+}
+
+message GORM_PB_Table_res_log{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 action = 3;
+    sfixed32 cfgtype = 4;
+    sfixed32 cfgid = 5;
+    sfixed32 delta = 6;
+    sfixed32 value = 7;
+    sfixed64 createtime = 8;
+}
+
+message GORM_PB_Table_roles{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed64 userid = 3;
+    sfixed64 worldid = 4;
+    sfixed32 dbid = 5;
+    string name = 6;
+    sfixed32 charid = 7;
+    string face = 8;
+    sfixed64 createtime = 9;
+}
+
+message GORM_PB_Table_role{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    string rolename = 3;
+    sfixed32 level = 4;
+    sfixed64 exp = 5;
+    sfixed32 characterid = 6;
+    sfixed32 gold = 7;
+    sfixed64 offlinetime = 8;
+    sfixed32 inited = 9;
+    sfixed64 createtime = 10;
+    string face = 11;
+    sfixed64 online = 12;
+    sfixed64 worldid = 13;
+    sfixed32 pttype = 14;
+}
+
+message GORM_PB_Table_scene{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 sceneid = 3;
+    string collects = 4;
+}
+
+message GORM_PB_Table_skill{
+    fixed64 version = 1;
+    sfixed64 roleid = 2;
+    sfixed32 snakeid = 3;
+    string skill1 = 4;
+    string skill2 = 5;
+    string skill3 = 6;
+    string skill4 = 7;
+}
+
+message GORM_PB_Table_user{
+    fixed64 version = 1;
+    sfixed64 userid = 2;
+    string ptid = 3;
+    sfixed32 pttype = 4;
+    sfixed64 createtime = 5;
 }
 

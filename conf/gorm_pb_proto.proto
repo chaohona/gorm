@@ -66,7 +66,7 @@ message GORM_PB_SPLIT_INFO
 {
 	message GORM_COLUMN_VALUE
 	{
-		int32 	Column = 1;
+		sfixed32 	Column = 1;
 		bytes 	Value = 2;
 	}
 	repeated GORM_COLUMN_VALUE SplitInfo = 1;
@@ -74,17 +74,17 @@ message GORM_PB_SPLIT_INFO
 
 message GORM_PB_Ret_Code 
 {
-	int32 	Code = 1;			// 0 为成功，-1为失败，-4为部分失败
-	int32 	DBCode = 2;			// 后端db的错误码
+	sfixed32 	Code = 1;			// 0 为成功，-1为失败，-4为部分失败
+	sfixed32 	DBCode = 2;			// 后端db的错误码
 	string 	DBErrInfo = 3;		// 后端db错误的详细信息
-	int32	SucessNum	 = 4;	// 成功的请求个数
-	int32 	TotalNum	 = 5;	// 所有的请求
+	sfixed32	SucessNum	 = 4;	// 成功的请求个数
+	sfixed32 	TotalNum	 = 5;	// 所有的请求
 }
 
 message GORM_PB_RELOAD_TABLE_REQ
 {
 	GORM_PB_REQ_HEADER 		Header = 1; 
-	uint64 					TableVersion = 2;
+	fixed64 					TableVersion = 2;
 }
 
 message GORM_PB_RELOAD_TABLE_RSP
@@ -94,10 +94,10 @@ message GORM_PB_RELOAD_TABLE_RSP
 
 message GORM_PB_REQ_HEADER 
 {
-	int32   				TableId	 = 1;	// 表的类型
-	int32    				BusinessID = 2;	// 串行化ID
-	int32 					VerPolice = 3;	// 版本校验规则
-	uint32 				ReqFlag  = 4;	// 参见GORM_CMD_FLAG_XXX
+	sfixed32   			TableId	 = 1;	// 表的类型
+	sfixed32    			BusinessID = 2;	// 串行化ID
+	sfixed32 				VerPolice = 3;	// 版本校验规则
+	fixed32 				ReqFlag  = 4;	// 参见GORM_CMD_FLAG_XXX
 	bytes					FieldMode	= 5;
 	GORM_PB_SPLIT_INFO 	SplitTableInfo = 6;	// 分库分表信息
 }
@@ -114,7 +114,7 @@ message GORM_PB_HEART_RSP
 
 message GORM_PB_TABLE_SCHEMA_INFO_COLUMN
 {
-	uint64	Version = 1;
+	fixed64	Version = 1;
 	string 	Name = 2;
 	string	TypeDesc = 3;
 	GORM_PB_COLUMN_TYPE Type = 4;
@@ -122,97 +122,97 @@ message GORM_PB_TABLE_SCHEMA_INFO_COLUMN
 
 message GORM_PB_TABLE_SCHEMA_INFO
 {
-	uint64	Version = 1;
-	string 	TableName = 2;
-	int32  	TableIdx = 3;
-	repeated GORM_PB_TABLE_SCHEMA_INFO_COLUMN Columns = 4;
+	fixed64		Version = 1;
+	string 		TableName = 2;
+	sfixed32  	TableIdx = 3;
+	repeated 	GORM_PB_TABLE_SCHEMA_INFO_COLUMN Columns = 4;
 }
 
 message GORM_PB_HAND_SHAKE_REQ
 {
 	GORM_PB_REQ_HEADER 		Header = 1;
-	uint64		Version = 2;
-	uint32		Md5     = 3;
+	fixed64		Version = 2;
+	fixed32		Md5     = 3;
 	repeated 	GORM_PB_TABLE_SCHEMA_INFO Schemas = 4;
 }
 
 message GORM_PB_HAND_SHAKE_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	uint64	ClientId	= 2;	// 客户端ID
+	fixed64	 ClientId	= 2;	// 客户端ID
 }
 
 // 插入暂时只能支持单挑记录插入
 message GORM_PB_INSERT_REQ
 {
-	GORM_PB_REQ_HEADER 		Header = 1;
-	repeated GORM_PB_TABLE 	Tables = 2;
+	GORM_PB_REQ_HEADER 	Header = 1;
+	repeated GORM_PB_TABLE 			Tables = 2;
 }
 
 message GORM_PB_INSERT_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	repeated GORM_PB_TABLE 	Tables = 2;	// 如果需要回带数据，则将数据带回
-	uint64					LastInsertId = 3;
+	repeated GORM_PB_TABLE 			Tables = 2;	// 如果需要回带数据，则将数据带回
+	fixed64				LastInsertId = 3;
 }
 
 message GORM_PB_UPDATE_REQ
 {
-	GORM_PB_REQ_HEADER 		Header 	= 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;
+	GORM_PB_REQ_HEADER 	Header 	= 1;
+	repeated GORM_PB_TABLE 			Tables 	= 2;
 }
 
 message GORM_PB_UPDATE_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
-	int32					AffectedNum = 3;
+	repeated GORM_PB_TABLE 			Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	sfixed32				AffectedNum = 3;
 }
 
 message GORM_PB_REPLACE_REQ
 {
-	GORM_PB_REQ_HEADER 		Header 	= 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;
+	GORM_PB_REQ_HEADER 	Header 	= 1;
+	repeated GORM_PB_TABLE 			Tables 	= 2;
 }
 
 message GORM_PB_REPLACE_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
-	int32					AffectedNum = 3;
+	repeated GORM_PB_TABLE 			Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	sfixed32				AffectedNum = 3;
 }
 
 message GORM_PB_GET_REQ 
 {
 	GORM_PB_REQ_HEADER 	Header 	= 1;
-	GORM_PB_TABLE		Table	= 2;
-	int32	GetFlag = 3;
+	GORM_PB_TABLE			Table	= 2;
+	sfixed32				GetFlag = 3;
 }
 
 message GORM_PB_GET_RSP
 {
-	GORM_PB_Ret_Code 	RetCode = 1;
-	GORM_PB_TABLE 		Table 	= 2;
-	int32				NewInsert = 3;	// 结果是否是新插入的
-	uint64				LastInsertId = 4;	// 结果是否是新插入的
+	GORM_PB_Ret_Code 		RetCode = 1;
+	GORM_PB_TABLE 			Table 	= 2;
+	sfixed32				NewInsert = 3;	// 结果是否是新插入的
+	fixed64				LastInsertId = 4;	// 结果是否是新插入的
 }
 
 message GORM_PB_BATCH_GET_REQ 
 {
 	GORM_PB_REQ_HEADER 		Header 	= 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	repeated GORM_PB_TABLE 				Tables 	= 2;	// 如果需要回带数据，则将数据带回
 }
 
 message GORM_PB_BATCH_GET_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;
+	repeated GORM_PB_TABLE 			Tables 	= 2;
 }
 
 message GORM_PB_INCREASE_REQ
 {
 	GORM_PB_REQ_HEADER 			Header 	 = 1;
-	repeated GORM_PB_TABLE 		Tables 	= 2;
+	repeated GORM_PB_TABLE 					Tables 	= 2;
 	string 						PlusColumns = 3;	// 增加的字段
 	string 						MinusColumns = 4;	// 减少的字段
 }
@@ -220,42 +220,42 @@ message GORM_PB_INCREASE_REQ
 message GORM_PB_INCREASE_RSP
 {
 	GORM_PB_Ret_Code 			RetCode = 1;
-	repeated GORM_PB_TABLE 		Tables 	= 2;
-	int32						AffectedNum = 3;
+	repeated GORM_PB_TABLE 				Tables 	= 2;
+	sfixed32					AffectedNum = 3;
 }
 
 message GORM_PB_DELETE_REQ
 {
 	GORM_PB_REQ_HEADER 		Header = 1;
-	GORM_PB_TABLE			Table	= 2;
+	GORM_PB_TABLE				Table	= 2;
 }
 
 message GORM_PB_DELETE_RSP
 {
-	GORM_PB_Ret_Code 		RetCode = 1;
-	int32					AffectedNum = 2;
+	GORM_PB_Ret_Code 			RetCode = 1;
+	sfixed32					AffectedNum = 2;
 }
 
 message GORM_PB_GET_BY_PARTKEY_REQ
 {
 	GORM_PB_REQ_HEADER 		Header = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	repeated GORM_PB_TABLE 				Tables 	= 2;	// 如果需要回带数据，则将数据带回
 }
 
 message GORM_PB_GET_BY_PARTKEY_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;
+	repeated GORM_PB_TABLE 			Tables 	= 2;
 }
 
 message GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ
 {
 	GORM_PB_REQ_HEADER 		Header = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;	// 如果需要回带数据，则将数据带回
+	repeated GORM_PB_TABLE 				Tables 	= 2;	// 如果需要回带数据，则将数据带回
 }
 
 message GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP
 {
 	GORM_PB_Ret_Code 		RetCode = 1;
-	repeated GORM_PB_TABLE 	Tables 	= 2;
+	repeated GORM_PB_TABLE 			Tables 	= 2;
 }
