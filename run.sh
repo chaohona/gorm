@@ -1,8 +1,8 @@
 #!/bin/bash
 
-
-./bin/killall /root/gorm/bin/gorm-server
+chmod +x bin/killall
+./bin/killall /root/github.com/gorm/bin/gorm-server
 
 rm -rf log.txt
 
-nohup /root/gorm/bin/gorm-server > log.txt 2>&1 &
+nohup /root/github.com/gorm/bin/gorm-server > log.txt 2>&1 &

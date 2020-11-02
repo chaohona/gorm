@@ -20,23 +20,155 @@
     <table name="currency" version="1">
         <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
         <column name="snakeId" type="int32" defaultvalue="0" desc="货币Id" />
-        <column name="currency1" type="string" size="4096" desc="货币组1" />
-        <column name="currency2" type="string" size="4096" desc="货币组2" />
-        <column name="currency3" type="string" size="4096" desc="货币组3" />
-        <column name="currency4" type="string" size="4096" desc="货币组4" />
+        <column name="currency1" type="string" size="1024" desc="货币组1" />
+        <column name="currency2" type="string" size="1024" desc="货币组2" />
+        <column name="currency3" type="string" size="1024" desc="货币组3" />
+        <column name="currency4" type="string" size="1024" desc="货币组4" />
         <index name="currency_roleId" columns="roleId" unique="true"/>
         <splitinfo columns="roleId" num="2"/>
     </table>
     <table name="cycleevent" version="1">
         <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
-        <column name="events" type="string" size="4096" desc="数据" />
+        <column name="events" type="string" size="1024" desc="数据" />
         <index name="cycleevent_roleId" columns="roleId" unique="true"/>
         <splitinfo columns="roleId" num="2"/>
     </table>
+    <table name="equip" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="装备sid" />
+        <column name="equip1" type="string" size="1024" desc="装备组1" />
+        <column name="equip2" type="string" size="1024" desc="装备组2" />
+        <column name="equip3" type="string" size="1024" desc="装备组3" />
+        <column name="equip4" type="string" size="1024" desc="装备组4" />
+        <index name="equip_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="food" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="食物sid" />
+        <column name="food1" type="string" size="1024" desc="食物组1" />
+        <column name="food2" type="string" size="1024" desc="食物组2" />
+        <column name="food3" type="string" size="1024" desc="食物组3" />
+        <column name="food4" type="string" size="1024" desc="食物组4" />
+        <index name="food_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="hero" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="唯一id" />
+        <column name="heros" type="string" size="1024" desc="英雄列表" />
+        <column name="teams" type="string" size="1024" desc="队伍列表" />
+        <index name="hero_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+<!-- log -->   <table name="login_log" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="角色ID" />
+        <column name="action" type="int32" defaultvalue="0" desc="0:登录,1:登出" />
+        <column name="online" type="int32" defaultvalue="0" desc="在线时长（玩家不为退出类型时为空）" />
+        <column name="ip" type="string" size="1024" defaultvalue="" desc="登录ip" />
+        <column name="appid" type="string" size="1024" defaultvalue="" desc="包id" />
+        <column name="createTime" type="int64" defaultvalue="0" desc="记录时间" />
+        <index name="login_log_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="mail" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="mail1" type="string" size="1024" desc="邮件1" />
+        <column name="mail2" type="string" size="1024" desc="邮件2" />
+        <column name="mail3" type="string" size="1024" desc="邮件3" />
+        <column name="mail4" type="string" size="1024" desc="邮件4" />
+        <column name="mail5" type="string" size="1024" desc="邮件5" />
+        <column name="lastMailId" type="int32" defaultvalue="0" desc="最后邮件id" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="snakeId" />
+        <index name="mail_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="material" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="材料sid" />
+        <column name="material1" type="string" size="1024" desc="材料组1" />
+        <column name="material2" type="string" size="1024" desc="材料组2" />
+        <column name="material3" type="string" size="1024" desc="材料组3" />
+        <column name="material4" type="string" size="1024" desc="材料组4" />
+        <index name="material_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="npc" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="唯一id" />
+        <column name="npcs" type="string" size="1024" desc="npc列表" />
+        <index name="npc_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="res_log" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="action" type="int32" defaultvalue="0" desc="1:战斗" />
+        <column name="cfgType" type="int32" defaultvalue="0" desc="1:金币" />
+        <column name="cfgId" type="int32" defaultvalue="0" desc="配置ID" />
+        <column name="delta" type="int32" defaultvalue="0" desc="改变值" />
+        <column name="value" type="int32" defaultvalue="0" desc="最终值" />
+        <column name="createTime" type="int64" defaultvalue="0" desc="记录时间" />
+        <index name="res_log_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="roles" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="角色ID" />
+        <column name="userId" type="int64" defaultvalue="0" desc="帐号ID" />
+        <column name="worldId" type="int64" defaultvalue="0" desc="区ID" />
+        <column name="dbId" type="int32" defaultvalue="0" desc="负载库" />
+        <column name="name" type="string" size="1024" defaultvalue="" desc="角色名" />
+        <column name="charId" type="int32" defaultvalue="0" desc="人物Id" />
+        <column name="face" type="string" size="1024" desc="face" />
+        <column name="createTime" type="int64" defaultvalue="0" desc="创建时间" />
+        <index name="roles_roleId" columns="roleId,userId" />
+        <splitinfo columns="roleId,userId" num="2"/>
+    </table>
+    <table name="role" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="roleName" type="string" size="1024" defaultvalue="" desc="角色名" />
+        <column name="level" type="int32" defaultvalue="0" desc="等级" />
+        <column name="exp" type="int64" defaultvalue="0" desc="经验" />
+        <column name="characterId" type="int32" defaultvalue="0" desc="人物id" />
+        <column name="gold" type="int32" defaultvalue="0" desc="金币" />
+        <column name="offlineTime" type="int64" defaultvalue="0" desc="离线时间" />
+        <column name="inited" type="int32" defaultvalue="0" desc="预创建标志" />
+        <column name="createTime" type="int64" defaultvalue="0" desc="角色创建时间" />
+        <column name="face" type="string" size="1024" desc="角色捏脸" />
+        <column name="online" type="int64" defaultvalue="0" desc="今天上线次数" />
+        <column name="worldId" type="int64" defaultvalue="0" desc="世界id" />
+        <column name="ptType" type="int32" defaultvalue="0" desc="pt类型" />
+        <index name="role_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="scene" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="sceneId" type="int32" defaultvalue="0" desc="推图Id" />
+        <column name="collects" type="string" size="1024" desc="资源库" />
+        <index name="scene_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="skill" version="1">
+        <column name="roleId" type="int64" defaultvalue="0" desc="用户ID" />
+        <column name="snakeId" type="int32" defaultvalue="0" desc="技能Id" />
+        <column name="skill1" type="string" size="1024" desc="技能组1" />
+        <column name="skill2" type="string" size="1024" desc="技能组2" />
+        <column name="skill3" type="string" size="1024" desc="技能组3" />
+        <column name="skill4" type="string" size="1024" desc="技能组4" />
+        <index name="skill_roleId" columns="roleId" unique="true"/>
+        <splitinfo columns="roleId" num="2"/>
+    </table>
+    <table name="user" version="1">
+        <column name="userId" type="int64" defaultvalue="0" desc="账号id" />
+        <column name="ptId" type="string" size="1024" desc="平台帐号Id" />
+        <column name="ptType" type="int32" defaultvalue="0" desc="平台类型" />
+        <column name="createTime" type="int64" defaultvalue="0" desc="创建时间" />
+        <index name="user_userId" columns="userId" unique="true"/>
+        <splitinfo columns="userId" num="2"/>
+    </table>
 	<databases>
 		<!--name为数据库用户名，database为数据库名字 defaultrouter为默认路由数据库-->
-		<db name="lixiang_game" host="192.168.12.42" port="3306" user="root" password="ztgame@123" type="mysql" database="game" defaultroute="true"/>
-		<db name="lixiang_account" host="192.168.12.42" port="3306" user="root" password="ztgame@123" type="mysql" database="account"/>
+		<db name="lixiang_game" host="192.168.12.42" port="3306" user="mark" password="ztgame@123" type="mysql" database="daobatu" defaultroute="true"/>
+		<db name="lixiang_account" host="192.168.12.42" port="3306" user="mark" password="ztgame@123" type="mysql" database="daobatu"/>
 	</databases>
 	<routes>
 		<table name="currency" splittablekey="id">
@@ -44,6 +176,45 @@
 		</table>
 		<table name="cycleevent" splittablekey="id">
 			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="equip" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="food" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="hero" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="login_log" splittablekey="roleid">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="mail" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="material" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="npc" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="res_log" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="roles" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="role" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="scene" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="skill" splittablekey="id">
+			<db name="lixiang_game" splittablenum="2"/>
+		</table>
+		<table name="user" splittablekey="id">
+			<db name="lixiang_account" splittablenum="2"/>
 		</table>
 	</routes>
 </giant-game>
