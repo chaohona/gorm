@@ -49,7 +49,7 @@ public:
     void GotResult(GORM_DBRequest *pRequest);
 private:
     // 响应事件通知,唤醒前端线程
-    inline void GORM_FrontEndThread::ResponseSignal()
+    inline void ResponseSignal()
     {
         this->m_pSignalEvent->Single();
     }

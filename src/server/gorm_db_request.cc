@@ -7,7 +7,6 @@
 #include "gorm_frontend_thread.h"
 #include "gorm_work_thread.h"
 #include "gorm_table_field_map_define.h"
-#include "gorm_redis_define.h"
 
 using namespace gorm;
 GORM_DBRequest::GORM_DBRequest(shared_ptr<GORM_MemPool> &pMemPool):pMemPool(pMemPool)

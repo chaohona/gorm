@@ -10,7 +10,6 @@
 #include "gorm_mempool.h"
 #include "gorm_mysql_request.h"
 #include "gorm_pb_proto.pb.h"
-#include "gorm_redis.h"
 #include "gorm_config.h"
 #include "gorm_signal_event.h"
 
