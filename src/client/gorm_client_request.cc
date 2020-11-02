@@ -204,7 +204,7 @@ int GORM_ClientRequest::AddRecord(GORM_Record *&pRecord, int iTableId)
     {
         iTableId = this->iTableId;
     }
-    if (!InvalidTableCheck(iTableId))
+    if (!GORM_InvalidTableCheck(iTableId))
     {
         return GORM_INVALID_TABLE;
     }

@@ -30,7 +30,6 @@
 #include "gorm_singleton.h"
 #include "gorm_socket.h"
 #include "gorm_sys_inc.h"
-#include "gorm_thread.h"
 #include "gorm_thread_pool.h"
 #include "gorm_type.h"
 #include "gorm_utils.h"

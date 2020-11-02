@@ -188,6 +188,7 @@ int GORM_RouteInfo::ParseDB(YAML::Node &node)
     return GORM_OK;
 }
 
+// 解析table_route字段
 int GORM_RouteInfo::ParseRoute(YAML::Node &node)
 {
     try
@@ -203,6 +204,7 @@ int GORM_RouteInfo::ParseRoute(YAML::Node &node)
         {
             pTable = &this->routes.vRouteTables[i];
             auto table = node[i];
+            // table_route.table_name
             if (!table["table_name"])
             {
                 GORM_LOGE("invalid config table_route.table_name:%d", i);
@@ -223,6 +225,7 @@ int GORM_RouteInfo::ParseRoute(YAML::Node &node)
                 GORM_LOGE("invalid config table_route.router, too many config, index:%d, num:", i, pTable->iDBNum);
                 return GORM_ERROR;
             }
+            // 解析table_route.router
             if (GORM_OK != this->ParseRouteList(pTable, router))
             {
                 GORM_LOGE("invalid config table_route.router:%d", i);
@@ -239,6 +242,7 @@ int GORM_RouteInfo::ParseRoute(YAML::Node &node)
     return GORM_OK;
 }
 
+// 解析table_route.router下面的路由列表
 int GORM_RouteInfo::ParseRouteList(GORM_RouteTable *pTable, YAML::Node &node)
 {
     GORM_RouteDB *pRoute;

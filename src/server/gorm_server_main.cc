@@ -38,6 +38,7 @@ bool MainLoop()
     }
 }
 
+// 解析文件等准备工作
 GORM_Ret PreRun()
 {
     // 1、解析配置文件
@@ -110,6 +111,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
+    // 3、管理线程，目前为空循环
     MainLoop();
     
     return 0;

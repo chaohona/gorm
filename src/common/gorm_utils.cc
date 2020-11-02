@@ -217,66 +217,6 @@ int hex_digit_to_int(char c) {
 }
 
 
-GORM_FieldsOpt::GORM_FieldsOpt(GORM_FieldsOpt &other)
-{
-    memcpy(this->szFieldCollections, other.szFieldCollections, 128);
-}
-
-GORM_FieldsOpt::GORM_FieldsOpt(string &strFields)
-{
-    memset(szFieldCollections, 0, 128);
-    int iLen = strFields.size();
-    if (iLen > 128)
-        iLen = 128;
-    if (iLen > 0)
-        memcpy(this->szFieldCollections, strFields.c_str(), iLen);
-}
-
-GORM_FieldsOpt::GORM_FieldsOpt():iUsedIdx(0)
-{
-    memset(szFieldCollections, 0, 128);
-}
-
-GORM_FieldsOpt& GORM_FieldsOpt::operator=(GORM_FieldsOpt &other)
-{
-#ifdef _WIN32
-	strncpy_s(this->szFieldCollections, other.szFieldCollections, 128);
-#else
-    strncpy(this->szFieldCollections, other.szFieldCollections, 128);
-#endif
-    return *this;
-}
-
-
-bool GORM_FieldsOpt::AddField(int iField)
-{
-    if (iField >= 1024)
-    {
-        return false;
-    }
-    // 大部分情况走到这里
-    int idx = iField >> 3;
-    szFieldCollections[idx] |= 1<<(iField & 0x07);
-    if (iUsedIdx <= idx)
-        iUsedIdx = idx+1;
-
-    return true;
-}
-
-bool GORM_FieldsOpt::DelField(int iField)
-{
-    if (iField >= 1024)
-    {
-        return true;
-    }
-    // 大部分情况走到这里
-    int idx = iField >> 3;
-    szFieldCollections[idx] ^= (1<<(iField & 0x07));
-
-    return true;
-}
-
-
 vector<int> GORM_FieldsOpt::GetFields(const char *szFields, int iLen)
 {
     if (iLen > 128)
@@ -324,19 +264,5 @@ vector<int> GORM_FieldsOpt::GetFields(const char *szFields, int iLen)
 
     return std::move(v);
 }
-
-bool GORM_FieldsOpt::FieldInMode(const char *szFields, int iLen, int iField)
-{
-    if (iField >= 1024)
-    {
-        return false;
-    }
-    // 大部分情况走到这里
-    int idx = iField >> 3;
-    if (idx >= iLen)
-        return false;
-    return (szFields[idx] & (1<<(iField & 0x07))) > 0;
-}
-    
 
 

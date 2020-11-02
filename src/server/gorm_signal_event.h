@@ -7,6 +7,7 @@
 #include "gorm_event.h"
 
 class GORM_Thread;
+// 线程之间相互发送唤醒信号的事件
 class GORM_SignalEvent : public GORM_Event
 {
 public:

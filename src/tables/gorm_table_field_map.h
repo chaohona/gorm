@@ -9,10 +9,8 @@
 namespace gorm
 {
 
-GORM_DLL_DECL bool InvalidTableCheck(int iTableId);
+GORM_DLL_DECL bool GORM_InvalidTableCheck(int iTableId);
 
-
-// 所有的表的字段的宏宇字段的名字保存在gorm_fields_map_define中
 
 // 通过表中字段的名字，获取字段的宏
 GORM_DLL_DECL int GORM_GetFieldID(int iTableId, const char* szFiledName, OUT int &iFieldId);
@@ -28,6 +26,7 @@ GORM_DLL_DECL int GORM_GetTableVersion(const char *szTable, OUT uint64 &ulVersio
 GORM_DLL_DECL int GORM_GetTableId(const char *szTableName, OUT int &iTableId);
 GORM_DLL_DECL int GORM_GetTableName(int iTableId, OUT char *&szTableName);
 
+// 将Record加入通信消息
 GORM_DLL_DECL int GORM_AddRecordToReqPbMsg(int iTableId, GORM_PB_TABLE *pPbTable, PB_MSG_PTR pPbMsg); 
 
 
@@ -59,17 +58,22 @@ using FieldName2Id = unordered_map<string,int>;
 using TableName2Id = unordered_map<string,int>;
 using TableId2Name = unordered_map<int,string>;
 using TableVersionMap = unordered_map<int,uint64>;
+// 表相关的映射关系
 class GORM_DLL_DECL GORM_TableFieldMapInstance
 {
 public:
 	static GORM_TableFieldMapInstance *Instance();
     int Init(GORM_Log *pLogger);
 public:
+    // 各个表的列id与列名映射关系
     static FieldId2Name *mapId2Name;
     static FieldName2Id *mapName2Id;
+    // 表名与id映射关系
     static TableName2Id *mapTableName2Id;
     static TableId2Name *mapTableId2Name;
+    // 表的元数据版本信息
     static TableVersionMap *mapTableVersion;
+    // 表信息的proto结构，用于版本校验
     static PB_MSG_PTR pTableInfo;
 private:
 	static GORM_TableFieldMapInstance* pInstance;

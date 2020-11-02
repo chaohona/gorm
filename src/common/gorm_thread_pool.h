@@ -4,7 +4,6 @@
 #define _GORM_THREAD_POOL_H__
 
 #include "gorm_sys_inc.h"
-#include "gorm_thread.h"
 #include "gorm_type.h"
 #include "gorm_mempool.h"
 class GORM_ThreadPool;
@@ -15,6 +14,8 @@ public:
     virtual ~GORM_Thread();
 
     virtual void Work(mutex *m) = 0;
+    // 通知事件回调
+    // 用于在本线程处理io等待阶段(epoll_wait)，别的线程唤醒本线程的时候的回调
     virtual void SignalCB() = 0;
     //static void Start(shared_ptr<GORM_Thread> &pThread);
 public:
@@ -38,6 +39,7 @@ public:
     virtual ~GORM_ThreadPool();
 
     void Stop();
+    // 创建iNum个线程
     virtual int CreateThread(int iNum) = 0;
     // m 为
     void StartWork(shared_ptr<GORM_Thread> pThread);

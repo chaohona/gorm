@@ -8,7 +8,7 @@
 
 namespace gorm{
 
-bool InvalidTableCheck(int iTableId)
+bool GORM_InvalidTableCheck(int iTableId)
 {
     return iTableId > GORM_PB_TABLE_IDX_MIN__ && iTableId < GORM_PB_TABLE_IDX_MAX__;
 }

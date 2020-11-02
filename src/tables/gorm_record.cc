@@ -8,7 +8,7 @@ namespace gorm{
 
 int GORM_Record::Init(int iTableId, GORM_Log *pLogger)
 {
-    if (!InvalidTableCheck(iTableId))
+    if (!GORM_InvalidTableCheck(iTableId))
     {
         return GORM_INVALID_TABLE;
     }

@@ -172,11 +172,6 @@ void GORM_FrontEndThread::EventCheck()
     }
 }
 
-void GORM_FrontEndThread::ResponseSignal()
-{
-    this->m_pSignalEvent->Single();
-}
-
 void GORM_FrontEndThread::SignalCB()
 {
     GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *pQueue = nullptr;

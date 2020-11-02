@@ -12,6 +12,7 @@
 #include "gorm_config.h"
 
 class GORM_FrontEndThread;
+// 监听事件处理器
 class GORM_ListenEvent : public GORM_Event
 {
 public:
@@ -32,6 +33,7 @@ public:
     GORM_FrontEndThread *pFrontThread;
 };
 
+// 前端监听线程
 class GORM_FrontEndThread : public GORM_Thread
 {
 public:
@@ -40,12 +42,20 @@ public:
 
     virtual void Work(mutex *m);
 
+    // 获取到新的连接
     int AcceptClient(GORM_FD iFD);
     virtual void SignalCB();
-    void ResponseSignal();
+    // 获取到结果，工作线程将结果交给前端线程
     void GotResult(GORM_DBRequest *pRequest);
 private:
+    // 响应事件通知,唤醒前端线程
+    inline void GORM_FrontEndThread::ResponseSignal()
+    {
+        this->m_pSignalEvent->Single();
+    }
+    // 客户端状态检查
     void EventCheck();
+    // 初始化线程之间交互
     int InitTransferEvent();
 public:
     GORM_FD                         m_iListenFD = 0;    // 监听端口句柄
@@ -57,7 +67,7 @@ public:
     // 响应统一交给前端线程之后，由前端线程自己处理，避免多线程锁问题
     GORM_SSQueue<GORM_DBRequest*, GORM_FRONT_REQUEST_QUEUE_LEN> *m_pResponseList;
     int m_iWorkThreadNum = 0;
-    shared_ptr<GORM_SignalEvent>  m_pSignalEvent;
+    shared_ptr<GORM_SignalEvent>  m_pSignalEvent;   // 
 };
 
 class GORM_FrontEndThreadPool : public GORM_ThreadPool, 

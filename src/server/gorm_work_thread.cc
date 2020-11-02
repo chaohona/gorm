@@ -131,30 +131,6 @@ int GORM_WorkThread::AccepNewRequest(GORM_DBRequest *pRequest)
     return GORM_OK;
 }
 
-// 清除已经关闭的客户端连接
-// 将新的连接加入epoll触发器
-void GORM_WorkThread::EventCheck()
-{
-    try
-    {
-        GORM_Event *pEvent;
-        for(auto itr : this->m_mapFrontEndEvents)
-        {
-            pEvent = itr.second;
-            if (pEvent->IsClosed())
-            {
-                this->m_mapFrontEndEvents.erase(pEvent->m_uiEventId);
-                delete pEvent;
-            }
-        }
-
-    }
-    catch(exception &e)
-    {
-        GORM_LOGE("event check got exception:%s", e.what());
-    }
-}
-
 void GORM_WorkThread::Finish()
 {
     
@@ -240,10 +216,6 @@ int GORM_WorkThreadPool::RecycleWorkThread(GORM_WorkThread *pThread)
     std::unique_lock<std::mutex> lock(m_Mutex);
     this->m_mapThreadGroup.erase(pThread->m_threadId);
     return GORM_OK;
-}
-
-void GORM_WorkThreadPool::WorkThreadUpdateLoad(GORM_WorkThread *pThread, uint64 ulLoad)
-{
 }
 
 int GORM_WorkThreadPool::PublishRequestToDB(int iTableId, uint32 uiHashValue, GORM_WorkThread *&pWorkThread)

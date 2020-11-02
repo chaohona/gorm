@@ -26,19 +26,23 @@ public:
     virtual ~GORM_WorkThread();
 
     virtual void Work(mutex *m);
+    void Finish();
+    // 工作线程接收到前端请求
+    int AccepNewRequest(GORM_DBRequest *pRequest);
+    virtual void SignalCB();
+private:
+    // db模块初始化工作，多线程程序，mysql驱动建立连接的时候需要在互斥区里面
+    bool DBInit(mutex *m);
+    // cache模块初始化
+    int CacheInit(GORM_Config *pConfig);
+    // 检查
+    void Exist();
+    int Init(mutex *m, GORM_Config *pConfig);
+    // 前端线程通知本线程有新消息
     inline void NotifyNewRequest()
     {
         this->m_pSignalEvent->Single();
     }
-    void Finish();
-    int AccepNewRequest(GORM_DBRequest *pRequest);
-    virtual void SignalCB();
-private:
-    bool DBInit(mutex *m);
-    int CacheInit(GORM_Config *pConfig);
-    void EventCheck();
-    void Exist();
-    int Init(mutex *m, GORM_Config *pConfig);
     
 public:
     // 线程内部使用的变量
@@ -69,7 +73,7 @@ public:
     virtual ~GORM_WorkThreadPool();
     // 回收工作线程
     int RecycleWorkThread(GORM_WorkThread *pThread);
-    void WorkThreadUpdateLoad(GORM_WorkThread *pThread, uint64 ulLoad);
+    // 分配请求总入口，将请求分配给后端工作线程
     int PublishRequestToDB(int iTableId, uint32 uiHashValue, GORM_WorkThread *&pWorkThread);
 public:
     virtual int CreateThread(int iNum);

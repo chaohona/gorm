@@ -1,7 +1,7 @@
 #include "gorm_server_table_stable.h"
 #include "gorm_mysql_conn_pool.h"
 
-char *GORM_GetColumnType(const GORM_PB_COLUMN_VALUE &columnValue)
+const char *GORM_GetColumnType(const GORM_PB_COLUMN_VALUE &columnValue)
 {
     switch (columnValue.type())
     {
