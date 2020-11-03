@@ -261,8 +261,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         } 
         
@@ -280,8 +279,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -304,8 +302,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -327,8 +324,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
 
             if (!pReqMsg->has_table())
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -352,8 +348,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
 
             if (!pReqMsg->has_table())
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -376,8 +371,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -400,8 +394,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -424,8 +417,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else
@@ -448,8 +440,7 @@ int GORM_DBRequest::ParseReqMsg(char *szMsg, int iMsgLen)
             this->iReqNum = pReqMsg->tables_size();
             if (this->iReqNum == 0)
             {
-                this->GetResult(GORM_REQ_NO_RECORDS);
-                return GORM_OK;
+                return GORM_REQ_NO_RECORDS;
             }
         }
         else

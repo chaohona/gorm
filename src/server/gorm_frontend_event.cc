@@ -333,6 +333,7 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     {
         pCurrentRequest->GetResult(iRet, 0, nullptr);
         this->ReadyWrite();
+        GORM_LOGE("parse request from client failed, tableid:%d, cmd:%d, seqid:%u, flag:%d", pCurrentRequest->iReqTableId, iReqCmd, iReqID, flag);
         return iRet;
     }
     if (this->m_ulClientId == 0)
