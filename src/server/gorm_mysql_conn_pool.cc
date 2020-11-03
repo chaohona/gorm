@@ -410,7 +410,7 @@ int GORM_MySQLEvent::GetMySQLTableInfo()
         GORM_LOGE("init table column info failed.");
         return GORM_ERROR;
     }
-    char *szSql = "SELECT column_name,table_name,data_type FROM information_schema.columns where table_schema=\"%s\"";
+    const char *szSql = "SELECT column_name,table_name,data_type FROM information_schema.columns where table_schema=\"%s\"";
     char sql[2048];
     int iLen = snprintf(sql, 2048, szSql, m_strDBName.c_str());
     if (GORM_OK != MySQLSyncQuery(sql, iLen))

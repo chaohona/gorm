@@ -47,7 +47,6 @@ _vscnprintf(char *buf, size_t size, const char *fmt, va_list args)
 void
 GORM_Stacktrace(int skip_count)
 {
-#ifdef GORM_HAVE_BACKTRACE
     void *stack[64];
     char **symbols;
     int size, i, j;
@@ -65,13 +64,11 @@ GORM_Stacktrace(int skip_count)
     }
 
     free(symbols);
-#endif
 }
 
 
 void GORM_Assert(const char *cond, const char *file, int line, int panic)
 {
-    return;
     if (panic) {
         GORM_Stacktrace(1);
         abort();

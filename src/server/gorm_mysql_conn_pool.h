@@ -12,7 +12,7 @@
 
 
 #define GORM_GET_MYSQL_FD(MYSQL, FD)\
-FD=MYSQL->net.vio->mysql_socket.fd
+FD=MYSQL->net.fd
 
 enum MySQLOptStep
 {
