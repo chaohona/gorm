@@ -2,6 +2,7 @@
 #include "gorm_pb_proto.pb.h"
 #include "gorm_table_field_map_define.h"
 #include "gorm_record.h"
+#include "gorm_inc.h"
 
 namespace gorm{
 
@@ -62,6 +63,7 @@ void GORM_SetReqHeader(IN char *szMsg, uint32 uiLen,GORM_CMD iReqCmd, uint32 iRe
 
 void GORM_SetRspHeader(char *szMsg, uint32 uiLen, uint8 reqCmd, uint32 iReqId, char cErrCode, uint8 flag)
 {
+    cout << "rsp len:" << uiLen << "reqCmd:" << int(reqCmd) << "reqID:" << iReqId << endl;
     szMsg[0] = char(uiLen>>24);
     szMsg[1] = char(uiLen>>16);
     szMsg[2] = char(uiLen>>8);

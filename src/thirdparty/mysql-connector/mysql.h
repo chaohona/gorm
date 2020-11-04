@@ -75,10 +75,7 @@ typedef int my_socket;
 #endif
 #endif /* MY_COMPILER_INCLUDED */
 
-#ifdef _WIN32
-#else
 #include "field_types.h"
-#endif
 #include "my_list.h"
 #include "mysql_com.h"
 
@@ -776,8 +773,6 @@ bool STDCALL mysql_more_results(MYSQL *mysql);
 int STDCALL mysql_next_result(MYSQL *mysql);
 int STDCALL mysql_stmt_next_result(MYSQL_STMT *stmt);
 void STDCALL mysql_close(MYSQL *sock);
-my_socket vio_fd(MYSQL_VIO vio);
-
 
 /* Public key reset */
 void STDCALL mysql_reset_server_public_key(void);
