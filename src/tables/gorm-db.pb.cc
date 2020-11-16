@@ -35,6 +35,10 @@ class GORM_PB_Table_heroDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_hero> _instance;
 } _GORM_PB_Table_hero_default_instance_;
+class GORM_PB_Table_login_logDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_login_log> _instance;
+} _GORM_PB_Table_login_log_default_instance_;
 class GORM_PB_Table_mailDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_mail> _instance;
@@ -47,6 +51,18 @@ class GORM_PB_Table_npcDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_npc> _instance;
 } _GORM_PB_Table_npc_default_instance_;
+class GORM_PB_Table_res_logDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_res_log> _instance;
+} _GORM_PB_Table_res_log_default_instance_;
+class GORM_PB_Table_interactionDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_interaction> _instance;
+} _GORM_PB_Table_interaction_default_instance_;
+class GORM_PB_Table_rolesDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_roles> _instance;
+} _GORM_PB_Table_roles_default_instance_;
 class GORM_PB_Table_roleDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_role> _instance;
@@ -59,18 +75,14 @@ class GORM_PB_Table_skillDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_skill> _instance;
 } _GORM_PB_Table_skill_default_instance_;
-class GORM_PB_Table_interactionDefaultTypeInternal {
+class GORM_PB_Table_ptuserDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_interaction> _instance;
-} _GORM_PB_Table_interaction_default_instance_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_ptuser> _instance;
+} _GORM_PB_Table_ptuser_default_instance_;
 class GORM_PB_Table_userDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_user> _instance;
 } _GORM_PB_Table_user_default_instance_;
-class GORM_PB_Table_rolesDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GORM_PB_Table_roles> _instance;
-} _GORM_PB_Table_roles_default_instance_;
 }  // namespace gorm
 static void InitDefaultsscc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -156,6 +168,20 @@ static void InitDefaultsscc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto}, {}};
 
+static void InitDefaultsscc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::gorm::_GORM_PB_Table_login_log_default_instance_;
+    new (ptr) ::gorm::GORM_PB_Table_login_log();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::gorm::GORM_PB_Table_login_log::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto}, {}};
+
 static void InitDefaultsscc_info_GORM_PB_Table_mail_gorm_2ddb_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -197,6 +223,34 @@ static void InitDefaultsscc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto}, {}};
+
+static void InitDefaultsscc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::gorm::_GORM_PB_Table_ptuser_default_instance_;
+    new (ptr) ::gorm::GORM_PB_Table_ptuser();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::gorm::GORM_PB_Table_ptuser::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto}, {}};
+
+static void InitDefaultsscc_info_GORM_PB_Table_res_log_gorm_2ddb_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::gorm::_GORM_PB_Table_res_log_default_instance_;
+    new (ptr) ::gorm::GORM_PB_Table_res_log();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::gorm::GORM_PB_Table_res_log::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_res_log_gorm_2ddb_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GORM_PB_Table_res_log_gorm_2ddb_2eproto}, {}};
 
 static void InitDefaultsscc_info_GORM_PB_Table_role_gorm_2ddb_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -268,7 +322,7 @@ static void InitDefaultsscc_info_GORM_PB_Table_user_gorm_2ddb_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GORM_PB_Table_user_gorm_2ddb_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gorm_2ddb_2eproto[14];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gorm_2ddb_2eproto[17];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_gorm_2ddb_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gorm_2ddb_2eproto = nullptr;
 
@@ -326,6 +380,19 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_2ddb_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_hero, roleid_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_hero, snakeid_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_hero, heros_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_hero, teams_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, version_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, roleid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, action_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, online_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, ip_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, appid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_login_log, createtime_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_mail, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -362,6 +429,45 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_2ddb_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_npc, snakeid_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_npc, npcs_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, version_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, roleid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, action_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, cfgtype_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, cfgid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, delta_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, value_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_res_log, createtime_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, version_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, roleid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, snakeid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction1_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction2_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction3_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction4_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, version_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, roleid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, userid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, worldid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, dbid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, name_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, charid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, face_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, createtime_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -378,6 +484,9 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_2ddb_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, createtime_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, face_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, online_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, worldid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, pttype_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_role, userid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_scene, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -400,17 +509,14 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_2ddb_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_skill, skill3_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_skill, skill4_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_ptuser, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, version_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, roleid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, snakeid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction1_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction2_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction3_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_interaction, interaction4_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_ptuser, version_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_ptuser, ptid_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_ptuser, pttype_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_ptuser, userid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_user, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -421,20 +527,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_2ddb_2eproto::offsets[] P
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_user, ptid_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_user, pttype_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_user, createtime_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, version_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, roleid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, userid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, worldid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, dbid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, name_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, charid_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, face_),
-  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_roles, createtime_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_Table_user, rolesdata_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::gorm::GORM_PB_Table_currency)},
@@ -442,15 +535,18 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 20, -1, sizeof(::gorm::GORM_PB_Table_equip)},
   { 32, -1, sizeof(::gorm::GORM_PB_Table_food)},
   { 44, -1, sizeof(::gorm::GORM_PB_Table_hero)},
-  { 53, -1, sizeof(::gorm::GORM_PB_Table_mail)},
-  { 67, -1, sizeof(::gorm::GORM_PB_Table_material)},
-  { 79, -1, sizeof(::gorm::GORM_PB_Table_npc)},
-  { 88, -1, sizeof(::gorm::GORM_PB_Table_role)},
-  { 105, -1, sizeof(::gorm::GORM_PB_Table_scene)},
-  { 114, -1, sizeof(::gorm::GORM_PB_Table_skill)},
-  { 126, -1, sizeof(::gorm::GORM_PB_Table_interaction)},
-  { 138, -1, sizeof(::gorm::GORM_PB_Table_user)},
-  { 148, -1, sizeof(::gorm::GORM_PB_Table_roles)},
+  { 54, -1, sizeof(::gorm::GORM_PB_Table_login_log)},
+  { 66, -1, sizeof(::gorm::GORM_PB_Table_mail)},
+  { 80, -1, sizeof(::gorm::GORM_PB_Table_material)},
+  { 92, -1, sizeof(::gorm::GORM_PB_Table_npc)},
+  { 101, -1, sizeof(::gorm::GORM_PB_Table_res_log)},
+  { 114, -1, sizeof(::gorm::GORM_PB_Table_interaction)},
+  { 126, -1, sizeof(::gorm::GORM_PB_Table_roles)},
+  { 140, -1, sizeof(::gorm::GORM_PB_Table_role)},
+  { 160, -1, sizeof(::gorm::GORM_PB_Table_scene)},
+  { 169, -1, sizeof(::gorm::GORM_PB_Table_skill)},
+  { 181, -1, sizeof(::gorm::GORM_PB_Table_ptuser)},
+  { 190, -1, sizeof(::gorm::GORM_PB_Table_user)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -459,80 +555,97 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_equip_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_food_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_hero_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_login_log_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_mail_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_material_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_npc_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_res_log_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_interaction_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_roles_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_role_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_scene_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_skill_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_interaction_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_ptuser_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_user_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gorm::_GORM_PB_Table_roles_default_instance_),
 };
 
 const char descriptor_table_protodef_gorm_2ddb_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rgorm-db.proto\022\004gorm\"\226\001\n\026GORM_PB_Table_"
-  "currency\022\017\n\007version\030\001 \001(\004\022\016\n\006roleid\030\002 \001("
-  "\003\022\017\n\007snakeid\030\003 \001(\005\022\021\n\tcurrency1\030\004 \001(\t\022\021\n"
-  "\tcurrency2\030\005 \001(\t\022\021\n\tcurrency3\030\006 \001(\t\022\021\n\tc"
-  "urrency4\030\007 \001(\t\"K\n\030GORM_PB_Table_cycleeve"
-  "nt\022\017\n\007version\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\016\n\006e"
-  "vents\030\003 \001(\t\"\207\001\n\023GORM_PB_Table_equip\022\017\n\007v"
-  "ersion\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\017\n\007snakeid\030"
-  "\003 \001(\005\022\016\n\006equip1\030\004 \001(\t\022\016\n\006equip2\030\005 \001(\t\022\016\n"
-  "\006equip3\030\006 \001(\t\022\016\n\006equip4\030\007 \001(\t\"\202\001\n\022GORM_P"
-  "B_Table_food\022\017\n\007version\030\001 \001(\004\022\016\n\006roleid\030"
-  "\002 \001(\003\022\017\n\007snakeid\030\003 \001(\005\022\r\n\005food1\030\004 \001(\t\022\r\n"
-  "\005food2\030\005 \001(\t\022\r\n\005food3\030\006 \001(\t\022\r\n\005food4\030\007 \001"
-  "(\t\"U\n\022GORM_PB_Table_hero\022\017\n\007version\030\001 \001("
-  "\004\022\016\n\006roleid\030\002 \001(\003\022\017\n\007snakeid\030\003 \001(\005\022\r\n\005he"
-  "ros\030\004 \001(\t\"\245\001\n\022GORM_PB_Table_mail\022\017\n\007vers"
-  "ion\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\r\n\005mail1\030\003 \001(\t"
-  "\022\r\n\005mail2\030\004 \001(\t\022\r\n\005mail3\030\005 \001(\t\022\r\n\005mail4\030"
-  "\006 \001(\t\022\r\n\005mail5\030\007 \001(\t\022\022\n\nlastmailid\030\010 \001(\005"
-  "\022\017\n\007snakeid\030\t \001(\005\"\226\001\n\026GORM_PB_Table_mate"
-  "rial\022\017\n\007version\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\017\n"
-  "\007snakeid\030\003 \001(\005\022\021\n\tmaterial1\030\004 \001(\t\022\021\n\tmat"
-  "erial2\030\005 \001(\t\022\021\n\tmaterial3\030\006 \001(\t\022\021\n\tmater"
-  "ial4\030\007 \001(\t\"S\n\021GORM_PB_Table_npc\022\017\n\007versi"
-  "on\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\017\n\007snakeid\030\003 \001("
-  "\005\022\014\n\004npcs\030\004 \001(\t\"\335\001\n\022GORM_PB_Table_role\022\017"
-  "\n\007version\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\020\n\010rolen"
-  "ame\030\003 \001(\t\022\r\n\005level\030\004 \001(\005\022\013\n\003exp\030\005 \001(\003\022\023\n"
-  "\013characterid\030\006 \001(\005\022\014\n\004gold\030\007 \001(\005\022\023\n\013offl"
-  "inetime\030\010 \001(\003\022\016\n\006inited\030\t \001(\005\022\022\n\ncreatet"
-  "ime\030\n \001(\003\022\014\n\004face\030\013 \001(\t\022\016\n\006online\030\014 \001(\003\""
-  "Y\n\023GORM_PB_Table_scene\022\017\n\007version\030\001 \001(\004\022"
-  "\016\n\006roleid\030\002 \001(\003\022\017\n\007sceneid\030\003 \001(\005\022\020\n\010coll"
-  "ects\030\004 \001(\t\"\207\001\n\023GORM_PB_Table_skill\022\017\n\007ve"
-  "rsion\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\017\n\007snakeid\030\003"
-  " \001(\005\022\016\n\006skill1\030\004 \001(\t\022\016\n\006skill2\030\005 \001(\t\022\016\n\006"
-  "skill3\030\006 \001(\t\022\016\n\006skill4\030\007 \001(\t\"\245\001\n\031GORM_PB"
-  "_Table_interaction\022\017\n\007version\030\001 \001(\004\022\016\n\006r"
-  "oleid\030\002 \001(\003\022\017\n\007snakeid\030\003 \001(\005\022\024\n\014interact"
-  "ion1\030\004 \001(\t\022\024\n\014interaction2\030\005 \001(\t\022\024\n\014inte"
-  "raction3\030\006 \001(\t\022\024\n\014interaction4\030\007 \001(\t\"g\n\022"
-  "GORM_PB_Table_user\022\017\n\007version\030\001 \001(\004\022\016\n\006u"
-  "serid\030\002 \001(\003\022\014\n\004ptid\030\003 \001(\t\022\016\n\006pttype\030\004 \001("
-  "\005\022\022\n\ncreatetime\030\005 \001(\003\"\245\001\n\023GORM_PB_Table_"
-  "roles\022\017\n\007version\030\001 \001(\004\022\016\n\006roleid\030\002 \001(\003\022\016"
-  "\n\006userid\030\003 \001(\003\022\017\n\007worldid\030\004 \001(\003\022\014\n\004dbid\030"
-  "\005 \001(\005\022\014\n\004name\030\006 \001(\t\022\016\n\006charid\030\007 \001(\005\022\014\n\004f"
-  "ace\030\010 \001(\t\022\022\n\ncreatetime\030\t \001(\003B\013Z\tgorm/go"
-  "rmb\006proto3"
+  "currency\022\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001("
+  "\020\022\017\n\007snakeid\030\003 \001(\017\022\021\n\tcurrency1\030\004 \001(\014\022\021\n"
+  "\tcurrency2\030\005 \001(\014\022\021\n\tcurrency3\030\006 \001(\014\022\021\n\tc"
+  "urrency4\030\007 \001(\014\"K\n\030GORM_PB_Table_cycleeve"
+  "nt\022\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\016\n\006e"
+  "vents\030\003 \001(\014\"\207\001\n\023GORM_PB_Table_equip\022\017\n\007v"
+  "ersion\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\017\n\007snakeid\030"
+  "\003 \001(\017\022\016\n\006equip1\030\004 \001(\014\022\016\n\006equip2\030\005 \001(\014\022\016\n"
+  "\006equip3\030\006 \001(\014\022\016\n\006equip4\030\007 \001(\014\"\202\001\n\022GORM_P"
+  "B_Table_food\022\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030"
+  "\002 \001(\020\022\017\n\007snakeid\030\003 \001(\017\022\r\n\005food1\030\004 \001(\014\022\r\n"
+  "\005food2\030\005 \001(\014\022\r\n\005food3\030\006 \001(\014\022\r\n\005food4\030\007 \001"
+  "(\014\"d\n\022GORM_PB_Table_hero\022\017\n\007version\030\001 \001("
+  "\006\022\016\n\006roleid\030\002 \001(\020\022\017\n\007snakeid\030\003 \001(\017\022\r\n\005he"
+  "ros\030\004 \001(\014\022\r\n\005teams\030\005 \001(\014\"\211\001\n\027GORM_PB_Tab"
+  "le_login_log\022\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030"
+  "\002 \001(\020\022\016\n\006action\030\003 \001(\017\022\016\n\006online\030\004 \001(\017\022\n\n"
+  "\002ip\030\005 \001(\014\022\r\n\005appid\030\006 \001(\014\022\022\n\ncreatetime\030\007"
+  " \001(\020\"\245\001\n\022GORM_PB_Table_mail\022\017\n\007version\030\001"
+  " \001(\006\022\016\n\006roleid\030\002 \001(\020\022\r\n\005mail1\030\003 \001(\014\022\r\n\005m"
+  "ail2\030\004 \001(\014\022\r\n\005mail3\030\005 \001(\014\022\r\n\005mail4\030\006 \001(\014"
+  "\022\r\n\005mail5\030\007 \001(\014\022\022\n\nlastmailid\030\010 \001(\017\022\017\n\007s"
+  "nakeid\030\t \001(\017\"\226\001\n\026GORM_PB_Table_material\022"
+  "\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\017\n\007snak"
+  "eid\030\003 \001(\017\022\021\n\tmaterial1\030\004 \001(\014\022\021\n\tmaterial"
+  "2\030\005 \001(\014\022\021\n\tmaterial3\030\006 \001(\014\022\021\n\tmaterial4\030"
+  "\007 \001(\014\"S\n\021GORM_PB_Table_npc\022\017\n\007version\030\001 "
+  "\001(\006\022\016\n\006roleid\030\002 \001(\020\022\017\n\007snakeid\030\003 \001(\017\022\014\n\004"
+  "npcs\030\004 \001(\014\"\232\001\n\025GORM_PB_Table_res_log\022\017\n\007"
+  "version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\016\n\006action\030"
+  "\003 \001(\017\022\017\n\007cfgtype\030\004 \001(\017\022\r\n\005cfgid\030\005 \001(\017\022\r\n"
+  "\005delta\030\006 \001(\017\022\r\n\005value\030\007 \001(\017\022\022\n\ncreatetim"
+  "e\030\010 \001(\020\"\245\001\n\031GORM_PB_Table_interaction\022\017\n"
+  "\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\017\n\007snakei"
+  "d\030\003 \001(\017\022\024\n\014interaction1\030\004 \001(\014\022\024\n\014interac"
+  "tion2\030\005 \001(\014\022\024\n\014interaction3\030\006 \001(\014\022\024\n\014int"
+  "eraction4\030\007 \001(\014\"\245\001\n\023GORM_PB_Table_roles\022"
+  "\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\016\n\006user"
+  "id\030\003 \001(\020\022\017\n\007worldid\030\004 \001(\020\022\014\n\004dbid\030\005 \001(\017\022"
+  "\014\n\004name\030\006 \001(\014\022\016\n\006charid\030\007 \001(\017\022\014\n\004face\030\010 "
+  "\001(\014\022\022\n\ncreatetime\030\t \001(\020\"\216\002\n\022GORM_PB_Tabl"
+  "e_role\022\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022"
+  "\020\n\010rolename\030\003 \001(\014\022\r\n\005level\030\004 \001(\017\022\013\n\003exp\030"
+  "\005 \001(\020\022\023\n\013characterid\030\006 \001(\017\022\014\n\004gold\030\007 \001(\017"
+  "\022\023\n\013offlinetime\030\010 \001(\020\022\016\n\006inited\030\t \001(\017\022\022\n"
+  "\ncreatetime\030\n \001(\020\022\014\n\004face\030\013 \001(\014\022\016\n\006onlin"
+  "e\030\014 \001(\020\022\017\n\007worldid\030\r \001(\020\022\016\n\006pttype\030\016 \001(\017"
+  "\022\016\n\006userid\030\017 \001(\020\"Y\n\023GORM_PB_Table_scene\022"
+  "\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002 \001(\020\022\017\n\007scen"
+  "eid\030\003 \001(\017\022\020\n\010collects\030\004 \001(\014\"\207\001\n\023GORM_PB_"
+  "Table_skill\022\017\n\007version\030\001 \001(\006\022\016\n\006roleid\030\002"
+  " \001(\020\022\017\n\007snakeid\030\003 \001(\017\022\016\n\006skill1\030\004 \001(\014\022\016\n"
+  "\006skill2\030\005 \001(\014\022\016\n\006skill3\030\006 \001(\014\022\016\n\006skill4\030"
+  "\007 \001(\014\"U\n\024GORM_PB_Table_ptuser\022\017\n\007version"
+  "\030\001 \001(\006\022\014\n\004ptid\030\002 \001(\014\022\016\n\006pttype\030\003 \001(\017\022\016\n\006"
+  "userid\030\004 \001(\020\"z\n\022GORM_PB_Table_user\022\017\n\007ve"
+  "rsion\030\001 \001(\006\022\016\n\006userid\030\002 \001(\020\022\014\n\004ptid\030\003 \001("
+  "\014\022\016\n\006pttype\030\004 \001(\017\022\022\n\ncreatetime\030\005 \001(\020\022\021\n"
+  "\trolesdata\030\006 \001(\014B\013Z\tgorm/gormb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_gorm_2ddb_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gorm_2ddb_2eproto_sccs[14] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gorm_2ddb_2eproto_sccs[17] = {
   &scc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_cycleevent_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_equip_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_food_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_hero_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base,
+  &scc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_mail_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_material_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto.base,
+  &scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto.base,
+  &scc_info_GORM_PB_Table_res_log_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base,
   &scc_info_GORM_PB_Table_scene_gorm_2ddb_2eproto.base,
@@ -541,10 +654,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gorm_2ddb_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gorm_2ddb_2eproto = {
-  false, false, descriptor_table_protodef_gorm_2ddb_2eproto, "gorm-db.proto", 1930,
-  &descriptor_table_gorm_2ddb_2eproto_once, descriptor_table_gorm_2ddb_2eproto_sccs, descriptor_table_gorm_2ddb_2eproto_deps, 14, 0,
+  false, false, descriptor_table_protodef_gorm_2ddb_2eproto, "gorm-db.proto", 2397,
+  &descriptor_table_gorm_2ddb_2eproto_once, descriptor_table_gorm_2ddb_2eproto_sccs, descriptor_table_gorm_2ddb_2eproto_deps, 17, 0,
   schemas, file_default_instances, TableStruct_gorm_2ddb_2eproto::offsets,
-  file_level_metadata_gorm_2ddb_2eproto, 14, file_level_enum_descriptors_gorm_2ddb_2eproto, file_level_service_descriptors_gorm_2ddb_2eproto,
+  file_level_metadata_gorm_2ddb_2eproto, 17, file_level_enum_descriptors_gorm_2ddb_2eproto, file_level_service_descriptors_gorm_2ddb_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -658,60 +771,56 @@ const char* GORM_PB_Table_currency::_InternalParse(const char* ptr, ::PROTOBUF_N
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string currency1 = 4;
+      // bytes currency1 = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_currency1();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_currency.currency1"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string currency2 = 5;
+      // bytes currency2 = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_currency2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_currency.currency2"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string currency3 = 6;
+      // bytes currency3 = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           auto str = _internal_mutable_currency3();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_currency.currency3"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string currency4 = 7;
+      // bytes currency4 = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
           auto str = _internal_mutable_currency4();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_currency.currency4"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -743,61 +852,45 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string currency1 = 4;
+  // bytes currency1 = 4;
   if (this->currency1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_currency1().data(), static_cast<int>(this->_internal_currency1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_currency.currency1");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_currency1(), target);
   }
 
-  // string currency2 = 5;
+  // bytes currency2 = 5;
   if (this->currency2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_currency2().data(), static_cast<int>(this->_internal_currency2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_currency.currency2");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         5, this->_internal_currency2(), target);
   }
 
-  // string currency3 = 6;
+  // bytes currency3 = 6;
   if (this->currency3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_currency3().data(), static_cast<int>(this->_internal_currency3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_currency.currency3");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         6, this->_internal_currency3(), target);
   }
 
-  // string currency4 = 7;
+  // bytes currency4 = 7;
   if (this->currency4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_currency4().data(), static_cast<int>(this->_internal_currency4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_currency.currency4");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         7, this->_internal_currency4(), target);
   }
 
@@ -817,53 +910,47 @@ size_t GORM_PB_Table_currency::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string currency1 = 4;
+  // bytes currency1 = 4;
   if (this->currency1().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_currency1());
   }
 
-  // string currency2 = 5;
+  // bytes currency2 = 5;
   if (this->currency2().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_currency2());
   }
 
-  // string currency3 = 6;
+  // bytes currency3 = 6;
   if (this->currency3().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_currency3());
   }
 
-  // string currency4 = 7;
+  // bytes currency4 = 7;
   if (this->currency4().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_currency4());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1041,26 +1128,25 @@ const char* GORM_PB_Table_cycleevent::_InternalParse(const char* ptr, ::PROTOBUF
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // string events = 3;
+      // bytes events = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_events();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_cycleevent.events"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1092,25 +1178,21 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // string events = 3;
+  // bytes events = 3;
   if (this->events().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_events().data(), static_cast<int>(this->_internal_events().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_cycleevent.events");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         3, this->_internal_events(), target);
   }
 
@@ -1130,25 +1212,21 @@ size_t GORM_PB_Table_cycleevent::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string events = 3;
+  // bytes events = 3;
   if (this->events().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_events());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1335,60 +1413,56 @@ const char* GORM_PB_Table_equip::_InternalParse(const char* ptr, ::PROTOBUF_NAME
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string equip1 = 4;
+      // bytes equip1 = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_equip1();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_equip.equip1"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string equip2 = 5;
+      // bytes equip2 = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_equip2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_equip.equip2"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string equip3 = 6;
+      // bytes equip3 = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           auto str = _internal_mutable_equip3();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_equip.equip3"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string equip4 = 7;
+      // bytes equip4 = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
           auto str = _internal_mutable_equip4();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_equip.equip4"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1420,61 +1494,45 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string equip1 = 4;
+  // bytes equip1 = 4;
   if (this->equip1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_equip1().data(), static_cast<int>(this->_internal_equip1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_equip.equip1");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_equip1(), target);
   }
 
-  // string equip2 = 5;
+  // bytes equip2 = 5;
   if (this->equip2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_equip2().data(), static_cast<int>(this->_internal_equip2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_equip.equip2");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         5, this->_internal_equip2(), target);
   }
 
-  // string equip3 = 6;
+  // bytes equip3 = 6;
   if (this->equip3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_equip3().data(), static_cast<int>(this->_internal_equip3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_equip.equip3");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         6, this->_internal_equip3(), target);
   }
 
-  // string equip4 = 7;
+  // bytes equip4 = 7;
   if (this->equip4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_equip4().data(), static_cast<int>(this->_internal_equip4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_equip.equip4");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         7, this->_internal_equip4(), target);
   }
 
@@ -1494,53 +1552,47 @@ size_t GORM_PB_Table_equip::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string equip1 = 4;
+  // bytes equip1 = 4;
   if (this->equip1().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_equip1());
   }
 
-  // string equip2 = 5;
+  // bytes equip2 = 5;
   if (this->equip2().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_equip2());
   }
 
-  // string equip3 = 6;
+  // bytes equip3 = 6;
   if (this->equip3().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_equip3());
   }
 
-  // string equip4 = 7;
+  // bytes equip4 = 7;
   if (this->equip4().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_equip4());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1742,60 +1794,56 @@ const char* GORM_PB_Table_food::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string food1 = 4;
+      // bytes food1 = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_food1();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_food.food1"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string food2 = 5;
+      // bytes food2 = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_food2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_food.food2"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string food3 = 6;
+      // bytes food3 = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           auto str = _internal_mutable_food3();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_food.food3"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string food4 = 7;
+      // bytes food4 = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
           auto str = _internal_mutable_food4();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_food.food4"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1827,61 +1875,45 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string food1 = 4;
+  // bytes food1 = 4;
   if (this->food1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_food1().data(), static_cast<int>(this->_internal_food1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_food.food1");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_food1(), target);
   }
 
-  // string food2 = 5;
+  // bytes food2 = 5;
   if (this->food2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_food2().data(), static_cast<int>(this->_internal_food2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_food.food2");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         5, this->_internal_food2(), target);
   }
 
-  // string food3 = 6;
+  // bytes food3 = 6;
   if (this->food3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_food3().data(), static_cast<int>(this->_internal_food3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_food.food3");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         6, this->_internal_food3(), target);
   }
 
-  // string food4 = 7;
+  // bytes food4 = 7;
   if (this->food4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_food4().data(), static_cast<int>(this->_internal_food4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_food.food4");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         7, this->_internal_food4(), target);
   }
 
@@ -1901,53 +1933,47 @@ size_t GORM_PB_Table_food::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string food1 = 4;
+  // bytes food1 = 4;
   if (this->food1().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_food1());
   }
 
-  // string food2 = 5;
+  // bytes food2 = 5;
   if (this->food2().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_food2());
   }
 
-  // string food3 = 6;
+  // bytes food3 = 6;
   if (this->food3().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_food3());
   }
 
-  // string food4 = 7;
+  // bytes food4 = 7;
   if (this->food4().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_food4());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2064,6 +2090,11 @@ GORM_PB_Table_hero::GORM_PB_Table_hero(const GORM_PB_Table_hero& from)
     heros_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_heros(),
       GetArena());
   }
+  teams_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_teams().empty()) {
+    teams_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_teams(),
+      GetArena());
+  }
   ::memcpy(&version_, &from.version_,
     static_cast<size_t>(reinterpret_cast<char*>(&snakeid_) -
     reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
@@ -2073,6 +2104,7 @@ GORM_PB_Table_hero::GORM_PB_Table_hero(const GORM_PB_Table_hero& from)
 void GORM_PB_Table_hero::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_hero_gorm_2ddb_2eproto.base);
   heros_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  teams_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&version_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&snakeid_) -
       reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
@@ -2087,6 +2119,7 @@ GORM_PB_Table_hero::~GORM_PB_Table_hero() {
 void GORM_PB_Table_hero::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   heros_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  teams_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void GORM_PB_Table_hero::ArenaDtor(void* object) {
@@ -2111,6 +2144,7 @@ void GORM_PB_Table_hero::Clear() {
   (void) cached_has_bits;
 
   heros_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  teams_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&version_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&snakeid_) -
       reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
@@ -2125,33 +2159,40 @@ const char* GORM_PB_Table_hero::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string heros = 4;
+      // bytes heros = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_heros();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_hero.heros"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes teams = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_teams();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2183,32 +2224,34 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string heros = 4;
+  // bytes heros = 4;
   if (this->heros().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_heros().data(), static_cast<int>(this->_internal_heros().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_hero.heros");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_heros(), target);
+  }
+
+  // bytes teams = 5;
+  if (this->teams().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        5, this->_internal_teams(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2227,32 +2270,33 @@ size_t GORM_PB_Table_hero::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string heros = 4;
+  // bytes heros = 4;
   if (this->heros().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_heros());
   }
 
-  // uint64 version = 1;
+  // bytes teams = 5;
+  if (this->teams().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_teams());
+  }
+
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2289,6 +2333,9 @@ void GORM_PB_Table_hero::MergeFrom(const GORM_PB_Table_hero& from) {
   if (from.heros().size() > 0) {
     _internal_set_heros(from._internal_heros());
   }
+  if (from.teams().size() > 0) {
+    _internal_set_teams(from._internal_teams());
+  }
   if (from.version() != 0) {
     _internal_set_version(from._internal_version());
   }
@@ -2322,6 +2369,7 @@ void GORM_PB_Table_hero::InternalSwap(GORM_PB_Table_hero* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   heros_.Swap(&other->heros_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  teams_.Swap(&other->teams_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(GORM_PB_Table_hero, snakeid_)
       + sizeof(GORM_PB_Table_hero::snakeid_)
@@ -2331,6 +2379,363 @@ void GORM_PB_Table_hero::InternalSwap(GORM_PB_Table_hero* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_hero::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void GORM_PB_Table_login_log::InitAsDefaultInstance() {
+}
+class GORM_PB_Table_login_log::_Internal {
+ public:
+};
+
+GORM_PB_Table_login_log::GORM_PB_Table_login_log(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_login_log)
+}
+GORM_PB_Table_login_log::GORM_PB_Table_login_log(const GORM_PB_Table_login_log& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_ip().empty()) {
+    ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_ip(),
+      GetArena());
+  }
+  appid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_appid().empty()) {
+    appid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_appid(),
+      GetArena());
+  }
+  ::memcpy(&version_, &from.version_,
+    static_cast<size_t>(reinterpret_cast<char*>(&createtime_) -
+    reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
+  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_login_log)
+}
+
+void GORM_PB_Table_login_log::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto.base);
+  ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  appid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&createtime_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
+}
+
+GORM_PB_Table_login_log::~GORM_PB_Table_login_log() {
+  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_login_log)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GORM_PB_Table_login_log::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  ip_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  appid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void GORM_PB_Table_login_log::ArenaDtor(void* object) {
+  GORM_PB_Table_login_log* _this = reinterpret_cast< GORM_PB_Table_login_log* >(object);
+  (void)_this;
+}
+void GORM_PB_Table_login_log::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GORM_PB_Table_login_log::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GORM_PB_Table_login_log& GORM_PB_Table_login_log::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GORM_PB_Table_login_log::Clear() {
+// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_login_log)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ip_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  appid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&createtime_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GORM_PB_Table_login_log::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // fixed64 version = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 roleid = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 action = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          action_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 online = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          online_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // bytes ip = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_ip();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes appid = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          auto str = _internal_mutable_appid();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 createtime = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 57)) {
+          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_login_log::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_login_log)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
+  }
+
+  // sfixed32 action = 3;
+  if (this->action() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_action(), target);
+  }
+
+  // sfixed32 online = 4;
+  if (this->online() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(4, this->_internal_online(), target);
+  }
+
+  // bytes ip = 5;
+  if (this->ip().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        5, this->_internal_ip(), target);
+  }
+
+  // bytes appid = 6;
+  if (this->appid().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        6, this->_internal_appid(), target);
+  }
+
+  // sfixed64 createtime = 7;
+  if (this->createtime() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(7, this->_internal_createtime(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_login_log)
+  return target;
+}
+
+size_t GORM_PB_Table_login_log::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_login_log)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bytes ip = 5;
+  if (this->ip().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_ip());
+  }
+
+  // bytes appid = 6;
+  if (this->appid().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_appid());
+  }
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed32 action = 3;
+  if (this->action() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 online = 4;
+  if (this->online() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed64 createtime = 7;
+  if (this->createtime() != 0) {
+    total_size += 1 + 8;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GORM_PB_Table_login_log::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_login_log)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GORM_PB_Table_login_log* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_login_log>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_login_log)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_login_log)
+    MergeFrom(*source);
+  }
+}
+
+void GORM_PB_Table_login_log::MergeFrom(const GORM_PB_Table_login_log& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_login_log)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.ip().size() > 0) {
+    _internal_set_ip(from._internal_ip());
+  }
+  if (from.appid().size() > 0) {
+    _internal_set_appid(from._internal_appid());
+  }
+  if (from.version() != 0) {
+    _internal_set_version(from._internal_version());
+  }
+  if (from.roleid() != 0) {
+    _internal_set_roleid(from._internal_roleid());
+  }
+  if (from.action() != 0) {
+    _internal_set_action(from._internal_action());
+  }
+  if (from.online() != 0) {
+    _internal_set_online(from._internal_online());
+  }
+  if (from.createtime() != 0) {
+    _internal_set_createtime(from._internal_createtime());
+  }
+}
+
+void GORM_PB_Table_login_log::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_login_log)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GORM_PB_Table_login_log::CopyFrom(const GORM_PB_Table_login_log& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_login_log)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GORM_PB_Table_login_log::IsInitialized() const {
+  return true;
+}
+
+void GORM_PB_Table_login_log::InternalSwap(GORM_PB_Table_login_log* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ip_.Swap(&other->ip_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  appid_.Swap(&other->appid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_login_log, createtime_)
+      + sizeof(GORM_PB_Table_login_log::createtime_)
+      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_login_log, version_)>(
+          reinterpret_cast<char*>(&version_),
+          reinterpret_cast<char*>(&other->version_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_login_log::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -2450,77 +2855,72 @@ const char* GORM_PB_Table_mail::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // string mail1 = 3;
+      // bytes mail1 = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_mail1();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_mail.mail1"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string mail2 = 4;
+      // bytes mail2 = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_mail2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_mail.mail2"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string mail3 = 5;
+      // bytes mail3 = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_mail3();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_mail.mail3"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string mail4 = 6;
+      // bytes mail4 = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           auto str = _internal_mutable_mail4();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_mail.mail4"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string mail5 = 7;
+      // bytes mail5 = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
           auto str = _internal_mutable_mail5();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_mail.mail5"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 lastmailid = 8;
+      // sfixed32 lastmailid = 8;
       case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
-          lastmailid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 69)) {
+          lastmailid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 9;
+      // sfixed32 snakeid = 9;
       case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 77)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
       default: {
@@ -2551,78 +2951,58 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // string mail1 = 3;
+  // bytes mail1 = 3;
   if (this->mail1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_mail1().data(), static_cast<int>(this->_internal_mail1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_mail.mail1");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         3, this->_internal_mail1(), target);
   }
 
-  // string mail2 = 4;
+  // bytes mail2 = 4;
   if (this->mail2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_mail2().data(), static_cast<int>(this->_internal_mail2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_mail.mail2");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_mail2(), target);
   }
 
-  // string mail3 = 5;
+  // bytes mail3 = 5;
   if (this->mail3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_mail3().data(), static_cast<int>(this->_internal_mail3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_mail.mail3");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         5, this->_internal_mail3(), target);
   }
 
-  // string mail4 = 6;
+  // bytes mail4 = 6;
   if (this->mail4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_mail4().data(), static_cast<int>(this->_internal_mail4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_mail.mail4");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         6, this->_internal_mail4(), target);
   }
 
-  // string mail5 = 7;
+  // bytes mail5 = 7;
   if (this->mail5().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_mail5().data(), static_cast<int>(this->_internal_mail5().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_mail.mail5");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         7, this->_internal_mail5(), target);
   }
 
-  // int32 lastmailid = 8;
+  // sfixed32 lastmailid = 8;
   if (this->lastmailid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_lastmailid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(8, this->_internal_lastmailid(), target);
   }
 
-  // int32 snakeid = 9;
+  // sfixed32 snakeid = 9;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(9, this->_internal_snakeid(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2641,67 +3021,59 @@ size_t GORM_PB_Table_mail::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string mail1 = 3;
+  // bytes mail1 = 3;
   if (this->mail1().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_mail1());
   }
 
-  // string mail2 = 4;
+  // bytes mail2 = 4;
   if (this->mail2().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_mail2());
   }
 
-  // string mail3 = 5;
+  // bytes mail3 = 5;
   if (this->mail3().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_mail3());
   }
 
-  // string mail4 = 6;
+  // bytes mail4 = 6;
   if (this->mail4().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_mail4());
   }
 
-  // string mail5 = 7;
+  // bytes mail5 = 7;
   if (this->mail5().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_mail5());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 lastmailid = 8;
+  // sfixed32 lastmailid = 8;
   if (this->lastmailid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_lastmailid());
+    total_size += 1 + 4;
   }
 
-  // int32 snakeid = 9;
+  // sfixed32 snakeid = 9;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2910,60 +3282,56 @@ const char* GORM_PB_Table_material::_InternalParse(const char* ptr, ::PROTOBUF_N
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string material1 = 4;
+      // bytes material1 = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_material1();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_material.material1"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string material2 = 5;
+      // bytes material2 = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_material2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_material.material2"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string material3 = 6;
+      // bytes material3 = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           auto str = _internal_mutable_material3();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_material.material3"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string material4 = 7;
+      // bytes material4 = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
           auto str = _internal_mutable_material4();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_material.material4"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2995,61 +3363,45 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string material1 = 4;
+  // bytes material1 = 4;
   if (this->material1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_material1().data(), static_cast<int>(this->_internal_material1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_material.material1");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_material1(), target);
   }
 
-  // string material2 = 5;
+  // bytes material2 = 5;
   if (this->material2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_material2().data(), static_cast<int>(this->_internal_material2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_material.material2");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         5, this->_internal_material2(), target);
   }
 
-  // string material3 = 6;
+  // bytes material3 = 6;
   if (this->material3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_material3().data(), static_cast<int>(this->_internal_material3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_material.material3");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         6, this->_internal_material3(), target);
   }
 
-  // string material4 = 7;
+  // bytes material4 = 7;
   if (this->material4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_material4().data(), static_cast<int>(this->_internal_material4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_material.material4");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         7, this->_internal_material4(), target);
   }
 
@@ -3069,53 +3421,47 @@ size_t GORM_PB_Table_material::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string material1 = 4;
+  // bytes material1 = 4;
   if (this->material1().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_material1());
   }
 
-  // string material2 = 5;
+  // bytes material2 = 5;
   if (this->material2().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_material2());
   }
 
-  // string material3 = 6;
+  // bytes material3 = 6;
   if (this->material3().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_material3());
   }
 
-  // string material4 = 7;
+  // bytes material4 = 7;
   if (this->material4().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_material4());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3293,33 +3639,32 @@ const char* GORM_PB_Table_npc::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string npcs = 4;
+      // bytes npcs = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_npcs();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_npc.npcs"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3351,31 +3696,27 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string npcs = 4;
+  // bytes npcs = 4;
   if (this->npcs().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_npcs().data(), static_cast<int>(this->_internal_npcs().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_npc.npcs");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_npcs(), target);
   }
 
@@ -3395,32 +3736,26 @@ size_t GORM_PB_Table_npc::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string npcs = 4;
+  // bytes npcs = 4;
   if (this->npcs().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_npcs());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3505,6 +3840,1139 @@ void GORM_PB_Table_npc::InternalSwap(GORM_PB_Table_npc* other) {
 
 // ===================================================================
 
+void GORM_PB_Table_res_log::InitAsDefaultInstance() {
+}
+class GORM_PB_Table_res_log::_Internal {
+ public:
+};
+
+GORM_PB_Table_res_log::GORM_PB_Table_res_log(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_res_log)
+}
+GORM_PB_Table_res_log::GORM_PB_Table_res_log(const GORM_PB_Table_res_log& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&version_, &from.version_,
+    static_cast<size_t>(reinterpret_cast<char*>(&value_) -
+    reinterpret_cast<char*>(&version_)) + sizeof(value_));
+  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_res_log)
+}
+
+void GORM_PB_Table_res_log::SharedCtor() {
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(value_));
+}
+
+GORM_PB_Table_res_log::~GORM_PB_Table_res_log() {
+  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_res_log)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GORM_PB_Table_res_log::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void GORM_PB_Table_res_log::ArenaDtor(void* object) {
+  GORM_PB_Table_res_log* _this = reinterpret_cast< GORM_PB_Table_res_log* >(object);
+  (void)_this;
+}
+void GORM_PB_Table_res_log::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GORM_PB_Table_res_log::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GORM_PB_Table_res_log& GORM_PB_Table_res_log::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_res_log_gorm_2ddb_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GORM_PB_Table_res_log::Clear() {
+// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_res_log)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&value_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(value_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GORM_PB_Table_res_log::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // fixed64 version = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 roleid = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 action = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          action_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 cfgtype = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          cfgtype_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 cfgid = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 45)) {
+          cfgid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 delta = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 53)) {
+          delta_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 value = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
+          value_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 createtime = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 65)) {
+          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_res_log::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_res_log)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
+  }
+
+  // sfixed32 action = 3;
+  if (this->action() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_action(), target);
+  }
+
+  // sfixed32 cfgtype = 4;
+  if (this->cfgtype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(4, this->_internal_cfgtype(), target);
+  }
+
+  // sfixed32 cfgid = 5;
+  if (this->cfgid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(5, this->_internal_cfgid(), target);
+  }
+
+  // sfixed32 delta = 6;
+  if (this->delta() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(6, this->_internal_delta(), target);
+  }
+
+  // sfixed32 value = 7;
+  if (this->value() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(7, this->_internal_value(), target);
+  }
+
+  // sfixed64 createtime = 8;
+  if (this->createtime() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(8, this->_internal_createtime(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_res_log)
+  return target;
+}
+
+size_t GORM_PB_Table_res_log::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_res_log)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed32 action = 3;
+  if (this->action() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 cfgtype = 4;
+  if (this->cfgtype() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 cfgid = 5;
+  if (this->cfgid() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 delta = 6;
+  if (this->delta() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed64 createtime = 8;
+  if (this->createtime() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed32 value = 7;
+  if (this->value() != 0) {
+    total_size += 1 + 4;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GORM_PB_Table_res_log::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_res_log)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GORM_PB_Table_res_log* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_res_log>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_res_log)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_res_log)
+    MergeFrom(*source);
+  }
+}
+
+void GORM_PB_Table_res_log::MergeFrom(const GORM_PB_Table_res_log& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_res_log)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.version() != 0) {
+    _internal_set_version(from._internal_version());
+  }
+  if (from.roleid() != 0) {
+    _internal_set_roleid(from._internal_roleid());
+  }
+  if (from.action() != 0) {
+    _internal_set_action(from._internal_action());
+  }
+  if (from.cfgtype() != 0) {
+    _internal_set_cfgtype(from._internal_cfgtype());
+  }
+  if (from.cfgid() != 0) {
+    _internal_set_cfgid(from._internal_cfgid());
+  }
+  if (from.delta() != 0) {
+    _internal_set_delta(from._internal_delta());
+  }
+  if (from.createtime() != 0) {
+    _internal_set_createtime(from._internal_createtime());
+  }
+  if (from.value() != 0) {
+    _internal_set_value(from._internal_value());
+  }
+}
+
+void GORM_PB_Table_res_log::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_res_log)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GORM_PB_Table_res_log::CopyFrom(const GORM_PB_Table_res_log& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_res_log)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GORM_PB_Table_res_log::IsInitialized() const {
+  return true;
+}
+
+void GORM_PB_Table_res_log::InternalSwap(GORM_PB_Table_res_log* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_res_log, value_)
+      + sizeof(GORM_PB_Table_res_log::value_)
+      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_res_log, version_)>(
+          reinterpret_cast<char*>(&version_),
+          reinterpret_cast<char*>(&other->version_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_res_log::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void GORM_PB_Table_interaction::InitAsDefaultInstance() {
+}
+class GORM_PB_Table_interaction::_Internal {
+ public:
+};
+
+GORM_PB_Table_interaction::GORM_PB_Table_interaction(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_interaction)
+}
+GORM_PB_Table_interaction::GORM_PB_Table_interaction(const GORM_PB_Table_interaction& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  interaction1_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_interaction1().empty()) {
+    interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction1(),
+      GetArena());
+  }
+  interaction2_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_interaction2().empty()) {
+    interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction2(),
+      GetArena());
+  }
+  interaction3_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_interaction3().empty()) {
+    interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction3(),
+      GetArena());
+  }
+  interaction4_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_interaction4().empty()) {
+    interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction4(),
+      GetArena());
+  }
+  ::memcpy(&version_, &from.version_,
+    static_cast<size_t>(reinterpret_cast<char*>(&snakeid_) -
+    reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
+  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_interaction)
+}
+
+void GORM_PB_Table_interaction::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base);
+  interaction1_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  interaction2_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  interaction3_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  interaction4_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&snakeid_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
+}
+
+GORM_PB_Table_interaction::~GORM_PB_Table_interaction() {
+  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_interaction)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GORM_PB_Table_interaction::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  interaction1_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  interaction2_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  interaction3_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  interaction4_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void GORM_PB_Table_interaction::ArenaDtor(void* object) {
+  GORM_PB_Table_interaction* _this = reinterpret_cast< GORM_PB_Table_interaction* >(object);
+  (void)_this;
+}
+void GORM_PB_Table_interaction::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GORM_PB_Table_interaction::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GORM_PB_Table_interaction& GORM_PB_Table_interaction::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GORM_PB_Table_interaction::Clear() {
+// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_interaction)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  interaction1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  interaction2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  interaction3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  interaction4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&snakeid_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GORM_PB_Table_interaction::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // fixed64 version = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 roleid = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 snakeid = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // bytes interaction1 = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          auto str = _internal_mutable_interaction1();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes interaction2 = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_interaction2();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes interaction3 = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          auto str = _internal_mutable_interaction3();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bytes interaction4 = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          auto str = _internal_mutable_interaction4();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_interaction::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_interaction)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
+  }
+
+  // sfixed32 snakeid = 3;
+  if (this->snakeid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
+  }
+
+  // bytes interaction1 = 4;
+  if (this->interaction1().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        4, this->_internal_interaction1(), target);
+  }
+
+  // bytes interaction2 = 5;
+  if (this->interaction2().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        5, this->_internal_interaction2(), target);
+  }
+
+  // bytes interaction3 = 6;
+  if (this->interaction3().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        6, this->_internal_interaction3(), target);
+  }
+
+  // bytes interaction4 = 7;
+  if (this->interaction4().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        7, this->_internal_interaction4(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_interaction)
+  return target;
+}
+
+size_t GORM_PB_Table_interaction::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_interaction)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bytes interaction1 = 4;
+  if (this->interaction1().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_interaction1());
+  }
+
+  // bytes interaction2 = 5;
+  if (this->interaction2().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_interaction2());
+  }
+
+  // bytes interaction3 = 6;
+  if (this->interaction3().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_interaction3());
+  }
+
+  // bytes interaction4 = 7;
+  if (this->interaction4().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_interaction4());
+  }
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed32 snakeid = 3;
+  if (this->snakeid() != 0) {
+    total_size += 1 + 4;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GORM_PB_Table_interaction::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_interaction)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GORM_PB_Table_interaction* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_interaction>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_interaction)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_interaction)
+    MergeFrom(*source);
+  }
+}
+
+void GORM_PB_Table_interaction::MergeFrom(const GORM_PB_Table_interaction& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_interaction)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.interaction1().size() > 0) {
+    _internal_set_interaction1(from._internal_interaction1());
+  }
+  if (from.interaction2().size() > 0) {
+    _internal_set_interaction2(from._internal_interaction2());
+  }
+  if (from.interaction3().size() > 0) {
+    _internal_set_interaction3(from._internal_interaction3());
+  }
+  if (from.interaction4().size() > 0) {
+    _internal_set_interaction4(from._internal_interaction4());
+  }
+  if (from.version() != 0) {
+    _internal_set_version(from._internal_version());
+  }
+  if (from.roleid() != 0) {
+    _internal_set_roleid(from._internal_roleid());
+  }
+  if (from.snakeid() != 0) {
+    _internal_set_snakeid(from._internal_snakeid());
+  }
+}
+
+void GORM_PB_Table_interaction::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_interaction)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GORM_PB_Table_interaction::CopyFrom(const GORM_PB_Table_interaction& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_interaction)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GORM_PB_Table_interaction::IsInitialized() const {
+  return true;
+}
+
+void GORM_PB_Table_interaction::InternalSwap(GORM_PB_Table_interaction* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  interaction1_.Swap(&other->interaction1_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  interaction2_.Swap(&other->interaction2_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  interaction3_.Swap(&other->interaction3_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  interaction4_.Swap(&other->interaction4_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_interaction, snakeid_)
+      + sizeof(GORM_PB_Table_interaction::snakeid_)
+      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_interaction, version_)>(
+          reinterpret_cast<char*>(&version_),
+          reinterpret_cast<char*>(&other->version_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_interaction::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void GORM_PB_Table_roles::InitAsDefaultInstance() {
+}
+class GORM_PB_Table_roles::_Internal {
+ public:
+};
+
+GORM_PB_Table_roles::GORM_PB_Table_roles(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_roles)
+}
+GORM_PB_Table_roles::GORM_PB_Table_roles(const GORM_PB_Table_roles& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
+      GetArena());
+  }
+  face_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_face().empty()) {
+    face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_face(),
+      GetArena());
+  }
+  ::memcpy(&version_, &from.version_,
+    static_cast<size_t>(reinterpret_cast<char*>(&createtime_) -
+    reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
+  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_roles)
+}
+
+void GORM_PB_Table_roles::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  face_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&createtime_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
+}
+
+GORM_PB_Table_roles::~GORM_PB_Table_roles() {
+  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_roles)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GORM_PB_Table_roles::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  face_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void GORM_PB_Table_roles::ArenaDtor(void* object) {
+  GORM_PB_Table_roles* _this = reinterpret_cast< GORM_PB_Table_roles* >(object);
+  (void)_this;
+}
+void GORM_PB_Table_roles::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GORM_PB_Table_roles::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GORM_PB_Table_roles& GORM_PB_Table_roles::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GORM_PB_Table_roles::Clear() {
+// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_roles)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  face_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&version_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&createtime_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GORM_PB_Table_roles::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // fixed64 version = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 roleid = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 userid = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 25)) {
+          userid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 worldid = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 33)) {
+          worldid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 dbid = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 45)) {
+          dbid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // bytes name = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          auto str = _internal_mutable_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 charid = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
+          charid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // bytes face = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          auto str = _internal_mutable_face();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 createtime = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 73)) {
+          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_roles::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_roles)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
+  }
+
+  // sfixed64 userid = 3;
+  if (this->userid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(3, this->_internal_userid(), target);
+  }
+
+  // sfixed64 worldid = 4;
+  if (this->worldid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(4, this->_internal_worldid(), target);
+  }
+
+  // sfixed32 dbid = 5;
+  if (this->dbid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(5, this->_internal_dbid(), target);
+  }
+
+  // bytes name = 6;
+  if (this->name().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        6, this->_internal_name(), target);
+  }
+
+  // sfixed32 charid = 7;
+  if (this->charid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(7, this->_internal_charid(), target);
+  }
+
+  // bytes face = 8;
+  if (this->face().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        8, this->_internal_face(), target);
+  }
+
+  // sfixed64 createtime = 9;
+  if (this->createtime() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(9, this->_internal_createtime(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_roles)
+  return target;
+}
+
+size_t GORM_PB_Table_roles::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_roles)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // bytes name = 6;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_name());
+  }
+
+  // bytes face = 8;
+  if (this->face().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_face());
+  }
+
+  // fixed64 version = 1;
+  if (this->version() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 roleid = 2;
+  if (this->roleid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 userid = 3;
+  if (this->userid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 worldid = 4;
+  if (this->worldid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed32 dbid = 5;
+  if (this->dbid() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 charid = 7;
+  if (this->charid() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed64 createtime = 9;
+  if (this->createtime() != 0) {
+    total_size += 1 + 8;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GORM_PB_Table_roles::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_roles)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GORM_PB_Table_roles* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_roles>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_roles)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_roles)
+    MergeFrom(*source);
+  }
+}
+
+void GORM_PB_Table_roles::MergeFrom(const GORM_PB_Table_roles& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_roles)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.name().size() > 0) {
+    _internal_set_name(from._internal_name());
+  }
+  if (from.face().size() > 0) {
+    _internal_set_face(from._internal_face());
+  }
+  if (from.version() != 0) {
+    _internal_set_version(from._internal_version());
+  }
+  if (from.roleid() != 0) {
+    _internal_set_roleid(from._internal_roleid());
+  }
+  if (from.userid() != 0) {
+    _internal_set_userid(from._internal_userid());
+  }
+  if (from.worldid() != 0) {
+    _internal_set_worldid(from._internal_worldid());
+  }
+  if (from.dbid() != 0) {
+    _internal_set_dbid(from._internal_dbid());
+  }
+  if (from.charid() != 0) {
+    _internal_set_charid(from._internal_charid());
+  }
+  if (from.createtime() != 0) {
+    _internal_set_createtime(from._internal_createtime());
+  }
+}
+
+void GORM_PB_Table_roles::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_roles)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GORM_PB_Table_roles::CopyFrom(const GORM_PB_Table_roles& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_roles)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GORM_PB_Table_roles::IsInitialized() const {
+  return true;
+}
+
+void GORM_PB_Table_roles::InternalSwap(GORM_PB_Table_roles* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  face_.Swap(&other->face_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_roles, createtime_)
+      + sizeof(GORM_PB_Table_roles::createtime_)
+      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_roles, version_)>(
+          reinterpret_cast<char*>(&version_),
+          reinterpret_cast<char*>(&other->version_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_roles::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void GORM_PB_Table_role::InitAsDefaultInstance() {
 }
 class GORM_PB_Table_role::_Internal {
@@ -3531,8 +4999,8 @@ GORM_PB_Table_role::GORM_PB_Table_role(const GORM_PB_Table_role& from)
       GetArena());
   }
   ::memcpy(&version_, &from.version_,
-    static_cast<size_t>(reinterpret_cast<char*>(&online_) -
-    reinterpret_cast<char*>(&version_)) + sizeof(online_));
+    static_cast<size_t>(reinterpret_cast<char*>(&pttype_) -
+    reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
   // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_role)
 }
 
@@ -3541,8 +5009,8 @@ void GORM_PB_Table_role::SharedCtor() {
   rolename_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   face_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&version_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&online_) -
-      reinterpret_cast<char*>(&version_)) + sizeof(online_));
+      reinterpret_cast<char*>(&pttype_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
 }
 
 GORM_PB_Table_role::~GORM_PB_Table_role() {
@@ -3581,8 +5049,8 @@ void GORM_PB_Table_role::Clear() {
   rolename_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   face_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&version_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&online_) -
-      reinterpret_cast<char*>(&version_)) + sizeof(online_));
+      reinterpret_cast<char*>(&pttype_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3594,92 +5062,111 @@ const char* GORM_PB_Table_role::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // string rolename = 3;
+      // bytes rolename = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_rolename();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_role.rolename"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 level = 4;
+      // sfixed32 level = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          level_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // int64 exp = 5;
+      // sfixed64 exp = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          exp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 41)) {
+          exp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 characterid = 6;
+      // sfixed32 characterid = 6;
       case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
-          characterid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 53)) {
+          characterid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // int32 gold = 7;
+      // sfixed32 gold = 7;
       case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
-          gold_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
+          gold_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // int64 offlinetime = 8;
+      // sfixed64 offlinetime = 8;
       case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
-          offlinetime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 65)) {
+          offlinetime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 inited = 9;
+      // sfixed32 inited = 9;
       case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
-          inited_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 77)) {
+          inited_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // int64 createtime = 10;
+      // sfixed64 createtime = 10;
       case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 80)) {
-          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 81)) {
+          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // string face = 11;
+      // bytes face = 11;
       case 11:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
           auto str = _internal_mutable_face();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_role.face"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int64 online = 12;
+      // sfixed64 online = 12;
       case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 96)) {
-          online_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 97)) {
+          online_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 worldid = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 105)) {
+          worldid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 pttype = 14;
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 117)) {
+          pttype_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed64 userid = 15;
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 121)) {
+          userid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
       default: {
@@ -3710,84 +5197,94 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // string rolename = 3;
+  // bytes rolename = 3;
   if (this->rolename().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_rolename().data(), static_cast<int>(this->_internal_rolename().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_role.rolename");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         3, this->_internal_rolename(), target);
   }
 
-  // int32 level = 4;
+  // sfixed32 level = 4;
   if (this->level() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_level(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(4, this->_internal_level(), target);
   }
 
-  // int64 exp = 5;
+  // sfixed64 exp = 5;
   if (this->exp() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_exp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(5, this->_internal_exp(), target);
   }
 
-  // int32 characterid = 6;
+  // sfixed32 characterid = 6;
   if (this->characterid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_characterid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(6, this->_internal_characterid(), target);
   }
 
-  // int32 gold = 7;
+  // sfixed32 gold = 7;
   if (this->gold() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_gold(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(7, this->_internal_gold(), target);
   }
 
-  // int64 offlinetime = 8;
+  // sfixed64 offlinetime = 8;
   if (this->offlinetime() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(8, this->_internal_offlinetime(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(8, this->_internal_offlinetime(), target);
   }
 
-  // int32 inited = 9;
+  // sfixed32 inited = 9;
   if (this->inited() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(9, this->_internal_inited(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(9, this->_internal_inited(), target);
   }
 
-  // int64 createtime = 10;
+  // sfixed64 createtime = 10;
   if (this->createtime() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(10, this->_internal_createtime(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(10, this->_internal_createtime(), target);
   }
 
-  // string face = 11;
+  // bytes face = 11;
   if (this->face().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_face().data(), static_cast<int>(this->_internal_face().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_role.face");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         11, this->_internal_face(), target);
   }
 
-  // int64 online = 12;
+  // sfixed64 online = 12;
   if (this->online() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(12, this->_internal_online(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(12, this->_internal_online(), target);
+  }
+
+  // sfixed64 worldid = 13;
+  if (this->worldid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(13, this->_internal_worldid(), target);
+  }
+
+  // sfixed32 pttype = 14;
+  if (this->pttype() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(14, this->_internal_pttype(), target);
+  }
+
+  // sfixed64 userid = 15;
+  if (this->userid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(15, this->_internal_userid(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3806,88 +5303,83 @@ size_t GORM_PB_Table_role::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string rolename = 3;
+  // bytes rolename = 3;
   if (this->rolename().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_rolename());
   }
 
-  // string face = 11;
+  // bytes face = 11;
   if (this->face().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_face());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int64 exp = 5;
+  // sfixed64 exp = 5;
   if (this->exp() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_exp());
+    total_size += 1 + 8;
   }
 
-  // int32 level = 4;
+  // sfixed32 level = 4;
   if (this->level() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_level());
+    total_size += 1 + 4;
   }
 
-  // int32 characterid = 6;
+  // sfixed32 characterid = 6;
   if (this->characterid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_characterid());
+    total_size += 1 + 4;
   }
 
-  // int64 offlinetime = 8;
+  // sfixed64 offlinetime = 8;
   if (this->offlinetime() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_offlinetime());
+    total_size += 1 + 8;
   }
 
-  // int32 gold = 7;
+  // sfixed32 gold = 7;
   if (this->gold() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_gold());
+    total_size += 1 + 4;
   }
 
-  // int32 inited = 9;
+  // sfixed32 inited = 9;
   if (this->inited() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_inited());
+    total_size += 1 + 4;
   }
 
-  // int64 createtime = 10;
+  // sfixed64 createtime = 10;
   if (this->createtime() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_createtime());
+    total_size += 1 + 8;
   }
 
-  // int64 online = 12;
+  // sfixed64 online = 12;
   if (this->online() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_online());
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 worldid = 13;
+  if (this->worldid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed64 userid = 15;
+  if (this->userid() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // sfixed32 pttype = 14;
+  if (this->pttype() != 0) {
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3957,6 +5449,15 @@ void GORM_PB_Table_role::MergeFrom(const GORM_PB_Table_role& from) {
   if (from.online() != 0) {
     _internal_set_online(from._internal_online());
   }
+  if (from.worldid() != 0) {
+    _internal_set_worldid(from._internal_worldid());
+  }
+  if (from.userid() != 0) {
+    _internal_set_userid(from._internal_userid());
+  }
+  if (from.pttype() != 0) {
+    _internal_set_pttype(from._internal_pttype());
+  }
 }
 
 void GORM_PB_Table_role::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -3983,8 +5484,8 @@ void GORM_PB_Table_role::InternalSwap(GORM_PB_Table_role* other) {
   rolename_.Swap(&other->rolename_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   face_.Swap(&other->face_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_role, online_)
-      + sizeof(GORM_PB_Table_role::online_)
+      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_role, pttype_)
+      + sizeof(GORM_PB_Table_role::pttype_)
       - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_role, version_)>(
           reinterpret_cast<char*>(&version_),
           reinterpret_cast<char*>(&other->version_));
@@ -4078,33 +5579,32 @@ const char* GORM_PB_Table_scene::_InternalParse(const char* ptr, ::PROTOBUF_NAME
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 sceneid = 3;
+      // sfixed32 sceneid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          sceneid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          sceneid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string collects = 4;
+      // bytes collects = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_collects();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_scene.collects"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4136,31 +5636,27 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 sceneid = 3;
+  // sfixed32 sceneid = 3;
   if (this->sceneid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_sceneid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_sceneid(), target);
   }
 
-  // string collects = 4;
+  // bytes collects = 4;
   if (this->collects().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_collects().data(), static_cast<int>(this->_internal_collects().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_scene.collects");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_collects(), target);
   }
 
@@ -4180,32 +5676,26 @@ size_t GORM_PB_Table_scene::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string collects = 4;
+  // bytes collects = 4;
   if (this->collects().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_collects());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 sceneid = 3;
+  // sfixed32 sceneid = 3;
   if (this->sceneid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_sceneid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4395,60 +5885,56 @@ const char* GORM_PB_Table_skill::_InternalParse(const char* ptr, ::PROTOBUF_NAME
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // sfixed64 roleid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 snakeid = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string skill1 = 4;
+      // bytes skill1 = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           auto str = _internal_mutable_skill1();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_skill.skill1"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string skill2 = 5;
+      // bytes skill2 = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
           auto str = _internal_mutable_skill2();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_skill.skill2"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string skill3 = 6;
+      // bytes skill3 = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           auto str = _internal_mutable_skill3();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_skill.skill3"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // string skill4 = 7;
+      // bytes skill4 = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
           auto str = _internal_mutable_skill4();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_skill.skill4"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4480,61 +5966,45 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_roleid(), target);
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_snakeid(), target);
   }
 
-  // string skill1 = 4;
+  // bytes skill1 = 4;
   if (this->skill1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_skill1().data(), static_cast<int>(this->_internal_skill1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_skill.skill1");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         4, this->_internal_skill1(), target);
   }
 
-  // string skill2 = 5;
+  // bytes skill2 = 5;
   if (this->skill2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_skill2().data(), static_cast<int>(this->_internal_skill2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_skill.skill2");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         5, this->_internal_skill2(), target);
   }
 
-  // string skill3 = 6;
+  // bytes skill3 = 6;
   if (this->skill3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_skill3().data(), static_cast<int>(this->_internal_skill3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_skill.skill3");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         6, this->_internal_skill3(), target);
   }
 
-  // string skill4 = 7;
+  // bytes skill4 = 7;
   if (this->skill4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_skill4().data(), static_cast<int>(this->_internal_skill4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_skill.skill4");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         7, this->_internal_skill4(), target);
   }
 
@@ -4554,53 +6024,47 @@ size_t GORM_PB_Table_skill::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string skill1 = 4;
+  // bytes skill1 = 4;
   if (this->skill1().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_skill1());
   }
 
-  // string skill2 = 5;
+  // bytes skill2 = 5;
   if (this->skill2().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_skill2());
   }
 
-  // string skill3 = 6;
+  // bytes skill3 = 6;
   if (this->skill3().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_skill3());
   }
 
-  // string skill4 = 7;
+  // bytes skill4 = 7;
   if (this->skill4().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_skill4());
   }
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4697,104 +6161,80 @@ void GORM_PB_Table_skill::InternalSwap(GORM_PB_Table_skill* other) {
 
 // ===================================================================
 
-void GORM_PB_Table_interaction::InitAsDefaultInstance() {
+void GORM_PB_Table_ptuser::InitAsDefaultInstance() {
 }
-class GORM_PB_Table_interaction::_Internal {
+class GORM_PB_Table_ptuser::_Internal {
  public:
 };
 
-GORM_PB_Table_interaction::GORM_PB_Table_interaction(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+GORM_PB_Table_ptuser::GORM_PB_Table_ptuser(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_interaction)
+  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_ptuser)
 }
-GORM_PB_Table_interaction::GORM_PB_Table_interaction(const GORM_PB_Table_interaction& from)
+GORM_PB_Table_ptuser::GORM_PB_Table_ptuser(const GORM_PB_Table_ptuser& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  interaction1_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_interaction1().empty()) {
-    interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction1(),
-      GetArena());
-  }
-  interaction2_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_interaction2().empty()) {
-    interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction2(),
-      GetArena());
-  }
-  interaction3_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_interaction3().empty()) {
-    interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction3(),
-      GetArena());
-  }
-  interaction4_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_interaction4().empty()) {
-    interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_interaction4(),
+  ptid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_ptid().empty()) {
+    ptid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_ptid(),
       GetArena());
   }
   ::memcpy(&version_, &from.version_,
-    static_cast<size_t>(reinterpret_cast<char*>(&snakeid_) -
-    reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
-  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_interaction)
+    static_cast<size_t>(reinterpret_cast<char*>(&pttype_) -
+    reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
+  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_ptuser)
 }
 
-void GORM_PB_Table_interaction::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base);
-  interaction1_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  interaction2_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  interaction3_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  interaction4_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+void GORM_PB_Table_ptuser::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto.base);
+  ptid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&version_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&snakeid_) -
-      reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
+      reinterpret_cast<char*>(&pttype_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
 }
 
-GORM_PB_Table_interaction::~GORM_PB_Table_interaction() {
-  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_interaction)
+GORM_PB_Table_ptuser::~GORM_PB_Table_ptuser() {
+  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_ptuser)
   SharedDtor();
   _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-void GORM_PB_Table_interaction::SharedDtor() {
+void GORM_PB_Table_ptuser::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
-  interaction1_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  interaction2_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  interaction3_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  interaction4_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ptid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
-void GORM_PB_Table_interaction::ArenaDtor(void* object) {
-  GORM_PB_Table_interaction* _this = reinterpret_cast< GORM_PB_Table_interaction* >(object);
+void GORM_PB_Table_ptuser::ArenaDtor(void* object) {
+  GORM_PB_Table_ptuser* _this = reinterpret_cast< GORM_PB_Table_ptuser* >(object);
   (void)_this;
 }
-void GORM_PB_Table_interaction::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+void GORM_PB_Table_ptuser::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
 }
-void GORM_PB_Table_interaction::SetCachedSize(int size) const {
+void GORM_PB_Table_ptuser::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const GORM_PB_Table_interaction& GORM_PB_Table_interaction::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto.base);
+const GORM_PB_Table_ptuser& GORM_PB_Table_ptuser::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void GORM_PB_Table_interaction::Clear() {
-// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_interaction)
+void GORM_PB_Table_ptuser::Clear() {
+// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_ptuser)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  interaction1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  interaction2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  interaction3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  interaction4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ptid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&version_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&snakeid_) -
-      reinterpret_cast<char*>(&version_)) + sizeof(snakeid_));
+      reinterpret_cast<char*>(&pttype_) -
+      reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* GORM_PB_Table_interaction::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* GORM_PB_Table_ptuser::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
@@ -4802,61 +6242,33 @@ const char* GORM_PB_Table_interaction::_InternalParse(const char* ptr, ::PROTOBU
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 roleid = 2;
+      // bytes ptid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_ptid();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 snakeid = 3;
+      // sfixed32 pttype = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          snakeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          pttype_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // string interaction1 = 4;
+      // sfixed64 userid = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          auto str = _internal_mutable_interaction1();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_interaction.interaction1"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string interaction2 = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          auto str = _internal_mutable_interaction2();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_interaction.interaction2"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string interaction3 = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          auto str = _internal_mutable_interaction3();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_interaction.interaction3"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string interaction4 = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
-          auto str = _internal_mutable_interaction4();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_interaction.interaction4"));
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 33)) {
+          userid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
       default: {
@@ -4881,133 +6293,72 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_interaction::_InternalSerialize(
+::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_ptuser::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_interaction)
+  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_ptuser)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 roleid = 2;
-  if (this->roleid() != 0) {
+  // bytes ptid = 2;
+  if (this->ptid().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        2, this->_internal_ptid(), target);
+  }
+
+  // sfixed32 pttype = 3;
+  if (this->pttype() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(3, this->_internal_pttype(), target);
   }
 
-  // int32 snakeid = 3;
-  if (this->snakeid() != 0) {
+  // sfixed64 userid = 4;
+  if (this->userid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_snakeid(), target);
-  }
-
-  // string interaction1 = 4;
-  if (this->interaction1().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_interaction1().data(), static_cast<int>(this->_internal_interaction1().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_interaction.interaction1");
-    target = stream->WriteStringMaybeAliased(
-        4, this->_internal_interaction1(), target);
-  }
-
-  // string interaction2 = 5;
-  if (this->interaction2().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_interaction2().data(), static_cast<int>(this->_internal_interaction2().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_interaction.interaction2");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_interaction2(), target);
-  }
-
-  // string interaction3 = 6;
-  if (this->interaction3().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_interaction3().data(), static_cast<int>(this->_internal_interaction3().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_interaction.interaction3");
-    target = stream->WriteStringMaybeAliased(
-        6, this->_internal_interaction3(), target);
-  }
-
-  // string interaction4 = 7;
-  if (this->interaction4().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_interaction4().data(), static_cast<int>(this->_internal_interaction4().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_interaction.interaction4");
-    target = stream->WriteStringMaybeAliased(
-        7, this->_internal_interaction4(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(4, this->_internal_userid(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_interaction)
+  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_ptuser)
   return target;
 }
 
-size_t GORM_PB_Table_interaction::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_interaction)
+size_t GORM_PB_Table_ptuser::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_ptuser)
   size_t total_size = 0;
 
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string interaction1 = 4;
-  if (this->interaction1().size() > 0) {
+  // bytes ptid = 2;
+  if (this->ptid().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_interaction1());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_ptid());
   }
 
-  // string interaction2 = 5;
-  if (this->interaction2().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_interaction2());
-  }
-
-  // string interaction3 = 6;
-  if (this->interaction3().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_interaction3());
-  }
-
-  // string interaction4 = 7;
-  if (this->interaction4().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_interaction4());
-  }
-
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 roleid = 2;
-  if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
+  // sfixed64 userid = 4;
+  if (this->userid() != 0) {
+    total_size += 1 + 8;
   }
 
-  // int32 snakeid = 3;
-  if (this->snakeid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_snakeid());
+  // sfixed32 pttype = 3;
+  if (this->pttype() != 0) {
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5019,85 +6370,73 @@ size_t GORM_PB_Table_interaction::ByteSizeLong() const {
   return total_size;
 }
 
-void GORM_PB_Table_interaction::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_interaction)
+void GORM_PB_Table_ptuser::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_ptuser)
   GOOGLE_DCHECK_NE(&from, this);
-  const GORM_PB_Table_interaction* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_interaction>(
+  const GORM_PB_Table_ptuser* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_ptuser>(
           &from);
   if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_interaction)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_ptuser)
     ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_interaction)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_ptuser)
     MergeFrom(*source);
   }
 }
 
-void GORM_PB_Table_interaction::MergeFrom(const GORM_PB_Table_interaction& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_interaction)
+void GORM_PB_Table_ptuser::MergeFrom(const GORM_PB_Table_ptuser& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_ptuser)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.interaction1().size() > 0) {
-    _internal_set_interaction1(from._internal_interaction1());
-  }
-  if (from.interaction2().size() > 0) {
-    _internal_set_interaction2(from._internal_interaction2());
-  }
-  if (from.interaction3().size() > 0) {
-    _internal_set_interaction3(from._internal_interaction3());
-  }
-  if (from.interaction4().size() > 0) {
-    _internal_set_interaction4(from._internal_interaction4());
+  if (from.ptid().size() > 0) {
+    _internal_set_ptid(from._internal_ptid());
   }
   if (from.version() != 0) {
     _internal_set_version(from._internal_version());
   }
-  if (from.roleid() != 0) {
-    _internal_set_roleid(from._internal_roleid());
+  if (from.userid() != 0) {
+    _internal_set_userid(from._internal_userid());
   }
-  if (from.snakeid() != 0) {
-    _internal_set_snakeid(from._internal_snakeid());
+  if (from.pttype() != 0) {
+    _internal_set_pttype(from._internal_pttype());
   }
 }
 
-void GORM_PB_Table_interaction::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_interaction)
+void GORM_PB_Table_ptuser::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_ptuser)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void GORM_PB_Table_interaction::CopyFrom(const GORM_PB_Table_interaction& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_interaction)
+void GORM_PB_Table_ptuser::CopyFrom(const GORM_PB_Table_ptuser& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_ptuser)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool GORM_PB_Table_interaction::IsInitialized() const {
+bool GORM_PB_Table_ptuser::IsInitialized() const {
   return true;
 }
 
-void GORM_PB_Table_interaction::InternalSwap(GORM_PB_Table_interaction* other) {
+void GORM_PB_Table_ptuser::InternalSwap(GORM_PB_Table_ptuser* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  interaction1_.Swap(&other->interaction1_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  interaction2_.Swap(&other->interaction2_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  interaction3_.Swap(&other->interaction3_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  interaction4_.Swap(&other->interaction4_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ptid_.Swap(&other->ptid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_interaction, snakeid_)
-      + sizeof(GORM_PB_Table_interaction::snakeid_)
-      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_interaction, version_)>(
+      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_ptuser, pttype_)
+      + sizeof(GORM_PB_Table_ptuser::pttype_)
+      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_ptuser, version_)>(
           reinterpret_cast<char*>(&version_),
           reinterpret_cast<char*>(&other->version_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_interaction::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_ptuser::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -5124,6 +6463,11 @@ GORM_PB_Table_user::GORM_PB_Table_user(const GORM_PB_Table_user& from)
     ptid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_ptid(),
       GetArena());
   }
+  rolesdata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_rolesdata().empty()) {
+    rolesdata_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_rolesdata(),
+      GetArena());
+  }
   ::memcpy(&version_, &from.version_,
     static_cast<size_t>(reinterpret_cast<char*>(&pttype_) -
     reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
@@ -5133,6 +6477,7 @@ GORM_PB_Table_user::GORM_PB_Table_user(const GORM_PB_Table_user& from)
 void GORM_PB_Table_user::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base);
   ptid_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  rolesdata_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&version_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&pttype_) -
       reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
@@ -5147,6 +6492,7 @@ GORM_PB_Table_user::~GORM_PB_Table_user() {
 void GORM_PB_Table_user::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   ptid_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  rolesdata_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void GORM_PB_Table_user::ArenaDtor(void* object) {
@@ -5171,6 +6517,7 @@ void GORM_PB_Table_user::Clear() {
   (void) cached_has_bits;
 
   ptid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  rolesdata_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&version_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&pttype_) -
       reinterpret_cast<char*>(&version_)) + sizeof(pttype_));
@@ -5185,40 +6532,47 @@ const char* GORM_PB_Table_user::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint64 version = 1;
+      // fixed64 version = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 9)) {
+          version_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint64);
         } else goto handle_unusual;
         continue;
-      // int64 userid = 2;
+      // sfixed64 userid = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          userid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 17)) {
+          userid_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
         } else goto handle_unusual;
         continue;
-      // string ptid = 3;
+      // bytes ptid = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_ptid();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_user.ptid"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 pttype = 4;
+      // sfixed32 pttype = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          pttype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          pttype_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
-      // int64 createtime = 5;
+      // sfixed64 createtime = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 41)) {
+          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int64>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int64);
+        } else goto handle_unusual;
+        continue;
+      // bytes rolesdata = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          auto str = _internal_mutable_rolesdata();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -5250,38 +6604,40 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   if (this->version() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed64ToArray(1, this->_internal_version(), target);
   }
 
-  // int64 userid = 2;
+  // sfixed64 userid = 2;
   if (this->userid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_userid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(2, this->_internal_userid(), target);
   }
 
-  // string ptid = 3;
+  // bytes ptid = 3;
   if (this->ptid().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_ptid().data(), static_cast<int>(this->_internal_ptid().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_user.ptid");
-    target = stream->WriteStringMaybeAliased(
+    target = stream->WriteBytesMaybeAliased(
         3, this->_internal_ptid(), target);
   }
 
-  // int32 pttype = 4;
+  // sfixed32 pttype = 4;
   if (this->pttype() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_pttype(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(4, this->_internal_pttype(), target);
   }
 
-  // int64 createtime = 5;
+  // sfixed64 createtime = 5;
   if (this->createtime() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_createtime(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed64ToArray(5, this->_internal_createtime(), target);
+  }
+
+  // bytes rolesdata = 6;
+  if (this->rolesdata().size() > 0) {
+    target = stream->WriteBytesMaybeAliased(
+        6, this->_internal_rolesdata(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5300,39 +6656,38 @@ size_t GORM_PB_Table_user::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string ptid = 3;
+  // bytes ptid = 3;
   if (this->ptid().size() > 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_ptid());
   }
 
-  // uint64 version = 1;
+  // bytes rolesdata = 6;
+  if (this->rolesdata().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_rolesdata());
+  }
+
+  // fixed64 version = 1;
   if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
+    total_size += 1 + 8;
   }
 
-  // int64 userid = 2;
+  // sfixed64 userid = 2;
   if (this->userid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_userid());
+    total_size += 1 + 8;
   }
 
-  // int64 createtime = 5;
+  // sfixed64 createtime = 5;
   if (this->createtime() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_createtime());
+    total_size += 1 + 8;
   }
 
-  // int32 pttype = 4;
+  // sfixed32 pttype = 4;
   if (this->pttype() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_pttype());
+    total_size += 1 + 4;
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -5368,6 +6723,9 @@ void GORM_PB_Table_user::MergeFrom(const GORM_PB_Table_user& from) {
 
   if (from.ptid().size() > 0) {
     _internal_set_ptid(from._internal_ptid());
+  }
+  if (from.rolesdata().size() > 0) {
+    _internal_set_rolesdata(from._internal_rolesdata());
   }
   if (from.version() != 0) {
     _internal_set_version(from._internal_version());
@@ -5405,6 +6763,7 @@ void GORM_PB_Table_user::InternalSwap(GORM_PB_Table_user* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   ptid_.Swap(&other->ptid_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  rolesdata_.Swap(&other->rolesdata_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(GORM_PB_Table_user, pttype_)
       + sizeof(GORM_PB_Table_user::pttype_)
@@ -5414,429 +6773,6 @@ void GORM_PB_Table_user::InternalSwap(GORM_PB_Table_user* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_user::GetMetadata() const {
-  return GetMetadataStatic();
-}
-
-
-// ===================================================================
-
-void GORM_PB_Table_roles::InitAsDefaultInstance() {
-}
-class GORM_PB_Table_roles::_Internal {
- public:
-};
-
-GORM_PB_Table_roles::GORM_PB_Table_roles(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor();
-  RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_Table_roles)
-}
-GORM_PB_Table_roles::GORM_PB_Table_roles(const GORM_PB_Table_roles& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_name().empty()) {
-    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
-      GetArena());
-  }
-  face_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from._internal_face().empty()) {
-    face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_face(),
-      GetArena());
-  }
-  ::memcpy(&version_, &from.version_,
-    static_cast<size_t>(reinterpret_cast<char*>(&createtime_) -
-    reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
-  // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_Table_roles)
-}
-
-void GORM_PB_Table_roles::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  face_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&version_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&createtime_) -
-      reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
-}
-
-GORM_PB_Table_roles::~GORM_PB_Table_roles() {
-  // @@protoc_insertion_point(destructor:gorm.GORM_PB_Table_roles)
-  SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-void GORM_PB_Table_roles::SharedDtor() {
-  GOOGLE_DCHECK(GetArena() == nullptr);
-  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  face_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-void GORM_PB_Table_roles::ArenaDtor(void* object) {
-  GORM_PB_Table_roles* _this = reinterpret_cast< GORM_PB_Table_roles* >(object);
-  (void)_this;
-}
-void GORM_PB_Table_roles::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
-void GORM_PB_Table_roles::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const GORM_PB_Table_roles& GORM_PB_Table_roles::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void GORM_PB_Table_roles::Clear() {
-// @@protoc_insertion_point(message_clear_start:gorm.GORM_PB_Table_roles)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  face_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  ::memset(&version_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&createtime_) -
-      reinterpret_cast<char*>(&version_)) + sizeof(createtime_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* GORM_PB_Table_roles::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // uint64 version = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          version_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int64 roleid = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          roleid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int64 userid = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          userid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int64 worldid = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          worldid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int32 dbid = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          dbid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string name = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          auto str = _internal_mutable_name();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_roles.name"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int32 charid = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
-          charid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string face = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
-          auto str = _internal_mutable_face();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "gorm.GORM_PB_Table_roles.face"));
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // int64 createtime = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
-          createtime_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag,
-            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* GORM_PB_Table_roles::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:gorm.GORM_PB_Table_roles)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // uint64 version = 1;
-  if (this->version() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->_internal_version(), target);
-  }
-
-  // int64 roleid = 2;
-  if (this->roleid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_roleid(), target);
-  }
-
-  // int64 userid = 3;
-  if (this->userid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_userid(), target);
-  }
-
-  // int64 worldid = 4;
-  if (this->worldid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_worldid(), target);
-  }
-
-  // int32 dbid = 5;
-  if (this->dbid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_dbid(), target);
-  }
-
-  // string name = 6;
-  if (this->name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_roles.name");
-    target = stream->WriteStringMaybeAliased(
-        6, this->_internal_name(), target);
-  }
-
-  // int32 charid = 7;
-  if (this->charid() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_charid(), target);
-  }
-
-  // string face = 8;
-  if (this->face().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_face().data(), static_cast<int>(this->_internal_face().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "gorm.GORM_PB_Table_roles.face");
-    target = stream->WriteStringMaybeAliased(
-        8, this->_internal_face(), target);
-  }
-
-  // int64 createtime = 9;
-  if (this->createtime() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(9, this->_internal_createtime(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:gorm.GORM_PB_Table_roles)
-  return target;
-}
-
-size_t GORM_PB_Table_roles::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:gorm.GORM_PB_Table_roles)
-  size_t total_size = 0;
-
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string name = 6;
-  if (this->name().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
-  }
-
-  // string face = 8;
-  if (this->face().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_face());
-  }
-
-  // uint64 version = 1;
-  if (this->version() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->_internal_version());
-  }
-
-  // int64 roleid = 2;
-  if (this->roleid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_roleid());
-  }
-
-  // int64 userid = 3;
-  if (this->userid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_userid());
-  }
-
-  // int64 worldid = 4;
-  if (this->worldid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_worldid());
-  }
-
-  // int32 dbid = 5;
-  if (this->dbid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_dbid());
-  }
-
-  // int32 charid = 7;
-  if (this->charid() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_charid());
-  }
-
-  // int64 createtime = 9;
-  if (this->createtime() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_createtime());
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void GORM_PB_Table_roles::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:gorm.GORM_PB_Table_roles)
-  GOOGLE_DCHECK_NE(&from, this);
-  const GORM_PB_Table_roles* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GORM_PB_Table_roles>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gorm.GORM_PB_Table_roles)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:gorm.GORM_PB_Table_roles)
-    MergeFrom(*source);
-  }
-}
-
-void GORM_PB_Table_roles::MergeFrom(const GORM_PB_Table_roles& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:gorm.GORM_PB_Table_roles)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.name().size() > 0) {
-    _internal_set_name(from._internal_name());
-  }
-  if (from.face().size() > 0) {
-    _internal_set_face(from._internal_face());
-  }
-  if (from.version() != 0) {
-    _internal_set_version(from._internal_version());
-  }
-  if (from.roleid() != 0) {
-    _internal_set_roleid(from._internal_roleid());
-  }
-  if (from.userid() != 0) {
-    _internal_set_userid(from._internal_userid());
-  }
-  if (from.worldid() != 0) {
-    _internal_set_worldid(from._internal_worldid());
-  }
-  if (from.dbid() != 0) {
-    _internal_set_dbid(from._internal_dbid());
-  }
-  if (from.charid() != 0) {
-    _internal_set_charid(from._internal_charid());
-  }
-  if (from.createtime() != 0) {
-    _internal_set_createtime(from._internal_createtime());
-  }
-}
-
-void GORM_PB_Table_roles::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:gorm.GORM_PB_Table_roles)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void GORM_PB_Table_roles::CopyFrom(const GORM_PB_Table_roles& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:gorm.GORM_PB_Table_roles)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool GORM_PB_Table_roles::IsInitialized() const {
-  return true;
-}
-
-void GORM_PB_Table_roles::InternalSwap(GORM_PB_Table_roles* other) {
-  using std::swap;
-  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  face_.Swap(&other->face_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GORM_PB_Table_roles, createtime_)
-      + sizeof(GORM_PB_Table_roles::createtime_)
-      - PROTOBUF_FIELD_OFFSET(GORM_PB_Table_roles, version_)>(
-          reinterpret_cast<char*>(&version_),
-          reinterpret_cast<char*>(&other->version_));
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_Table_roles::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -5859,6 +6795,9 @@ template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_food* Arena::CreateMaybeMessa
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_hero* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_hero >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_hero >(arena);
 }
+template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_login_log* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_login_log >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_login_log >(arena);
+}
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_mail* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_mail >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_mail >(arena);
 }
@@ -5867,6 +6806,15 @@ template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_material* Arena::CreateMaybeM
 }
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_npc* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_npc >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_npc >(arena);
+}
+template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_res_log* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_res_log >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_res_log >(arena);
+}
+template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_interaction* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_interaction >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_interaction >(arena);
+}
+template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_roles* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_roles >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_roles >(arena);
 }
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_role* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_role >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_role >(arena);
@@ -5877,14 +6825,11 @@ template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_scene* Arena::CreateMaybeMess
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_skill* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_skill >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_skill >(arena);
 }
-template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_interaction* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_interaction >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_interaction >(arena);
+template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_ptuser* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_ptuser >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_ptuser >(arena);
 }
 template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_user* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_user >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_user >(arena);
-}
-template<> PROTOBUF_NOINLINE ::gorm::GORM_PB_Table_roles* Arena::CreateMaybeMessage< ::gorm::GORM_PB_Table_roles >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::gorm::GORM_PB_Table_roles >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

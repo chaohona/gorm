@@ -327,6 +327,14 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         return GORM_OK;
     }
 
+    if (this->m_ulClientId == 0)
+    {
+        GORM_LOGE("client send request before make hand shake.");
+        pCurrentRequest->GetResult(GORM_NEED_HAND_SHAKE, 0, nullptr);
+        this->ReadyWrite();
+        return GORM_OK;
+    }
+
     // 获取请求的路由
     int iRet = pCurrentRequest->ParseReqMsg(szMsg, iMsgLen);
     if (iRet != GORM_OK)
@@ -335,13 +343,6 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         this->ReadyWrite();
         GORM_LOGE("parse request from client failed, tableid:%d, cmd:%d, seqid:%u, flag:%d", pCurrentRequest->iReqTableId, iReqCmd, iReqID, flag);
         return iRet;
-    }
-    if (this->m_ulClientId == 0)
-    {
-        GORM_LOGE("client send request before make hand shake.");
-        pCurrentRequest->GetResult(GORM_NEED_HAND_SHAKE, 0, nullptr);
-        this->ReadyWrite();
-        return GORM_OK;
     }
 
     int iPendingNum = this->m_pRequestRing->GetNum();

@@ -47,7 +47,7 @@ struct TableStruct_gorm_2ddb_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[14]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[17]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -73,6 +73,9 @@ extern GORM_PB_Table_heroDefaultTypeInternal _GORM_PB_Table_hero_default_instanc
 class GORM_PB_Table_interaction;
 class GORM_PB_Table_interactionDefaultTypeInternal;
 extern GORM_PB_Table_interactionDefaultTypeInternal _GORM_PB_Table_interaction_default_instance_;
+class GORM_PB_Table_login_log;
+class GORM_PB_Table_login_logDefaultTypeInternal;
+extern GORM_PB_Table_login_logDefaultTypeInternal _GORM_PB_Table_login_log_default_instance_;
 class GORM_PB_Table_mail;
 class GORM_PB_Table_mailDefaultTypeInternal;
 extern GORM_PB_Table_mailDefaultTypeInternal _GORM_PB_Table_mail_default_instance_;
@@ -82,6 +85,12 @@ extern GORM_PB_Table_materialDefaultTypeInternal _GORM_PB_Table_material_default
 class GORM_PB_Table_npc;
 class GORM_PB_Table_npcDefaultTypeInternal;
 extern GORM_PB_Table_npcDefaultTypeInternal _GORM_PB_Table_npc_default_instance_;
+class GORM_PB_Table_ptuser;
+class GORM_PB_Table_ptuserDefaultTypeInternal;
+extern GORM_PB_Table_ptuserDefaultTypeInternal _GORM_PB_Table_ptuser_default_instance_;
+class GORM_PB_Table_res_log;
+class GORM_PB_Table_res_logDefaultTypeInternal;
+extern GORM_PB_Table_res_logDefaultTypeInternal _GORM_PB_Table_res_log_default_instance_;
 class GORM_PB_Table_role;
 class GORM_PB_Table_roleDefaultTypeInternal;
 extern GORM_PB_Table_roleDefaultTypeInternal _GORM_PB_Table_role_default_instance_;
@@ -105,9 +114,12 @@ template<> ::gorm::GORM_PB_Table_equip* Arena::CreateMaybeMessage<::gorm::GORM_P
 template<> ::gorm::GORM_PB_Table_food* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_food>(Arena*);
 template<> ::gorm::GORM_PB_Table_hero* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_hero>(Arena*);
 template<> ::gorm::GORM_PB_Table_interaction* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_interaction>(Arena*);
+template<> ::gorm::GORM_PB_Table_login_log* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_login_log>(Arena*);
 template<> ::gorm::GORM_PB_Table_mail* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_mail>(Arena*);
 template<> ::gorm::GORM_PB_Table_material* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_material>(Arena*);
 template<> ::gorm::GORM_PB_Table_npc* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_npc>(Arena*);
+template<> ::gorm::GORM_PB_Table_ptuser* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_ptuser>(Arena*);
+template<> ::gorm::GORM_PB_Table_res_log* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_res_log>(Arena*);
 template<> ::gorm::GORM_PB_Table_role* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_role>(Arena*);
 template<> ::gorm::GORM_PB_Table_roles* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_roles>(Arena*);
 template<> ::gorm::GORM_PB_Table_scene* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_scene>(Arena*);
@@ -239,13 +251,13 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string currency1 = 4;
+  // bytes currency1 = 4;
   void clear_currency1();
   const std::string& currency1() const;
   void set_currency1(const std::string& value);
   void set_currency1(std::string&& value);
   void set_currency1(const char* value);
-  void set_currency1(const char* value, size_t size);
+  void set_currency1(const void* value, size_t size);
   std::string* mutable_currency1();
   std::string* release_currency1();
   void set_allocated_currency1(std::string* currency1);
@@ -264,13 +276,13 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
   std::string* _internal_mutable_currency1();
   public:
 
-  // string currency2 = 5;
+  // bytes currency2 = 5;
   void clear_currency2();
   const std::string& currency2() const;
   void set_currency2(const std::string& value);
   void set_currency2(std::string&& value);
   void set_currency2(const char* value);
-  void set_currency2(const char* value, size_t size);
+  void set_currency2(const void* value, size_t size);
   std::string* mutable_currency2();
   std::string* release_currency2();
   void set_allocated_currency2(std::string* currency2);
@@ -289,13 +301,13 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
   std::string* _internal_mutable_currency2();
   public:
 
-  // string currency3 = 6;
+  // bytes currency3 = 6;
   void clear_currency3();
   const std::string& currency3() const;
   void set_currency3(const std::string& value);
   void set_currency3(std::string&& value);
   void set_currency3(const char* value);
-  void set_currency3(const char* value, size_t size);
+  void set_currency3(const void* value, size_t size);
   std::string* mutable_currency3();
   std::string* release_currency3();
   void set_allocated_currency3(std::string* currency3);
@@ -314,13 +326,13 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
   std::string* _internal_mutable_currency3();
   public:
 
-  // string currency4 = 7;
+  // bytes currency4 = 7;
   void clear_currency4();
   const std::string& currency4() const;
   void set_currency4(const std::string& value);
   void set_currency4(std::string&& value);
   void set_currency4(const char* value);
-  void set_currency4(const char* value, size_t size);
+  void set_currency4(const void* value, size_t size);
   std::string* mutable_currency4();
   std::string* release_currency4();
   void set_allocated_currency4(std::string* currency4);
@@ -339,7 +351,7 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
   std::string* _internal_mutable_currency4();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -348,7 +360,7 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -357,7 +369,7 @@ class GORM_PB_Table_currency PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -502,13 +514,13 @@ class GORM_PB_Table_cycleevent PROTOBUF_FINAL :
     kVersionFieldNumber = 1,
     kRoleidFieldNumber = 2,
   };
-  // string events = 3;
+  // bytes events = 3;
   void clear_events();
   const std::string& events() const;
   void set_events(const std::string& value);
   void set_events(std::string&& value);
   void set_events(const char* value);
-  void set_events(const char* value, size_t size);
+  void set_events(const void* value, size_t size);
   std::string* mutable_events();
   std::string* release_events();
   void set_allocated_events(std::string* events);
@@ -527,7 +539,7 @@ class GORM_PB_Table_cycleevent PROTOBUF_FINAL :
   std::string* _internal_mutable_events();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -536,7 +548,7 @@ class GORM_PB_Table_cycleevent PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -681,13 +693,13 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string equip1 = 4;
+  // bytes equip1 = 4;
   void clear_equip1();
   const std::string& equip1() const;
   void set_equip1(const std::string& value);
   void set_equip1(std::string&& value);
   void set_equip1(const char* value);
-  void set_equip1(const char* value, size_t size);
+  void set_equip1(const void* value, size_t size);
   std::string* mutable_equip1();
   std::string* release_equip1();
   void set_allocated_equip1(std::string* equip1);
@@ -706,13 +718,13 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
   std::string* _internal_mutable_equip1();
   public:
 
-  // string equip2 = 5;
+  // bytes equip2 = 5;
   void clear_equip2();
   const std::string& equip2() const;
   void set_equip2(const std::string& value);
   void set_equip2(std::string&& value);
   void set_equip2(const char* value);
-  void set_equip2(const char* value, size_t size);
+  void set_equip2(const void* value, size_t size);
   std::string* mutable_equip2();
   std::string* release_equip2();
   void set_allocated_equip2(std::string* equip2);
@@ -731,13 +743,13 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
   std::string* _internal_mutable_equip2();
   public:
 
-  // string equip3 = 6;
+  // bytes equip3 = 6;
   void clear_equip3();
   const std::string& equip3() const;
   void set_equip3(const std::string& value);
   void set_equip3(std::string&& value);
   void set_equip3(const char* value);
-  void set_equip3(const char* value, size_t size);
+  void set_equip3(const void* value, size_t size);
   std::string* mutable_equip3();
   std::string* release_equip3();
   void set_allocated_equip3(std::string* equip3);
@@ -756,13 +768,13 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
   std::string* _internal_mutable_equip3();
   public:
 
-  // string equip4 = 7;
+  // bytes equip4 = 7;
   void clear_equip4();
   const std::string& equip4() const;
   void set_equip4(const std::string& value);
   void set_equip4(std::string&& value);
   void set_equip4(const char* value);
-  void set_equip4(const char* value, size_t size);
+  void set_equip4(const void* value, size_t size);
   std::string* mutable_equip4();
   std::string* release_equip4();
   void set_allocated_equip4(std::string* equip4);
@@ -781,7 +793,7 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
   std::string* _internal_mutable_equip4();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -790,7 +802,7 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -799,7 +811,7 @@ class GORM_PB_Table_equip PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -948,13 +960,13 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string food1 = 4;
+  // bytes food1 = 4;
   void clear_food1();
   const std::string& food1() const;
   void set_food1(const std::string& value);
   void set_food1(std::string&& value);
   void set_food1(const char* value);
-  void set_food1(const char* value, size_t size);
+  void set_food1(const void* value, size_t size);
   std::string* mutable_food1();
   std::string* release_food1();
   void set_allocated_food1(std::string* food1);
@@ -973,13 +985,13 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
   std::string* _internal_mutable_food1();
   public:
 
-  // string food2 = 5;
+  // bytes food2 = 5;
   void clear_food2();
   const std::string& food2() const;
   void set_food2(const std::string& value);
   void set_food2(std::string&& value);
   void set_food2(const char* value);
-  void set_food2(const char* value, size_t size);
+  void set_food2(const void* value, size_t size);
   std::string* mutable_food2();
   std::string* release_food2();
   void set_allocated_food2(std::string* food2);
@@ -998,13 +1010,13 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
   std::string* _internal_mutable_food2();
   public:
 
-  // string food3 = 6;
+  // bytes food3 = 6;
   void clear_food3();
   const std::string& food3() const;
   void set_food3(const std::string& value);
   void set_food3(std::string&& value);
   void set_food3(const char* value);
-  void set_food3(const char* value, size_t size);
+  void set_food3(const void* value, size_t size);
   std::string* mutable_food3();
   std::string* release_food3();
   void set_allocated_food3(std::string* food3);
@@ -1023,13 +1035,13 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
   std::string* _internal_mutable_food3();
   public:
 
-  // string food4 = 7;
+  // bytes food4 = 7;
   void clear_food4();
   const std::string& food4() const;
   void set_food4(const std::string& value);
   void set_food4(std::string&& value);
   void set_food4(const char* value);
-  void set_food4(const char* value, size_t size);
+  void set_food4(const void* value, size_t size);
   std::string* mutable_food4();
   std::string* release_food4();
   void set_allocated_food4(std::string* food4);
@@ -1048,7 +1060,7 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
   std::string* _internal_mutable_food4();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1057,7 +1069,7 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -1066,7 +1078,7 @@ class GORM_PB_Table_food PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1208,17 +1220,18 @@ class GORM_PB_Table_hero PROTOBUF_FINAL :
 
   enum : int {
     kHerosFieldNumber = 4,
+    kTeamsFieldNumber = 5,
     kVersionFieldNumber = 1,
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string heros = 4;
+  // bytes heros = 4;
   void clear_heros();
   const std::string& heros() const;
   void set_heros(const std::string& value);
   void set_heros(std::string&& value);
   void set_heros(const char* value);
-  void set_heros(const char* value, size_t size);
+  void set_heros(const void* value, size_t size);
   std::string* mutable_heros();
   std::string* release_heros();
   void set_allocated_heros(std::string* heros);
@@ -1237,7 +1250,32 @@ class GORM_PB_Table_hero PROTOBUF_FINAL :
   std::string* _internal_mutable_heros();
   public:
 
-  // uint64 version = 1;
+  // bytes teams = 5;
+  void clear_teams();
+  const std::string& teams() const;
+  void set_teams(const std::string& value);
+  void set_teams(std::string&& value);
+  void set_teams(const char* value);
+  void set_teams(const void* value, size_t size);
+  std::string* mutable_teams();
+  std::string* release_teams();
+  void set_allocated_teams(std::string* teams);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_teams();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_teams(
+      std::string* teams);
+  private:
+  const std::string& _internal_teams() const;
+  void _internal_set_teams(const std::string& value);
+  std::string* _internal_mutable_teams();
+  public:
+
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1246,7 +1284,7 @@ class GORM_PB_Table_hero PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -1255,7 +1293,7 @@ class GORM_PB_Table_hero PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1272,9 +1310,245 @@ class GORM_PB_Table_hero PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr heros_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr teams_;
   ::PROTOBUF_NAMESPACE_ID::uint64 version_;
   ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_2ddb_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GORM_PB_Table_login_log PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_login_log) */ {
+ public:
+  inline GORM_PB_Table_login_log() : GORM_PB_Table_login_log(nullptr) {};
+  virtual ~GORM_PB_Table_login_log();
+
+  GORM_PB_Table_login_log(const GORM_PB_Table_login_log& from);
+  GORM_PB_Table_login_log(GORM_PB_Table_login_log&& from) noexcept
+    : GORM_PB_Table_login_log() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_Table_login_log& operator=(const GORM_PB_Table_login_log& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_Table_login_log& operator=(GORM_PB_Table_login_log&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_Table_login_log& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_Table_login_log* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_login_log*>(
+               &_GORM_PB_Table_login_log_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(GORM_PB_Table_login_log& a, GORM_PB_Table_login_log& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_Table_login_log* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_Table_login_log* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_Table_login_log* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_login_log>(nullptr);
+  }
+
+  GORM_PB_Table_login_log* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_login_log>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_Table_login_log& from);
+  void MergeFrom(const GORM_PB_Table_login_log& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_Table_login_log* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_Table_login_log";
+  }
+  protected:
+  explicit GORM_PB_Table_login_log(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
+    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIpFieldNumber = 5,
+    kAppidFieldNumber = 6,
+    kVersionFieldNumber = 1,
+    kRoleidFieldNumber = 2,
+    kActionFieldNumber = 3,
+    kOnlineFieldNumber = 4,
+    kCreatetimeFieldNumber = 7,
+  };
+  // bytes ip = 5;
+  void clear_ip();
+  const std::string& ip() const;
+  void set_ip(const std::string& value);
+  void set_ip(std::string&& value);
+  void set_ip(const char* value);
+  void set_ip(const void* value, size_t size);
+  std::string* mutable_ip();
+  std::string* release_ip();
+  void set_allocated_ip(std::string* ip);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_ip();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_ip(
+      std::string* ip);
+  private:
+  const std::string& _internal_ip() const;
+  void _internal_set_ip(const std::string& value);
+  std::string* _internal_mutable_ip();
+  public:
+
+  // bytes appid = 6;
+  void clear_appid();
+  const std::string& appid() const;
+  void set_appid(const std::string& value);
+  void set_appid(std::string&& value);
+  void set_appid(const char* value);
+  void set_appid(const void* value, size_t size);
+  std::string* mutable_appid();
+  std::string* release_appid();
+  void set_allocated_appid(std::string* appid);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_appid();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_appid(
+      std::string* appid);
+  private:
+  const std::string& _internal_appid() const;
+  void _internal_set_appid(const std::string& value);
+  std::string* _internal_mutable_appid();
+  public:
+
+  // fixed64 version = 1;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // sfixed64 roleid = 2;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 action = 3;
+  void clear_action();
+  ::PROTOBUF_NAMESPACE_ID::int32 action() const;
+  void set_action(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_action() const;
+  void _internal_set_action(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 online = 4;
+  void clear_online();
+  ::PROTOBUF_NAMESPACE_ID::int32 online() const;
+  void set_online(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_online() const;
+  void _internal_set_online(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed64 createtime = 7;
+  void clear_createtime();
+  ::PROTOBUF_NAMESPACE_ID::int64 createtime() const;
+  void set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_createtime() const;
+  void _internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_login_log)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ip_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr appid_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 action_;
+  ::PROTOBUF_NAMESPACE_ID::int32 online_;
+  ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -1322,7 +1596,7 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
                &_GORM_PB_Table_mail_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(GORM_PB_Table_mail& a, GORM_PB_Table_mail& b) {
     a.Swap(&b);
@@ -1403,13 +1677,13 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
     kLastmailidFieldNumber = 8,
     kSnakeidFieldNumber = 9,
   };
-  // string mail1 = 3;
+  // bytes mail1 = 3;
   void clear_mail1();
   const std::string& mail1() const;
   void set_mail1(const std::string& value);
   void set_mail1(std::string&& value);
   void set_mail1(const char* value);
-  void set_mail1(const char* value, size_t size);
+  void set_mail1(const void* value, size_t size);
   std::string* mutable_mail1();
   std::string* release_mail1();
   void set_allocated_mail1(std::string* mail1);
@@ -1428,13 +1702,13 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   std::string* _internal_mutable_mail1();
   public:
 
-  // string mail2 = 4;
+  // bytes mail2 = 4;
   void clear_mail2();
   const std::string& mail2() const;
   void set_mail2(const std::string& value);
   void set_mail2(std::string&& value);
   void set_mail2(const char* value);
-  void set_mail2(const char* value, size_t size);
+  void set_mail2(const void* value, size_t size);
   std::string* mutable_mail2();
   std::string* release_mail2();
   void set_allocated_mail2(std::string* mail2);
@@ -1453,13 +1727,13 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   std::string* _internal_mutable_mail2();
   public:
 
-  // string mail3 = 5;
+  // bytes mail3 = 5;
   void clear_mail3();
   const std::string& mail3() const;
   void set_mail3(const std::string& value);
   void set_mail3(std::string&& value);
   void set_mail3(const char* value);
-  void set_mail3(const char* value, size_t size);
+  void set_mail3(const void* value, size_t size);
   std::string* mutable_mail3();
   std::string* release_mail3();
   void set_allocated_mail3(std::string* mail3);
@@ -1478,13 +1752,13 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   std::string* _internal_mutable_mail3();
   public:
 
-  // string mail4 = 6;
+  // bytes mail4 = 6;
   void clear_mail4();
   const std::string& mail4() const;
   void set_mail4(const std::string& value);
   void set_mail4(std::string&& value);
   void set_mail4(const char* value);
-  void set_mail4(const char* value, size_t size);
+  void set_mail4(const void* value, size_t size);
   std::string* mutable_mail4();
   std::string* release_mail4();
   void set_allocated_mail4(std::string* mail4);
@@ -1503,13 +1777,13 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   std::string* _internal_mutable_mail4();
   public:
 
-  // string mail5 = 7;
+  // bytes mail5 = 7;
   void clear_mail5();
   const std::string& mail5() const;
   void set_mail5(const std::string& value);
   void set_mail5(std::string&& value);
   void set_mail5(const char* value);
-  void set_mail5(const char* value, size_t size);
+  void set_mail5(const void* value, size_t size);
   std::string* mutable_mail5();
   std::string* release_mail5();
   void set_allocated_mail5(std::string* mail5);
@@ -1528,7 +1802,7 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   std::string* _internal_mutable_mail5();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1537,7 +1811,7 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -1546,7 +1820,7 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 lastmailid = 8;
+  // sfixed32 lastmailid = 8;
   void clear_lastmailid();
   ::PROTOBUF_NAMESPACE_ID::int32 lastmailid() const;
   void set_lastmailid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1555,7 +1829,7 @@ class GORM_PB_Table_mail PROTOBUF_FINAL :
   void _internal_set_lastmailid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 snakeid = 9;
+  // sfixed32 snakeid = 9;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1627,7 +1901,7 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
                &_GORM_PB_Table_material_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(GORM_PB_Table_material& a, GORM_PB_Table_material& b) {
     a.Swap(&b);
@@ -1706,13 +1980,13 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string material1 = 4;
+  // bytes material1 = 4;
   void clear_material1();
   const std::string& material1() const;
   void set_material1(const std::string& value);
   void set_material1(std::string&& value);
   void set_material1(const char* value);
-  void set_material1(const char* value, size_t size);
+  void set_material1(const void* value, size_t size);
   std::string* mutable_material1();
   std::string* release_material1();
   void set_allocated_material1(std::string* material1);
@@ -1731,13 +2005,13 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
   std::string* _internal_mutable_material1();
   public:
 
-  // string material2 = 5;
+  // bytes material2 = 5;
   void clear_material2();
   const std::string& material2() const;
   void set_material2(const std::string& value);
   void set_material2(std::string&& value);
   void set_material2(const char* value);
-  void set_material2(const char* value, size_t size);
+  void set_material2(const void* value, size_t size);
   std::string* mutable_material2();
   std::string* release_material2();
   void set_allocated_material2(std::string* material2);
@@ -1756,13 +2030,13 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
   std::string* _internal_mutable_material2();
   public:
 
-  // string material3 = 6;
+  // bytes material3 = 6;
   void clear_material3();
   const std::string& material3() const;
   void set_material3(const std::string& value);
   void set_material3(std::string&& value);
   void set_material3(const char* value);
-  void set_material3(const char* value, size_t size);
+  void set_material3(const void* value, size_t size);
   std::string* mutable_material3();
   std::string* release_material3();
   void set_allocated_material3(std::string* material3);
@@ -1781,13 +2055,13 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
   std::string* _internal_mutable_material3();
   public:
 
-  // string material4 = 7;
+  // bytes material4 = 7;
   void clear_material4();
   const std::string& material4() const;
   void set_material4(const std::string& value);
   void set_material4(std::string&& value);
   void set_material4(const char* value);
-  void set_material4(const char* value, size_t size);
+  void set_material4(const void* value, size_t size);
   std::string* mutable_material4();
   std::string* release_material4();
   void set_allocated_material4(std::string* material4);
@@ -1806,7 +2080,7 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
   std::string* _internal_mutable_material4();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1815,7 +2089,7 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -1824,7 +2098,7 @@ class GORM_PB_Table_material PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1894,7 +2168,7 @@ class GORM_PB_Table_npc PROTOBUF_FINAL :
                &_GORM_PB_Table_npc_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(GORM_PB_Table_npc& a, GORM_PB_Table_npc& b) {
     a.Swap(&b);
@@ -1970,13 +2244,13 @@ class GORM_PB_Table_npc PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string npcs = 4;
+  // bytes npcs = 4;
   void clear_npcs();
   const std::string& npcs() const;
   void set_npcs(const std::string& value);
   void set_npcs(std::string&& value);
   void set_npcs(const char* value);
-  void set_npcs(const char* value, size_t size);
+  void set_npcs(const void* value, size_t size);
   std::string* mutable_npcs();
   std::string* release_npcs();
   void set_allocated_npcs(std::string* npcs);
@@ -1995,7 +2269,7 @@ class GORM_PB_Table_npc PROTOBUF_FINAL :
   std::string* _internal_mutable_npcs();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2004,7 +2278,7 @@ class GORM_PB_Table_npc PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2013,7 +2287,7 @@ class GORM_PB_Table_npc PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2033,6 +2307,744 @@ class GORM_PB_Table_npc PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::uint64 version_;
   ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_2ddb_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GORM_PB_Table_res_log PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_res_log) */ {
+ public:
+  inline GORM_PB_Table_res_log() : GORM_PB_Table_res_log(nullptr) {};
+  virtual ~GORM_PB_Table_res_log();
+
+  GORM_PB_Table_res_log(const GORM_PB_Table_res_log& from);
+  GORM_PB_Table_res_log(GORM_PB_Table_res_log&& from) noexcept
+    : GORM_PB_Table_res_log() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_Table_res_log& operator=(const GORM_PB_Table_res_log& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_Table_res_log& operator=(GORM_PB_Table_res_log&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_Table_res_log& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_Table_res_log* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_res_log*>(
+               &_GORM_PB_Table_res_log_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(GORM_PB_Table_res_log& a, GORM_PB_Table_res_log& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_Table_res_log* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_Table_res_log* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_Table_res_log* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_res_log>(nullptr);
+  }
+
+  GORM_PB_Table_res_log* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_res_log>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_Table_res_log& from);
+  void MergeFrom(const GORM_PB_Table_res_log& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_Table_res_log* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_Table_res_log";
+  }
+  protected:
+  explicit GORM_PB_Table_res_log(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
+    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kVersionFieldNumber = 1,
+    kRoleidFieldNumber = 2,
+    kActionFieldNumber = 3,
+    kCfgtypeFieldNumber = 4,
+    kCfgidFieldNumber = 5,
+    kDeltaFieldNumber = 6,
+    kCreatetimeFieldNumber = 8,
+    kValueFieldNumber = 7,
+  };
+  // fixed64 version = 1;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // sfixed64 roleid = 2;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 action = 3;
+  void clear_action();
+  ::PROTOBUF_NAMESPACE_ID::int32 action() const;
+  void set_action(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_action() const;
+  void _internal_set_action(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 cfgtype = 4;
+  void clear_cfgtype();
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgtype() const;
+  void set_cfgtype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_cfgtype() const;
+  void _internal_set_cfgtype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 cfgid = 5;
+  void clear_cfgid();
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgid() const;
+  void set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_cfgid() const;
+  void _internal_set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 delta = 6;
+  void clear_delta();
+  ::PROTOBUF_NAMESPACE_ID::int32 delta() const;
+  void set_delta(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_delta() const;
+  void _internal_set_delta(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed64 createtime = 8;
+  void clear_createtime();
+  ::PROTOBUF_NAMESPACE_ID::int64 createtime() const;
+  void set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_createtime() const;
+  void _internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 value = 7;
+  void clear_value();
+  ::PROTOBUF_NAMESPACE_ID::int32 value() const;
+  void set_value(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_value() const;
+  void _internal_set_value(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_res_log)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 action_;
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgtype_;
+  ::PROTOBUF_NAMESPACE_ID::int32 cfgid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 delta_;
+  ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
+  ::PROTOBUF_NAMESPACE_ID::int32 value_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_2ddb_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GORM_PB_Table_interaction PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_interaction) */ {
+ public:
+  inline GORM_PB_Table_interaction() : GORM_PB_Table_interaction(nullptr) {};
+  virtual ~GORM_PB_Table_interaction();
+
+  GORM_PB_Table_interaction(const GORM_PB_Table_interaction& from);
+  GORM_PB_Table_interaction(GORM_PB_Table_interaction&& from) noexcept
+    : GORM_PB_Table_interaction() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_Table_interaction& operator=(const GORM_PB_Table_interaction& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_Table_interaction& operator=(GORM_PB_Table_interaction&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_Table_interaction& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_Table_interaction* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_interaction*>(
+               &_GORM_PB_Table_interaction_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(GORM_PB_Table_interaction& a, GORM_PB_Table_interaction& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_Table_interaction* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_Table_interaction* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_Table_interaction* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_interaction>(nullptr);
+  }
+
+  GORM_PB_Table_interaction* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_interaction>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_Table_interaction& from);
+  void MergeFrom(const GORM_PB_Table_interaction& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_Table_interaction* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_Table_interaction";
+  }
+  protected:
+  explicit GORM_PB_Table_interaction(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
+    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInteraction1FieldNumber = 4,
+    kInteraction2FieldNumber = 5,
+    kInteraction3FieldNumber = 6,
+    kInteraction4FieldNumber = 7,
+    kVersionFieldNumber = 1,
+    kRoleidFieldNumber = 2,
+    kSnakeidFieldNumber = 3,
+  };
+  // bytes interaction1 = 4;
+  void clear_interaction1();
+  const std::string& interaction1() const;
+  void set_interaction1(const std::string& value);
+  void set_interaction1(std::string&& value);
+  void set_interaction1(const char* value);
+  void set_interaction1(const void* value, size_t size);
+  std::string* mutable_interaction1();
+  std::string* release_interaction1();
+  void set_allocated_interaction1(std::string* interaction1);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_interaction1();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_interaction1(
+      std::string* interaction1);
+  private:
+  const std::string& _internal_interaction1() const;
+  void _internal_set_interaction1(const std::string& value);
+  std::string* _internal_mutable_interaction1();
+  public:
+
+  // bytes interaction2 = 5;
+  void clear_interaction2();
+  const std::string& interaction2() const;
+  void set_interaction2(const std::string& value);
+  void set_interaction2(std::string&& value);
+  void set_interaction2(const char* value);
+  void set_interaction2(const void* value, size_t size);
+  std::string* mutable_interaction2();
+  std::string* release_interaction2();
+  void set_allocated_interaction2(std::string* interaction2);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_interaction2();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_interaction2(
+      std::string* interaction2);
+  private:
+  const std::string& _internal_interaction2() const;
+  void _internal_set_interaction2(const std::string& value);
+  std::string* _internal_mutable_interaction2();
+  public:
+
+  // bytes interaction3 = 6;
+  void clear_interaction3();
+  const std::string& interaction3() const;
+  void set_interaction3(const std::string& value);
+  void set_interaction3(std::string&& value);
+  void set_interaction3(const char* value);
+  void set_interaction3(const void* value, size_t size);
+  std::string* mutable_interaction3();
+  std::string* release_interaction3();
+  void set_allocated_interaction3(std::string* interaction3);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_interaction3();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_interaction3(
+      std::string* interaction3);
+  private:
+  const std::string& _internal_interaction3() const;
+  void _internal_set_interaction3(const std::string& value);
+  std::string* _internal_mutable_interaction3();
+  public:
+
+  // bytes interaction4 = 7;
+  void clear_interaction4();
+  const std::string& interaction4() const;
+  void set_interaction4(const std::string& value);
+  void set_interaction4(std::string&& value);
+  void set_interaction4(const char* value);
+  void set_interaction4(const void* value, size_t size);
+  std::string* mutable_interaction4();
+  std::string* release_interaction4();
+  void set_allocated_interaction4(std::string* interaction4);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_interaction4();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_interaction4(
+      std::string* interaction4);
+  private:
+  const std::string& _internal_interaction4() const;
+  void _internal_set_interaction4(const std::string& value);
+  std::string* _internal_mutable_interaction4();
+  public:
+
+  // fixed64 version = 1;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // sfixed64 roleid = 2;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 snakeid = 3;
+  void clear_snakeid();
+  ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
+  void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_snakeid() const;
+  void _internal_set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_interaction)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction1_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction2_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction3_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction4_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 snakeid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_2ddb_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GORM_PB_Table_roles PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_roles) */ {
+ public:
+  inline GORM_PB_Table_roles() : GORM_PB_Table_roles(nullptr) {};
+  virtual ~GORM_PB_Table_roles();
+
+  GORM_PB_Table_roles(const GORM_PB_Table_roles& from);
+  GORM_PB_Table_roles(GORM_PB_Table_roles&& from) noexcept
+    : GORM_PB_Table_roles() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_Table_roles& operator=(const GORM_PB_Table_roles& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_Table_roles& operator=(GORM_PB_Table_roles&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_Table_roles& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_Table_roles* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_roles*>(
+               &_GORM_PB_Table_roles_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(GORM_PB_Table_roles& a, GORM_PB_Table_roles& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_Table_roles* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_Table_roles* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_Table_roles* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_roles>(nullptr);
+  }
+
+  GORM_PB_Table_roles* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_roles>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_Table_roles& from);
+  void MergeFrom(const GORM_PB_Table_roles& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_Table_roles* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_Table_roles";
+  }
+  protected:
+  explicit GORM_PB_Table_roles(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
+    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNameFieldNumber = 6,
+    kFaceFieldNumber = 8,
+    kVersionFieldNumber = 1,
+    kRoleidFieldNumber = 2,
+    kUseridFieldNumber = 3,
+    kWorldidFieldNumber = 4,
+    kDbidFieldNumber = 5,
+    kCharidFieldNumber = 7,
+    kCreatetimeFieldNumber = 9,
+  };
+  // bytes name = 6;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const void* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_name();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_name(
+      std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
+  // bytes face = 8;
+  void clear_face();
+  const std::string& face() const;
+  void set_face(const std::string& value);
+  void set_face(std::string&& value);
+  void set_face(const char* value);
+  void set_face(const void* value, size_t size);
+  std::string* mutable_face();
+  std::string* release_face();
+  void set_allocated_face(std::string* face);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_face();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_face(
+      std::string* face);
+  private:
+  const std::string& _internal_face() const;
+  void _internal_set_face(const std::string& value);
+  std::string* _internal_mutable_face();
+  public:
+
+  // fixed64 version = 1;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // sfixed64 roleid = 2;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed64 userid = 3;
+  void clear_userid();
+  ::PROTOBUF_NAMESPACE_ID::int64 userid() const;
+  void set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_userid() const;
+  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed64 worldid = 4;
+  void clear_worldid();
+  ::PROTOBUF_NAMESPACE_ID::int64 worldid() const;
+  void set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_worldid() const;
+  void _internal_set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 dbid = 5;
+  void clear_dbid();
+  ::PROTOBUF_NAMESPACE_ID::int32 dbid() const;
+  void set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_dbid() const;
+  void _internal_set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 charid = 7;
+  void clear_charid();
+  ::PROTOBUF_NAMESPACE_ID::int32 charid() const;
+  void set_charid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_charid() const;
+  void _internal_set_charid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed64 createtime = 9;
+  void clear_createtime();
+  ::PROTOBUF_NAMESPACE_ID::int64 createtime() const;
+  void set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_createtime() const;
+  void _internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_roles)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr face_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 userid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 worldid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 dbid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 charid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -2080,7 +3092,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
                &_GORM_PB_Table_role_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    12;
 
   friend void swap(GORM_PB_Table_role& a, GORM_PB_Table_role& b) {
     a.Swap(&b);
@@ -2163,14 +3175,17 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
     kInitedFieldNumber = 9,
     kCreatetimeFieldNumber = 10,
     kOnlineFieldNumber = 12,
+    kWorldidFieldNumber = 13,
+    kUseridFieldNumber = 15,
+    kPttypeFieldNumber = 14,
   };
-  // string rolename = 3;
+  // bytes rolename = 3;
   void clear_rolename();
   const std::string& rolename() const;
   void set_rolename(const std::string& value);
   void set_rolename(std::string&& value);
   void set_rolename(const char* value);
-  void set_rolename(const char* value, size_t size);
+  void set_rolename(const void* value, size_t size);
   std::string* mutable_rolename();
   std::string* release_rolename();
   void set_allocated_rolename(std::string* rolename);
@@ -2189,13 +3204,13 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   std::string* _internal_mutable_rolename();
   public:
 
-  // string face = 11;
+  // bytes face = 11;
   void clear_face();
   const std::string& face() const;
   void set_face(const std::string& value);
   void set_face(std::string&& value);
   void set_face(const char* value);
-  void set_face(const char* value, size_t size);
+  void set_face(const void* value, size_t size);
   std::string* mutable_face();
   std::string* release_face();
   void set_allocated_face(std::string* face);
@@ -2214,7 +3229,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   std::string* _internal_mutable_face();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2223,7 +3238,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2232,7 +3247,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int64 exp = 5;
+  // sfixed64 exp = 5;
   void clear_exp();
   ::PROTOBUF_NAMESPACE_ID::int64 exp() const;
   void set_exp(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2241,7 +3256,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_exp(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 level = 4;
+  // sfixed32 level = 4;
   void clear_level();
   ::PROTOBUF_NAMESPACE_ID::int32 level() const;
   void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2250,7 +3265,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 characterid = 6;
+  // sfixed32 characterid = 6;
   void clear_characterid();
   ::PROTOBUF_NAMESPACE_ID::int32 characterid() const;
   void set_characterid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2259,7 +3274,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_characterid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int64 offlinetime = 8;
+  // sfixed64 offlinetime = 8;
   void clear_offlinetime();
   ::PROTOBUF_NAMESPACE_ID::int64 offlinetime() const;
   void set_offlinetime(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2268,7 +3283,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_offlinetime(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 gold = 7;
+  // sfixed32 gold = 7;
   void clear_gold();
   ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
   void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2277,7 +3292,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 inited = 9;
+  // sfixed32 inited = 9;
   void clear_inited();
   ::PROTOBUF_NAMESPACE_ID::int32 inited() const;
   void set_inited(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2286,7 +3301,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_inited(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int64 createtime = 10;
+  // sfixed64 createtime = 10;
   void clear_createtime();
   ::PROTOBUF_NAMESPACE_ID::int64 createtime() const;
   void set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2295,13 +3310,40 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int64 online = 12;
+  // sfixed64 online = 12;
   void clear_online();
   ::PROTOBUF_NAMESPACE_ID::int64 online() const;
   void set_online(::PROTOBUF_NAMESPACE_ID::int64 value);
   private:
   ::PROTOBUF_NAMESPACE_ID::int64 _internal_online() const;
   void _internal_set_online(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed64 worldid = 13;
+  void clear_worldid();
+  ::PROTOBUF_NAMESPACE_ID::int64 worldid() const;
+  void set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_worldid() const;
+  void _internal_set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed64 userid = 15;
+  void clear_userid();
+  ::PROTOBUF_NAMESPACE_ID::int64 userid() const;
+  void set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_userid() const;
+  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 pttype = 14;
+  void clear_pttype();
+  ::PROTOBUF_NAMESPACE_ID::int32 pttype() const;
+  void set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_pttype() const;
+  void _internal_set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_role)
@@ -2323,6 +3365,9 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int32 inited_;
   ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
   ::PROTOBUF_NAMESPACE_ID::int64 online_;
+  ::PROTOBUF_NAMESPACE_ID::int64 worldid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 userid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 pttype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -2370,7 +3415,7 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
                &_GORM_PB_Table_scene_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    13;
 
   friend void swap(GORM_PB_Table_scene& a, GORM_PB_Table_scene& b) {
     a.Swap(&b);
@@ -2446,13 +3491,13 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSceneidFieldNumber = 3,
   };
-  // string collects = 4;
+  // bytes collects = 4;
   void clear_collects();
   const std::string& collects() const;
   void set_collects(const std::string& value);
   void set_collects(std::string&& value);
   void set_collects(const char* value);
-  void set_collects(const char* value, size_t size);
+  void set_collects(const void* value, size_t size);
   std::string* mutable_collects();
   std::string* release_collects();
   void set_allocated_collects(std::string* collects);
@@ -2471,7 +3516,7 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
   std::string* _internal_mutable_collects();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2480,7 +3525,7 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2489,7 +3534,7 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 sceneid = 3;
+  // sfixed32 sceneid = 3;
   void clear_sceneid();
   ::PROTOBUF_NAMESPACE_ID::int32 sceneid() const;
   void set_sceneid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2556,7 +3601,7 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
                &_GORM_PB_Table_skill_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    14;
 
   friend void swap(GORM_PB_Table_skill& a, GORM_PB_Table_skill& b) {
     a.Swap(&b);
@@ -2635,13 +3680,13 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
     kRoleidFieldNumber = 2,
     kSnakeidFieldNumber = 3,
   };
-  // string skill1 = 4;
+  // bytes skill1 = 4;
   void clear_skill1();
   const std::string& skill1() const;
   void set_skill1(const std::string& value);
   void set_skill1(std::string&& value);
   void set_skill1(const char* value);
-  void set_skill1(const char* value, size_t size);
+  void set_skill1(const void* value, size_t size);
   std::string* mutable_skill1();
   std::string* release_skill1();
   void set_allocated_skill1(std::string* skill1);
@@ -2660,13 +3705,13 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
   std::string* _internal_mutable_skill1();
   public:
 
-  // string skill2 = 5;
+  // bytes skill2 = 5;
   void clear_skill2();
   const std::string& skill2() const;
   void set_skill2(const std::string& value);
   void set_skill2(std::string&& value);
   void set_skill2(const char* value);
-  void set_skill2(const char* value, size_t size);
+  void set_skill2(const void* value, size_t size);
   std::string* mutable_skill2();
   std::string* release_skill2();
   void set_allocated_skill2(std::string* skill2);
@@ -2685,13 +3730,13 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
   std::string* _internal_mutable_skill2();
   public:
 
-  // string skill3 = 6;
+  // bytes skill3 = 6;
   void clear_skill3();
   const std::string& skill3() const;
   void set_skill3(const std::string& value);
   void set_skill3(std::string&& value);
   void set_skill3(const char* value);
-  void set_skill3(const char* value, size_t size);
+  void set_skill3(const void* value, size_t size);
   std::string* mutable_skill3();
   std::string* release_skill3();
   void set_allocated_skill3(std::string* skill3);
@@ -2710,13 +3755,13 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
   std::string* _internal_mutable_skill3();
   public:
 
-  // string skill4 = 7;
+  // bytes skill4 = 7;
   void clear_skill4();
   const std::string& skill4() const;
   void set_skill4(const std::string& value);
   void set_skill4(std::string&& value);
   void set_skill4(const char* value);
-  void set_skill4(const char* value, size_t size);
+  void set_skill4(const void* value, size_t size);
   std::string* mutable_skill4();
   std::string* release_skill4();
   void set_allocated_skill4(std::string* skill4);
@@ -2735,7 +3780,7 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
   std::string* _internal_mutable_skill4();
   public:
 
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2744,7 +3789,7 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
+  // sfixed64 roleid = 2;
   void clear_roleid();
   ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
   void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -2753,7 +3798,7 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
   void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
+  // sfixed32 snakeid = 3;
   void clear_snakeid();
   ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
   void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2781,23 +3826,23 @@ class GORM_PB_Table_skill PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
-class GORM_PB_Table_interaction PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_interaction) */ {
+class GORM_PB_Table_ptuser PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_ptuser) */ {
  public:
-  inline GORM_PB_Table_interaction() : GORM_PB_Table_interaction(nullptr) {};
-  virtual ~GORM_PB_Table_interaction();
+  inline GORM_PB_Table_ptuser() : GORM_PB_Table_ptuser(nullptr) {};
+  virtual ~GORM_PB_Table_ptuser();
 
-  GORM_PB_Table_interaction(const GORM_PB_Table_interaction& from);
-  GORM_PB_Table_interaction(GORM_PB_Table_interaction&& from) noexcept
-    : GORM_PB_Table_interaction() {
+  GORM_PB_Table_ptuser(const GORM_PB_Table_ptuser& from);
+  GORM_PB_Table_ptuser(GORM_PB_Table_ptuser&& from) noexcept
+    : GORM_PB_Table_ptuser() {
     *this = ::std::move(from);
   }
 
-  inline GORM_PB_Table_interaction& operator=(const GORM_PB_Table_interaction& from) {
+  inline GORM_PB_Table_ptuser& operator=(const GORM_PB_Table_ptuser& from) {
     CopyFrom(from);
     return *this;
   }
-  inline GORM_PB_Table_interaction& operator=(GORM_PB_Table_interaction&& from) noexcept {
+  inline GORM_PB_Table_ptuser& operator=(GORM_PB_Table_ptuser&& from) noexcept {
     if (GetArena() == from.GetArena()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -2815,20 +3860,20 @@ class GORM_PB_Table_interaction PROTOBUF_FINAL :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const GORM_PB_Table_interaction& default_instance();
+  static const GORM_PB_Table_ptuser& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GORM_PB_Table_interaction* internal_default_instance() {
-    return reinterpret_cast<const GORM_PB_Table_interaction*>(
-               &_GORM_PB_Table_interaction_default_instance_);
+  static inline const GORM_PB_Table_ptuser* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_ptuser*>(
+               &_GORM_PB_Table_ptuser_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    15;
 
-  friend void swap(GORM_PB_Table_interaction& a, GORM_PB_Table_interaction& b) {
+  friend void swap(GORM_PB_Table_ptuser& a, GORM_PB_Table_ptuser& b) {
     a.Swap(&b);
   }
-  inline void Swap(GORM_PB_Table_interaction* other) {
+  inline void Swap(GORM_PB_Table_ptuser* other) {
     if (other == this) return;
     if (GetArena() == other->GetArena()) {
       InternalSwap(other);
@@ -2836,7 +3881,7 @@ class GORM_PB_Table_interaction PROTOBUF_FINAL :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(GORM_PB_Table_interaction* other) {
+  void UnsafeArenaSwap(GORM_PB_Table_ptuser* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -2844,17 +3889,17 @@ class GORM_PB_Table_interaction PROTOBUF_FINAL :
 
   // implements Message ----------------------------------------------
 
-  inline GORM_PB_Table_interaction* New() const final {
-    return CreateMaybeMessage<GORM_PB_Table_interaction>(nullptr);
+  inline GORM_PB_Table_ptuser* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_ptuser>(nullptr);
   }
 
-  GORM_PB_Table_interaction* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<GORM_PB_Table_interaction>(arena);
+  GORM_PB_Table_ptuser* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_ptuser>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const GORM_PB_Table_interaction& from);
-  void MergeFrom(const GORM_PB_Table_interaction& from);
+  void CopyFrom(const GORM_PB_Table_ptuser& from);
+  void MergeFrom(const GORM_PB_Table_ptuser& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -2868,13 +3913,13 @@ class GORM_PB_Table_interaction PROTOBUF_FINAL :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(GORM_PB_Table_interaction* other);
+  void InternalSwap(GORM_PB_Table_ptuser* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "gorm.GORM_PB_Table_interaction";
+    return "gorm.GORM_PB_Table_ptuser";
   }
   protected:
-  explicit GORM_PB_Table_interaction(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  explicit GORM_PB_Table_ptuser(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
@@ -2894,115 +3939,37 @@ class GORM_PB_Table_interaction PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInteraction1FieldNumber = 4,
-    kInteraction2FieldNumber = 5,
-    kInteraction3FieldNumber = 6,
-    kInteraction4FieldNumber = 7,
+    kPtidFieldNumber = 2,
     kVersionFieldNumber = 1,
-    kRoleidFieldNumber = 2,
-    kSnakeidFieldNumber = 3,
+    kUseridFieldNumber = 4,
+    kPttypeFieldNumber = 3,
   };
-  // string interaction1 = 4;
-  void clear_interaction1();
-  const std::string& interaction1() const;
-  void set_interaction1(const std::string& value);
-  void set_interaction1(std::string&& value);
-  void set_interaction1(const char* value);
-  void set_interaction1(const char* value, size_t size);
-  std::string* mutable_interaction1();
-  std::string* release_interaction1();
-  void set_allocated_interaction1(std::string* interaction1);
+  // bytes ptid = 2;
+  void clear_ptid();
+  const std::string& ptid() const;
+  void set_ptid(const std::string& value);
+  void set_ptid(std::string&& value);
+  void set_ptid(const char* value);
+  void set_ptid(const void* value, size_t size);
+  std::string* mutable_ptid();
+  std::string* release_ptid();
+  void set_allocated_ptid(std::string* ptid);
   GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
   "    string fields are deprecated and will be removed in a"
   "    future release.")
-  std::string* unsafe_arena_release_interaction1();
+  std::string* unsafe_arena_release_ptid();
   GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
   "    string fields are deprecated and will be removed in a"
   "    future release.")
-  void unsafe_arena_set_allocated_interaction1(
-      std::string* interaction1);
+  void unsafe_arena_set_allocated_ptid(
+      std::string* ptid);
   private:
-  const std::string& _internal_interaction1() const;
-  void _internal_set_interaction1(const std::string& value);
-  std::string* _internal_mutable_interaction1();
+  const std::string& _internal_ptid() const;
+  void _internal_set_ptid(const std::string& value);
+  std::string* _internal_mutable_ptid();
   public:
 
-  // string interaction2 = 5;
-  void clear_interaction2();
-  const std::string& interaction2() const;
-  void set_interaction2(const std::string& value);
-  void set_interaction2(std::string&& value);
-  void set_interaction2(const char* value);
-  void set_interaction2(const char* value, size_t size);
-  std::string* mutable_interaction2();
-  std::string* release_interaction2();
-  void set_allocated_interaction2(std::string* interaction2);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_interaction2();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_interaction2(
-      std::string* interaction2);
-  private:
-  const std::string& _internal_interaction2() const;
-  void _internal_set_interaction2(const std::string& value);
-  std::string* _internal_mutable_interaction2();
-  public:
-
-  // string interaction3 = 6;
-  void clear_interaction3();
-  const std::string& interaction3() const;
-  void set_interaction3(const std::string& value);
-  void set_interaction3(std::string&& value);
-  void set_interaction3(const char* value);
-  void set_interaction3(const char* value, size_t size);
-  std::string* mutable_interaction3();
-  std::string* release_interaction3();
-  void set_allocated_interaction3(std::string* interaction3);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_interaction3();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_interaction3(
-      std::string* interaction3);
-  private:
-  const std::string& _internal_interaction3() const;
-  void _internal_set_interaction3(const std::string& value);
-  std::string* _internal_mutable_interaction3();
-  public:
-
-  // string interaction4 = 7;
-  void clear_interaction4();
-  const std::string& interaction4() const;
-  void set_interaction4(const std::string& value);
-  void set_interaction4(std::string&& value);
-  void set_interaction4(const char* value);
-  void set_interaction4(const char* value, size_t size);
-  std::string* mutable_interaction4();
-  std::string* release_interaction4();
-  void set_allocated_interaction4(std::string* interaction4);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_interaction4();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_interaction4(
-      std::string* interaction4);
-  private:
-  const std::string& _internal_interaction4() const;
-  void _internal_set_interaction4(const std::string& value);
-  std::string* _internal_mutable_interaction4();
-  public:
-
-  // uint64 version = 1;
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -3011,38 +3978,35 @@ class GORM_PB_Table_interaction PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 roleid = 2;
-  void clear_roleid();
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
-  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  // sfixed64 userid = 4;
+  void clear_userid();
+  ::PROTOBUF_NAMESPACE_ID::int64 userid() const;
+  void set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
-  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_userid() const;
+  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 snakeid = 3;
-  void clear_snakeid();
-  ::PROTOBUF_NAMESPACE_ID::int32 snakeid() const;
-  void set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  // sfixed32 pttype = 3;
+  void clear_pttype();
+  ::PROTOBUF_NAMESPACE_ID::int32 pttype() const;
+  void set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_snakeid() const;
-  void _internal_set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_pttype() const;
+  void _internal_set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_interaction)
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_ptuser)
  private:
   class _Internal;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction1_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction2_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction3_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interaction4_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ptid_;
   ::PROTOBUF_NAMESPACE_ID::uint64 version_;
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 snakeid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 userid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 pttype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -3090,7 +4054,7 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
                &_GORM_PB_Table_user_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    16;
 
   friend void swap(GORM_PB_Table_user& a, GORM_PB_Table_user& b) {
     a.Swap(&b);
@@ -3162,18 +4126,19 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
 
   enum : int {
     kPtidFieldNumber = 3,
+    kRolesdataFieldNumber = 6,
     kVersionFieldNumber = 1,
     kUseridFieldNumber = 2,
     kCreatetimeFieldNumber = 5,
     kPttypeFieldNumber = 4,
   };
-  // string ptid = 3;
+  // bytes ptid = 3;
   void clear_ptid();
   const std::string& ptid() const;
   void set_ptid(const std::string& value);
   void set_ptid(std::string&& value);
   void set_ptid(const char* value);
-  void set_ptid(const char* value, size_t size);
+  void set_ptid(const void* value, size_t size);
   std::string* mutable_ptid();
   std::string* release_ptid();
   void set_allocated_ptid(std::string* ptid);
@@ -3192,7 +4157,32 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
   std::string* _internal_mutable_ptid();
   public:
 
-  // uint64 version = 1;
+  // bytes rolesdata = 6;
+  void clear_rolesdata();
+  const std::string& rolesdata() const;
+  void set_rolesdata(const std::string& value);
+  void set_rolesdata(std::string&& value);
+  void set_rolesdata(const char* value);
+  void set_rolesdata(const void* value, size_t size);
+  std::string* mutable_rolesdata();
+  std::string* release_rolesdata();
+  void set_allocated_rolesdata(std::string* rolesdata);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_rolesdata();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_rolesdata(
+      std::string* rolesdata);
+  private:
+  const std::string& _internal_rolesdata() const;
+  void _internal_set_rolesdata(const std::string& value);
+  std::string* _internal_mutable_rolesdata();
+  public:
+
+  // fixed64 version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -3201,7 +4191,7 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int64 userid = 2;
+  // sfixed64 userid = 2;
   void clear_userid();
   ::PROTOBUF_NAMESPACE_ID::int64 userid() const;
   void set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -3210,7 +4200,7 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
   void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int64 createtime = 5;
+  // sfixed64 createtime = 5;
   void clear_createtime();
   ::PROTOBUF_NAMESPACE_ID::int64 createtime() const;
   void set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
@@ -3219,7 +4209,7 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
   void _internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
-  // int32 pttype = 4;
+  // sfixed32 pttype = 4;
   void clear_pttype();
   ::PROTOBUF_NAMESPACE_ID::int32 pttype() const;
   void set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -3236,267 +4226,11 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ptid_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr rolesdata_;
   ::PROTOBUF_NAMESPACE_ID::uint64 version_;
   ::PROTOBUF_NAMESPACE_ID::int64 userid_;
   ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
   ::PROTOBUF_NAMESPACE_ID::int32 pttype_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_gorm_2ddb_2eproto;
-};
-// -------------------------------------------------------------------
-
-class GORM_PB_Table_roles PROTOBUF_FINAL :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_roles) */ {
- public:
-  inline GORM_PB_Table_roles() : GORM_PB_Table_roles(nullptr) {};
-  virtual ~GORM_PB_Table_roles();
-
-  GORM_PB_Table_roles(const GORM_PB_Table_roles& from);
-  GORM_PB_Table_roles(GORM_PB_Table_roles&& from) noexcept
-    : GORM_PB_Table_roles() {
-    *this = ::std::move(from);
-  }
-
-  inline GORM_PB_Table_roles& operator=(const GORM_PB_Table_roles& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline GORM_PB_Table_roles& operator=(GORM_PB_Table_roles&& from) noexcept {
-    if (GetArena() == from.GetArena()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const GORM_PB_Table_roles& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const GORM_PB_Table_roles* internal_default_instance() {
-    return reinterpret_cast<const GORM_PB_Table_roles*>(
-               &_GORM_PB_Table_roles_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    13;
-
-  friend void swap(GORM_PB_Table_roles& a, GORM_PB_Table_roles& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(GORM_PB_Table_roles* other) {
-    if (other == this) return;
-    if (GetArena() == other->GetArena()) {
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(GORM_PB_Table_roles* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline GORM_PB_Table_roles* New() const final {
-    return CreateMaybeMessage<GORM_PB_Table_roles>(nullptr);
-  }
-
-  GORM_PB_Table_roles* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<GORM_PB_Table_roles>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const GORM_PB_Table_roles& from);
-  void MergeFrom(const GORM_PB_Table_roles& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(GORM_PB_Table_roles* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "gorm.GORM_PB_Table_roles";
-  }
-  protected:
-  explicit GORM_PB_Table_roles(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
-    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kNameFieldNumber = 6,
-    kFaceFieldNumber = 8,
-    kVersionFieldNumber = 1,
-    kRoleidFieldNumber = 2,
-    kUseridFieldNumber = 3,
-    kWorldidFieldNumber = 4,
-    kDbidFieldNumber = 5,
-    kCharidFieldNumber = 7,
-    kCreatetimeFieldNumber = 9,
-  };
-  // string name = 6;
-  void clear_name();
-  const std::string& name() const;
-  void set_name(const std::string& value);
-  void set_name(std::string&& value);
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  std::string* mutable_name();
-  std::string* release_name();
-  void set_allocated_name(std::string* name);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_name();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_name(
-      std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
-
-  // string face = 8;
-  void clear_face();
-  const std::string& face() const;
-  void set_face(const std::string& value);
-  void set_face(std::string&& value);
-  void set_face(const char* value);
-  void set_face(const char* value, size_t size);
-  std::string* mutable_face();
-  std::string* release_face();
-  void set_allocated_face(std::string* face);
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  std::string* unsafe_arena_release_face();
-  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
-  "    string fields are deprecated and will be removed in a"
-  "    future release.")
-  void unsafe_arena_set_allocated_face(
-      std::string* face);
-  private:
-  const std::string& _internal_face() const;
-  void _internal_set_face(const std::string& value);
-  std::string* _internal_mutable_face();
-  public:
-
-  // uint64 version = 1;
-  void clear_version();
-  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
-  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
-  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
-  public:
-
-  // int64 roleid = 2;
-  void clear_roleid();
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
-  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
-  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  public:
-
-  // int64 userid = 3;
-  void clear_userid();
-  ::PROTOBUF_NAMESPACE_ID::int64 userid() const;
-  void set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_userid() const;
-  void _internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  public:
-
-  // int64 worldid = 4;
-  void clear_worldid();
-  ::PROTOBUF_NAMESPACE_ID::int64 worldid() const;
-  void set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_worldid() const;
-  void _internal_set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value);
-  public:
-
-  // int32 dbid = 5;
-  void clear_dbid();
-  ::PROTOBUF_NAMESPACE_ID::int32 dbid() const;
-  void set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_dbid() const;
-  void _internal_set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int32 charid = 7;
-  void clear_charid();
-  ::PROTOBUF_NAMESPACE_ID::int32 charid() const;
-  void set_charid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_charid() const;
-  void _internal_set_charid(::PROTOBUF_NAMESPACE_ID::int32 value);
-  public:
-
-  // int64 createtime = 9;
-  void clear_createtime();
-  ::PROTOBUF_NAMESPACE_ID::int64 createtime() const;
-  void set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_createtime() const;
-  void _internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_roles)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr face_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
-  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
-  ::PROTOBUF_NAMESPACE_ID::int64 userid_;
-  ::PROTOBUF_NAMESPACE_ID::int64 worldid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 dbid_;
-  ::PROTOBUF_NAMESPACE_ID::int32 charid_;
-  ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -3511,7 +4245,7 @@ class GORM_PB_Table_roles PROTOBUF_FINAL :
 #endif  // __GNUC__
 // GORM_PB_Table_currency
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_currency::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -3531,7 +4265,7 @@ inline void GORM_PB_Table_currency::set_version(::PROTOBUF_NAMESPACE_ID::uint64 
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_currency.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_currency::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -3551,7 +4285,7 @@ inline void GORM_PB_Table_currency::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 va
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_currency.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_currency::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -3571,7 +4305,7 @@ inline void GORM_PB_Table_currency::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 v
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_currency.snakeid)
 }
 
-// string currency1 = 4;
+// bytes currency1 = 4;
 inline void GORM_PB_Table_currency::clear_currency1() {
   currency1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -3607,7 +4341,7 @@ inline void GORM_PB_Table_currency::set_currency1(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_currency.currency1)
 }
-inline void GORM_PB_Table_currency::set_currency1(const char* value,
+inline void GORM_PB_Table_currency::set_currency1(const void* value,
     size_t size) {
   
   currency1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -3652,7 +4386,7 @@ inline void GORM_PB_Table_currency::unsafe_arena_set_allocated_currency1(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_currency.currency1)
 }
 
-// string currency2 = 5;
+// bytes currency2 = 5;
 inline void GORM_PB_Table_currency::clear_currency2() {
   currency2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -3688,7 +4422,7 @@ inline void GORM_PB_Table_currency::set_currency2(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_currency.currency2)
 }
-inline void GORM_PB_Table_currency::set_currency2(const char* value,
+inline void GORM_PB_Table_currency::set_currency2(const void* value,
     size_t size) {
   
   currency2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -3733,7 +4467,7 @@ inline void GORM_PB_Table_currency::unsafe_arena_set_allocated_currency2(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_currency.currency2)
 }
 
-// string currency3 = 6;
+// bytes currency3 = 6;
 inline void GORM_PB_Table_currency::clear_currency3() {
   currency3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -3769,7 +4503,7 @@ inline void GORM_PB_Table_currency::set_currency3(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_currency.currency3)
 }
-inline void GORM_PB_Table_currency::set_currency3(const char* value,
+inline void GORM_PB_Table_currency::set_currency3(const void* value,
     size_t size) {
   
   currency3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -3814,7 +4548,7 @@ inline void GORM_PB_Table_currency::unsafe_arena_set_allocated_currency3(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_currency.currency3)
 }
 
-// string currency4 = 7;
+// bytes currency4 = 7;
 inline void GORM_PB_Table_currency::clear_currency4() {
   currency4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -3850,7 +4584,7 @@ inline void GORM_PB_Table_currency::set_currency4(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_currency.currency4)
 }
-inline void GORM_PB_Table_currency::set_currency4(const char* value,
+inline void GORM_PB_Table_currency::set_currency4(const void* value,
     size_t size) {
   
   currency4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -3899,7 +4633,7 @@ inline void GORM_PB_Table_currency::unsafe_arena_set_allocated_currency4(
 
 // GORM_PB_Table_cycleevent
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_cycleevent::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -3919,7 +4653,7 @@ inline void GORM_PB_Table_cycleevent::set_version(::PROTOBUF_NAMESPACE_ID::uint6
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_cycleevent.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_cycleevent::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -3939,7 +4673,7 @@ inline void GORM_PB_Table_cycleevent::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_cycleevent.roleid)
 }
 
-// string events = 3;
+// bytes events = 3;
 inline void GORM_PB_Table_cycleevent::clear_events() {
   events_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -3975,7 +4709,7 @@ inline void GORM_PB_Table_cycleevent::set_events(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_cycleevent.events)
 }
-inline void GORM_PB_Table_cycleevent::set_events(const char* value,
+inline void GORM_PB_Table_cycleevent::set_events(const void* value,
     size_t size) {
   
   events_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4024,7 +4758,7 @@ inline void GORM_PB_Table_cycleevent::unsafe_arena_set_allocated_events(
 
 // GORM_PB_Table_equip
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_equip::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -4044,7 +4778,7 @@ inline void GORM_PB_Table_equip::set_version(::PROTOBUF_NAMESPACE_ID::uint64 val
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_equip.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_equip::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -4064,7 +4798,7 @@ inline void GORM_PB_Table_equip::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_equip.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_equip::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -4084,7 +4818,7 @@ inline void GORM_PB_Table_equip::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_equip.snakeid)
 }
 
-// string equip1 = 4;
+// bytes equip1 = 4;
 inline void GORM_PB_Table_equip::clear_equip1() {
   equip1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4120,7 +4854,7 @@ inline void GORM_PB_Table_equip::set_equip1(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_equip.equip1)
 }
-inline void GORM_PB_Table_equip::set_equip1(const char* value,
+inline void GORM_PB_Table_equip::set_equip1(const void* value,
     size_t size) {
   
   equip1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4165,7 +4899,7 @@ inline void GORM_PB_Table_equip::unsafe_arena_set_allocated_equip1(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_equip.equip1)
 }
 
-// string equip2 = 5;
+// bytes equip2 = 5;
 inline void GORM_PB_Table_equip::clear_equip2() {
   equip2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4201,7 +4935,7 @@ inline void GORM_PB_Table_equip::set_equip2(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_equip.equip2)
 }
-inline void GORM_PB_Table_equip::set_equip2(const char* value,
+inline void GORM_PB_Table_equip::set_equip2(const void* value,
     size_t size) {
   
   equip2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4246,7 +4980,7 @@ inline void GORM_PB_Table_equip::unsafe_arena_set_allocated_equip2(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_equip.equip2)
 }
 
-// string equip3 = 6;
+// bytes equip3 = 6;
 inline void GORM_PB_Table_equip::clear_equip3() {
   equip3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4282,7 +5016,7 @@ inline void GORM_PB_Table_equip::set_equip3(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_equip.equip3)
 }
-inline void GORM_PB_Table_equip::set_equip3(const char* value,
+inline void GORM_PB_Table_equip::set_equip3(const void* value,
     size_t size) {
   
   equip3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4327,7 +5061,7 @@ inline void GORM_PB_Table_equip::unsafe_arena_set_allocated_equip3(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_equip.equip3)
 }
 
-// string equip4 = 7;
+// bytes equip4 = 7;
 inline void GORM_PB_Table_equip::clear_equip4() {
   equip4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4363,7 +5097,7 @@ inline void GORM_PB_Table_equip::set_equip4(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_equip.equip4)
 }
-inline void GORM_PB_Table_equip::set_equip4(const char* value,
+inline void GORM_PB_Table_equip::set_equip4(const void* value,
     size_t size) {
   
   equip4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4412,7 +5146,7 @@ inline void GORM_PB_Table_equip::unsafe_arena_set_allocated_equip4(
 
 // GORM_PB_Table_food
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_food::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -4432,7 +5166,7 @@ inline void GORM_PB_Table_food::set_version(::PROTOBUF_NAMESPACE_ID::uint64 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_food.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_food::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -4452,7 +5186,7 @@ inline void GORM_PB_Table_food::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_food.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_food::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -4472,7 +5206,7 @@ inline void GORM_PB_Table_food::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_food.snakeid)
 }
 
-// string food1 = 4;
+// bytes food1 = 4;
 inline void GORM_PB_Table_food::clear_food1() {
   food1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4508,7 +5242,7 @@ inline void GORM_PB_Table_food::set_food1(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_food.food1)
 }
-inline void GORM_PB_Table_food::set_food1(const char* value,
+inline void GORM_PB_Table_food::set_food1(const void* value,
     size_t size) {
   
   food1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4553,7 +5287,7 @@ inline void GORM_PB_Table_food::unsafe_arena_set_allocated_food1(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_food.food1)
 }
 
-// string food2 = 5;
+// bytes food2 = 5;
 inline void GORM_PB_Table_food::clear_food2() {
   food2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4589,7 +5323,7 @@ inline void GORM_PB_Table_food::set_food2(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_food.food2)
 }
-inline void GORM_PB_Table_food::set_food2(const char* value,
+inline void GORM_PB_Table_food::set_food2(const void* value,
     size_t size) {
   
   food2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4634,7 +5368,7 @@ inline void GORM_PB_Table_food::unsafe_arena_set_allocated_food2(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_food.food2)
 }
 
-// string food3 = 6;
+// bytes food3 = 6;
 inline void GORM_PB_Table_food::clear_food3() {
   food3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4670,7 +5404,7 @@ inline void GORM_PB_Table_food::set_food3(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_food.food3)
 }
-inline void GORM_PB_Table_food::set_food3(const char* value,
+inline void GORM_PB_Table_food::set_food3(const void* value,
     size_t size) {
   
   food3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4715,7 +5449,7 @@ inline void GORM_PB_Table_food::unsafe_arena_set_allocated_food3(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_food.food3)
 }
 
-// string food4 = 7;
+// bytes food4 = 7;
 inline void GORM_PB_Table_food::clear_food4() {
   food4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4751,7 +5485,7 @@ inline void GORM_PB_Table_food::set_food4(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_food.food4)
 }
-inline void GORM_PB_Table_food::set_food4(const char* value,
+inline void GORM_PB_Table_food::set_food4(const void* value,
     size_t size) {
   
   food4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4800,7 +5534,7 @@ inline void GORM_PB_Table_food::unsafe_arena_set_allocated_food4(
 
 // GORM_PB_Table_hero
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_hero::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -4820,7 +5554,7 @@ inline void GORM_PB_Table_hero::set_version(::PROTOBUF_NAMESPACE_ID::uint64 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_hero.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_hero::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -4840,7 +5574,7 @@ inline void GORM_PB_Table_hero::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_hero.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_hero::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -4860,7 +5594,7 @@ inline void GORM_PB_Table_hero::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_hero.snakeid)
 }
 
-// string heros = 4;
+// bytes heros = 4;
 inline void GORM_PB_Table_hero::clear_heros() {
   heros_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -4896,7 +5630,7 @@ inline void GORM_PB_Table_hero::set_heros(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_hero.heros)
 }
-inline void GORM_PB_Table_hero::set_heros(const char* value,
+inline void GORM_PB_Table_hero::set_heros(const void* value,
     size_t size) {
   
   heros_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -4941,11 +5675,358 @@ inline void GORM_PB_Table_hero::unsafe_arena_set_allocated_heros(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_hero.heros)
 }
 
+// bytes teams = 5;
+inline void GORM_PB_Table_hero::clear_teams() {
+  teams_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_hero::teams() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_hero.teams)
+  return _internal_teams();
+}
+inline void GORM_PB_Table_hero::set_teams(const std::string& value) {
+  _internal_set_teams(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_hero.teams)
+}
+inline std::string* GORM_PB_Table_hero::mutable_teams() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_hero.teams)
+  return _internal_mutable_teams();
+}
+inline const std::string& GORM_PB_Table_hero::_internal_teams() const {
+  return teams_.Get();
+}
+inline void GORM_PB_Table_hero::_internal_set_teams(const std::string& value) {
+  
+  teams_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_hero::set_teams(std::string&& value) {
+  
+  teams_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_hero.teams)
+}
+inline void GORM_PB_Table_hero::set_teams(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  teams_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_hero.teams)
+}
+inline void GORM_PB_Table_hero::set_teams(const void* value,
+    size_t size) {
+  
+  teams_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_hero.teams)
+}
+inline std::string* GORM_PB_Table_hero::_internal_mutable_teams() {
+  
+  return teams_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_hero::release_teams() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_hero.teams)
+  return teams_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_hero::set_allocated_teams(std::string* teams) {
+  if (teams != nullptr) {
+    
+  } else {
+    
+  }
+  teams_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), teams,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_hero.teams)
+}
+inline std::string* GORM_PB_Table_hero::unsafe_arena_release_teams() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_hero.teams)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return teams_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_hero::unsafe_arena_set_allocated_teams(
+    std::string* teams) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (teams != nullptr) {
+    
+  } else {
+    
+  }
+  teams_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      teams, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_hero.teams)
+}
+
+// -------------------------------------------------------------------
+
+// GORM_PB_Table_login_log
+
+// fixed64 version = 1;
+inline void GORM_PB_Table_login_log::clear_version() {
+  version_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_login_log::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_login_log::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.version)
+  return _internal_version();
+}
+inline void GORM_PB_Table_login_log::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  version_ = value;
+}
+inline void GORM_PB_Table_login_log::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.version)
+}
+
+// sfixed64 roleid = 2;
+inline void GORM_PB_Table_login_log::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_login_log::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_login_log::roleid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.roleid)
+  return _internal_roleid();
+}
+inline void GORM_PB_Table_login_log::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void GORM_PB_Table_login_log::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.roleid)
+}
+
+// sfixed32 action = 3;
+inline void GORM_PB_Table_login_log::clear_action() {
+  action_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_login_log::_internal_action() const {
+  return action_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_login_log::action() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.action)
+  return _internal_action();
+}
+inline void GORM_PB_Table_login_log::_internal_set_action(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  action_ = value;
+}
+inline void GORM_PB_Table_login_log::set_action(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_action(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.action)
+}
+
+// sfixed32 online = 4;
+inline void GORM_PB_Table_login_log::clear_online() {
+  online_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_login_log::_internal_online() const {
+  return online_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_login_log::online() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.online)
+  return _internal_online();
+}
+inline void GORM_PB_Table_login_log::_internal_set_online(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  online_ = value;
+}
+inline void GORM_PB_Table_login_log::set_online(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_online(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.online)
+}
+
+// bytes ip = 5;
+inline void GORM_PB_Table_login_log::clear_ip() {
+  ip_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_login_log::ip() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.ip)
+  return _internal_ip();
+}
+inline void GORM_PB_Table_login_log::set_ip(const std::string& value) {
+  _internal_set_ip(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.ip)
+}
+inline std::string* GORM_PB_Table_login_log::mutable_ip() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_login_log.ip)
+  return _internal_mutable_ip();
+}
+inline const std::string& GORM_PB_Table_login_log::_internal_ip() const {
+  return ip_.Get();
+}
+inline void GORM_PB_Table_login_log::_internal_set_ip(const std::string& value) {
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_login_log::set_ip(std::string&& value) {
+  
+  ip_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_login_log.ip)
+}
+inline void GORM_PB_Table_login_log::set_ip(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_login_log.ip)
+}
+inline void GORM_PB_Table_login_log::set_ip(const void* value,
+    size_t size) {
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_login_log.ip)
+}
+inline std::string* GORM_PB_Table_login_log::_internal_mutable_ip() {
+  
+  return ip_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_login_log::release_ip() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_login_log.ip)
+  return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_login_log::set_allocated_ip(std::string* ip) {
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ip,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_login_log.ip)
+}
+inline std::string* GORM_PB_Table_login_log::unsafe_arena_release_ip() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_login_log.ip)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return ip_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_login_log::unsafe_arena_set_allocated_ip(
+    std::string* ip) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ip, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_login_log.ip)
+}
+
+// bytes appid = 6;
+inline void GORM_PB_Table_login_log::clear_appid() {
+  appid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_login_log::appid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.appid)
+  return _internal_appid();
+}
+inline void GORM_PB_Table_login_log::set_appid(const std::string& value) {
+  _internal_set_appid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.appid)
+}
+inline std::string* GORM_PB_Table_login_log::mutable_appid() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_login_log.appid)
+  return _internal_mutable_appid();
+}
+inline const std::string& GORM_PB_Table_login_log::_internal_appid() const {
+  return appid_.Get();
+}
+inline void GORM_PB_Table_login_log::_internal_set_appid(const std::string& value) {
+  
+  appid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_login_log::set_appid(std::string&& value) {
+  
+  appid_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_login_log.appid)
+}
+inline void GORM_PB_Table_login_log::set_appid(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  appid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_login_log.appid)
+}
+inline void GORM_PB_Table_login_log::set_appid(const void* value,
+    size_t size) {
+  
+  appid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_login_log.appid)
+}
+inline std::string* GORM_PB_Table_login_log::_internal_mutable_appid() {
+  
+  return appid_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_login_log::release_appid() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_login_log.appid)
+  return appid_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_login_log::set_allocated_appid(std::string* appid) {
+  if (appid != nullptr) {
+    
+  } else {
+    
+  }
+  appid_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), appid,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_login_log.appid)
+}
+inline std::string* GORM_PB_Table_login_log::unsafe_arena_release_appid() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_login_log.appid)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return appid_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_login_log::unsafe_arena_set_allocated_appid(
+    std::string* appid) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (appid != nullptr) {
+    
+  } else {
+    
+  }
+  appid_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      appid, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_login_log.appid)
+}
+
+// sfixed64 createtime = 7;
+inline void GORM_PB_Table_login_log::clear_createtime() {
+  createtime_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_login_log::_internal_createtime() const {
+  return createtime_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_login_log::createtime() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_login_log.createtime)
+  return _internal_createtime();
+}
+inline void GORM_PB_Table_login_log::_internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  createtime_ = value;
+}
+inline void GORM_PB_Table_login_log::set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_createtime(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_login_log.createtime)
+}
+
 // -------------------------------------------------------------------
 
 // GORM_PB_Table_mail
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_mail::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -4965,7 +6046,7 @@ inline void GORM_PB_Table_mail::set_version(::PROTOBUF_NAMESPACE_ID::uint64 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mail.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_mail::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -4985,7 +6066,7 @@ inline void GORM_PB_Table_mail::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mail.roleid)
 }
 
-// string mail1 = 3;
+// bytes mail1 = 3;
 inline void GORM_PB_Table_mail::clear_mail1() {
   mail1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5021,7 +6102,7 @@ inline void GORM_PB_Table_mail::set_mail1(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mail.mail1)
 }
-inline void GORM_PB_Table_mail::set_mail1(const char* value,
+inline void GORM_PB_Table_mail::set_mail1(const void* value,
     size_t size) {
   
   mail1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5066,7 +6147,7 @@ inline void GORM_PB_Table_mail::unsafe_arena_set_allocated_mail1(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mail.mail1)
 }
 
-// string mail2 = 4;
+// bytes mail2 = 4;
 inline void GORM_PB_Table_mail::clear_mail2() {
   mail2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5102,7 +6183,7 @@ inline void GORM_PB_Table_mail::set_mail2(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mail.mail2)
 }
-inline void GORM_PB_Table_mail::set_mail2(const char* value,
+inline void GORM_PB_Table_mail::set_mail2(const void* value,
     size_t size) {
   
   mail2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5147,7 +6228,7 @@ inline void GORM_PB_Table_mail::unsafe_arena_set_allocated_mail2(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mail.mail2)
 }
 
-// string mail3 = 5;
+// bytes mail3 = 5;
 inline void GORM_PB_Table_mail::clear_mail3() {
   mail3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5183,7 +6264,7 @@ inline void GORM_PB_Table_mail::set_mail3(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mail.mail3)
 }
-inline void GORM_PB_Table_mail::set_mail3(const char* value,
+inline void GORM_PB_Table_mail::set_mail3(const void* value,
     size_t size) {
   
   mail3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5228,7 +6309,7 @@ inline void GORM_PB_Table_mail::unsafe_arena_set_allocated_mail3(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mail.mail3)
 }
 
-// string mail4 = 6;
+// bytes mail4 = 6;
 inline void GORM_PB_Table_mail::clear_mail4() {
   mail4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5264,7 +6345,7 @@ inline void GORM_PB_Table_mail::set_mail4(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mail.mail4)
 }
-inline void GORM_PB_Table_mail::set_mail4(const char* value,
+inline void GORM_PB_Table_mail::set_mail4(const void* value,
     size_t size) {
   
   mail4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5309,7 +6390,7 @@ inline void GORM_PB_Table_mail::unsafe_arena_set_allocated_mail4(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mail.mail4)
 }
 
-// string mail5 = 7;
+// bytes mail5 = 7;
 inline void GORM_PB_Table_mail::clear_mail5() {
   mail5_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5345,7 +6426,7 @@ inline void GORM_PB_Table_mail::set_mail5(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mail.mail5)
 }
-inline void GORM_PB_Table_mail::set_mail5(const char* value,
+inline void GORM_PB_Table_mail::set_mail5(const void* value,
     size_t size) {
   
   mail5_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5390,7 +6471,7 @@ inline void GORM_PB_Table_mail::unsafe_arena_set_allocated_mail5(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mail.mail5)
 }
 
-// int32 lastmailid = 8;
+// sfixed32 lastmailid = 8;
 inline void GORM_PB_Table_mail::clear_lastmailid() {
   lastmailid_ = 0;
 }
@@ -5410,7 +6491,7 @@ inline void GORM_PB_Table_mail::set_lastmailid(::PROTOBUF_NAMESPACE_ID::int32 va
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mail.lastmailid)
 }
 
-// int32 snakeid = 9;
+// sfixed32 snakeid = 9;
 inline void GORM_PB_Table_mail::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -5434,7 +6515,7 @@ inline void GORM_PB_Table_mail::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value
 
 // GORM_PB_Table_material
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_material::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -5454,7 +6535,7 @@ inline void GORM_PB_Table_material::set_version(::PROTOBUF_NAMESPACE_ID::uint64 
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_material.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_material::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -5474,7 +6555,7 @@ inline void GORM_PB_Table_material::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 va
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_material.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_material::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -5494,7 +6575,7 @@ inline void GORM_PB_Table_material::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 v
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_material.snakeid)
 }
 
-// string material1 = 4;
+// bytes material1 = 4;
 inline void GORM_PB_Table_material::clear_material1() {
   material1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5530,7 +6611,7 @@ inline void GORM_PB_Table_material::set_material1(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_material.material1)
 }
-inline void GORM_PB_Table_material::set_material1(const char* value,
+inline void GORM_PB_Table_material::set_material1(const void* value,
     size_t size) {
   
   material1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5575,7 +6656,7 @@ inline void GORM_PB_Table_material::unsafe_arena_set_allocated_material1(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_material.material1)
 }
 
-// string material2 = 5;
+// bytes material2 = 5;
 inline void GORM_PB_Table_material::clear_material2() {
   material2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5611,7 +6692,7 @@ inline void GORM_PB_Table_material::set_material2(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_material.material2)
 }
-inline void GORM_PB_Table_material::set_material2(const char* value,
+inline void GORM_PB_Table_material::set_material2(const void* value,
     size_t size) {
   
   material2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5656,7 +6737,7 @@ inline void GORM_PB_Table_material::unsafe_arena_set_allocated_material2(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_material.material2)
 }
 
-// string material3 = 6;
+// bytes material3 = 6;
 inline void GORM_PB_Table_material::clear_material3() {
   material3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5692,7 +6773,7 @@ inline void GORM_PB_Table_material::set_material3(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_material.material3)
 }
-inline void GORM_PB_Table_material::set_material3(const char* value,
+inline void GORM_PB_Table_material::set_material3(const void* value,
     size_t size) {
   
   material3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5737,7 +6818,7 @@ inline void GORM_PB_Table_material::unsafe_arena_set_allocated_material3(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_material.material3)
 }
 
-// string material4 = 7;
+// bytes material4 = 7;
 inline void GORM_PB_Table_material::clear_material4() {
   material4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5773,7 +6854,7 @@ inline void GORM_PB_Table_material::set_material4(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_material.material4)
 }
-inline void GORM_PB_Table_material::set_material4(const char* value,
+inline void GORM_PB_Table_material::set_material4(const void* value,
     size_t size) {
   
   material4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5822,7 +6903,7 @@ inline void GORM_PB_Table_material::unsafe_arena_set_allocated_material4(
 
 // GORM_PB_Table_npc
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_npc::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -5842,7 +6923,7 @@ inline void GORM_PB_Table_npc::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_npc.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_npc::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -5862,7 +6943,7 @@ inline void GORM_PB_Table_npc::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) 
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_npc.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_npc::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -5882,7 +6963,7 @@ inline void GORM_PB_Table_npc::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_npc.snakeid)
 }
 
-// string npcs = 4;
+// bytes npcs = 4;
 inline void GORM_PB_Table_npc::clear_npcs() {
   npcs_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -5918,7 +6999,7 @@ inline void GORM_PB_Table_npc::set_npcs(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_npc.npcs)
 }
-inline void GORM_PB_Table_npc::set_npcs(const char* value,
+inline void GORM_PB_Table_npc::set_npcs(const void* value,
     size_t size) {
   
   npcs_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -5965,9 +7046,867 @@ inline void GORM_PB_Table_npc::unsafe_arena_set_allocated_npcs(
 
 // -------------------------------------------------------------------
 
+// GORM_PB_Table_res_log
+
+// fixed64 version = 1;
+inline void GORM_PB_Table_res_log::clear_version() {
+  version_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_res_log::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_res_log::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.version)
+  return _internal_version();
+}
+inline void GORM_PB_Table_res_log::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  version_ = value;
+}
+inline void GORM_PB_Table_res_log::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.version)
+}
+
+// sfixed64 roleid = 2;
+inline void GORM_PB_Table_res_log::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_res_log::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_res_log::roleid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.roleid)
+  return _internal_roleid();
+}
+inline void GORM_PB_Table_res_log::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void GORM_PB_Table_res_log::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.roleid)
+}
+
+// sfixed32 action = 3;
+inline void GORM_PB_Table_res_log::clear_action() {
+  action_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::_internal_action() const {
+  return action_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::action() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.action)
+  return _internal_action();
+}
+inline void GORM_PB_Table_res_log::_internal_set_action(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  action_ = value;
+}
+inline void GORM_PB_Table_res_log::set_action(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_action(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.action)
+}
+
+// sfixed32 cfgtype = 4;
+inline void GORM_PB_Table_res_log::clear_cfgtype() {
+  cfgtype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::_internal_cfgtype() const {
+  return cfgtype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::cfgtype() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.cfgtype)
+  return _internal_cfgtype();
+}
+inline void GORM_PB_Table_res_log::_internal_set_cfgtype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  cfgtype_ = value;
+}
+inline void GORM_PB_Table_res_log::set_cfgtype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_cfgtype(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.cfgtype)
+}
+
+// sfixed32 cfgid = 5;
+inline void GORM_PB_Table_res_log::clear_cfgid() {
+  cfgid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::_internal_cfgid() const {
+  return cfgid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::cfgid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.cfgid)
+  return _internal_cfgid();
+}
+inline void GORM_PB_Table_res_log::_internal_set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  cfgid_ = value;
+}
+inline void GORM_PB_Table_res_log::set_cfgid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_cfgid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.cfgid)
+}
+
+// sfixed32 delta = 6;
+inline void GORM_PB_Table_res_log::clear_delta() {
+  delta_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::_internal_delta() const {
+  return delta_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::delta() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.delta)
+  return _internal_delta();
+}
+inline void GORM_PB_Table_res_log::_internal_set_delta(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  delta_ = value;
+}
+inline void GORM_PB_Table_res_log::set_delta(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_delta(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.delta)
+}
+
+// sfixed32 value = 7;
+inline void GORM_PB_Table_res_log::clear_value() {
+  value_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::_internal_value() const {
+  return value_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_res_log::value() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.value)
+  return _internal_value();
+}
+inline void GORM_PB_Table_res_log::_internal_set_value(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  value_ = value;
+}
+inline void GORM_PB_Table_res_log::set_value(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.value)
+}
+
+// sfixed64 createtime = 8;
+inline void GORM_PB_Table_res_log::clear_createtime() {
+  createtime_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_res_log::_internal_createtime() const {
+  return createtime_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_res_log::createtime() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_res_log.createtime)
+  return _internal_createtime();
+}
+inline void GORM_PB_Table_res_log::_internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  createtime_ = value;
+}
+inline void GORM_PB_Table_res_log::set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_createtime(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_res_log.createtime)
+}
+
+// -------------------------------------------------------------------
+
+// GORM_PB_Table_interaction
+
+// fixed64 version = 1;
+inline void GORM_PB_Table_interaction::clear_version() {
+  version_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_interaction::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_interaction::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.version)
+  return _internal_version();
+}
+inline void GORM_PB_Table_interaction::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  version_ = value;
+}
+inline void GORM_PB_Table_interaction::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.version)
+}
+
+// sfixed64 roleid = 2;
+inline void GORM_PB_Table_interaction::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_interaction::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_interaction::roleid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.roleid)
+  return _internal_roleid();
+}
+inline void GORM_PB_Table_interaction::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void GORM_PB_Table_interaction::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.roleid)
+}
+
+// sfixed32 snakeid = 3;
+inline void GORM_PB_Table_interaction::clear_snakeid() {
+  snakeid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_interaction::_internal_snakeid() const {
+  return snakeid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_interaction::snakeid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.snakeid)
+  return _internal_snakeid();
+}
+inline void GORM_PB_Table_interaction::_internal_set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  snakeid_ = value;
+}
+inline void GORM_PB_Table_interaction::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_snakeid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.snakeid)
+}
+
+// bytes interaction1 = 4;
+inline void GORM_PB_Table_interaction::clear_interaction1() {
+  interaction1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_interaction::interaction1() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction1)
+  return _internal_interaction1();
+}
+inline void GORM_PB_Table_interaction::set_interaction1(const std::string& value) {
+  _internal_set_interaction1(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction1)
+}
+inline std::string* GORM_PB_Table_interaction::mutable_interaction1() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction1)
+  return _internal_mutable_interaction1();
+}
+inline const std::string& GORM_PB_Table_interaction::_internal_interaction1() const {
+  return interaction1_.Get();
+}
+inline void GORM_PB_Table_interaction::_internal_set_interaction1(const std::string& value) {
+  
+  interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_interaction::set_interaction1(std::string&& value) {
+  
+  interaction1_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction1)
+}
+inline void GORM_PB_Table_interaction::set_interaction1(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction1)
+}
+inline void GORM_PB_Table_interaction::set_interaction1(const void* value,
+    size_t size) {
+  
+  interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction1)
+}
+inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction1() {
+  
+  return interaction1_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_interaction::release_interaction1() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction1)
+  return interaction1_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_interaction::set_allocated_interaction1(std::string* interaction1) {
+  if (interaction1 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction1_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction1,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction1)
+}
+inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction1() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction1)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return interaction1_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction1(
+    std::string* interaction1) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (interaction1 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction1_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      interaction1, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction1)
+}
+
+// bytes interaction2 = 5;
+inline void GORM_PB_Table_interaction::clear_interaction2() {
+  interaction2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_interaction::interaction2() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction2)
+  return _internal_interaction2();
+}
+inline void GORM_PB_Table_interaction::set_interaction2(const std::string& value) {
+  _internal_set_interaction2(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction2)
+}
+inline std::string* GORM_PB_Table_interaction::mutable_interaction2() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction2)
+  return _internal_mutable_interaction2();
+}
+inline const std::string& GORM_PB_Table_interaction::_internal_interaction2() const {
+  return interaction2_.Get();
+}
+inline void GORM_PB_Table_interaction::_internal_set_interaction2(const std::string& value) {
+  
+  interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_interaction::set_interaction2(std::string&& value) {
+  
+  interaction2_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction2)
+}
+inline void GORM_PB_Table_interaction::set_interaction2(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction2)
+}
+inline void GORM_PB_Table_interaction::set_interaction2(const void* value,
+    size_t size) {
+  
+  interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction2)
+}
+inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction2() {
+  
+  return interaction2_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_interaction::release_interaction2() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction2)
+  return interaction2_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_interaction::set_allocated_interaction2(std::string* interaction2) {
+  if (interaction2 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction2_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction2,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction2)
+}
+inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction2() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction2)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return interaction2_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction2(
+    std::string* interaction2) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (interaction2 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction2_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      interaction2, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction2)
+}
+
+// bytes interaction3 = 6;
+inline void GORM_PB_Table_interaction::clear_interaction3() {
+  interaction3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_interaction::interaction3() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction3)
+  return _internal_interaction3();
+}
+inline void GORM_PB_Table_interaction::set_interaction3(const std::string& value) {
+  _internal_set_interaction3(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction3)
+}
+inline std::string* GORM_PB_Table_interaction::mutable_interaction3() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction3)
+  return _internal_mutable_interaction3();
+}
+inline const std::string& GORM_PB_Table_interaction::_internal_interaction3() const {
+  return interaction3_.Get();
+}
+inline void GORM_PB_Table_interaction::_internal_set_interaction3(const std::string& value) {
+  
+  interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_interaction::set_interaction3(std::string&& value) {
+  
+  interaction3_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction3)
+}
+inline void GORM_PB_Table_interaction::set_interaction3(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction3)
+}
+inline void GORM_PB_Table_interaction::set_interaction3(const void* value,
+    size_t size) {
+  
+  interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction3)
+}
+inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction3() {
+  
+  return interaction3_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_interaction::release_interaction3() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction3)
+  return interaction3_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_interaction::set_allocated_interaction3(std::string* interaction3) {
+  if (interaction3 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction3_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction3,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction3)
+}
+inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction3() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction3)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return interaction3_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction3(
+    std::string* interaction3) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (interaction3 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction3_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      interaction3, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction3)
+}
+
+// bytes interaction4 = 7;
+inline void GORM_PB_Table_interaction::clear_interaction4() {
+  interaction4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_interaction::interaction4() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction4)
+  return _internal_interaction4();
+}
+inline void GORM_PB_Table_interaction::set_interaction4(const std::string& value) {
+  _internal_set_interaction4(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction4)
+}
+inline std::string* GORM_PB_Table_interaction::mutable_interaction4() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction4)
+  return _internal_mutable_interaction4();
+}
+inline const std::string& GORM_PB_Table_interaction::_internal_interaction4() const {
+  return interaction4_.Get();
+}
+inline void GORM_PB_Table_interaction::_internal_set_interaction4(const std::string& value) {
+  
+  interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_interaction::set_interaction4(std::string&& value) {
+  
+  interaction4_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction4)
+}
+inline void GORM_PB_Table_interaction::set_interaction4(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction4)
+}
+inline void GORM_PB_Table_interaction::set_interaction4(const void* value,
+    size_t size) {
+  
+  interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction4)
+}
+inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction4() {
+  
+  return interaction4_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_interaction::release_interaction4() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction4)
+  return interaction4_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_interaction::set_allocated_interaction4(std::string* interaction4) {
+  if (interaction4 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction4_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction4,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction4)
+}
+inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction4() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction4)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return interaction4_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction4(
+    std::string* interaction4) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (interaction4 != nullptr) {
+    
+  } else {
+    
+  }
+  interaction4_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      interaction4, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction4)
+}
+
+// -------------------------------------------------------------------
+
+// GORM_PB_Table_roles
+
+// fixed64 version = 1;
+inline void GORM_PB_Table_roles::clear_version() {
+  version_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_roles::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_roles::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.version)
+  return _internal_version();
+}
+inline void GORM_PB_Table_roles::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  version_ = value;
+}
+inline void GORM_PB_Table_roles::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.version)
+}
+
+// sfixed64 roleid = 2;
+inline void GORM_PB_Table_roles::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::roleid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.roleid)
+  return _internal_roleid();
+}
+inline void GORM_PB_Table_roles::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void GORM_PB_Table_roles::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.roleid)
+}
+
+// sfixed64 userid = 3;
+inline void GORM_PB_Table_roles::clear_userid() {
+  userid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_userid() const {
+  return userid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::userid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.userid)
+  return _internal_userid();
+}
+inline void GORM_PB_Table_roles::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  userid_ = value;
+}
+inline void GORM_PB_Table_roles::set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_userid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.userid)
+}
+
+// sfixed64 worldid = 4;
+inline void GORM_PB_Table_roles::clear_worldid() {
+  worldid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_worldid() const {
+  return worldid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::worldid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.worldid)
+  return _internal_worldid();
+}
+inline void GORM_PB_Table_roles::_internal_set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  worldid_ = value;
+}
+inline void GORM_PB_Table_roles::set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_worldid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.worldid)
+}
+
+// sfixed32 dbid = 5;
+inline void GORM_PB_Table_roles::clear_dbid() {
+  dbid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::_internal_dbid() const {
+  return dbid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::dbid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.dbid)
+  return _internal_dbid();
+}
+inline void GORM_PB_Table_roles::_internal_set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  dbid_ = value;
+}
+inline void GORM_PB_Table_roles::set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_dbid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.dbid)
+}
+
+// bytes name = 6;
+inline void GORM_PB_Table_roles::clear_name() {
+  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_roles::name() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.name)
+  return _internal_name();
+}
+inline void GORM_PB_Table_roles::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.name)
+}
+inline std::string* GORM_PB_Table_roles::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_roles.name)
+  return _internal_mutable_name();
+}
+inline const std::string& GORM_PB_Table_roles::_internal_name() const {
+  return name_.Get();
+}
+inline void GORM_PB_Table_roles::_internal_set_name(const std::string& value) {
+  
+  name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_roles::set_name(std::string&& value) {
+  
+  name_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_roles.name)
+}
+inline void GORM_PB_Table_roles::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_roles.name)
+}
+inline void GORM_PB_Table_roles::set_name(const void* value,
+    size_t size) {
+  
+  name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_roles.name)
+}
+inline std::string* GORM_PB_Table_roles::_internal_mutable_name() {
+  
+  return name_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_roles::release_name() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_roles.name)
+  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_roles::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_roles.name)
+}
+inline std::string* GORM_PB_Table_roles::unsafe_arena_release_name() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_roles.name)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return name_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_roles::unsafe_arena_set_allocated_name(
+    std::string* name) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      name, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_roles.name)
+}
+
+// sfixed32 charid = 7;
+inline void GORM_PB_Table_roles::clear_charid() {
+  charid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::_internal_charid() const {
+  return charid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::charid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.charid)
+  return _internal_charid();
+}
+inline void GORM_PB_Table_roles::_internal_set_charid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  charid_ = value;
+}
+inline void GORM_PB_Table_roles::set_charid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_charid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.charid)
+}
+
+// bytes face = 8;
+inline void GORM_PB_Table_roles::clear_face() {
+  face_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_roles::face() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.face)
+  return _internal_face();
+}
+inline void GORM_PB_Table_roles::set_face(const std::string& value) {
+  _internal_set_face(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.face)
+}
+inline std::string* GORM_PB_Table_roles::mutable_face() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_roles.face)
+  return _internal_mutable_face();
+}
+inline const std::string& GORM_PB_Table_roles::_internal_face() const {
+  return face_.Get();
+}
+inline void GORM_PB_Table_roles::_internal_set_face(const std::string& value) {
+  
+  face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_roles::set_face(std::string&& value) {
+  
+  face_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_roles.face)
+}
+inline void GORM_PB_Table_roles::set_face(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_roles.face)
+}
+inline void GORM_PB_Table_roles::set_face(const void* value,
+    size_t size) {
+  
+  face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_roles.face)
+}
+inline std::string* GORM_PB_Table_roles::_internal_mutable_face() {
+  
+  return face_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_roles::release_face() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_roles.face)
+  return face_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_roles::set_allocated_face(std::string* face) {
+  if (face != nullptr) {
+    
+  } else {
+    
+  }
+  face_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), face,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_roles.face)
+}
+inline std::string* GORM_PB_Table_roles::unsafe_arena_release_face() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_roles.face)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return face_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_roles::unsafe_arena_set_allocated_face(
+    std::string* face) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (face != nullptr) {
+    
+  } else {
+    
+  }
+  face_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      face, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_roles.face)
+}
+
+// sfixed64 createtime = 9;
+inline void GORM_PB_Table_roles::clear_createtime() {
+  createtime_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_createtime() const {
+  return createtime_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::createtime() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.createtime)
+  return _internal_createtime();
+}
+inline void GORM_PB_Table_roles::_internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  createtime_ = value;
+}
+inline void GORM_PB_Table_roles::set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_createtime(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.createtime)
+}
+
+// -------------------------------------------------------------------
+
 // GORM_PB_Table_role
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_role::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -5987,7 +7926,7 @@ inline void GORM_PB_Table_role::set_version(::PROTOBUF_NAMESPACE_ID::uint64 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_role::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -6007,7 +7946,7 @@ inline void GORM_PB_Table_role::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.roleid)
 }
 
-// string rolename = 3;
+// bytes rolename = 3;
 inline void GORM_PB_Table_role::clear_rolename() {
   rolename_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6043,7 +7982,7 @@ inline void GORM_PB_Table_role::set_rolename(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_role.rolename)
 }
-inline void GORM_PB_Table_role::set_rolename(const char* value,
+inline void GORM_PB_Table_role::set_rolename(const void* value,
     size_t size) {
   
   rolename_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6088,7 +8027,7 @@ inline void GORM_PB_Table_role::unsafe_arena_set_allocated_rolename(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_role.rolename)
 }
 
-// int32 level = 4;
+// sfixed32 level = 4;
 inline void GORM_PB_Table_role::clear_level() {
   level_ = 0;
 }
@@ -6108,7 +8047,7 @@ inline void GORM_PB_Table_role::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) 
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.level)
 }
 
-// int64 exp = 5;
+// sfixed64 exp = 5;
 inline void GORM_PB_Table_role::clear_exp() {
   exp_ = PROTOBUF_LONGLONG(0);
 }
@@ -6128,7 +8067,7 @@ inline void GORM_PB_Table_role::set_exp(::PROTOBUF_NAMESPACE_ID::int64 value) {
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.exp)
 }
 
-// int32 characterid = 6;
+// sfixed32 characterid = 6;
 inline void GORM_PB_Table_role::clear_characterid() {
   characterid_ = 0;
 }
@@ -6148,7 +8087,7 @@ inline void GORM_PB_Table_role::set_characterid(::PROTOBUF_NAMESPACE_ID::int32 v
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.characterid)
 }
 
-// int32 gold = 7;
+// sfixed32 gold = 7;
 inline void GORM_PB_Table_role::clear_gold() {
   gold_ = 0;
 }
@@ -6168,7 +8107,7 @@ inline void GORM_PB_Table_role::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.gold)
 }
 
-// int64 offlinetime = 8;
+// sfixed64 offlinetime = 8;
 inline void GORM_PB_Table_role::clear_offlinetime() {
   offlinetime_ = PROTOBUF_LONGLONG(0);
 }
@@ -6188,7 +8127,7 @@ inline void GORM_PB_Table_role::set_offlinetime(::PROTOBUF_NAMESPACE_ID::int64 v
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.offlinetime)
 }
 
-// int32 inited = 9;
+// sfixed32 inited = 9;
 inline void GORM_PB_Table_role::clear_inited() {
   inited_ = 0;
 }
@@ -6208,7 +8147,7 @@ inline void GORM_PB_Table_role::set_inited(::PROTOBUF_NAMESPACE_ID::int32 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.inited)
 }
 
-// int64 createtime = 10;
+// sfixed64 createtime = 10;
 inline void GORM_PB_Table_role::clear_createtime() {
   createtime_ = PROTOBUF_LONGLONG(0);
 }
@@ -6228,7 +8167,7 @@ inline void GORM_PB_Table_role::set_createtime(::PROTOBUF_NAMESPACE_ID::int64 va
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.createtime)
 }
 
-// string face = 11;
+// bytes face = 11;
 inline void GORM_PB_Table_role::clear_face() {
   face_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6264,7 +8203,7 @@ inline void GORM_PB_Table_role::set_face(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_role.face)
 }
-inline void GORM_PB_Table_role::set_face(const char* value,
+inline void GORM_PB_Table_role::set_face(const void* value,
     size_t size) {
   
   face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6309,7 +8248,7 @@ inline void GORM_PB_Table_role::unsafe_arena_set_allocated_face(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_role.face)
 }
 
-// int64 online = 12;
+// sfixed64 online = 12;
 inline void GORM_PB_Table_role::clear_online() {
   online_ = PROTOBUF_LONGLONG(0);
 }
@@ -6329,11 +8268,71 @@ inline void GORM_PB_Table_role::set_online(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.online)
 }
 
+// sfixed64 worldid = 13;
+inline void GORM_PB_Table_role::clear_worldid() {
+  worldid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_role::_internal_worldid() const {
+  return worldid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_role::worldid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_role.worldid)
+  return _internal_worldid();
+}
+inline void GORM_PB_Table_role::_internal_set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  worldid_ = value;
+}
+inline void GORM_PB_Table_role::set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_worldid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.worldid)
+}
+
+// sfixed32 pttype = 14;
+inline void GORM_PB_Table_role::clear_pttype() {
+  pttype_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_role::_internal_pttype() const {
+  return pttype_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_role::pttype() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_role.pttype)
+  return _internal_pttype();
+}
+inline void GORM_PB_Table_role::_internal_set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  pttype_ = value;
+}
+inline void GORM_PB_Table_role::set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_pttype(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.pttype)
+}
+
+// sfixed64 userid = 15;
+inline void GORM_PB_Table_role::clear_userid() {
+  userid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_role::_internal_userid() const {
+  return userid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_role::userid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_role.userid)
+  return _internal_userid();
+}
+inline void GORM_PB_Table_role::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  userid_ = value;
+}
+inline void GORM_PB_Table_role::set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_userid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.userid)
+}
+
 // -------------------------------------------------------------------
 
 // GORM_PB_Table_scene
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_scene::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -6353,7 +8352,7 @@ inline void GORM_PB_Table_scene::set_version(::PROTOBUF_NAMESPACE_ID::uint64 val
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_scene.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_scene::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -6373,7 +8372,7 @@ inline void GORM_PB_Table_scene::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_scene.roleid)
 }
 
-// int32 sceneid = 3;
+// sfixed32 sceneid = 3;
 inline void GORM_PB_Table_scene::clear_sceneid() {
   sceneid_ = 0;
 }
@@ -6393,7 +8392,7 @@ inline void GORM_PB_Table_scene::set_sceneid(::PROTOBUF_NAMESPACE_ID::int32 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_scene.sceneid)
 }
 
-// string collects = 4;
+// bytes collects = 4;
 inline void GORM_PB_Table_scene::clear_collects() {
   collects_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6429,7 +8428,7 @@ inline void GORM_PB_Table_scene::set_collects(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_scene.collects)
 }
-inline void GORM_PB_Table_scene::set_collects(const char* value,
+inline void GORM_PB_Table_scene::set_collects(const void* value,
     size_t size) {
   
   collects_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6478,7 +8477,7 @@ inline void GORM_PB_Table_scene::unsafe_arena_set_allocated_collects(
 
 // GORM_PB_Table_skill
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_skill::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -6498,7 +8497,7 @@ inline void GORM_PB_Table_skill::set_version(::PROTOBUF_NAMESPACE_ID::uint64 val
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_skill.version)
 }
 
-// int64 roleid = 2;
+// sfixed64 roleid = 2;
 inline void GORM_PB_Table_skill::clear_roleid() {
   roleid_ = PROTOBUF_LONGLONG(0);
 }
@@ -6518,7 +8517,7 @@ inline void GORM_PB_Table_skill::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_skill.roleid)
 }
 
-// int32 snakeid = 3;
+// sfixed32 snakeid = 3;
 inline void GORM_PB_Table_skill::clear_snakeid() {
   snakeid_ = 0;
 }
@@ -6538,7 +8537,7 @@ inline void GORM_PB_Table_skill::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_skill.snakeid)
 }
 
-// string skill1 = 4;
+// bytes skill1 = 4;
 inline void GORM_PB_Table_skill::clear_skill1() {
   skill1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6574,7 +8573,7 @@ inline void GORM_PB_Table_skill::set_skill1(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_skill.skill1)
 }
-inline void GORM_PB_Table_skill::set_skill1(const char* value,
+inline void GORM_PB_Table_skill::set_skill1(const void* value,
     size_t size) {
   
   skill1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6619,7 +8618,7 @@ inline void GORM_PB_Table_skill::unsafe_arena_set_allocated_skill1(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_skill.skill1)
 }
 
-// string skill2 = 5;
+// bytes skill2 = 5;
 inline void GORM_PB_Table_skill::clear_skill2() {
   skill2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6655,7 +8654,7 @@ inline void GORM_PB_Table_skill::set_skill2(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_skill.skill2)
 }
-inline void GORM_PB_Table_skill::set_skill2(const char* value,
+inline void GORM_PB_Table_skill::set_skill2(const void* value,
     size_t size) {
   
   skill2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6700,7 +8699,7 @@ inline void GORM_PB_Table_skill::unsafe_arena_set_allocated_skill2(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_skill.skill2)
 }
 
-// string skill3 = 6;
+// bytes skill3 = 6;
 inline void GORM_PB_Table_skill::clear_skill3() {
   skill3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6736,7 +8735,7 @@ inline void GORM_PB_Table_skill::set_skill3(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_skill.skill3)
 }
-inline void GORM_PB_Table_skill::set_skill3(const char* value,
+inline void GORM_PB_Table_skill::set_skill3(const void* value,
     size_t size) {
   
   skill3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6781,7 +8780,7 @@ inline void GORM_PB_Table_skill::unsafe_arena_set_allocated_skill3(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_skill.skill3)
 }
 
-// string skill4 = 7;
+// bytes skill4 = 7;
 inline void GORM_PB_Table_skill::clear_skill4() {
   skill4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -6817,7 +8816,7 @@ inline void GORM_PB_Table_skill::set_skill4(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_skill.skill4)
 }
-inline void GORM_PB_Table_skill::set_skill4(const char* value,
+inline void GORM_PB_Table_skill::set_skill4(const void* value,
     size_t size) {
   
   skill4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -6864,397 +8863,154 @@ inline void GORM_PB_Table_skill::unsafe_arena_set_allocated_skill4(
 
 // -------------------------------------------------------------------
 
-// GORM_PB_Table_interaction
+// GORM_PB_Table_ptuser
 
-// uint64 version = 1;
-inline void GORM_PB_Table_interaction::clear_version() {
+// fixed64 version = 1;
+inline void GORM_PB_Table_ptuser::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_interaction::_internal_version() const {
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_ptuser::_internal_version() const {
   return version_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_interaction::version() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.version)
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_ptuser::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_ptuser.version)
   return _internal_version();
 }
-inline void GORM_PB_Table_interaction::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void GORM_PB_Table_ptuser::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   version_ = value;
 }
-inline void GORM_PB_Table_interaction::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void GORM_PB_Table_ptuser::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   _internal_set_version(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.version)
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_ptuser.version)
 }
 
-// int64 roleid = 2;
-inline void GORM_PB_Table_interaction::clear_roleid() {
-  roleid_ = PROTOBUF_LONGLONG(0);
+// bytes ptid = 2;
+inline void GORM_PB_Table_ptuser::clear_ptid() {
+  ptid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_interaction::_internal_roleid() const {
-  return roleid_;
+inline const std::string& GORM_PB_Table_ptuser::ptid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_ptuser.ptid)
+  return _internal_ptid();
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_interaction::roleid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.roleid)
-  return _internal_roleid();
+inline void GORM_PB_Table_ptuser::set_ptid(const std::string& value) {
+  _internal_set_ptid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_ptuser.ptid)
 }
-inline void GORM_PB_Table_interaction::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline std::string* GORM_PB_Table_ptuser::mutable_ptid() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_ptuser.ptid)
+  return _internal_mutable_ptid();
+}
+inline const std::string& GORM_PB_Table_ptuser::_internal_ptid() const {
+  return ptid_.Get();
+}
+inline void GORM_PB_Table_ptuser::_internal_set_ptid(const std::string& value) {
   
-  roleid_ = value;
+  ptid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
 }
-inline void GORM_PB_Table_interaction::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_roleid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.roleid)
-}
-
-// int32 snakeid = 3;
-inline void GORM_PB_Table_interaction::clear_snakeid() {
-  snakeid_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_interaction::_internal_snakeid() const {
-  return snakeid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_interaction::snakeid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.snakeid)
-  return _internal_snakeid();
-}
-inline void GORM_PB_Table_interaction::_internal_set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void GORM_PB_Table_ptuser::set_ptid(std::string&& value) {
   
-  snakeid_ = value;
-}
-inline void GORM_PB_Table_interaction::set_snakeid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_snakeid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.snakeid)
-}
-
-// string interaction1 = 4;
-inline void GORM_PB_Table_interaction::clear_interaction1() {
-  interaction1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline const std::string& GORM_PB_Table_interaction::interaction1() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction1)
-  return _internal_interaction1();
-}
-inline void GORM_PB_Table_interaction::set_interaction1(const std::string& value) {
-  _internal_set_interaction1(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction1)
-}
-inline std::string* GORM_PB_Table_interaction::mutable_interaction1() {
-  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction1)
-  return _internal_mutable_interaction1();
-}
-inline const std::string& GORM_PB_Table_interaction::_internal_interaction1() const {
-  return interaction1_.Get();
-}
-inline void GORM_PB_Table_interaction::_internal_set_interaction1(const std::string& value) {
-  
-  interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
-}
-inline void GORM_PB_Table_interaction::set_interaction1(std::string&& value) {
-  
-  interaction1_.Set(
+  ptid_.Set(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction1)
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_ptuser.ptid)
 }
-inline void GORM_PB_Table_interaction::set_interaction1(const char* value) {
+inline void GORM_PB_Table_ptuser::set_ptid(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+  ptid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
               GetArena());
-  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction1)
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_ptuser.ptid)
 }
-inline void GORM_PB_Table_interaction::set_interaction1(const char* value,
+inline void GORM_PB_Table_ptuser::set_ptid(const void* value,
     size_t size) {
   
-  interaction1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+  ptid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
       reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction1)
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_ptuser.ptid)
 }
-inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction1() {
+inline std::string* GORM_PB_Table_ptuser::_internal_mutable_ptid() {
   
-  return interaction1_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  return ptid_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline std::string* GORM_PB_Table_interaction::release_interaction1() {
-  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction1)
-  return interaction1_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+inline std::string* GORM_PB_Table_ptuser::release_ptid() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_ptuser.ptid)
+  return ptid_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline void GORM_PB_Table_interaction::set_allocated_interaction1(std::string* interaction1) {
-  if (interaction1 != nullptr) {
+inline void GORM_PB_Table_ptuser::set_allocated_ptid(std::string* ptid) {
+  if (ptid != nullptr) {
     
   } else {
     
   }
-  interaction1_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction1,
+  ptid_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ptid,
       GetArena());
-  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction1)
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_ptuser.ptid)
 }
-inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction1() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction1)
+inline std::string* GORM_PB_Table_ptuser::unsafe_arena_release_ptid() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_ptuser.ptid)
   GOOGLE_DCHECK(GetArena() != nullptr);
   
-  return interaction1_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  return ptid_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       GetArena());
 }
-inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction1(
-    std::string* interaction1) {
+inline void GORM_PB_Table_ptuser::unsafe_arena_set_allocated_ptid(
+    std::string* ptid) {
   GOOGLE_DCHECK(GetArena() != nullptr);
-  if (interaction1 != nullptr) {
+  if (ptid != nullptr) {
     
   } else {
     
   }
-  interaction1_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      interaction1, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction1)
+  ptid_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ptid, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_ptuser.ptid)
 }
 
-// string interaction2 = 5;
-inline void GORM_PB_Table_interaction::clear_interaction2() {
-  interaction2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+// sfixed32 pttype = 3;
+inline void GORM_PB_Table_ptuser::clear_pttype() {
+  pttype_ = 0;
 }
-inline const std::string& GORM_PB_Table_interaction::interaction2() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction2)
-  return _internal_interaction2();
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_ptuser::_internal_pttype() const {
+  return pttype_;
 }
-inline void GORM_PB_Table_interaction::set_interaction2(const std::string& value) {
-  _internal_set_interaction2(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction2)
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_ptuser::pttype() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_ptuser.pttype)
+  return _internal_pttype();
 }
-inline std::string* GORM_PB_Table_interaction::mutable_interaction2() {
-  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction2)
-  return _internal_mutable_interaction2();
-}
-inline const std::string& GORM_PB_Table_interaction::_internal_interaction2() const {
-  return interaction2_.Get();
-}
-inline void GORM_PB_Table_interaction::_internal_set_interaction2(const std::string& value) {
+inline void GORM_PB_Table_ptuser::_internal_set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+  pttype_ = value;
 }
-inline void GORM_PB_Table_interaction::set_interaction2(std::string&& value) {
-  
-  interaction2_.Set(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction2)
-}
-inline void GORM_PB_Table_interaction::set_interaction2(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArena());
-  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction2)
-}
-inline void GORM_PB_Table_interaction::set_interaction2(const char* value,
-    size_t size) {
-  
-  interaction2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction2)
-}
-inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction2() {
-  
-  return interaction2_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline std::string* GORM_PB_Table_interaction::release_interaction2() {
-  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction2)
-  return interaction2_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void GORM_PB_Table_interaction::set_allocated_interaction2(std::string* interaction2) {
-  if (interaction2 != nullptr) {
-    
-  } else {
-    
-  }
-  interaction2_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction2,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction2)
-}
-inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction2() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction2)
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  
-  return interaction2_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      GetArena());
-}
-inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction2(
-    std::string* interaction2) {
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  if (interaction2 != nullptr) {
-    
-  } else {
-    
-  }
-  interaction2_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      interaction2, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction2)
+inline void GORM_PB_Table_ptuser::set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_pttype(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_ptuser.pttype)
 }
 
-// string interaction3 = 6;
-inline void GORM_PB_Table_interaction::clear_interaction3() {
-  interaction3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+// sfixed64 userid = 4;
+inline void GORM_PB_Table_ptuser::clear_userid() {
+  userid_ = PROTOBUF_LONGLONG(0);
 }
-inline const std::string& GORM_PB_Table_interaction::interaction3() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction3)
-  return _internal_interaction3();
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_ptuser::_internal_userid() const {
+  return userid_;
 }
-inline void GORM_PB_Table_interaction::set_interaction3(const std::string& value) {
-  _internal_set_interaction3(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction3)
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_ptuser::userid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_ptuser.userid)
+  return _internal_userid();
 }
-inline std::string* GORM_PB_Table_interaction::mutable_interaction3() {
-  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction3)
-  return _internal_mutable_interaction3();
-}
-inline const std::string& GORM_PB_Table_interaction::_internal_interaction3() const {
-  return interaction3_.Get();
-}
-inline void GORM_PB_Table_interaction::_internal_set_interaction3(const std::string& value) {
+inline void GORM_PB_Table_ptuser::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
   
-  interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+  userid_ = value;
 }
-inline void GORM_PB_Table_interaction::set_interaction3(std::string&& value) {
-  
-  interaction3_.Set(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction3)
-}
-inline void GORM_PB_Table_interaction::set_interaction3(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArena());
-  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction3)
-}
-inline void GORM_PB_Table_interaction::set_interaction3(const char* value,
-    size_t size) {
-  
-  interaction3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction3)
-}
-inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction3() {
-  
-  return interaction3_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline std::string* GORM_PB_Table_interaction::release_interaction3() {
-  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction3)
-  return interaction3_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void GORM_PB_Table_interaction::set_allocated_interaction3(std::string* interaction3) {
-  if (interaction3 != nullptr) {
-    
-  } else {
-    
-  }
-  interaction3_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction3,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction3)
-}
-inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction3() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction3)
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  
-  return interaction3_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      GetArena());
-}
-inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction3(
-    std::string* interaction3) {
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  if (interaction3 != nullptr) {
-    
-  } else {
-    
-  }
-  interaction3_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      interaction3, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction3)
-}
-
-// string interaction4 = 7;
-inline void GORM_PB_Table_interaction::clear_interaction4() {
-  interaction4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline const std::string& GORM_PB_Table_interaction::interaction4() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_interaction.interaction4)
-  return _internal_interaction4();
-}
-inline void GORM_PB_Table_interaction::set_interaction4(const std::string& value) {
-  _internal_set_interaction4(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_interaction.interaction4)
-}
-inline std::string* GORM_PB_Table_interaction::mutable_interaction4() {
-  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_interaction.interaction4)
-  return _internal_mutable_interaction4();
-}
-inline const std::string& GORM_PB_Table_interaction::_internal_interaction4() const {
-  return interaction4_.Get();
-}
-inline void GORM_PB_Table_interaction::_internal_set_interaction4(const std::string& value) {
-  
-  interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
-}
-inline void GORM_PB_Table_interaction::set_interaction4(std::string&& value) {
-  
-  interaction4_.Set(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_interaction.interaction4)
-}
-inline void GORM_PB_Table_interaction::set_interaction4(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArena());
-  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_interaction.interaction4)
-}
-inline void GORM_PB_Table_interaction::set_interaction4(const char* value,
-    size_t size) {
-  
-  interaction4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_interaction.interaction4)
-}
-inline std::string* GORM_PB_Table_interaction::_internal_mutable_interaction4() {
-  
-  return interaction4_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline std::string* GORM_PB_Table_interaction::release_interaction4() {
-  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_interaction.interaction4)
-  return interaction4_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void GORM_PB_Table_interaction::set_allocated_interaction4(std::string* interaction4) {
-  if (interaction4 != nullptr) {
-    
-  } else {
-    
-  }
-  interaction4_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), interaction4,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_interaction.interaction4)
-}
-inline std::string* GORM_PB_Table_interaction::unsafe_arena_release_interaction4() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_interaction.interaction4)
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  
-  return interaction4_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      GetArena());
-}
-inline void GORM_PB_Table_interaction::unsafe_arena_set_allocated_interaction4(
-    std::string* interaction4) {
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  if (interaction4 != nullptr) {
-    
-  } else {
-    
-  }
-  interaction4_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      interaction4, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_interaction.interaction4)
+inline void GORM_PB_Table_ptuser::set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_userid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_ptuser.userid)
 }
 
 // -------------------------------------------------------------------
 
 // GORM_PB_Table_user
 
-// uint64 version = 1;
+// fixed64 version = 1;
 inline void GORM_PB_Table_user::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -7274,7 +9030,7 @@ inline void GORM_PB_Table_user::set_version(::PROTOBUF_NAMESPACE_ID::uint64 valu
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_user.version)
 }
 
-// int64 userid = 2;
+// sfixed64 userid = 2;
 inline void GORM_PB_Table_user::clear_userid() {
   userid_ = PROTOBUF_LONGLONG(0);
 }
@@ -7294,7 +9050,7 @@ inline void GORM_PB_Table_user::set_userid(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_user.userid)
 }
 
-// string ptid = 3;
+// bytes ptid = 3;
 inline void GORM_PB_Table_user::clear_ptid() {
   ptid_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
@@ -7330,7 +9086,7 @@ inline void GORM_PB_Table_user::set_ptid(const char* value) {
               GetArena());
   // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_user.ptid)
 }
-inline void GORM_PB_Table_user::set_ptid(const char* value,
+inline void GORM_PB_Table_user::set_ptid(const void* value,
     size_t size) {
   
   ptid_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
@@ -7375,7 +9131,7 @@ inline void GORM_PB_Table_user::unsafe_arena_set_allocated_ptid(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_user.ptid)
 }
 
-// int32 pttype = 4;
+// sfixed32 pttype = 4;
 inline void GORM_PB_Table_user::clear_pttype() {
   pttype_ = 0;
 }
@@ -7395,7 +9151,7 @@ inline void GORM_PB_Table_user::set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_user.pttype)
 }
 
-// int64 createtime = 5;
+// sfixed64 createtime = 5;
 inline void GORM_PB_Table_user::clear_createtime() {
   createtime_ = PROTOBUF_LONGLONG(0);
 }
@@ -7415,315 +9171,96 @@ inline void GORM_PB_Table_user::set_createtime(::PROTOBUF_NAMESPACE_ID::int64 va
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_user.createtime)
 }
 
-// -------------------------------------------------------------------
-
-// GORM_PB_Table_roles
-
-// uint64 version = 1;
-inline void GORM_PB_Table_roles::clear_version() {
-  version_ = PROTOBUF_ULONGLONG(0);
+// bytes rolesdata = 6;
+inline void GORM_PB_Table_user::clear_rolesdata() {
+  rolesdata_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_roles::_internal_version() const {
-  return version_;
+inline const std::string& GORM_PB_Table_user::rolesdata() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_user.rolesdata)
+  return _internal_rolesdata();
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_roles::version() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.version)
-  return _internal_version();
+inline void GORM_PB_Table_user::set_rolesdata(const std::string& value) {
+  _internal_set_rolesdata(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_user.rolesdata)
 }
-inline void GORM_PB_Table_roles::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline std::string* GORM_PB_Table_user::mutable_rolesdata() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_user.rolesdata)
+  return _internal_mutable_rolesdata();
+}
+inline const std::string& GORM_PB_Table_user::_internal_rolesdata() const {
+  return rolesdata_.Get();
+}
+inline void GORM_PB_Table_user::_internal_set_rolesdata(const std::string& value) {
   
-  version_ = value;
+  rolesdata_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
 }
-inline void GORM_PB_Table_roles::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  _internal_set_version(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.version)
-}
-
-// int64 roleid = 2;
-inline void GORM_PB_Table_roles::clear_roleid() {
-  roleid_ = PROTOBUF_LONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_roleid() const {
-  return roleid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::roleid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.roleid)
-  return _internal_roleid();
-}
-inline void GORM_PB_Table_roles::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline void GORM_PB_Table_user::set_rolesdata(std::string&& value) {
   
-  roleid_ = value;
-}
-inline void GORM_PB_Table_roles::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_roleid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.roleid)
-}
-
-// int64 userid = 3;
-inline void GORM_PB_Table_roles::clear_userid() {
-  userid_ = PROTOBUF_LONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_userid() const {
-  return userid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::userid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.userid)
-  return _internal_userid();
-}
-inline void GORM_PB_Table_roles::_internal_set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  
-  userid_ = value;
-}
-inline void GORM_PB_Table_roles::set_userid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_userid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.userid)
-}
-
-// int64 worldid = 4;
-inline void GORM_PB_Table_roles::clear_worldid() {
-  worldid_ = PROTOBUF_LONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_worldid() const {
-  return worldid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::worldid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.worldid)
-  return _internal_worldid();
-}
-inline void GORM_PB_Table_roles::_internal_set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  
-  worldid_ = value;
-}
-inline void GORM_PB_Table_roles::set_worldid(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_worldid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.worldid)
-}
-
-// int32 dbid = 5;
-inline void GORM_PB_Table_roles::clear_dbid() {
-  dbid_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::_internal_dbid() const {
-  return dbid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::dbid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.dbid)
-  return _internal_dbid();
-}
-inline void GORM_PB_Table_roles::_internal_set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  dbid_ = value;
-}
-inline void GORM_PB_Table_roles::set_dbid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_dbid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.dbid)
-}
-
-// string name = 6;
-inline void GORM_PB_Table_roles::clear_name() {
-  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline const std::string& GORM_PB_Table_roles::name() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.name)
-  return _internal_name();
-}
-inline void GORM_PB_Table_roles::set_name(const std::string& value) {
-  _internal_set_name(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.name)
-}
-inline std::string* GORM_PB_Table_roles::mutable_name() {
-  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_roles.name)
-  return _internal_mutable_name();
-}
-inline const std::string& GORM_PB_Table_roles::_internal_name() const {
-  return name_.Get();
-}
-inline void GORM_PB_Table_roles::_internal_set_name(const std::string& value) {
-  
-  name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
-}
-inline void GORM_PB_Table_roles::set_name(std::string&& value) {
-  
-  name_.Set(
+  rolesdata_.Set(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_roles.name)
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_user.rolesdata)
 }
-inline void GORM_PB_Table_roles::set_name(const char* value) {
+inline void GORM_PB_Table_user::set_rolesdata(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
-  name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+  rolesdata_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
               GetArena());
-  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_roles.name)
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_user.rolesdata)
 }
-inline void GORM_PB_Table_roles::set_name(const char* value,
+inline void GORM_PB_Table_user::set_rolesdata(const void* value,
     size_t size) {
   
-  name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+  rolesdata_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
       reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_roles.name)
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_user.rolesdata)
 }
-inline std::string* GORM_PB_Table_roles::_internal_mutable_name() {
+inline std::string* GORM_PB_Table_user::_internal_mutable_rolesdata() {
   
-  return name_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  return rolesdata_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline std::string* GORM_PB_Table_roles::release_name() {
-  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_roles.name)
-  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+inline std::string* GORM_PB_Table_user::release_rolesdata() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_user.rolesdata)
+  return rolesdata_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
 }
-inline void GORM_PB_Table_roles::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
+inline void GORM_PB_Table_user::set_allocated_rolesdata(std::string* rolesdata) {
+  if (rolesdata != nullptr) {
     
   } else {
     
   }
-  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+  rolesdata_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), rolesdata,
       GetArena());
-  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_roles.name)
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_user.rolesdata)
 }
-inline std::string* GORM_PB_Table_roles::unsafe_arena_release_name() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_roles.name)
+inline std::string* GORM_PB_Table_user::unsafe_arena_release_rolesdata() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_user.rolesdata)
   GOOGLE_DCHECK(GetArena() != nullptr);
   
-  return name_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+  return rolesdata_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       GetArena());
 }
-inline void GORM_PB_Table_roles::unsafe_arena_set_allocated_name(
-    std::string* name) {
+inline void GORM_PB_Table_user::unsafe_arena_set_allocated_rolesdata(
+    std::string* rolesdata) {
   GOOGLE_DCHECK(GetArena() != nullptr);
-  if (name != nullptr) {
+  if (rolesdata != nullptr) {
     
   } else {
     
   }
-  name_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      name, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_roles.name)
-}
-
-// int32 charid = 7;
-inline void GORM_PB_Table_roles::clear_charid() {
-  charid_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::_internal_charid() const {
-  return charid_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_roles::charid() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.charid)
-  return _internal_charid();
-}
-inline void GORM_PB_Table_roles::_internal_set_charid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  charid_ = value;
-}
-inline void GORM_PB_Table_roles::set_charid(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  _internal_set_charid(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.charid)
-}
-
-// string face = 8;
-inline void GORM_PB_Table_roles::clear_face() {
-  face_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline const std::string& GORM_PB_Table_roles::face() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.face)
-  return _internal_face();
-}
-inline void GORM_PB_Table_roles::set_face(const std::string& value) {
-  _internal_set_face(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.face)
-}
-inline std::string* GORM_PB_Table_roles::mutable_face() {
-  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_roles.face)
-  return _internal_mutable_face();
-}
-inline const std::string& GORM_PB_Table_roles::_internal_face() const {
-  return face_.Get();
-}
-inline void GORM_PB_Table_roles::_internal_set_face(const std::string& value) {
-  
-  face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
-}
-inline void GORM_PB_Table_roles::set_face(std::string&& value) {
-  
-  face_.Set(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
-  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_roles.face)
-}
-inline void GORM_PB_Table_roles::set_face(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArena());
-  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_roles.face)
-}
-inline void GORM_PB_Table_roles::set_face(const char* value,
-    size_t size) {
-  
-  face_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArena());
-  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_roles.face)
-}
-inline std::string* GORM_PB_Table_roles::_internal_mutable_face() {
-  
-  return face_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline std::string* GORM_PB_Table_roles::release_face() {
-  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_roles.face)
-  return face_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-}
-inline void GORM_PB_Table_roles::set_allocated_face(std::string* face) {
-  if (face != nullptr) {
-    
-  } else {
-    
-  }
-  face_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), face,
-      GetArena());
-  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_roles.face)
-}
-inline std::string* GORM_PB_Table_roles::unsafe_arena_release_face() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_roles.face)
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  
-  return face_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      GetArena());
-}
-inline void GORM_PB_Table_roles::unsafe_arena_set_allocated_face(
-    std::string* face) {
-  GOOGLE_DCHECK(GetArena() != nullptr);
-  if (face != nullptr) {
-    
-  } else {
-    
-  }
-  face_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      face, GetArena());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_roles.face)
-}
-
-// int64 createtime = 9;
-inline void GORM_PB_Table_roles::clear_createtime() {
-  createtime_ = PROTOBUF_LONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::_internal_createtime() const {
-  return createtime_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_roles::createtime() const {
-  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_roles.createtime)
-  return _internal_createtime();
-}
-inline void GORM_PB_Table_roles::_internal_set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  
-  createtime_ = value;
-}
-inline void GORM_PB_Table_roles::set_createtime(::PROTOBUF_NAMESPACE_ID::int64 value) {
-  _internal_set_createtime(value);
-  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_roles.createtime)
+  rolesdata_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      rolesdata, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_user.rolesdata)
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

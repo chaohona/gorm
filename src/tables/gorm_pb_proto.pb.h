@@ -415,7 +415,7 @@ class GORM_PB_SPLIT_INFO_GORM_COLUMN_VALUE PROTOBUF_FINAL :
   std::string* _internal_mutable_value();
   public:
 
-  // int32 Column = 1;
+  // sfixed32 Column = 1;
   void clear_column();
   ::PROTOBUF_NAMESPACE_ID::int32 column() const;
   void set_column(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -730,7 +730,7 @@ class GORM_PB_Ret_Code PROTOBUF_FINAL :
   std::string* _internal_mutable_dberrinfo();
   public:
 
-  // int32 Code = 1;
+  // sfixed32 Code = 1;
   void clear_code();
   ::PROTOBUF_NAMESPACE_ID::int32 code() const;
   void set_code(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -739,7 +739,7 @@ class GORM_PB_Ret_Code PROTOBUF_FINAL :
   void _internal_set_code(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 DBCode = 2;
+  // sfixed32 DBCode = 2;
   void clear_dbcode();
   ::PROTOBUF_NAMESPACE_ID::int32 dbcode() const;
   void set_dbcode(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -748,7 +748,7 @@ class GORM_PB_Ret_Code PROTOBUF_FINAL :
   void _internal_set_dbcode(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 SucessNum = 4;
+  // sfixed32 SucessNum = 4;
   void clear_sucessnum();
   ::PROTOBUF_NAMESPACE_ID::int32 sucessnum() const;
   void set_sucessnum(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -757,7 +757,7 @@ class GORM_PB_Ret_Code PROTOBUF_FINAL :
   void _internal_set_sucessnum(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 TotalNum = 5;
+  // sfixed32 TotalNum = 5;
   void clear_totalnum();
   ::PROTOBUF_NAMESPACE_ID::int32 totalnum() const;
   void set_totalnum(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -917,7 +917,7 @@ class GORM_PB_RELOAD_TABLE_REQ PROTOBUF_FINAL :
       ::gorm::GORM_PB_REQ_HEADER* header);
   ::gorm::GORM_PB_REQ_HEADER* unsafe_arena_release_header();
 
-  // uint64 TableVersion = 2;
+  // fixed64 TableVersion = 2;
   void clear_tableversion();
   ::PROTOBUF_NAMESPACE_ID::uint64 tableversion() const;
   void set_tableversion(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1249,7 +1249,7 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
       ::gorm::GORM_PB_SPLIT_INFO* splittableinfo);
   ::gorm::GORM_PB_SPLIT_INFO* unsafe_arena_release_splittableinfo();
 
-  // int32 TableId = 1;
+  // sfixed32 TableId = 1;
   void clear_tableid();
   ::PROTOBUF_NAMESPACE_ID::int32 tableid() const;
   void set_tableid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1258,7 +1258,7 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
   void _internal_set_tableid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 BusinessID = 2;
+  // sfixed32 BusinessID = 2;
   void clear_businessid();
   ::PROTOBUF_NAMESPACE_ID::int32 businessid() const;
   void set_businessid(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1267,7 +1267,7 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
   void _internal_set_businessid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // int32 VerPolice = 3;
+  // sfixed32 VerPolice = 3;
   void clear_verpolice();
   ::PROTOBUF_NAMESPACE_ID::int32 verpolice() const;
   void set_verpolice(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1276,7 +1276,7 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
   void _internal_set_verpolice(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // uint32 ReqFlag = 4;
+  // fixed32 ReqFlag = 4;
   void clear_reqflag();
   ::PROTOBUF_NAMESPACE_ID::uint32 reqflag() const;
   void set_reqflag(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1763,7 +1763,7 @@ class GORM_PB_TABLE_SCHEMA_INFO_COLUMN PROTOBUF_FINAL :
   std::string* _internal_mutable_typedesc();
   public:
 
-  // uint64 Version = 1;
+  // fixed64 Version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1958,7 +1958,7 @@ class GORM_PB_TABLE_SCHEMA_INFO PROTOBUF_FINAL :
   std::string* _internal_mutable_tablename();
   public:
 
-  // uint64 Version = 1;
+  // fixed64 Version = 1;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -1967,7 +1967,7 @@ class GORM_PB_TABLE_SCHEMA_INFO PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int32 TableIdx = 3;
+  // sfixed32 TableIdx = 3;
   void clear_tableidx();
   ::PROTOBUF_NAMESPACE_ID::int32 tableidx() const;
   void set_tableidx(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -2146,7 +2146,7 @@ class GORM_PB_HAND_SHAKE_REQ PROTOBUF_FINAL :
       ::gorm::GORM_PB_REQ_HEADER* header);
   ::gorm::GORM_PB_REQ_HEADER* unsafe_arena_release_header();
 
-  // uint64 Version = 2;
+  // fixed64 Version = 2;
   void clear_version();
   ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
   void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2155,7 +2155,7 @@ class GORM_PB_HAND_SHAKE_REQ PROTOBUF_FINAL :
   void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // uint32 Md5 = 3;
+  // fixed32 Md5 = 3;
   void clear_md5();
   ::PROTOBUF_NAMESPACE_ID::uint32 md5() const;
   void set_md5(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2314,7 +2314,7 @@ class GORM_PB_HAND_SHAKE_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_Ret_Code* retcode);
   ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
 
-  // uint64 ClientId = 2;
+  // fixed64 ClientId = 2;
   void clear_clientid();
   ::PROTOBUF_NAMESPACE_ID::uint64 clientid() const;
   void set_clientid(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2656,7 +2656,7 @@ class GORM_PB_INSERT_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_Ret_Code* retcode);
   ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
 
-  // uint64 LastInsertId = 3;
+  // fixed64 LastInsertId = 3;
   void clear_lastinsertid();
   ::PROTOBUF_NAMESPACE_ID::uint64 lastinsertid() const;
   void set_lastinsertid(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -2999,7 +2999,7 @@ class GORM_PB_UPDATE_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_Ret_Code* retcode);
   ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
 
-  // int32 AffectedNum = 3;
+  // sfixed32 AffectedNum = 3;
   void clear_affectednum();
   ::PROTOBUF_NAMESPACE_ID::int32 affectednum() const;
   void set_affectednum(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -3342,7 +3342,7 @@ class GORM_PB_REPLACE_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_Ret_Code* retcode);
   ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
 
-  // int32 AffectedNum = 3;
+  // sfixed32 AffectedNum = 3;
   void clear_affectednum();
   ::PROTOBUF_NAMESPACE_ID::int32 affectednum() const;
   void set_affectednum(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -3519,7 +3519,7 @@ class GORM_PB_GET_REQ PROTOBUF_FINAL :
       ::gorm::GORM_PB_TABLE* table);
   ::gorm::GORM_PB_TABLE* unsafe_arena_release_table();
 
-  // int32 GetFlag = 3;
+  // sfixed32 GetFlag = 3;
   void clear_getflag();
   ::PROTOBUF_NAMESPACE_ID::int32 getflag() const;
   void set_getflag(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -3697,7 +3697,7 @@ class GORM_PB_GET_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_TABLE* table);
   ::gorm::GORM_PB_TABLE* unsafe_arena_release_table();
 
-  // uint64 LastInsertId = 4;
+  // fixed64 LastInsertId = 4;
   void clear_lastinsertid();
   ::PROTOBUF_NAMESPACE_ID::uint64 lastinsertid() const;
   void set_lastinsertid(::PROTOBUF_NAMESPACE_ID::uint64 value);
@@ -3706,7 +3706,7 @@ class GORM_PB_GET_RSP PROTOBUF_FINAL :
   void _internal_set_lastinsertid(::PROTOBUF_NAMESPACE_ID::uint64 value);
   public:
 
-  // int32 NewInsert = 3;
+  // sfixed32 NewInsert = 3;
   void clear_newinsert();
   ::PROTOBUF_NAMESPACE_ID::int32 newinsert() const;
   void set_newinsert(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -4436,7 +4436,7 @@ class GORM_PB_INCREASE_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_Ret_Code* retcode);
   ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
 
-  // int32 AffectedNum = 3;
+  // sfixed32 AffectedNum = 3;
   void clear_affectednum();
   ::PROTOBUF_NAMESPACE_ID::int32 affectednum() const;
   void set_affectednum(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -4760,7 +4760,7 @@ class GORM_PB_DELETE_RSP PROTOBUF_FINAL :
       ::gorm::GORM_PB_Ret_Code* retcode);
   ::gorm::GORM_PB_Ret_Code* unsafe_arena_release_retcode();
 
-  // int32 AffectedNum = 2;
+  // sfixed32 AffectedNum = 2;
   void clear_affectednum();
   ::PROTOBUF_NAMESPACE_ID::int32 affectednum() const;
   void set_affectednum(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -5456,7 +5456,7 @@ class GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP PROTOBUF_FINAL :
 #endif  // __GNUC__
 // GORM_PB_SPLIT_INFO_GORM_COLUMN_VALUE
 
-// int32 Column = 1;
+// sfixed32 Column = 1;
 inline void GORM_PB_SPLIT_INFO_GORM_COLUMN_VALUE::clear_column() {
   column_ = 0;
 }
@@ -5604,7 +5604,7 @@ GORM_PB_SPLIT_INFO::splitinfo() const {
 
 // GORM_PB_Ret_Code
 
-// int32 Code = 1;
+// sfixed32 Code = 1;
 inline void GORM_PB_Ret_Code::clear_code() {
   code_ = 0;
 }
@@ -5624,7 +5624,7 @@ inline void GORM_PB_Ret_Code::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Ret_Code.Code)
 }
 
-// int32 DBCode = 2;
+// sfixed32 DBCode = 2;
 inline void GORM_PB_Ret_Code::clear_dbcode() {
   dbcode_ = 0;
 }
@@ -5725,7 +5725,7 @@ inline void GORM_PB_Ret_Code::unsafe_arena_set_allocated_dberrinfo(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Ret_Code.DBErrInfo)
 }
 
-// int32 SucessNum = 4;
+// sfixed32 SucessNum = 4;
 inline void GORM_PB_Ret_Code::clear_sucessnum() {
   sucessnum_ = 0;
 }
@@ -5745,7 +5745,7 @@ inline void GORM_PB_Ret_Code::set_sucessnum(::PROTOBUF_NAMESPACE_ID::int32 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Ret_Code.SucessNum)
 }
 
-// int32 TotalNum = 5;
+// sfixed32 TotalNum = 5;
 inline void GORM_PB_Ret_Code::clear_totalnum() {
   totalnum_ = 0;
 }
@@ -5850,7 +5850,7 @@ inline void GORM_PB_RELOAD_TABLE_REQ::set_allocated_header(::gorm::GORM_PB_REQ_H
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_RELOAD_TABLE_REQ.Header)
 }
 
-// uint64 TableVersion = 2;
+// fixed64 TableVersion = 2;
 inline void GORM_PB_RELOAD_TABLE_REQ::clear_tableversion() {
   tableversion_ = PROTOBUF_ULONGLONG(0);
 }
@@ -5959,7 +5959,7 @@ inline void GORM_PB_RELOAD_TABLE_RSP::set_allocated_retcode(::gorm::GORM_PB_Ret_
 
 // GORM_PB_REQ_HEADER
 
-// int32 TableId = 1;
+// sfixed32 TableId = 1;
 inline void GORM_PB_REQ_HEADER::clear_tableid() {
   tableid_ = 0;
 }
@@ -5979,7 +5979,7 @@ inline void GORM_PB_REQ_HEADER::set_tableid(::PROTOBUF_NAMESPACE_ID::int32 value
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_REQ_HEADER.TableId)
 }
 
-// int32 BusinessID = 2;
+// sfixed32 BusinessID = 2;
 inline void GORM_PB_REQ_HEADER::clear_businessid() {
   businessid_ = 0;
 }
@@ -5999,7 +5999,7 @@ inline void GORM_PB_REQ_HEADER::set_businessid(::PROTOBUF_NAMESPACE_ID::int32 va
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_REQ_HEADER.BusinessID)
 }
 
-// int32 VerPolice = 3;
+// sfixed32 VerPolice = 3;
 inline void GORM_PB_REQ_HEADER::clear_verpolice() {
   verpolice_ = 0;
 }
@@ -6019,7 +6019,7 @@ inline void GORM_PB_REQ_HEADER::set_verpolice(::PROTOBUF_NAMESPACE_ID::int32 val
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_REQ_HEADER.VerPolice)
 }
 
-// uint32 ReqFlag = 4;
+// fixed32 ReqFlag = 4;
 inline void GORM_PB_REQ_HEADER::clear_reqflag() {
   reqflag_ = 0u;
 }
@@ -6375,7 +6375,7 @@ inline void GORM_PB_HEART_RSP::set_allocated_retcode(::gorm::GORM_PB_Ret_Code* r
 
 // GORM_PB_TABLE_SCHEMA_INFO_COLUMN
 
-// uint64 Version = 1;
+// fixed64 Version = 1;
 inline void GORM_PB_TABLE_SCHEMA_INFO_COLUMN::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -6581,7 +6581,7 @@ inline void GORM_PB_TABLE_SCHEMA_INFO_COLUMN::set_type(::gorm::GORM_PB_COLUMN_TY
 
 // GORM_PB_TABLE_SCHEMA_INFO
 
-// uint64 Version = 1;
+// fixed64 Version = 1;
 inline void GORM_PB_TABLE_SCHEMA_INFO::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -6682,7 +6682,7 @@ inline void GORM_PB_TABLE_SCHEMA_INFO::unsafe_arena_set_allocated_tablename(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE_SCHEMA_INFO.TableName)
 }
 
-// int32 TableIdx = 3;
+// sfixed32 TableIdx = 3;
 inline void GORM_PB_TABLE_SCHEMA_INFO::clear_tableidx() {
   tableidx_ = 0;
 }
@@ -6826,7 +6826,7 @@ inline void GORM_PB_HAND_SHAKE_REQ::set_allocated_header(::gorm::GORM_PB_REQ_HEA
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_HAND_SHAKE_REQ.Header)
 }
 
-// uint64 Version = 2;
+// fixed64 Version = 2;
 inline void GORM_PB_HAND_SHAKE_REQ::clear_version() {
   version_ = PROTOBUF_ULONGLONG(0);
 }
@@ -6846,7 +6846,7 @@ inline void GORM_PB_HAND_SHAKE_REQ::set_version(::PROTOBUF_NAMESPACE_ID::uint64 
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_HAND_SHAKE_REQ.Version)
 }
 
-// uint32 Md5 = 3;
+// fixed32 Md5 = 3;
 inline void GORM_PB_HAND_SHAKE_REQ::clear_md5() {
   md5_ = 0u;
 }
@@ -6990,7 +6990,7 @@ inline void GORM_PB_HAND_SHAKE_RSP::set_allocated_retcode(::gorm::GORM_PB_Ret_Co
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_HAND_SHAKE_RSP.RetCode)
 }
 
-// uint64 ClientId = 2;
+// fixed64 ClientId = 2;
 inline void GORM_PB_HAND_SHAKE_RSP::clear_clientid() {
   clientid_ = PROTOBUF_ULONGLONG(0);
 }
@@ -7252,7 +7252,7 @@ GORM_PB_INSERT_RSP::tables() const {
   return tables_;
 }
 
-// uint64 LastInsertId = 3;
+// fixed64 LastInsertId = 3;
 inline void GORM_PB_INSERT_RSP::clear_lastinsertid() {
   lastinsertid_ = PROTOBUF_ULONGLONG(0);
 }
@@ -7514,7 +7514,7 @@ GORM_PB_UPDATE_RSP::tables() const {
   return tables_;
 }
 
-// int32 AffectedNum = 3;
+// sfixed32 AffectedNum = 3;
 inline void GORM_PB_UPDATE_RSP::clear_affectednum() {
   affectednum_ = 0;
 }
@@ -7776,7 +7776,7 @@ GORM_PB_REPLACE_RSP::tables() const {
   return tables_;
 }
 
-// int32 AffectedNum = 3;
+// sfixed32 AffectedNum = 3;
 inline void GORM_PB_REPLACE_RSP::clear_affectednum() {
   affectednum_ = 0;
 }
@@ -7956,7 +7956,7 @@ inline void GORM_PB_GET_REQ::set_allocated_table(::gorm::GORM_PB_TABLE* table) {
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_GET_REQ.Table)
 }
 
-// int32 GetFlag = 3;
+// sfixed32 GetFlag = 3;
 inline void GORM_PB_GET_REQ::clear_getflag() {
   getflag_ = 0;
 }
@@ -8136,7 +8136,7 @@ inline void GORM_PB_GET_RSP::set_allocated_table(::gorm::GORM_PB_TABLE* table) {
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_GET_RSP.Table)
 }
 
-// int32 NewInsert = 3;
+// sfixed32 NewInsert = 3;
 inline void GORM_PB_GET_RSP::clear_newinsert() {
   newinsert_ = 0;
 }
@@ -8156,7 +8156,7 @@ inline void GORM_PB_GET_RSP::set_newinsert(::PROTOBUF_NAMESPACE_ID::int32 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_GET_RSP.NewInsert)
 }
 
-// uint64 LastInsertId = 4;
+// fixed64 LastInsertId = 4;
 inline void GORM_PB_GET_RSP::clear_lastinsertid() {
   lastinsertid_ = PROTOBUF_ULONGLONG(0);
 }
@@ -8822,7 +8822,7 @@ GORM_PB_INCREASE_RSP::tables() const {
   return tables_;
 }
 
-// int32 AffectedNum = 3;
+// sfixed32 AffectedNum = 3;
 inline void GORM_PB_INCREASE_RSP::clear_affectednum() {
   affectednum_ = 0;
 }
@@ -9087,7 +9087,7 @@ inline void GORM_PB_DELETE_RSP::set_allocated_retcode(::gorm::GORM_PB_Ret_Code* 
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_DELETE_RSP.RetCode)
 }
 
-// int32 AffectedNum = 2;
+// sfixed32 AffectedNum = 2;
 inline void GORM_PB_DELETE_RSP::clear_affectednum() {
   affectednum_ = 0;
 }

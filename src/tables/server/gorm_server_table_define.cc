@@ -1296,9 +1296,7 @@ int GORM_PackGet_By_Non_Primary_KeySQLCURRENCY_One(shared_ptr<GORM_MemPool> &pMe
 
 	vector<int> vFields;
 	string fieldMode = header.fieldmode();
-    if (fieldMode == "")
-        return GORM_REQ_NO_RECORDS;
-    else 
+    if (fieldMode.size() != 0)
         vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
     int iLen = strlen(GetByNonPrimaySQL_CURRENCY);
     int iTotalLen = 64*vFields.size() + iLen + table_currency.ByteSizeLong() + 32;
@@ -1456,9 +1454,7 @@ int GORM_PackGet_By_Non_Primary_KeySQLCYCLEEVENT_One(shared_ptr<GORM_MemPool> &p
 
 	vector<int> vFields;
 	string fieldMode = header.fieldmode();
-    if (fieldMode == "")
-        return GORM_REQ_NO_RECORDS;
-    else 
+    if (fieldMode.size() != 0)
         vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
     int iLen = strlen(GetByNonPrimaySQL_CYCLEEVENT);
     int iTotalLen = 64*vFields.size() + iLen + table_cycleevent.ByteSizeLong() + 32;
