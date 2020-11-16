@@ -385,6 +385,7 @@ GORM_Ret GORM_MySQLEvent::FetchRows()
             break;
         }
     }
+    // 获取到了所有的结果
     if (m_iReadedRows == m_iReadingRows)
     {
         this->m_iOptStep = MYSQL_READ_FINISH;

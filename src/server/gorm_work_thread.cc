@@ -80,6 +80,7 @@ void GORM_WorkThread::SignalCB()
     int iLoop = 0;
     m_iRequestPendingNum = 0;
     do{
+        // 从请求池子中取出请求
         if (!this->m_pResponseList->Take(pReq, leftNum))
             break;
         if (pReq == nullptr)

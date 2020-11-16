@@ -108,6 +108,7 @@ public:
 
     uint32  uiHashValue;
     int     iTableIndex = -1;   // 表下标
+    bool    clientRefToTableIndex = false;  // 客户端是否自己表下标id
     int     staticRequest = 0;      // 此标记为1，则不会被回收
 
 #ifdef GORM_DEBUG

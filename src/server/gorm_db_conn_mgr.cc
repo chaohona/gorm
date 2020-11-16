@@ -188,14 +188,26 @@ int GORM_DBConnMgr::GetDBPool(GORM_DBRequest *pDBReq)
     {
         return GORM_NO_DB;
     }
-    if (pDBReq->iReqTableId < 1 || pDBReq->iReqTableId > this->iMaxTableId)
+    if (pDBReq->iReqTableId < 1 || pDBReq->iReqTableId > this->iMaxTableId || this->m_vTableRouteInfo[pDBReq->iReqTableId] == nullptr)
     {
-        GORM_LOGE("invalid table id:%d", pDBReq->iReqTableId);
+        GORM_LOGE("table route was not configed or invalid table id:%d", pDBReq->iReqTableId);
         return GORM_INVALID_TABLE;
     }
     GORM_TableRouteMgr &route = this->m_vTableRouteInfo[pDBReq->iReqTableId];
-    pDBReq->iTableIndex = pDBReq->uiHashValue%route.iSpilitMode;
+    // 获取表的下标
+    if (!pDBReq->clientRefToTableIndex)
+        pDBReq->iTableIndex = pDBReq->uiHashValue%route.iSpilitMode;
+    else if(pDBReq->iTableIndex >= route.iSpilitMode) // 如果客户端带的下标超表则报错
+    {
+        GORM_LOGE("client ref to invalid table index, tableid:%d, ref index:%d", pDBReq->iReqTableId, pDBReq->iTableIndex);
+        return GORM_NO_DB;
+    }
     pDBReq->pDbPool = route.vDbConn[pDBReq->iTableIndex];
+    if (pDBReq->pDbPool == nullptr)
+    {
+        GORM_LOGE("table route was not configed or invalid table id:%d, index:%d", pDBReq->iReqTableId, pDBReq->iTableIndex);
+        return GORM_INVALID_TABLE;
+    }
 
     return GORM_OK;
 }

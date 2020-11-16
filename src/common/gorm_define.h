@@ -19,6 +19,8 @@ namespace gorm{
 #define INOUT    
 #endif
 
+#define GORM_MAX_LIMIT_NUM 1024
+
 #define MAX_VERSION_LEN 128
 #define NET_IP_STR_LEN  46
 
@@ -139,6 +141,8 @@ enum GORM_ReqFlag
 
     // 2 空值是否可以自增
     GORM_REQ_FLAG_EMPTY_INCREASE    = 0b100,    // 空值也可以自增,自减
+    // 3 是否指定拉取指定表
+    GORM_REQ_REF_TO_TABLE_INDEX     = 0b1000,
 
     GORM_REQ_FLAG_MODE      = 0xFFFFFFFF,
 };

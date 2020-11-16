@@ -609,7 +609,7 @@ int GORM_MySQLRequest::PackHandShakeResult(int iRet, uint64 ulClientId)
     }
     
     pRspData->m_sUsedSize = iLen;
-    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HAND_SHAKE, this->uiReqID, GORM_OK, 0);
+    GORM_SetRspHeader(pRspData->m_uszData, iLen, GORM_CMD_HAND_SHAKE, this->uiReqID, iRet, 0);
     
     return GORM_OK;
 }

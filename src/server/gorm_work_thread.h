@@ -54,7 +54,7 @@ public:
     uint64                  m_ulThreadID;       // 本线程id
     ///////////////////////////////////////////////////////////////////////////
 
-    GORM_SSQueue<GORM_DBRequest*, GORM_WORK_REQUEST_QUEUE_LEN> *m_pResponseList;
+    GORM_SSQueue<GORM_DBRequest*, GORM_WORK_REQUEST_QUEUE_LEN> *m_pResponseList;    // front线程将请求放在这里面，work线程从这里面获取请求并处理
     int m_iInnerIdx = -1;
 
     //

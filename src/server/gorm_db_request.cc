@@ -51,7 +51,11 @@ if ((uiReqFlag & GORM_REQ_FLAG_RETURN_NEW_VALUE) > 0)               \
 else if ((uiReqFlag & GORM_REQ_FLAG_RETURN_ALL_VALUE) > 0)          \
     cReplyFlag = GORM_ResultFlag_RETURN_ALL_VALUE;                  \
 if ((uiReqFlag&GORM_REQ_FLAG_EMPTY_INCREASE) > 0)                   \
-    increaseFlag = GORM_IncreaseFlag_AutoCreate;
+    increaseFlag = GORM_IncreaseFlag_AutoCreate;                    \
+if ((uiReqFlag&GORM_REQ_REF_TO_TABLE_INDEX) > 0){                   \
+    clientRefToTableIndex = true;                                   \
+    iTableIndex = header.clientreftableindex();                     \
+}
 
 int GORM_DBRequest::SendToWorkThread()
 {
