@@ -102,6 +102,14 @@ bool GORM_Config::Init(char *szCfgFile)
                     return false;
                 }
             }
+            else if (content == "work-model")
+            {
+                string strWorkMode = c->second.as<string>();
+                if (strWorkMode == "concurrences")
+                {
+                    this->m_workMode = GORM_WORK_MODE_CONCURRENCE;
+                }
+            }
         }
     }
     catch(exception &e)

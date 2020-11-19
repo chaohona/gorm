@@ -188,7 +188,7 @@ int GORM_DBConnMgr::GetDBPool(GORM_DBRequest *pDBReq)
     {
         return GORM_NO_DB;
     }
-    if (pDBReq->iReqTableId < 1 || pDBReq->iReqTableId > this->iMaxTableId || this->m_vTableRouteInfo[pDBReq->iReqTableId] == nullptr)
+    if (pDBReq->iReqTableId < 1 || pDBReq->iReqTableId > this->iMaxTableId || this->m_vTableRouteInfo+pDBReq->iReqTableId == nullptr)
     {
         GORM_LOGE("table route was not configed or invalid table id:%d", pDBReq->iReqTableId);
         return GORM_INVALID_TABLE;

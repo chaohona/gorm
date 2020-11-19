@@ -54,7 +54,7 @@ if ((uiReqFlag&GORM_REQ_FLAG_EMPTY_INCREASE) > 0)                   \
     increaseFlag = GORM_IncreaseFlag_AutoCreate;                    \
 if ((uiReqFlag&GORM_REQ_REF_TO_TABLE_INDEX) > 0){                   \
     clientRefToTableIndex = true;                                   \
-    iTableIndex = header.clientreftableindex();                     \
+    iTableIndex = header.reftableindex();                     \
 }
 
 int GORM_DBRequest::SendToWorkThread()

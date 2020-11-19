@@ -22,6 +22,7 @@ private:
     bool ParseRedisInfo(YAML::Node &node);
 
 public:
+    GORM_WORK_MODE     m_workMode = GORM_WORK_MODE_SERIAL;               
     bool               m_bDaemonize = true;                     // 是否以后台进程运行
     int                m_iWorkThreadNum = 1;                // 启动的工作线程的总数
     int                m_iConnectNumPerPool = 5;                       // 每个线程和每个库建立的连接数

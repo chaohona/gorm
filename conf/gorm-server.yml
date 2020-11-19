@@ -1,5 +1,10 @@
 # gorm-server configuration file example.
 
+# work model
+# concurrences
+# serial
+work-model: concurrences
+
 #server listen address
 listen-address: 0.0.0.0:8806
 

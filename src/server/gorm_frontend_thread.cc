@@ -5,6 +5,7 @@
 #include "gorm_log.h"
 #include "gorm_work_thread.h"
 #include "gorm_define.h"
+#include "gorm_config.h"
 
 GORM_ListenEvent::GORM_ListenEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>      pEpoll) : GORM_Event(iFD, pEpoll)
 {
@@ -142,6 +143,7 @@ int GORM_FrontEndThread::AcceptClient(GORM_FD iFD)
     GORM_LOGD("fornt thread got new client:%d", iFD);
     GORM_FrontEndEvent *pEvent = new GORM_FrontEndEvent(iFD, this->m_pEpoll, this);
     pEvent->SetMemPool(this->m_pMemPool);
+    pEvent->m_workMode = GORM_Config::Instance()->m_workMode;
     this->m_pEpoll->AddEventRead(pEvent);
     this->m_mapFrontEndEvents[pEvent->m_uiEventId] = pEvent;
     return GORM_OK;
@@ -195,6 +197,14 @@ void GORM_FrontEndThread::SignalCB()
             }
             else 
             {
+                if (pReq->pFrontendEvent->m_workMode == GORM_WORK_MODE_SERIAL)
+                {
+                }
+                else
+                {
+                    pReq->pFrontendEvent->m_pRequestRing->AddData(pReq)
+                    pReq->pFrontendEvent->m_requestMap.erease(pReq->uiReqID);
+                }
                 pReq->pFrontendEvent->ReadyWrite();
                 
                 if (pReq->iWaitDone == 1)

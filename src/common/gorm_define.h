@@ -173,6 +173,11 @@ enum GORM_GET_FLAG {
     GORM_GET_FLAG_NON_INSERT = 1,
 };
 
+enum GORM_WORK_MODE{
+    GORM_WORK_MODE_SERIAL = 0,      // 串行工作
+    GORM_WORK_MODE_CONCURRENCE = 1, // 并行工作
+};
+
 #ifdef _WIN32
 
 #define strncpy strncpy_s

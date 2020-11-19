@@ -37,6 +37,7 @@ private:
     void FillErrReplyBuffer(GORM_DBRequest *pRequest);
     GORM_Ret HeartBeat();
     GORM_Ret HandShake(char *szMsg, int iMsgLen, uint32 iReqID);
+    GORM_Ret HandShakeResult(GORM_MySQLRequest* pHandShake, int code, uint64 clientId);
     GORM_Ret GetNextSending(bool &bContinue);
     inline void MoveMsg2Start()
     {
@@ -48,6 +49,8 @@ private:
 public:
     // 请求的缓冲池子,主要此池子中数据个数大于1就说明有pending消息
     shared_ptr<GORM_RingBuffer<GORM_DBRequest, 1024*8>> m_pRequestRing = nullptr;
+    unordered_map<uint32, GORM_DBRequest*>              m_requestMap;
+    GORM_WORK_MODE                                      m_workMode = GORM_WORK_MODE_SERIAL; 
     /////////////////////////////////接收客户端相关
     // 当前的正在处理的请求
     GORM_DBRequest                              *m_pCurrentRequest = nullptr;   // 正在解析的从客户端过来的请求

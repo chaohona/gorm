@@ -9,7 +9,8 @@ using namespace gorm;
 GORM_FrontEndEvent::GORM_FrontEndEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>       pEpoll, GORM_FrontEndThread *pThread) : 
     GORM_Event(iFD, pEpoll), m_pFrontThread(pThread)
 {
-    this->m_pRequestRing = make_shared<GORM_RingBuffer<GORM_DBRequest, 1024*8>>();
+    if (GORM_Config::Instance()->m_workMode == GORM_WORK_MODE_SERIAL)
+        this->m_pRequestRing = make_shared<GORM_RingBuffer<GORM_DBRequest, 1024*8>>();
     this->m_pReadCache = m_pFrontThread->m_pMemPool->GetData(1024*1024);
     m_pCurrentReadPtr = this->m_pReadCache->m_uszData;
     m_pStartPtr = this->m_pCurrentReadPtr;
@@ -35,6 +36,19 @@ GORM_FrontEndEvent::~GORM_FrontEndEvent()
             pRequest->pFrontendEvent = nullptr;
         }while(pRequest != nullptr);
         m_pRequestRing = nullptr;
+
+        auto it = this->m_requestMap.begin();
+        while(it != this->m_requestMap.end())
+        {
+            it->second->pFrontendEvent = nullptr;
+            it = this->m_requestMap.erase(it);
+        }
+        auto it = this->m_waitForResponseMap.begin();
+        while(it != this->m_waitForResponseMap.end())
+        {
+            it->second->pFrontendEvent = nullptr;
+            it = this->m_waitForResponseMap.erase(it);
+        }
     }
     catch(exception &e)
     {   
@@ -50,27 +64,47 @@ void GORM_FrontEndEvent::SetMemPool(shared_ptr<GORM_MemPool> &pMemPool)
 GORM_Ret GORM_FrontEndEvent::GetNextSending(bool &bContinue)
 {
     bContinue = false;
-    GORM_DBRequest *pRequest = this->m_pRequestRing->GetFront();                    
-    if (pRequest == nullptr)                                                        
-    {                                                                               
-        this->DelWrite();                                                           
-        return GORM_OK;                                                             
-    }                                                                               
-    if (pRequest->iWaitDone != 1)                                                   
-    {                                                                               
-        this->DelWrite();                                                           
-        if (pRequest->iSentToWorkThread == 0)                                       
-        {                                                                           
-            this->SendMsgToWorkThread(pRequest);                                     
-            return GORM_OK;                                                         
-        }                                                                           
-    }                                                                               
-    this->m_pSendingRequest = this->m_pRequestRing->PopFront();                     
-    if (this->m_pSendingRequest == nullptr)                                         
-    {                                                                               
-        this->DelWrite();                                                           
-        return GORM_OK;                                                             
-    }                                                                               
+    GORM_DBRequest *pRequest = nullptr;
+    //if (GORM_Config::Instance()->m_workMode == GORM_WORK_MODE_SERIAL)
+    //{
+        pRequest = this->m_pRequestRing->GetFront();                    
+        if (pRequest == nullptr)                                                        
+        {                                                                               
+            this->DelWrite();                                                           
+            return GORM_OK;                                                             
+        }                                                                               
+        if (pRequest->iWaitDone != 1)                                                   
+        {                                                                               
+            this->DelWrite();                                                           
+            if (pRequest->iSentToWorkThread == 0)                                       
+            {                                                                           
+                this->SendMsgToWorkThread(pRequest);                                     
+                return GORM_OK;                                                         
+            }                                                                           
+        }                                                                               
+        this->m_pSendingRequest = this->m_pRequestRing->PopFront();                     
+        if (this->m_pSendingRequest == nullptr)                                         
+        {                                                                               
+            this->DelWrite();                                                           
+            return GORM_OK;                                                             
+        }  
+    /*}
+    else
+    {
+        if (this->m_requestMap.size() == 0)
+        {
+            this->DelWrite();
+            return GORM_OK;
+        }
+        auto it = this->m_requestMap.begin();
+        if (it == this->m_requestMap.end())
+        {
+            this->DelWrite();                                                           
+            return GORM_OK;
+        }
+        this->m_pSendingRequest = it->second;
+        this->m_requestMap.erase(it);
+    }*/
     if (this->m_pSendingRequest->iReqCmd == GORM_CMD_BATCH_GET)                     
         this->m_pSendingRequest->PackBatchGetResult();                              
     else if( this->m_pSendingRequest->iReqCmd == GORM_CMD_GET_BY_PARTKEY)           
@@ -154,12 +188,14 @@ int GORM_FrontEndEvent::Read()
     {
         return GORM_ERROR;
     }
-    if (GORM_RB_POOLFULL(this->m_pRequestRing))
-    {
-        GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
-        this->Close();
-        ASSERT(false);
-        return GORM_ERROR;
+    if (this->m_workMode == GORM_WORK_MODE_SERIAL)
+        if (GORM_RB_POOLFULL(this->m_pRequestRing))
+        {
+            GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
+            this->Close();
+            ASSERT(false);
+            return GORM_ERROR;
+        }
     }
 
     int iLeft = 0;
@@ -212,13 +248,17 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
     m_pCurrentReadPtr += iRead;
     for (;;)
     {
-        if (GORM_RB_POOLFULL(this->m_pRequestRing))
+        if (this->m_workMode == GORM_WORK_MODE_SERIAL)
         {
-            GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
-            this->Close();
-            ASSERT(false);
-            return GORM_ERROR;
+            if (GORM_RB_POOLFULL(this->m_pRequestRing))
+            {
+                GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
+                this->Close();
+                ASSERT(false);
+                return GORM_ERROR;
+            }
         }
+
         // 1、检查是否获取到消息头
         if (this->m_uiMsgLen == 0)
         {
@@ -319,12 +359,19 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         return GORM_ERROR;
     }
     GORM_SetRequestSourceInfo(pCurrentRequest, iReqID, iReqCmd, this, this->m_pFrontThread);
-    if (!this->m_pRequestRing->AddData(pCurrentRequest))
+    if (this->m_workMode == GORM_WORK_MODE_SERIAL)
     {
-        ASSERT(false);
-        GORM_LOGE("add request to request ring failed.");
-        this->Close();
-        return GORM_OK;
+        if (!this->m_pRequestRing->AddData(pCurrentRequest))
+        {
+            ASSERT(false);
+            GORM_LOGE("add request to request ring failed.");
+            this->Close();
+            return GORM_OK;
+        }
+    }
+    else
+    {
+        this->m_requestMap.insert(std::make_pair<uint32, GORM_DBRequest*>(pCurrentRequest->uiReqID, pCurrentRequest));
     }
 
     if (this->m_ulClientId == 0)
@@ -345,12 +392,16 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         return iRet;
     }
 
-    int iPendingNum = this->m_pRequestRing->GetNum();
-    // 有没有获取到响应的请求
-    if ( iPendingNum > 1)
+    if (this->m_workMode == GORM_WORK_MODE_SERIAL)
     {
-        return GORM_OK;
+        int iPendingNum = this->m_pRequestRing->GetNum();
+        // 有没有获取到响应的请求
+        if ( iPendingNum > 1)
+        {
+            return GORM_OK;
+        }
     }
+
     unique_lock<mutex> locker(pCurrentRequest->m_Mutex);
     return this->SendMsgToWorkThread(pCurrentRequest);
 }
@@ -413,31 +464,48 @@ GORM_Ret GORM_FrontEndEvent::HeartBeat()
         pHeartBeat->iPreGood = 1;
     }
     this->ulHeadBeatTime = GORM_GetNowMS();
-    if (!this->m_pRequestRing->AddData(pHeartBeat))
+    if (this->m_workMode == GORM_WORK_MODE_SERIAL)
     {
-        GORM_LOGE("add request to request ring failed.");
-        this->Close();
-        return GORM_OK;
+        if (!this->m_pRequestRing->AddData(pHeartBeat))
+        {
+            GORM_LOGE("add request to request ring failed.");
+            this->Close();
+            return GORM_OK;
+        }
+    }
+    else
+    {
+        this->m_requestMap.insert(std::make_pair<uint32, GORM_DBRequest*>(pCurrentRequest->uiReqID, pCurrentRequest));
     }
     this->ReadyWrite();
 
     return GORM_OK;
 }
 
-#define GORM_HAND_SHAKE_RESULT(code, client)                    \
-if (GORM_OK != pHandShake->PackHandShakeResult(code, client))   \
-{                                                               \
-}                                                               \
-pHandShake->iWaitDone = 1;                                      \
-pHandShake->iPreGood = 1;                                       \
-if (!this->m_pRequestRing->AddData(pHandShake))                 \
-{                                                               \
-    GORM_LOGE("add request to request ring failed.");           \
-    this->Close();                                              \
-    return GORM_OK;                                             \
-}                                                               \
-this->ReadyWrite();
+GORM_Ret GORM_FrontEndEvent::HandShakeResult(GORM_MySQLRequest* pHandShake, int code, uint64 clientId)
+{
+    if (GORM_OK != pHandShake->PackHandShakeResult(code, clientId))   
+    {                                                               
+    }                                                               
+    pHandShake->iWaitDone = 1;                                      
+    pHandShake->iPreGood = 1;                                       
+    if (this->m_workMode == GORM_WORK_MODE_SERIAL)
+    {
+        if (!this->m_pRequestRing->AddData(pHeartBeat))
+        {
+            GORM_LOGE("add request to request ring failed.");
+            this->Close();
+            return GORM_OK;
+        }
+    }
+    else
+    {
+        this->m_requestMap.insert(std::make_pair<uint32, GORM_DBRequest*>(pCurrentRequest->uiReqID, pCurrentRequest));
+    }                                                         
+    this->ReadyWrite();
 
+    return GORM_OK;
+}
 
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
 {
@@ -465,13 +533,15 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     if (pHandShakeReq->md5() != pSvrHandShake->md5())
     {
         GORM_LOGE("hand shake md5 check failed.");
-        GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+        //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+        HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
         return GORM_OK;
     }
     if (pHandShakeReq->schemas_size() != pSvrHandShake->schemas_size())
     {
         GORM_LOGE("hand shake schema size check failed, req size:%d, server size:%d", pHandShakeReq->schemas_size(), pSvrHandShake->schemas_size());
-        GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+        //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+        HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
         return GORM_OK;
     }
     for(int i=0; i<pHandShakeReq->schemas_size(); i++)
@@ -481,7 +551,8 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
         if (reqInfo.columns_size() != svrInfo.columns_size())
         {
             GORM_LOGE("hand shake column size check failed, table:%s", reqInfo.tablename().c_str());
-            GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+            //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+            HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
             return GORM_OK;
         }
         for (int j=0; j<reqInfo.columns_size(); j++)
@@ -491,14 +562,16 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
             if (reqColumn.type() != svrColumn.type())
             {
                 GORM_LOGE("hand shake column type check failed, table:%s, column:%s", reqInfo.tablename().c_str(), reqColumn.name().c_str());
-                GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+                //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
+                HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
                 return GORM_OK;
             }
         }
     }
 
     this->m_ulClientId = 1;
-    GORM_HAND_SHAKE_RESULT(GORM_OK, this->m_ulClientId);
+    HandShakeResult(pHandShake, GORM_OK, this->m_ulClientId);
+    //GORM_HAND_SHAKE_RESULT(GORM_OK, this->m_ulClientId);
     return GORM_OK;
 }
 
