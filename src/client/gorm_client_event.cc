@@ -113,7 +113,6 @@ int GORM_ClientEvent::BeginReadNextMsg()
         m_iNeedLen = GORM_GetMsgLen(m_pReadingBuffer->m_uszData);
         if (m_iNeedLen > GORM_MAX_REQUEST_LEN)
         {
-            this->Close();
             GORM_CUSTOM_LOGD(pLogger, "response is too large.");
             this->m_pReadingResponse->cPreErrCode = GORM_PACK_RSP_ERROR;
             return GORM_ERROR;
@@ -261,7 +260,7 @@ int GORM_ClientEvent::ConnectToServer(const char *szIP, uint16 uiPort)
         GORM_CUSTOM_LOGE(pLogger, "set socket tcpnodelay failed:%s,%d, errno:%d, errmsg:%s", szIP, uiPort, errno, strerror(errno));
         return iRet;
     }
-    iRet = GORM_Socket::SetSndTimeO(iFD, 100);
+    /*iRet = GORM_Socket::SetSndTimeO(iFD, 100);
     if (iRet != GORM_OK)
     {
         GORM_CUSTOM_LOGE(pLogger, "set socket send time out failed:%s,%d, errno:%d, errmsg:%s", szIP, uiPort, errno, strerror(errno));
@@ -285,7 +284,7 @@ int GORM_ClientEvent::ConnectToServer(const char *szIP, uint16 uiPort)
     {
         GORM_CUSTOM_LOGE(pLogger, "set socket tcpnodelay failed:%s,%d, errno:%d, errmsg:%s", szIP, uiPort, errno, strerror(errno));
         return iRet;
-    }
+    }*/
     iRet = GORM_Socket::SetTcpKeepAlive(iFD);
     if (iRet != GORM_OK)
     {

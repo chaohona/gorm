@@ -154,7 +154,16 @@ int GORM_FrontEndEvent::Write()
         }
         if (iWriteLen < 0)
         {
-            this->Close();
+            if (errno == EINTR) {
+                GORM_LOGD("write on sd %d not ready", this->m_iFD);
+                continue;
+            } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                GORM_LOGD("sendv on sd %d not ready - eagain", this->m_iFD);
+                break;
+            } else {
+                GORM_LOGE("sendv on sd %d failed, errmsg %s", this->m_iFD, strerror(errno));
+                return GORM_ERROR;
+            }
             return GORM_ERROR;
         }
         this->m_iNeedWrite -= iWriteLen;
@@ -181,7 +190,7 @@ int GORM_FrontEndEvent::Write()
     return GORM_OK;
 }
 
-GORM_Ret ReadPrec()
+GORM_Ret GORM_FrontEndEvent::PreRead()
 {
     // 同步请求，同时只处理一个
     if (this->m_workMode == GORM_WORK_MODE_SERIAL)
@@ -200,15 +209,13 @@ GORM_Ret ReadPrec()
                     GORM_LOGE("request is time out, seqid:%d", reqMsg->uiReqID);
                     reqMsg->GetResult(GORM_REQUEST_TT);
                     this->AddWrite();
-                }       
-                //GORM_LOGE("there is message pending.");
+                }
                 return GORM_EAGAIN;
             }
         }
         if (GORM_RB_POOLFULL(this->m_pRequestRing))
         {
             GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
-            this->Close();
             ASSERT(false);
             return GORM_ERROR;
         }
@@ -225,7 +232,7 @@ int GORM_FrontEndEvent::Read()
         return GORM_ERROR;
     }
     GORM_Ret iRet;
-    iRet = ReadPrec();
+    iRet = PreRead();
     if (iRet == GORM_EAGAIN)
         return GORM_OK;
     else if (iRet != GORM_ERROR)
@@ -254,21 +261,22 @@ int GORM_FrontEndEvent::Read()
                 GORM_LOGE("recv from client not ready - eagain, %s:%d", this->m_szIP, this->m_uiPort);
                 return GORM_EAGAIN;
             }
+            GORM_LOGE("read got error, close the connection %s:%d, error:%d, errmsg:%s", this->m_szIP, this->m_uiPort, errno, strerror(errno));
             this->Close();
             
             return GORM_ERROR;
         }
         else if (iRead == 0)
         {
-            GORM_LOGE("client close the connection %s:%d", this->m_szIP, this->m_uiPort);
+            GORM_LOGE("read got 0, client close the connection %s:%d", this->m_szIP, this->m_uiPort);
             this->Close();
             return GORM_ERROR;
         }
 
         iRet = this->ParseMsg(iRead);
-        if (GORM_ERROR == iRet)
+        if (GORM_OK != iRet)
         {
-            this->Close();
+            GORM_LOGE("parse request failed, close the connection %s:%d", this->m_szIP, this->m_uiPort);
             break;
         }
         // 数据已经读完了
@@ -290,7 +298,6 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
             if (GORM_RB_POOLFULL(this->m_pRequestRing))
             {
                 GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
-                this->Close();
                 ASSERT(false);
                 return GORM_ERROR;
             }
@@ -312,7 +319,6 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
             if (this->m_uiMsgLen > GORM_MAX_REQUEST_LEN)
             {
                 GORM_LOGE("client rquest is too long:%d", this->m_uiMsgLen);
-                this->Close();
                 return GORM_ERROR;
             }
             // 分配一个大小至少为消息体大小的buffer
@@ -340,7 +346,7 @@ GORM_Ret GORM_FrontEndEvent::ParseMsg(int iRead)
         // 4、获取到一条消息了
         if (GORM_OK != this->ProcMsg(this->m_pStartPtr, this->m_uiMsgLen))
         {
-            this->Close();
+            GORM_LOGE("parse request failed %s:%d", this->m_szIP, this->m_uiPort);
             return GORM_ERROR;
         }
         // 处理完一条消息，初始化数据
@@ -375,24 +381,21 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     {
         if (this->m_ulClientId  != 0)
         {
-            GORM_LOGW("has make hand shake.");
-            return GORM_OK;
+            GORM_LOGW("has make hand shake, %s:%d", this->m_szIP, this->m_uiPort);
         }
         return this->HandShake(szMsg, iMsgLen, iReqID);
     } 
     else if (iReqCmd > GORM_CMD_MAX || iReqCmd <= GORM_CMD_INVALID)
     {
-        this->Close();
         GORM_LOGE("got invalid request command, cmd id:%d", iReqCmd);
-        return GORM_OK;
+        return GORM_ERROR;
     }
     GORM_DBRequest  *pCurrentRequest = new GORM_MySQLRequest(this->pMemPool);
     // 读取到一个请求之后传给解析器解析,如果当前的请求和前一个请求的事务id一样，则需要等前一个请求返回之后再接收下一个请求
     if (pCurrentRequest == nullptr)
     {
         // TODO 返回错误
-        GORM_LOGE("malloc request got failed.");
-        this->Close();
+        GORM_LOGE("malloc request got failed, %s:%d", this->m_szIP, this->m_uiPort);
         return GORM_ERROR;
     }
     GORM_SetRequestSourceInfo(pCurrentRequest, iReqID, iReqCmd, this, this->m_pFrontThread);
@@ -402,8 +405,7 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
         {
             ASSERT(false);
             GORM_LOGE("add request to request ring failed.");
-            this->Close();
-            return GORM_OK;
+            return GORM_ERROR;
         }
     }
     else
@@ -474,6 +476,7 @@ int GORM_FrontEndEvent::Error()
 int GORM_FrontEndEvent::Close()
 {
     this->m_pEpoll->DelEventRW(this);
+    GORM_Event::Close();
     return GORM_OK;
 }
 
@@ -506,7 +509,6 @@ GORM_Ret GORM_FrontEndEvent::HeartBeat()
         if (!this->m_pRequestRing->AddData(pHeartBeat))
         {
             GORM_LOGE("add request to request ring failed.");
-            this->Close();
             return GORM_OK;
         }
     }
@@ -531,7 +533,6 @@ GORM_Ret GORM_FrontEndEvent::HandShakeResult(GORM_MySQLRequest* pHandShake, int 
         if (!this->m_pRequestRing->AddData(pHeartBeat))
         {
             GORM_LOGE("add request to request ring failed.");
-            this->Close();
             return GORM_OK;
         }
     }
@@ -551,7 +552,6 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     if (pHandShakeReq == nullptr)
     {
         GORM_LOGE("malloc hand shake message failed.");
-        this->Close();
         delete pHandShake;
         return GORM_ERROR;
     }
@@ -560,7 +560,6 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     if (!pHandShakeReq->ParseFromArray(szMsg, iMsgLen-GORM_REQ_MSG_HEADER_LEN))
     {                                                                   
         GORM_LOGE("parse input buffer failed.");
-        this->Close();
         delete pHandShake;
         return GORM_UNPACK_REQ;                                         
     } 
