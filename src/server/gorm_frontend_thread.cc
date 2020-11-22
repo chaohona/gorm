@@ -96,7 +96,7 @@ void GORM_ListenEvent::AcceptClient(GORM_FD iFD)
         GORM_LOGE("set reuseraddr failed:%d", iFD);
         return;
     }
-    if (GORM_OK != GORM_Socket::SetLinger(iFD))
+    if (GORM_OK != GORM_Socket::SetLinger(iFD, 0))
     {
         GORM_LOGE("set SetLinger failed:%d", iFD);
         return;
@@ -164,18 +164,26 @@ void GORM_FrontEndThread::EventCheck()
     try
     {
         GORM_Event *pEvent;
-        for(auto itr : this->m_mapFrontEndEvents)
+        auto itr = this->m_mapFrontEndEvents.begin();
+        while(itr != this->m_mapFrontEndEvents.end())
         {
-            pEvent = itr.second;
-            if (pEvent->IsClosed())
+            pEvent = itr->second;
+            if (pEvent == nullptr)
+            {
+                itr = this->m_mapFrontEndEvents.erase(itr);
+                continue;
+            }
+            else if (pEvent->IsClosed())
             {
                 this->m_pEpoll->DelEvent(pEvent->m_iFD);
-                this->m_mapFrontEndEvents.erase(pEvent->m_uiEventId);
+                itr = this->m_mapFrontEndEvents.erase(itr);
                 //
                 delete pEvent;
+                continue;
             }
+            else
+                itr++;
         }
-
     }
     catch(exception &e)
     {
@@ -206,13 +214,14 @@ void GORM_FrontEndThread::SignalCB()
             }
             else 
             {
-                if (pReq->pFrontendEvent->m_workMode == GORM_WORK_MODE_SERIAL)
+                GORM_FrontEndEvent *pEvent = dynamic_cast<GORM_FrontEndEvent*>(pReq->pFrontendEvent);
+                if (pEvent->m_workMode == GORM_WORK_MODE_SERIAL)
                 {
                 }
                 else
                 {
-                    pReq->pFrontendEvent->m_pRequestRing->AddData(pReq)
-                    pReq->pFrontendEvent->m_requestMap.erease(pReq->uiReqID);
+                    pEvent->m_pRequestRing->AddData(pReq);
+                    pEvent->m_requestMap.erase(pReq->uiReqID);
                 }
                 pReq->pFrontendEvent->ReadyWrite();
                 

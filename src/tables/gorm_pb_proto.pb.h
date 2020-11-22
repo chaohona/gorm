@@ -1205,6 +1205,8 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
     kBusinessIDFieldNumber = 2,
     kVerPoliceFieldNumber = 3,
     kReqFlagFieldNumber = 4,
+    kLimitFieldNumber = 7,
+    kRefTableIndexFieldNumber = 8,
   };
   // bytes FieldMode = 5;
   void clear_fieldmode();
@@ -1285,6 +1287,24 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
   void _internal_set_reqflag(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
+  // sfixed32 Limit = 7;
+  void clear_limit();
+  ::PROTOBUF_NAMESPACE_ID::int32 limit() const;
+  void set_limit(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_limit() const;
+  void _internal_set_limit(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 RefTableIndex = 8;
+  void clear_reftableindex();
+  ::PROTOBUF_NAMESPACE_ID::int32 reftableindex() const;
+  void set_reftableindex(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_reftableindex() const;
+  void _internal_set_reftableindex(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:gorm.GORM_PB_REQ_HEADER)
  private:
   class _Internal;
@@ -1298,6 +1318,8 @@ class GORM_PB_REQ_HEADER PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int32 businessid_;
   ::PROTOBUF_NAMESPACE_ID::int32 verpolice_;
   ::PROTOBUF_NAMESPACE_ID::uint32 reqflag_;
+  ::PROTOBUF_NAMESPACE_ID::int32 limit_;
+  ::PROTOBUF_NAMESPACE_ID::int32 reftableindex_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_5fpb_5fproto_2eproto;
 };
@@ -6199,6 +6221,46 @@ inline void GORM_PB_REQ_HEADER::set_allocated_splittableinfo(::gorm::GORM_PB_SPL
   }
   splittableinfo_ = splittableinfo;
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_REQ_HEADER.SplitTableInfo)
+}
+
+// sfixed32 Limit = 7;
+inline void GORM_PB_REQ_HEADER::clear_limit() {
+  limit_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_REQ_HEADER::_internal_limit() const {
+  return limit_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_REQ_HEADER::limit() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_REQ_HEADER.Limit)
+  return _internal_limit();
+}
+inline void GORM_PB_REQ_HEADER::_internal_set_limit(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  limit_ = value;
+}
+inline void GORM_PB_REQ_HEADER::set_limit(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_limit(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_REQ_HEADER.Limit)
+}
+
+// sfixed32 RefTableIndex = 8;
+inline void GORM_PB_REQ_HEADER::clear_reftableindex() {
+  reftableindex_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_REQ_HEADER::_internal_reftableindex() const {
+  return reftableindex_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_REQ_HEADER::reftableindex() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_REQ_HEADER.RefTableIndex)
+  return _internal_reftableindex();
+}
+inline void GORM_PB_REQ_HEADER::_internal_set_reftableindex(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  reftableindex_ = value;
+}
+inline void GORM_PB_REQ_HEADER::set_reftableindex(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_reftableindex(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_REQ_HEADER.RefTableIndex)
 }
 
 // -------------------------------------------------------------------

@@ -18,7 +18,7 @@ extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5fproto_2eproto ::PROTOBUF_NAMESPACE_I
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5fproto_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Ret_Code_gorm_5fpb_5fproto_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5fproto_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GORM_PB_SPLIT_INFO_gorm_5fpb_5fproto_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5fproto_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_SPLIT_INFO_GORM_COLUMN_VALUE_gorm_5fpb_5fproto_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5ftables_5finc_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<18> scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5ftables_5finc_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<20> scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5fproto_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GORM_PB_TABLE_SCHEMA_INFO_gorm_5fpb_5fproto_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_5fpb_5fproto_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_TABLE_SCHEMA_INFO_COLUMN_gorm_5fpb_5fproto_2eproto;
 namespace gorm {
@@ -660,6 +660,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5fproto_2eproto::off
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_REQ_HEADER, reqflag_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_REQ_HEADER, fieldmode_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_REQ_HEADER, splittableinfo_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_REQ_HEADER, limit_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_REQ_HEADER, reftableindex_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_HEART_REQ, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -849,30 +851,30 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 23, -1, sizeof(::gorm::GORM_PB_RELOAD_TABLE_REQ)},
   { 30, -1, sizeof(::gorm::GORM_PB_RELOAD_TABLE_RSP)},
   { 36, -1, sizeof(::gorm::GORM_PB_REQ_HEADER)},
-  { 47, -1, sizeof(::gorm::GORM_PB_HEART_REQ)},
-  { 53, -1, sizeof(::gorm::GORM_PB_HEART_RSP)},
-  { 59, -1, sizeof(::gorm::GORM_PB_TABLE_SCHEMA_INFO_COLUMN)},
-  { 68, -1, sizeof(::gorm::GORM_PB_TABLE_SCHEMA_INFO)},
-  { 77, -1, sizeof(::gorm::GORM_PB_HAND_SHAKE_REQ)},
-  { 86, -1, sizeof(::gorm::GORM_PB_HAND_SHAKE_RSP)},
-  { 93, -1, sizeof(::gorm::GORM_PB_INSERT_REQ)},
-  { 100, -1, sizeof(::gorm::GORM_PB_INSERT_RSP)},
-  { 108, -1, sizeof(::gorm::GORM_PB_UPDATE_REQ)},
-  { 115, -1, sizeof(::gorm::GORM_PB_UPDATE_RSP)},
-  { 123, -1, sizeof(::gorm::GORM_PB_REPLACE_REQ)},
-  { 130, -1, sizeof(::gorm::GORM_PB_REPLACE_RSP)},
-  { 138, -1, sizeof(::gorm::GORM_PB_GET_REQ)},
-  { 146, -1, sizeof(::gorm::GORM_PB_GET_RSP)},
-  { 155, -1, sizeof(::gorm::GORM_PB_BATCH_GET_REQ)},
-  { 162, -1, sizeof(::gorm::GORM_PB_BATCH_GET_RSP)},
-  { 169, -1, sizeof(::gorm::GORM_PB_INCREASE_REQ)},
-  { 178, -1, sizeof(::gorm::GORM_PB_INCREASE_RSP)},
-  { 186, -1, sizeof(::gorm::GORM_PB_DELETE_REQ)},
-  { 193, -1, sizeof(::gorm::GORM_PB_DELETE_RSP)},
-  { 200, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_REQ)},
-  { 207, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_RSP)},
-  { 214, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ)},
-  { 221, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP)},
+  { 49, -1, sizeof(::gorm::GORM_PB_HEART_REQ)},
+  { 55, -1, sizeof(::gorm::GORM_PB_HEART_RSP)},
+  { 61, -1, sizeof(::gorm::GORM_PB_TABLE_SCHEMA_INFO_COLUMN)},
+  { 70, -1, sizeof(::gorm::GORM_PB_TABLE_SCHEMA_INFO)},
+  { 79, -1, sizeof(::gorm::GORM_PB_HAND_SHAKE_REQ)},
+  { 88, -1, sizeof(::gorm::GORM_PB_HAND_SHAKE_RSP)},
+  { 95, -1, sizeof(::gorm::GORM_PB_INSERT_REQ)},
+  { 102, -1, sizeof(::gorm::GORM_PB_INSERT_RSP)},
+  { 110, -1, sizeof(::gorm::GORM_PB_UPDATE_REQ)},
+  { 117, -1, sizeof(::gorm::GORM_PB_UPDATE_RSP)},
+  { 125, -1, sizeof(::gorm::GORM_PB_REPLACE_REQ)},
+  { 132, -1, sizeof(::gorm::GORM_PB_REPLACE_RSP)},
+  { 140, -1, sizeof(::gorm::GORM_PB_GET_REQ)},
+  { 148, -1, sizeof(::gorm::GORM_PB_GET_RSP)},
+  { 157, -1, sizeof(::gorm::GORM_PB_BATCH_GET_REQ)},
+  { 164, -1, sizeof(::gorm::GORM_PB_BATCH_GET_RSP)},
+  { 171, -1, sizeof(::gorm::GORM_PB_INCREASE_REQ)},
+  { 180, -1, sizeof(::gorm::GORM_PB_INCREASE_RSP)},
+  { 188, -1, sizeof(::gorm::GORM_PB_DELETE_REQ)},
+  { 195, -1, sizeof(::gorm::GORM_PB_DELETE_RSP)},
+  { 202, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_REQ)},
+  { 209, -1, sizeof(::gorm::GORM_PB_GET_BY_PARTKEY_RSP)},
+  { 216, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ)},
+  { 223, -1, sizeof(::gorm::GORM_PB_GET_BY_NON_PRIMARY_KEY_RSP)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -920,115 +922,116 @@ const char descriptor_table_protodef_gorm_5fpb_5fproto_2eproto[] PROTOBUF_SECTIO
   "E_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ"
   "_HEADER\022\024\n\014TableVersion\030\002 \001(\006\"C\n\030GORM_PB"
   "_RELOAD_TABLE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gor"
-  "m.GORM_PB_Ret_Code\"\242\001\n\022GORM_PB_REQ_HEADE"
+  "m.GORM_PB_Ret_Code\"\310\001\n\022GORM_PB_REQ_HEADE"
   "R\022\017\n\007TableId\030\001 \001(\017\022\022\n\nBusinessID\030\002 \001(\017\022\021"
   "\n\tVerPolice\030\003 \001(\017\022\017\n\007ReqFlag\030\004 \001(\007\022\021\n\tFi"
   "eldMode\030\005 \001(\014\0220\n\016SplitTableInfo\030\006 \001(\0132\030."
-  "gorm.GORM_PB_SPLIT_INFO\"=\n\021GORM_PB_HEART"
-  "_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_"
-  "HEADER\"<\n\021GORM_PB_HEART_RSP\022\'\n\007RetCode\030\001"
-  " \001(\0132\026.gorm.GORM_PB_Ret_Code\"|\n GORM_PB_"
-  "TABLE_SCHEMA_INFO_COLUMN\022\017\n\007Version\030\001 \001("
-  "\006\022\014\n\004Name\030\002 \001(\t\022\020\n\010TypeDesc\030\003 \001(\t\022\'\n\004Typ"
-  "e\030\004 \001(\0162\031.gorm.GORM_PB_COLUMN_TYPE\"\212\001\n\031G"
-  "ORM_PB_TABLE_SCHEMA_INFO\022\017\n\007Version\030\001 \001("
-  "\006\022\021\n\tTableName\030\002 \001(\t\022\020\n\010TableIdx\030\003 \001(\017\0227"
-  "\n\007Columns\030\004 \003(\0132&.gorm.GORM_PB_TABLE_SCH"
-  "EMA_INFO_COLUMN\"\222\001\n\026GORM_PB_HAND_SHAKE_R"
+  "gorm.GORM_PB_SPLIT_INFO\022\r\n\005Limit\030\007 \001(\017\022\025"
+  "\n\rRefTableIndex\030\010 \001(\017\"=\n\021GORM_PB_HEART_R"
   "EQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HE"
-  "ADER\022\017\n\007Version\030\002 \001(\006\022\013\n\003Md5\030\003 \001(\007\0220\n\007Sc"
-  "hemas\030\004 \003(\0132\037.gorm.GORM_PB_TABLE_SCHEMA_"
-  "INFO\"S\n\026GORM_PB_HAND_SHAKE_RSP\022\'\n\007RetCod"
-  "e\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022\020\n\010Clien"
-  "tId\030\002 \001(\006\"c\n\022GORM_PB_INSERT_REQ\022(\n\006Heade"
-  "r\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006Tab"
-  "les\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\022GORM_P"
-  "B_INSERT_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GOR"
-  "M_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GOR"
-  "M_PB_TABLE\022\024\n\014LastInsertId\030\003 \001(\006\"c\n\022GORM"
-  "_PB_UPDATE_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GO"
-  "RM_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm."
-  "GORM_PB_TABLE\"w\n\022GORM_PB_UPDATE_RSP\022\'\n\007R"
-  "etCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006"
-  "Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013Aff"
-  "ectedNum\030\003 \001(\017\"d\n\023GORM_PB_REPLACE_REQ\022(\n"
-  "\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022"
-  "#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\023"
-  "GORM_PB_REPLACE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.g"
-  "orm.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.g"
-  "orm.GORM_PB_TABLE\022\023\n\013AffectedNum\030\003 \001(\017\"p"
-  "\n\017GORM_PB_GET_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm"
-  ".GORM_PB_REQ_HEADER\022\"\n\005Table\030\002 \001(\0132\023.gor"
-  "m.GORM_PB_TABLE\022\017\n\007GetFlag\030\003 \001(\017\"\207\001\n\017GOR"
-  "M_PB_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GOR"
-  "M_PB_Ret_Code\022\"\n\005Table\030\002 \001(\0132\023.gorm.GORM"
-  "_PB_TABLE\022\021\n\tNewInsert\030\003 \001(\017\022\024\n\014LastInse"
-  "rtId\030\004 \001(\006\"f\n\025GORM_PB_BATCH_GET_REQ\022(\n\006H"
-  "eader\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n"
-  "\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"e\n\025GO"
-  "RM_PB_BATCH_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.g"
-  "orm.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.g"
-  "orm.GORM_PB_TABLE\"\220\001\n\024GORM_PB_INCREASE_R"
-  "EQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HE"
-  "ADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABL"
-  "E\022\023\n\013PlusColumns\030\003 \001(\t\022\024\n\014MinusColumns\030\004"
-  " \001(\t\"y\n\024GORM_PB_INCREASE_RSP\022\'\n\007RetCode\030"
-  "\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006Tables\030"
-  "\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013AffectedNu"
-  "m\030\003 \001(\017\"b\n\022GORM_PB_DELETE_REQ\022(\n\006Header\030"
-  "\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022\"\n\005Table"
-  "\030\002 \001(\0132\023.gorm.GORM_PB_TABLE\"R\n\022GORM_PB_D"
-  "ELETE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_P"
-  "B_Ret_Code\022\023\n\013AffectedNum\030\002 \001(\017\"k\n\032GORM_"
-  "PB_GET_BY_PARTKEY_REQ\022(\n\006Header\030\001 \001(\0132\030."
-  "gorm.GORM_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132"
-  "\023.gorm.GORM_PB_TABLE\"j\n\032GORM_PB_GET_BY_P"
-  "ARTKEY_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_"
+  "ADER\"<\n\021GORM_PB_HEART_RSP\022\'\n\007RetCode\030\001 \001"
+  "(\0132\026.gorm.GORM_PB_Ret_Code\"|\n GORM_PB_TA"
+  "BLE_SCHEMA_INFO_COLUMN\022\017\n\007Version\030\001 \001(\006\022"
+  "\014\n\004Name\030\002 \001(\t\022\020\n\010TypeDesc\030\003 \001(\t\022\'\n\004Type\030"
+  "\004 \001(\0162\031.gorm.GORM_PB_COLUMN_TYPE\"\212\001\n\031GOR"
+  "M_PB_TABLE_SCHEMA_INFO\022\017\n\007Version\030\001 \001(\006\022"
+  "\021\n\tTableName\030\002 \001(\t\022\020\n\010TableIdx\030\003 \001(\017\0227\n\007"
+  "Columns\030\004 \003(\0132&.gorm.GORM_PB_TABLE_SCHEM"
+  "A_INFO_COLUMN\"\222\001\n\026GORM_PB_HAND_SHAKE_REQ"
+  "\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEAD"
+  "ER\022\017\n\007Version\030\002 \001(\006\022\013\n\003Md5\030\003 \001(\007\0220\n\007Sche"
+  "mas\030\004 \003(\0132\037.gorm.GORM_PB_TABLE_SCHEMA_IN"
+  "FO\"S\n\026GORM_PB_HAND_SHAKE_RSP\022\'\n\007RetCode\030"
+  "\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022\020\n\010ClientI"
+  "d\030\002 \001(\006\"c\n\022GORM_PB_INSERT_REQ\022(\n\006Header\030"
+  "\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006Table"
+  "s\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\022GORM_PB_"
+  "INSERT_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_"
   "PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_"
-  "PB_TABLE\"s\n\"GORM_PB_GET_BY_NON_PRIMARY_K"
-  "EY_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_RE"
-  "Q_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_"
-  "TABLE\"r\n\"GORM_PB_GET_BY_NON_PRIMARY_KEY_"
-  "RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret_"
-  "Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABL"
-  "E*\237\t\n\tGORM_CODE\022\020\n\014GORM_CODE_OK\020\000\022\034\n\017GOR"
-  "M_CODE_ERROR\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020GORM_CODE_EAG"
-  "AIN\020\376\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CODE_INVALID_CLIE"
-  "NT\020\375\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_PART_FAILED\020\374"
-  "\377\377\377\377\377\377\377\377\001\022$\n\027GORM_CODE_INVALID_TABLE\020\373\377\377"
-  "\377\377\377\377\377\377\001\022\034\n\017GORM_CODE_RESET\020\372\377\377\377\377\377\377\377\377\001\022&\n"
-  "\031GORM_CODE_TOO_MUCH_RECORD\020\371\377\377\377\377\377\377\377\377\001\022\"\n"
-  "\025GORM_CODE_INIT_RECORD\020\370\377\377\377\377\377\377\377\377\001\022$\n\027GOR"
-  "M_CODE_INVALID_FIELD\020\367\377\377\377\377\377\377\377\377\001\022%\n\030GORM_"
-  "CODE_PACK_REQ_ERROR\020\366\377\377\377\377\377\377\377\377\001\022%\n\030GORM_C"
-  "ODE_REQ_NO_RECORDS\020\365\377\377\377\377\377\377\377\377\001\022#\n\026GORM_CO"
-  "DE_MULTI_TABLES\020\364\377\377\377\377\377\377\377\377\001\022(\n\033GORM_CODE_"
-  "RSP_UNPACK_FAILED\020\363\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_COD"
-  "E_CONN_CLOSED\020\362\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_CO"
-  "NN_FAILED\020\361\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_CODE_DB_ERR"
-  "OR\020\360\377\377\377\377\377\377\377\377\001\022\034\n\017GORM_CODE_NO_DB\020\357\377\377\377\377\377\377"
-  "\377\377\001\022$\n\027GORM_CODE_REQ_MSG_ERROR\020\356\377\377\377\377\377\377\377\377"
-  "\001\022&\n\031GORM_CODE_NOT_SUPPORT_CMD\020\355\377\377\377\377\377\377\377\377"
-  "\001\022!\n\024GORM_CODE_UNPACK_REQ\020\354\377\377\377\377\377\377\377\377\001\022%\n\030"
-  "GORM_CODE_PACK_RSP_ERROR\020\353\377\377\377\377\377\377\377\377\001\022(\n\033G"
-  "ORM_CODE_REQ_MSG_NO_HEADER\020\352\377\377\377\377\377\377\377\377\001\022%\n"
-  "\030GORM_CODE_REQ_NEED_SPLIT\020\351\377\377\377\377\377\377\377\377\001\022$\n\027"
-  "GORM_CODE_REQ_TOO_LARGE\020\350\377\377\377\377\377\377\377\377\001\022(\n\033GO"
-  "RM_CODE_DB_2_STRUCT_ERROR\020\347\377\377\377\377\377\377\377\377\001\022%\n\030"
-  "GORM_CODE_NO_MORE_RECORD\020\346\377\377\377\377\377\377\377\377\001\022&\n\031G"
-  "ORM_CODE_VERSION_NOT_SET\020\345\377\377\377\377\377\377\377\377\001\022\"\n\025G"
-  "ORM_CODE_CACHE_ERROR\020\344\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_"
-  "CODE_NO_VALUE\020\343\377\377\377\377\377\377\377\377\001\022)\n\034GORM_CODE_IN"
-  "VALID_VALUE_TYPE\020\342\377\377\377\377\377\377\377\377\001\022&\n\031GORM_CODE"
-  "_NEED_HAND_SHAKE\020\341\377\377\377\377\377\377\377\377\001*\245\002\n\010GORM_CMD"
-  "\022\024\n\020GORM_CMD_INVALID\020\000\022\022\n\016GORM_CMD_HEART"
-  "\020\001\022\027\n\023GORM_CMD_HAND_SHAKE\020\002\022\023\n\017GORM_CMD_"
-  "INSERT\020\003\022\024\n\020GORM_CMD_REPLACE\020\004\022\025\n\021GORM_C"
-  "MD_INCREASE\020\005\022\020\n\014GORM_CMD_GET\020\006\022\023\n\017GORM_"
-  "CMD_DELETE\020\007\022\026\n\022GORM_CMD_BATCH_GET\020\010\022\033\n\027"
-  "GORM_CMD_GET_BY_PARTKEY\020\t\022\023\n\017GORM_CMD_UP"
-  "DATE\020\n\022#\n\037GORM_CMD_GET_BY_NON_PRIMARY_KE"
-  "Y\020\013B\013Z\tgorm/gormb\006proto3"
+  "PB_TABLE\022\024\n\014LastInsertId\030\003 \001(\006\"c\n\022GORM_P"
+  "B_UPDATE_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM"
+  "_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GO"
+  "RM_PB_TABLE\"w\n\022GORM_PB_UPDATE_RSP\022\'\n\007Ret"
+  "Code\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006Ta"
+  "bles\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013Affec"
+  "tedNum\030\003 \001(\017\"d\n\023GORM_PB_REPLACE_REQ\022(\n\006H"
+  "eader\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n"
+  "\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"x\n\023GO"
+  "RM_PB_REPLACE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gor"
+  "m.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gor"
+  "m.GORM_PB_TABLE\022\023\n\013AffectedNum\030\003 \001(\017\"p\n\017"
+  "GORM_PB_GET_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.G"
+  "ORM_PB_REQ_HEADER\022\"\n\005Table\030\002 \001(\0132\023.gorm."
+  "GORM_PB_TABLE\022\017\n\007GetFlag\030\003 \001(\017\"\207\001\n\017GORM_"
+  "PB_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_"
+  "PB_Ret_Code\022\"\n\005Table\030\002 \001(\0132\023.gorm.GORM_P"
+  "B_TABLE\022\021\n\tNewInsert\030\003 \001(\017\022\024\n\014LastInsert"
+  "Id\030\004 \001(\006\"f\n\025GORM_PB_BATCH_GET_REQ\022(\n\006Hea"
+  "der\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEADER\022#\n\006T"
+  "ables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\"e\n\025GORM"
+  "_PB_BATCH_GET_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gor"
+  "m.GORM_PB_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gor"
+  "m.GORM_PB_TABLE\"\220\001\n\024GORM_PB_INCREASE_REQ"
+  "\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_HEAD"
+  "ER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE\022"
+  "\023\n\013PlusColumns\030\003 \001(\t\022\024\n\014MinusColumns\030\004 \001"
+  "(\t\"y\n\024GORM_PB_INCREASE_RSP\022\'\n\007RetCode\030\001 "
+  "\001(\0132\026.gorm.GORM_PB_Ret_Code\022#\n\006Tables\030\002 "
+  "\003(\0132\023.gorm.GORM_PB_TABLE\022\023\n\013AffectedNum\030"
+  "\003 \001(\017\"b\n\022GORM_PB_DELETE_REQ\022(\n\006Header\030\001 "
+  "\001(\0132\030.gorm.GORM_PB_REQ_HEADER\022\"\n\005Table\030\002"
+  " \001(\0132\023.gorm.GORM_PB_TABLE\"R\n\022GORM_PB_DEL"
+  "ETE_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_"
+  "Ret_Code\022\023\n\013AffectedNum\030\002 \001(\017\"k\n\032GORM_PB"
+  "_GET_BY_PARTKEY_REQ\022(\n\006Header\030\001 \001(\0132\030.go"
+  "rm.GORM_PB_REQ_HEADER\022#\n\006Tables\030\002 \003(\0132\023."
+  "gorm.GORM_PB_TABLE\"j\n\032GORM_PB_GET_BY_PAR"
+  "TKEY_RSP\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB"
+  "_Ret_Code\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB"
+  "_TABLE\"s\n\"GORM_PB_GET_BY_NON_PRIMARY_KEY"
+  "_REQ\022(\n\006Header\030\001 \001(\0132\030.gorm.GORM_PB_REQ_"
+  "HEADER\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TA"
+  "BLE\"r\n\"GORM_PB_GET_BY_NON_PRIMARY_KEY_RS"
+  "P\022\'\n\007RetCode\030\001 \001(\0132\026.gorm.GORM_PB_Ret_Co"
+  "de\022#\n\006Tables\030\002 \003(\0132\023.gorm.GORM_PB_TABLE*"
+  "\237\t\n\tGORM_CODE\022\020\n\014GORM_CODE_OK\020\000\022\034\n\017GORM_"
+  "CODE_ERROR\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020GORM_CODE_EAGAI"
+  "N\020\376\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CODE_INVALID_CLIENT"
+  "\020\375\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_PART_FAILED\020\374\377\377"
+  "\377\377\377\377\377\377\001\022$\n\027GORM_CODE_INVALID_TABLE\020\373\377\377\377\377"
+  "\377\377\377\377\001\022\034\n\017GORM_CODE_RESET\020\372\377\377\377\377\377\377\377\377\001\022&\n\031G"
+  "ORM_CODE_TOO_MUCH_RECORD\020\371\377\377\377\377\377\377\377\377\001\022\"\n\025G"
+  "ORM_CODE_INIT_RECORD\020\370\377\377\377\377\377\377\377\377\001\022$\n\027GORM_"
+  "CODE_INVALID_FIELD\020\367\377\377\377\377\377\377\377\377\001\022%\n\030GORM_CO"
+  "DE_PACK_REQ_ERROR\020\366\377\377\377\377\377\377\377\377\001\022%\n\030GORM_COD"
+  "E_REQ_NO_RECORDS\020\365\377\377\377\377\377\377\377\377\001\022#\n\026GORM_CODE"
+  "_MULTI_TABLES\020\364\377\377\377\377\377\377\377\377\001\022(\n\033GORM_CODE_RS"
+  "P_UNPACK_FAILED\020\363\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_"
+  "CONN_CLOSED\020\362\377\377\377\377\377\377\377\377\001\022\"\n\025GORM_CODE_CONN"
+  "_FAILED\020\361\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_CODE_DB_ERROR"
+  "\020\360\377\377\377\377\377\377\377\377\001\022\034\n\017GORM_CODE_NO_DB\020\357\377\377\377\377\377\377\377\377"
+  "\001\022$\n\027GORM_CODE_REQ_MSG_ERROR\020\356\377\377\377\377\377\377\377\377\001\022"
+  "&\n\031GORM_CODE_NOT_SUPPORT_CMD\020\355\377\377\377\377\377\377\377\377\001\022"
+  "!\n\024GORM_CODE_UNPACK_REQ\020\354\377\377\377\377\377\377\377\377\001\022%\n\030GO"
+  "RM_CODE_PACK_RSP_ERROR\020\353\377\377\377\377\377\377\377\377\001\022(\n\033GOR"
+  "M_CODE_REQ_MSG_NO_HEADER\020\352\377\377\377\377\377\377\377\377\001\022%\n\030G"
+  "ORM_CODE_REQ_NEED_SPLIT\020\351\377\377\377\377\377\377\377\377\001\022$\n\027GO"
+  "RM_CODE_REQ_TOO_LARGE\020\350\377\377\377\377\377\377\377\377\001\022(\n\033GORM"
+  "_CODE_DB_2_STRUCT_ERROR\020\347\377\377\377\377\377\377\377\377\001\022%\n\030GO"
+  "RM_CODE_NO_MORE_RECORD\020\346\377\377\377\377\377\377\377\377\001\022&\n\031GOR"
+  "M_CODE_VERSION_NOT_SET\020\345\377\377\377\377\377\377\377\377\001\022\"\n\025GOR"
+  "M_CODE_CACHE_ERROR\020\344\377\377\377\377\377\377\377\377\001\022\037\n\022GORM_CO"
+  "DE_NO_VALUE\020\343\377\377\377\377\377\377\377\377\001\022)\n\034GORM_CODE_INVA"
+  "LID_VALUE_TYPE\020\342\377\377\377\377\377\377\377\377\001\022&\n\031GORM_CODE_N"
+  "EED_HAND_SHAKE\020\341\377\377\377\377\377\377\377\377\001*\245\002\n\010GORM_CMD\022\024"
+  "\n\020GORM_CMD_INVALID\020\000\022\022\n\016GORM_CMD_HEART\020\001"
+  "\022\027\n\023GORM_CMD_HAND_SHAKE\020\002\022\023\n\017GORM_CMD_IN"
+  "SERT\020\003\022\024\n\020GORM_CMD_REPLACE\020\004\022\025\n\021GORM_CMD"
+  "_INCREASE\020\005\022\020\n\014GORM_CMD_GET\020\006\022\023\n\017GORM_CM"
+  "D_DELETE\020\007\022\026\n\022GORM_CMD_BATCH_GET\020\010\022\033\n\027GO"
+  "RM_CMD_GET_BY_PARTKEY\020\t\022\023\n\017GORM_CMD_UPDA"
+  "TE\020\n\022#\n\037GORM_CMD_GET_BY_NON_PRIMARY_KEY\020"
+  "\013B\013Z\tgorm/gormb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_gorm_5fpb_5fproto_2eproto_deps[1] = {
   &::descriptor_table_gorm_5fpb_5ftables_5finc_2eproto,
@@ -1067,7 +1070,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gorm_5fpb_5fproto_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gorm_5fpb_5fproto_2eproto = {
-  false, false, descriptor_table_protodef_gorm_5fpb_5fproto_2eproto, "gorm_pb_proto.proto", 4784,
+  false, false, descriptor_table_protodef_gorm_5fpb_5fproto_2eproto, "gorm_pb_proto.proto", 4822,
   &descriptor_table_gorm_5fpb_5fproto_2eproto_once, descriptor_table_gorm_5fpb_5fproto_2eproto_sccs, descriptor_table_gorm_5fpb_5fproto_2eproto_deps, 30, 1,
   schemas, file_default_instances, TableStruct_gorm_5fpb_5fproto_2eproto::offsets,
   file_level_metadata_gorm_5fpb_5fproto_2eproto, 30, file_level_enum_descriptors_gorm_5fpb_5fproto_2eproto, file_level_service_descriptors_gorm_5fpb_5fproto_2eproto,
@@ -2380,8 +2383,8 @@ GORM_PB_REQ_HEADER::GORM_PB_REQ_HEADER(const GORM_PB_REQ_HEADER& from)
     splittableinfo_ = nullptr;
   }
   ::memcpy(&tableid_, &from.tableid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&reqflag_) -
-    reinterpret_cast<char*>(&tableid_)) + sizeof(reqflag_));
+    static_cast<size_t>(reinterpret_cast<char*>(&reftableindex_) -
+    reinterpret_cast<char*>(&tableid_)) + sizeof(reftableindex_));
   // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_REQ_HEADER)
 }
 
@@ -2389,8 +2392,8 @@ void GORM_PB_REQ_HEADER::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GORM_PB_REQ_HEADER_gorm_5fpb_5fproto_2eproto.base);
   fieldmode_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&splittableinfo_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&reqflag_) -
-      reinterpret_cast<char*>(&splittableinfo_)) + sizeof(reqflag_));
+      reinterpret_cast<char*>(&reftableindex_) -
+      reinterpret_cast<char*>(&splittableinfo_)) + sizeof(reftableindex_));
 }
 
 GORM_PB_REQ_HEADER::~GORM_PB_REQ_HEADER() {
@@ -2432,8 +2435,8 @@ void GORM_PB_REQ_HEADER::Clear() {
   }
   splittableinfo_ = nullptr;
   ::memset(&tableid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&reqflag_) -
-      reinterpret_cast<char*>(&tableid_)) + sizeof(reqflag_));
+      reinterpret_cast<char*>(&reftableindex_) -
+      reinterpret_cast<char*>(&tableid_)) + sizeof(reftableindex_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2486,6 +2489,20 @@ const char* GORM_PB_REQ_HEADER::_InternalParse(const char* ptr, ::PROTOBUF_NAMES
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_splittableinfo(), ptr);
           CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 Limit = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
+          limit_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
+        } else goto handle_unusual;
+        continue;
+      // sfixed32 RefTableIndex = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 69)) {
+          reftableindex_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::int32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::int32);
         } else goto handle_unusual;
         continue;
       default: {
@@ -2554,6 +2571,18 @@ failure:
         6, _Internal::splittableinfo(this), target, stream);
   }
 
+  // sfixed32 Limit = 7;
+  if (this->limit() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(7, this->_internal_limit(), target);
+  }
+
+  // sfixed32 RefTableIndex = 8;
+  if (this->reftableindex() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteSFixed32ToArray(8, this->_internal_reftableindex(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2601,6 +2630,16 @@ size_t GORM_PB_REQ_HEADER::ByteSizeLong() const {
 
   // fixed32 ReqFlag = 4;
   if (this->reqflag() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 Limit = 7;
+  if (this->limit() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // sfixed32 RefTableIndex = 8;
+  if (this->reftableindex() != 0) {
     total_size += 1 + 4;
   }
 
@@ -2653,6 +2692,12 @@ void GORM_PB_REQ_HEADER::MergeFrom(const GORM_PB_REQ_HEADER& from) {
   if (from.reqflag() != 0) {
     _internal_set_reqflag(from._internal_reqflag());
   }
+  if (from.limit() != 0) {
+    _internal_set_limit(from._internal_limit());
+  }
+  if (from.reftableindex() != 0) {
+    _internal_set_reftableindex(from._internal_reftableindex());
+  }
 }
 
 void GORM_PB_REQ_HEADER::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -2678,8 +2723,8 @@ void GORM_PB_REQ_HEADER::InternalSwap(GORM_PB_REQ_HEADER* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   fieldmode_.Swap(&other->fieldmode_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(GORM_PB_REQ_HEADER, reqflag_)
-      + sizeof(GORM_PB_REQ_HEADER::reqflag_)
+      PROTOBUF_FIELD_OFFSET(GORM_PB_REQ_HEADER, reftableindex_)
+      + sizeof(GORM_PB_REQ_HEADER::reftableindex_)
       - PROTOBUF_FIELD_OFFSET(GORM_PB_REQ_HEADER, splittableinfo_)>(
           reinterpret_cast<char*>(&splittableinfo_),
           reinterpret_cast<char*>(&other->splittableinfo_));

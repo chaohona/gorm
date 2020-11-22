@@ -3,16 +3,16 @@ databases:
     type: mysql
     host: 192.168.12.42
     port: 3306
-    user: mark
+    user: root
     passwd: ztgame@123
-    database: daobatu
+    database: gaopin
   - name: lixiang_account
     type: mysql
     host: 192.168.12.42
     port: 3306
-    user: mark
+    user: root
     passwd: ztgame@123
-    database: daobatu
+    database: gaopin
 table_route:
   - table_name: currency
     router:
@@ -29,9 +29,6 @@ table_route:
   - table_name: hero
     router:
       - lixiang_game:2
-  - table_name: login_log
-    router:
-      - lixiang_game:2
   - table_name: mail
     router:
       - lixiang_game:2
@@ -39,12 +36,6 @@ table_route:
     router:
       - lixiang_game:2
   - table_name: npc
-    router:
-      - lixiang_game:2
-  - table_name: res_log
-    router:
-      - lixiang_game:2
-  - table_name: roles
     router:
       - lixiang_game:2
   - table_name: role
@@ -56,6 +47,27 @@ table_route:
   - table_name: skill
     router:
       - lixiang_game:2
+  - table_name: roles
+    router:
+      - lixiang_game:2
   - table_name: user
     router:
-      - lixiang_account:2
+      - lixiang_game:2
+  - table_name: login_log
+    router:
+      - lixiang_game:2
+  - table_name: res_log
+    router:
+      - lixiang_game:2
+  - table_name: interaction
+    router:
+      - lixiang_game:2
+  - table_name: ptuser
+    router:
+      - lixiang_game:2
+  - table_name: mainlinetask
+    router:
+      - lixiang_game:2
+  - table_name: pubmail
+    router:
+      - lixiang_game:2

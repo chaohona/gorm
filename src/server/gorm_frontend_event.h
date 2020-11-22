@@ -37,7 +37,7 @@ private:
     void FillErrReplyBuffer(GORM_DBRequest *pRequest);
     GORM_Ret HeartBeat();
     GORM_Ret HandShake(char *szMsg, int iMsgLen, uint32 iReqID);
-    GORM_Ret HandShakeResult(GORM_MySQLRequest* pHandShake, int code, uint64 clientId);
+    GORM_Ret HandShakeResult(GORM_DBRequest * pHandShake, int code, uint64 clientId);
     GORM_Ret GetNextSending(bool &bContinue);
     inline void MoveMsg2Start()
     {

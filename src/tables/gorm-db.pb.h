@@ -47,7 +47,7 @@ struct TableStruct_gorm_2ddb_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[17]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[19]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -79,6 +79,9 @@ extern GORM_PB_Table_login_logDefaultTypeInternal _GORM_PB_Table_login_log_defau
 class GORM_PB_Table_mail;
 class GORM_PB_Table_mailDefaultTypeInternal;
 extern GORM_PB_Table_mailDefaultTypeInternal _GORM_PB_Table_mail_default_instance_;
+class GORM_PB_Table_mainlinetask;
+class GORM_PB_Table_mainlinetaskDefaultTypeInternal;
+extern GORM_PB_Table_mainlinetaskDefaultTypeInternal _GORM_PB_Table_mainlinetask_default_instance_;
 class GORM_PB_Table_material;
 class GORM_PB_Table_materialDefaultTypeInternal;
 extern GORM_PB_Table_materialDefaultTypeInternal _GORM_PB_Table_material_default_instance_;
@@ -88,6 +91,9 @@ extern GORM_PB_Table_npcDefaultTypeInternal _GORM_PB_Table_npc_default_instance_
 class GORM_PB_Table_ptuser;
 class GORM_PB_Table_ptuserDefaultTypeInternal;
 extern GORM_PB_Table_ptuserDefaultTypeInternal _GORM_PB_Table_ptuser_default_instance_;
+class GORM_PB_Table_pubmail;
+class GORM_PB_Table_pubmailDefaultTypeInternal;
+extern GORM_PB_Table_pubmailDefaultTypeInternal _GORM_PB_Table_pubmail_default_instance_;
 class GORM_PB_Table_res_log;
 class GORM_PB_Table_res_logDefaultTypeInternal;
 extern GORM_PB_Table_res_logDefaultTypeInternal _GORM_PB_Table_res_log_default_instance_;
@@ -116,9 +122,11 @@ template<> ::gorm::GORM_PB_Table_hero* Arena::CreateMaybeMessage<::gorm::GORM_PB
 template<> ::gorm::GORM_PB_Table_interaction* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_interaction>(Arena*);
 template<> ::gorm::GORM_PB_Table_login_log* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_login_log>(Arena*);
 template<> ::gorm::GORM_PB_Table_mail* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_mail>(Arena*);
+template<> ::gorm::GORM_PB_Table_mainlinetask* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_mainlinetask>(Arena*);
 template<> ::gorm::GORM_PB_Table_material* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_material>(Arena*);
 template<> ::gorm::GORM_PB_Table_npc* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_npc>(Arena*);
 template<> ::gorm::GORM_PB_Table_ptuser* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_ptuser>(Arena*);
+template<> ::gorm::GORM_PB_Table_pubmail* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_pubmail>(Arena*);
 template<> ::gorm::GORM_PB_Table_res_log* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_res_log>(Arena*);
 template<> ::gorm::GORM_PB_Table_role* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_role>(Arena*);
 template<> ::gorm::GORM_PB_Table_roles* Arena::CreateMaybeMessage<::gorm::GORM_PB_Table_roles>(Arena*);
@@ -3178,6 +3186,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
     kWorldidFieldNumber = 13,
     kUseridFieldNumber = 15,
     kPttypeFieldNumber = 14,
+    kProceedslvFieldNumber = 16,
   };
   // bytes rolename = 3;
   void clear_rolename();
@@ -3346,6 +3355,15 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   void _internal_set_pttype(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // sfixed32 proceedslv = 16;
+  void clear_proceedslv();
+  ::PROTOBUF_NAMESPACE_ID::int32 proceedslv() const;
+  void set_proceedslv(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_proceedslv() const;
+  void _internal_set_proceedslv(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_role)
  private:
   class _Internal;
@@ -3368,6 +3386,7 @@ class GORM_PB_Table_role PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int64 worldid_;
   ::PROTOBUF_NAMESPACE_ID::int64 userid_;
   ::PROTOBUF_NAMESPACE_ID::int32 pttype_;
+  ::PROTOBUF_NAMESPACE_ID::int32 proceedslv_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -3487,6 +3506,7 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
 
   enum : int {
     kCollectsFieldNumber = 4,
+    kSeasonFieldNumber = 5,
     kVersionFieldNumber = 1,
     kRoleidFieldNumber = 2,
     kSceneidFieldNumber = 3,
@@ -3514,6 +3534,31 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
   const std::string& _internal_collects() const;
   void _internal_set_collects(const std::string& value);
   std::string* _internal_mutable_collects();
+  public:
+
+  // bytes season = 5;
+  void clear_season();
+  const std::string& season() const;
+  void set_season(const std::string& value);
+  void set_season(std::string&& value);
+  void set_season(const char* value);
+  void set_season(const void* value, size_t size);
+  std::string* mutable_season();
+  std::string* release_season();
+  void set_allocated_season(std::string* season);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_season();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_season(
+      std::string* season);
+  private:
+  const std::string& _internal_season() const;
+  void _internal_set_season(const std::string& value);
+  std::string* _internal_mutable_season();
   public:
 
   // fixed64 version = 1;
@@ -3551,6 +3596,7 @@ class GORM_PB_Table_scene PROTOBUF_FINAL :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr collects_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr season_;
   ::PROTOBUF_NAMESPACE_ID::uint64 version_;
   ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
   ::PROTOBUF_NAMESPACE_ID::int32 sceneid_;
@@ -4231,6 +4277,767 @@ class GORM_PB_Table_user PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::int64 userid_;
   ::PROTOBUF_NAMESPACE_ID::int64 createtime_;
   ::PROTOBUF_NAMESPACE_ID::int32 pttype_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_2ddb_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GORM_PB_Table_mainlinetask PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_mainlinetask) */ {
+ public:
+  inline GORM_PB_Table_mainlinetask() : GORM_PB_Table_mainlinetask(nullptr) {};
+  virtual ~GORM_PB_Table_mainlinetask();
+
+  GORM_PB_Table_mainlinetask(const GORM_PB_Table_mainlinetask& from);
+  GORM_PB_Table_mainlinetask(GORM_PB_Table_mainlinetask&& from) noexcept
+    : GORM_PB_Table_mainlinetask() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_Table_mainlinetask& operator=(const GORM_PB_Table_mainlinetask& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_Table_mainlinetask& operator=(GORM_PB_Table_mainlinetask&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_Table_mainlinetask& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_Table_mainlinetask* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_mainlinetask*>(
+               &_GORM_PB_Table_mainlinetask_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    17;
+
+  friend void swap(GORM_PB_Table_mainlinetask& a, GORM_PB_Table_mainlinetask& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_Table_mainlinetask* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_Table_mainlinetask* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_Table_mainlinetask* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_mainlinetask>(nullptr);
+  }
+
+  GORM_PB_Table_mainlinetask* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_mainlinetask>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_Table_mainlinetask& from);
+  void MergeFrom(const GORM_PB_Table_mainlinetask& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_Table_mainlinetask* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_Table_mainlinetask";
+  }
+  protected:
+  explicit GORM_PB_Table_mainlinetask(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
+    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kCompleatetask0FieldNumber = 4,
+    kCompleatetask1FieldNumber = 5,
+    kCompleatetask2FieldNumber = 6,
+    kCompleatetask3FieldNumber = 7,
+    kCompleatetask4FieldNumber = 8,
+    kCompleatetask5FieldNumber = 9,
+    kCompleatetask6FieldNumber = 10,
+    kCompleatetask7FieldNumber = 11,
+    kCompleatetask8FieldNumber = 12,
+    kCompleatetask9FieldNumber = 13,
+    kUnlockfuncsFieldNumber = 14,
+    kVersionFieldNumber = 1,
+    kRoleidFieldNumber = 2,
+    kRunningtaskFieldNumber = 3,
+  };
+  // bytes compleatetask0 = 4;
+  void clear_compleatetask0();
+  const std::string& compleatetask0() const;
+  void set_compleatetask0(const std::string& value);
+  void set_compleatetask0(std::string&& value);
+  void set_compleatetask0(const char* value);
+  void set_compleatetask0(const void* value, size_t size);
+  std::string* mutable_compleatetask0();
+  std::string* release_compleatetask0();
+  void set_allocated_compleatetask0(std::string* compleatetask0);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask0();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask0(
+      std::string* compleatetask0);
+  private:
+  const std::string& _internal_compleatetask0() const;
+  void _internal_set_compleatetask0(const std::string& value);
+  std::string* _internal_mutable_compleatetask0();
+  public:
+
+  // bytes compleatetask1 = 5;
+  void clear_compleatetask1();
+  const std::string& compleatetask1() const;
+  void set_compleatetask1(const std::string& value);
+  void set_compleatetask1(std::string&& value);
+  void set_compleatetask1(const char* value);
+  void set_compleatetask1(const void* value, size_t size);
+  std::string* mutable_compleatetask1();
+  std::string* release_compleatetask1();
+  void set_allocated_compleatetask1(std::string* compleatetask1);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask1();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask1(
+      std::string* compleatetask1);
+  private:
+  const std::string& _internal_compleatetask1() const;
+  void _internal_set_compleatetask1(const std::string& value);
+  std::string* _internal_mutable_compleatetask1();
+  public:
+
+  // bytes compleatetask2 = 6;
+  void clear_compleatetask2();
+  const std::string& compleatetask2() const;
+  void set_compleatetask2(const std::string& value);
+  void set_compleatetask2(std::string&& value);
+  void set_compleatetask2(const char* value);
+  void set_compleatetask2(const void* value, size_t size);
+  std::string* mutable_compleatetask2();
+  std::string* release_compleatetask2();
+  void set_allocated_compleatetask2(std::string* compleatetask2);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask2();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask2(
+      std::string* compleatetask2);
+  private:
+  const std::string& _internal_compleatetask2() const;
+  void _internal_set_compleatetask2(const std::string& value);
+  std::string* _internal_mutable_compleatetask2();
+  public:
+
+  // bytes compleatetask3 = 7;
+  void clear_compleatetask3();
+  const std::string& compleatetask3() const;
+  void set_compleatetask3(const std::string& value);
+  void set_compleatetask3(std::string&& value);
+  void set_compleatetask3(const char* value);
+  void set_compleatetask3(const void* value, size_t size);
+  std::string* mutable_compleatetask3();
+  std::string* release_compleatetask3();
+  void set_allocated_compleatetask3(std::string* compleatetask3);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask3();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask3(
+      std::string* compleatetask3);
+  private:
+  const std::string& _internal_compleatetask3() const;
+  void _internal_set_compleatetask3(const std::string& value);
+  std::string* _internal_mutable_compleatetask3();
+  public:
+
+  // bytes compleatetask4 = 8;
+  void clear_compleatetask4();
+  const std::string& compleatetask4() const;
+  void set_compleatetask4(const std::string& value);
+  void set_compleatetask4(std::string&& value);
+  void set_compleatetask4(const char* value);
+  void set_compleatetask4(const void* value, size_t size);
+  std::string* mutable_compleatetask4();
+  std::string* release_compleatetask4();
+  void set_allocated_compleatetask4(std::string* compleatetask4);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask4();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask4(
+      std::string* compleatetask4);
+  private:
+  const std::string& _internal_compleatetask4() const;
+  void _internal_set_compleatetask4(const std::string& value);
+  std::string* _internal_mutable_compleatetask4();
+  public:
+
+  // bytes compleatetask5 = 9;
+  void clear_compleatetask5();
+  const std::string& compleatetask5() const;
+  void set_compleatetask5(const std::string& value);
+  void set_compleatetask5(std::string&& value);
+  void set_compleatetask5(const char* value);
+  void set_compleatetask5(const void* value, size_t size);
+  std::string* mutable_compleatetask5();
+  std::string* release_compleatetask5();
+  void set_allocated_compleatetask5(std::string* compleatetask5);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask5();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask5(
+      std::string* compleatetask5);
+  private:
+  const std::string& _internal_compleatetask5() const;
+  void _internal_set_compleatetask5(const std::string& value);
+  std::string* _internal_mutable_compleatetask5();
+  public:
+
+  // bytes compleatetask6 = 10;
+  void clear_compleatetask6();
+  const std::string& compleatetask6() const;
+  void set_compleatetask6(const std::string& value);
+  void set_compleatetask6(std::string&& value);
+  void set_compleatetask6(const char* value);
+  void set_compleatetask6(const void* value, size_t size);
+  std::string* mutable_compleatetask6();
+  std::string* release_compleatetask6();
+  void set_allocated_compleatetask6(std::string* compleatetask6);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask6();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask6(
+      std::string* compleatetask6);
+  private:
+  const std::string& _internal_compleatetask6() const;
+  void _internal_set_compleatetask6(const std::string& value);
+  std::string* _internal_mutable_compleatetask6();
+  public:
+
+  // bytes compleatetask7 = 11;
+  void clear_compleatetask7();
+  const std::string& compleatetask7() const;
+  void set_compleatetask7(const std::string& value);
+  void set_compleatetask7(std::string&& value);
+  void set_compleatetask7(const char* value);
+  void set_compleatetask7(const void* value, size_t size);
+  std::string* mutable_compleatetask7();
+  std::string* release_compleatetask7();
+  void set_allocated_compleatetask7(std::string* compleatetask7);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask7();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask7(
+      std::string* compleatetask7);
+  private:
+  const std::string& _internal_compleatetask7() const;
+  void _internal_set_compleatetask7(const std::string& value);
+  std::string* _internal_mutable_compleatetask7();
+  public:
+
+  // bytes compleatetask8 = 12;
+  void clear_compleatetask8();
+  const std::string& compleatetask8() const;
+  void set_compleatetask8(const std::string& value);
+  void set_compleatetask8(std::string&& value);
+  void set_compleatetask8(const char* value);
+  void set_compleatetask8(const void* value, size_t size);
+  std::string* mutable_compleatetask8();
+  std::string* release_compleatetask8();
+  void set_allocated_compleatetask8(std::string* compleatetask8);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask8();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask8(
+      std::string* compleatetask8);
+  private:
+  const std::string& _internal_compleatetask8() const;
+  void _internal_set_compleatetask8(const std::string& value);
+  std::string* _internal_mutable_compleatetask8();
+  public:
+
+  // bytes compleatetask9 = 13;
+  void clear_compleatetask9();
+  const std::string& compleatetask9() const;
+  void set_compleatetask9(const std::string& value);
+  void set_compleatetask9(std::string&& value);
+  void set_compleatetask9(const char* value);
+  void set_compleatetask9(const void* value, size_t size);
+  std::string* mutable_compleatetask9();
+  std::string* release_compleatetask9();
+  void set_allocated_compleatetask9(std::string* compleatetask9);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_compleatetask9();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_compleatetask9(
+      std::string* compleatetask9);
+  private:
+  const std::string& _internal_compleatetask9() const;
+  void _internal_set_compleatetask9(const std::string& value);
+  std::string* _internal_mutable_compleatetask9();
+  public:
+
+  // bytes unlockfuncs = 14;
+  void clear_unlockfuncs();
+  const std::string& unlockfuncs() const;
+  void set_unlockfuncs(const std::string& value);
+  void set_unlockfuncs(std::string&& value);
+  void set_unlockfuncs(const char* value);
+  void set_unlockfuncs(const void* value, size_t size);
+  std::string* mutable_unlockfuncs();
+  std::string* release_unlockfuncs();
+  void set_allocated_unlockfuncs(std::string* unlockfuncs);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_unlockfuncs();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_unlockfuncs(
+      std::string* unlockfuncs);
+  private:
+  const std::string& _internal_unlockfuncs() const;
+  void _internal_set_unlockfuncs(const std::string& value);
+  std::string* _internal_mutable_unlockfuncs();
+  public:
+
+  // fixed64 version = 1;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // sfixed64 roleid = 2;
+  void clear_roleid();
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid() const;
+  void set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_roleid() const;
+  void _internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // sfixed32 runningtask = 3;
+  void clear_runningtask();
+  ::PROTOBUF_NAMESPACE_ID::int32 runningtask() const;
+  void set_runningtask(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_runningtask() const;
+  void _internal_set_runningtask(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_mainlinetask)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask0_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask1_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask2_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask3_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask4_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask5_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask6_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask7_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask8_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr compleatetask9_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr unlockfuncs_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
+  ::PROTOBUF_NAMESPACE_ID::int64 roleid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 runningtask_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_gorm_2ddb_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GORM_PB_Table_pubmail PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:gorm.GORM_PB_Table_pubmail) */ {
+ public:
+  inline GORM_PB_Table_pubmail() : GORM_PB_Table_pubmail(nullptr) {};
+  virtual ~GORM_PB_Table_pubmail();
+
+  GORM_PB_Table_pubmail(const GORM_PB_Table_pubmail& from);
+  GORM_PB_Table_pubmail(GORM_PB_Table_pubmail&& from) noexcept
+    : GORM_PB_Table_pubmail() {
+    *this = ::std::move(from);
+  }
+
+  inline GORM_PB_Table_pubmail& operator=(const GORM_PB_Table_pubmail& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GORM_PB_Table_pubmail& operator=(GORM_PB_Table_pubmail&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GORM_PB_Table_pubmail& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GORM_PB_Table_pubmail* internal_default_instance() {
+    return reinterpret_cast<const GORM_PB_Table_pubmail*>(
+               &_GORM_PB_Table_pubmail_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    18;
+
+  friend void swap(GORM_PB_Table_pubmail& a, GORM_PB_Table_pubmail& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GORM_PB_Table_pubmail* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GORM_PB_Table_pubmail* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GORM_PB_Table_pubmail* New() const final {
+    return CreateMaybeMessage<GORM_PB_Table_pubmail>(nullptr);
+  }
+
+  GORM_PB_Table_pubmail* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GORM_PB_Table_pubmail>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GORM_PB_Table_pubmail& from);
+  void MergeFrom(const GORM_PB_Table_pubmail& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GORM_PB_Table_pubmail* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "gorm.GORM_PB_Table_pubmail";
+  }
+  protected:
+  explicit GORM_PB_Table_pubmail(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_gorm_2ddb_2eproto);
+    return ::descriptor_table_gorm_2ddb_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAddresserFieldNumber = 3,
+    kTitleFieldNumber = 4,
+    kBodyFieldNumber = 5,
+    kRolesFieldNumber = 6,
+    kAttachmentFieldNumber = 7,
+    kVersionFieldNumber = 1,
+    kMailidFieldNumber = 2,
+    kDelFieldNumber = 9,
+    kDtFieldNumber = 8,
+  };
+  // bytes addresser = 3;
+  void clear_addresser();
+  const std::string& addresser() const;
+  void set_addresser(const std::string& value);
+  void set_addresser(std::string&& value);
+  void set_addresser(const char* value);
+  void set_addresser(const void* value, size_t size);
+  std::string* mutable_addresser();
+  std::string* release_addresser();
+  void set_allocated_addresser(std::string* addresser);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_addresser();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_addresser(
+      std::string* addresser);
+  private:
+  const std::string& _internal_addresser() const;
+  void _internal_set_addresser(const std::string& value);
+  std::string* _internal_mutable_addresser();
+  public:
+
+  // bytes title = 4;
+  void clear_title();
+  const std::string& title() const;
+  void set_title(const std::string& value);
+  void set_title(std::string&& value);
+  void set_title(const char* value);
+  void set_title(const void* value, size_t size);
+  std::string* mutable_title();
+  std::string* release_title();
+  void set_allocated_title(std::string* title);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_title();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_title(
+      std::string* title);
+  private:
+  const std::string& _internal_title() const;
+  void _internal_set_title(const std::string& value);
+  std::string* _internal_mutable_title();
+  public:
+
+  // bytes body = 5;
+  void clear_body();
+  const std::string& body() const;
+  void set_body(const std::string& value);
+  void set_body(std::string&& value);
+  void set_body(const char* value);
+  void set_body(const void* value, size_t size);
+  std::string* mutable_body();
+  std::string* release_body();
+  void set_allocated_body(std::string* body);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_body();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_body(
+      std::string* body);
+  private:
+  const std::string& _internal_body() const;
+  void _internal_set_body(const std::string& value);
+  std::string* _internal_mutable_body();
+  public:
+
+  // bytes roles = 6;
+  void clear_roles();
+  const std::string& roles() const;
+  void set_roles(const std::string& value);
+  void set_roles(std::string&& value);
+  void set_roles(const char* value);
+  void set_roles(const void* value, size_t size);
+  std::string* mutable_roles();
+  std::string* release_roles();
+  void set_allocated_roles(std::string* roles);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_roles();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_roles(
+      std::string* roles);
+  private:
+  const std::string& _internal_roles() const;
+  void _internal_set_roles(const std::string& value);
+  std::string* _internal_mutable_roles();
+  public:
+
+  // bytes attachment = 7;
+  void clear_attachment();
+  const std::string& attachment() const;
+  void set_attachment(const std::string& value);
+  void set_attachment(std::string&& value);
+  void set_attachment(const char* value);
+  void set_attachment(const void* value, size_t size);
+  std::string* mutable_attachment();
+  std::string* release_attachment();
+  void set_allocated_attachment(std::string* attachment);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_attachment();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_attachment(
+      std::string* attachment);
+  private:
+  const std::string& _internal_attachment() const;
+  void _internal_set_attachment(const std::string& value);
+  std::string* _internal_mutable_attachment();
+  public:
+
+  // fixed64 version = 1;
+  void clear_version();
+  ::PROTOBUF_NAMESPACE_ID::uint64 version() const;
+  void set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_version() const;
+  void _internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // sfixed32 mailid = 2;
+  void clear_mailid();
+  ::PROTOBUF_NAMESPACE_ID::int32 mailid() const;
+  void set_mailid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_mailid() const;
+  void _internal_set_mailid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed32 del = 9;
+  void clear_del();
+  ::PROTOBUF_NAMESPACE_ID::int32 del() const;
+  void set_del(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_del() const;
+  void _internal_set_del(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // sfixed64 dt = 8;
+  void clear_dt();
+  ::PROTOBUF_NAMESPACE_ID::int64 dt() const;
+  void set_dt(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_dt() const;
+  void _internal_set_dt(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:gorm.GORM_PB_Table_pubmail)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr addresser_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr title_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr body_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr roles_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attachment_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 version_;
+  ::PROTOBUF_NAMESPACE_ID::int32 mailid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 del_;
+  ::PROTOBUF_NAMESPACE_ID::int64 dt_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_2ddb_2eproto;
 };
@@ -8328,6 +9135,26 @@ inline void GORM_PB_Table_role::set_userid(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.userid)
 }
 
+// sfixed32 proceedslv = 16;
+inline void GORM_PB_Table_role::clear_proceedslv() {
+  proceedslv_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_role::_internal_proceedslv() const {
+  return proceedslv_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_role::proceedslv() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_role.proceedslv)
+  return _internal_proceedslv();
+}
+inline void GORM_PB_Table_role::_internal_set_proceedslv(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  proceedslv_ = value;
+}
+inline void GORM_PB_Table_role::set_proceedslv(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_proceedslv(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_role.proceedslv)
+}
+
 // -------------------------------------------------------------------
 
 // GORM_PB_Table_scene
@@ -8471,6 +9298,87 @@ inline void GORM_PB_Table_scene::unsafe_arena_set_allocated_collects(
   collects_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       collects, GetArena());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_scene.collects)
+}
+
+// bytes season = 5;
+inline void GORM_PB_Table_scene::clear_season() {
+  season_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_scene::season() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_scene.season)
+  return _internal_season();
+}
+inline void GORM_PB_Table_scene::set_season(const std::string& value) {
+  _internal_set_season(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_scene.season)
+}
+inline std::string* GORM_PB_Table_scene::mutable_season() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_scene.season)
+  return _internal_mutable_season();
+}
+inline const std::string& GORM_PB_Table_scene::_internal_season() const {
+  return season_.Get();
+}
+inline void GORM_PB_Table_scene::_internal_set_season(const std::string& value) {
+  
+  season_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_scene::set_season(std::string&& value) {
+  
+  season_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_scene.season)
+}
+inline void GORM_PB_Table_scene::set_season(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  season_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_scene.season)
+}
+inline void GORM_PB_Table_scene::set_season(const void* value,
+    size_t size) {
+  
+  season_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_scene.season)
+}
+inline std::string* GORM_PB_Table_scene::_internal_mutable_season() {
+  
+  return season_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_scene::release_season() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_scene.season)
+  return season_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_scene::set_allocated_season(std::string* season) {
+  if (season != nullptr) {
+    
+  } else {
+    
+  }
+  season_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), season,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_scene.season)
+}
+inline std::string* GORM_PB_Table_scene::unsafe_arena_release_season() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_scene.season)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return season_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_scene::unsafe_arena_set_allocated_season(
+    std::string* season) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (season != nullptr) {
+    
+  } else {
+    
+  }
+  season_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      season, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_scene.season)
 }
 
 // -------------------------------------------------------------------
@@ -9252,9 +10160,1457 @@ inline void GORM_PB_Table_user::unsafe_arena_set_allocated_rolesdata(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_user.rolesdata)
 }
 
+// -------------------------------------------------------------------
+
+// GORM_PB_Table_mainlinetask
+
+// fixed64 version = 1;
+inline void GORM_PB_Table_mainlinetask::clear_version() {
+  version_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_mainlinetask::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_mainlinetask::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.version)
+  return _internal_version();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  version_ = value;
+}
+inline void GORM_PB_Table_mainlinetask::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.version)
+}
+
+// sfixed64 roleid = 2;
+inline void GORM_PB_Table_mainlinetask::clear_roleid() {
+  roleid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_mainlinetask::_internal_roleid() const {
+  return roleid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_mainlinetask::roleid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.roleid)
+  return _internal_roleid();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  roleid_ = value;
+}
+inline void GORM_PB_Table_mainlinetask::set_roleid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_roleid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.roleid)
+}
+
+// sfixed32 runningtask = 3;
+inline void GORM_PB_Table_mainlinetask::clear_runningtask() {
+  runningtask_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_mainlinetask::_internal_runningtask() const {
+  return runningtask_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_mainlinetask::runningtask() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.runningtask)
+  return _internal_runningtask();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_runningtask(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  runningtask_ = value;
+}
+inline void GORM_PB_Table_mainlinetask::set_runningtask(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_runningtask(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.runningtask)
+}
+
+// bytes compleatetask0 = 4;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask0() {
+  compleatetask0_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask0() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+  return _internal_compleatetask0();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask0(const std::string& value) {
+  _internal_set_compleatetask0(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask0() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+  return _internal_mutable_compleatetask0();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask0() const {
+  return compleatetask0_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask0(const std::string& value) {
+  
+  compleatetask0_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask0(std::string&& value) {
+  
+  compleatetask0_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask0(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask0_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask0(const void* value,
+    size_t size) {
+  
+  compleatetask0_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask0() {
+  
+  return compleatetask0_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask0() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+  return compleatetask0_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask0(std::string* compleatetask0) {
+  if (compleatetask0 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask0_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask0,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask0() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask0_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask0(
+    std::string* compleatetask0) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask0 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask0_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask0, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask0)
+}
+
+// bytes compleatetask1 = 5;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask1() {
+  compleatetask1_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask1() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+  return _internal_compleatetask1();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask1(const std::string& value) {
+  _internal_set_compleatetask1(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask1() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+  return _internal_mutable_compleatetask1();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask1() const {
+  return compleatetask1_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask1(const std::string& value) {
+  
+  compleatetask1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask1(std::string&& value) {
+  
+  compleatetask1_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask1(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask1(const void* value,
+    size_t size) {
+  
+  compleatetask1_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask1() {
+  
+  return compleatetask1_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask1() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+  return compleatetask1_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask1(std::string* compleatetask1) {
+  if (compleatetask1 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask1_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask1,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask1() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask1_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask1(
+    std::string* compleatetask1) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask1 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask1_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask1, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask1)
+}
+
+// bytes compleatetask2 = 6;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask2() {
+  compleatetask2_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask2() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+  return _internal_compleatetask2();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask2(const std::string& value) {
+  _internal_set_compleatetask2(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask2() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+  return _internal_mutable_compleatetask2();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask2() const {
+  return compleatetask2_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask2(const std::string& value) {
+  
+  compleatetask2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask2(std::string&& value) {
+  
+  compleatetask2_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask2(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask2(const void* value,
+    size_t size) {
+  
+  compleatetask2_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask2() {
+  
+  return compleatetask2_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask2() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+  return compleatetask2_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask2(std::string* compleatetask2) {
+  if (compleatetask2 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask2_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask2,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask2() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask2_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask2(
+    std::string* compleatetask2) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask2 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask2_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask2, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask2)
+}
+
+// bytes compleatetask3 = 7;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask3() {
+  compleatetask3_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask3() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+  return _internal_compleatetask3();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask3(const std::string& value) {
+  _internal_set_compleatetask3(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask3() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+  return _internal_mutable_compleatetask3();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask3() const {
+  return compleatetask3_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask3(const std::string& value) {
+  
+  compleatetask3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask3(std::string&& value) {
+  
+  compleatetask3_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask3(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask3(const void* value,
+    size_t size) {
+  
+  compleatetask3_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask3() {
+  
+  return compleatetask3_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask3() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+  return compleatetask3_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask3(std::string* compleatetask3) {
+  if (compleatetask3 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask3_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask3,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask3() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask3_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask3(
+    std::string* compleatetask3) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask3 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask3_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask3, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask3)
+}
+
+// bytes compleatetask4 = 8;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask4() {
+  compleatetask4_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask4() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+  return _internal_compleatetask4();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask4(const std::string& value) {
+  _internal_set_compleatetask4(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask4() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+  return _internal_mutable_compleatetask4();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask4() const {
+  return compleatetask4_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask4(const std::string& value) {
+  
+  compleatetask4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask4(std::string&& value) {
+  
+  compleatetask4_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask4(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask4(const void* value,
+    size_t size) {
+  
+  compleatetask4_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask4() {
+  
+  return compleatetask4_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask4() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+  return compleatetask4_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask4(std::string* compleatetask4) {
+  if (compleatetask4 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask4_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask4,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask4() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask4_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask4(
+    std::string* compleatetask4) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask4 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask4_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask4, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask4)
+}
+
+// bytes compleatetask5 = 9;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask5() {
+  compleatetask5_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask5() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+  return _internal_compleatetask5();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask5(const std::string& value) {
+  _internal_set_compleatetask5(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask5() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+  return _internal_mutable_compleatetask5();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask5() const {
+  return compleatetask5_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask5(const std::string& value) {
+  
+  compleatetask5_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask5(std::string&& value) {
+  
+  compleatetask5_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask5(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask5_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask5(const void* value,
+    size_t size) {
+  
+  compleatetask5_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask5() {
+  
+  return compleatetask5_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask5() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+  return compleatetask5_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask5(std::string* compleatetask5) {
+  if (compleatetask5 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask5_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask5,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask5() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask5_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask5(
+    std::string* compleatetask5) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask5 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask5_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask5, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask5)
+}
+
+// bytes compleatetask6 = 10;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask6() {
+  compleatetask6_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask6() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+  return _internal_compleatetask6();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask6(const std::string& value) {
+  _internal_set_compleatetask6(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask6() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+  return _internal_mutable_compleatetask6();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask6() const {
+  return compleatetask6_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask6(const std::string& value) {
+  
+  compleatetask6_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask6(std::string&& value) {
+  
+  compleatetask6_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask6(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask6_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask6(const void* value,
+    size_t size) {
+  
+  compleatetask6_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask6() {
+  
+  return compleatetask6_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask6() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+  return compleatetask6_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask6(std::string* compleatetask6) {
+  if (compleatetask6 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask6_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask6,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask6() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask6_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask6(
+    std::string* compleatetask6) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask6 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask6_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask6, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask6)
+}
+
+// bytes compleatetask7 = 11;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask7() {
+  compleatetask7_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask7() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+  return _internal_compleatetask7();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask7(const std::string& value) {
+  _internal_set_compleatetask7(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask7() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+  return _internal_mutable_compleatetask7();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask7() const {
+  return compleatetask7_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask7(const std::string& value) {
+  
+  compleatetask7_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask7(std::string&& value) {
+  
+  compleatetask7_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask7(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask7_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask7(const void* value,
+    size_t size) {
+  
+  compleatetask7_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask7() {
+  
+  return compleatetask7_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask7() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+  return compleatetask7_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask7(std::string* compleatetask7) {
+  if (compleatetask7 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask7_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask7,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask7() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask7_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask7(
+    std::string* compleatetask7) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask7 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask7_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask7, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask7)
+}
+
+// bytes compleatetask8 = 12;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask8() {
+  compleatetask8_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask8() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+  return _internal_compleatetask8();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask8(const std::string& value) {
+  _internal_set_compleatetask8(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask8() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+  return _internal_mutable_compleatetask8();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask8() const {
+  return compleatetask8_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask8(const std::string& value) {
+  
+  compleatetask8_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask8(std::string&& value) {
+  
+  compleatetask8_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask8(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask8_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask8(const void* value,
+    size_t size) {
+  
+  compleatetask8_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask8() {
+  
+  return compleatetask8_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask8() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+  return compleatetask8_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask8(std::string* compleatetask8) {
+  if (compleatetask8 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask8_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask8,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask8() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask8_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask8(
+    std::string* compleatetask8) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask8 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask8_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask8, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask8)
+}
+
+// bytes compleatetask9 = 13;
+inline void GORM_PB_Table_mainlinetask::clear_compleatetask9() {
+  compleatetask9_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::compleatetask9() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+  return _internal_compleatetask9();
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask9(const std::string& value) {
+  _internal_set_compleatetask9(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_compleatetask9() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+  return _internal_mutable_compleatetask9();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_compleatetask9() const {
+  return compleatetask9_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_compleatetask9(const std::string& value) {
+  
+  compleatetask9_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask9(std::string&& value) {
+  
+  compleatetask9_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask9(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  compleatetask9_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+}
+inline void GORM_PB_Table_mainlinetask::set_compleatetask9(const void* value,
+    size_t size) {
+  
+  compleatetask9_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_compleatetask9() {
+  
+  return compleatetask9_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_compleatetask9() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+  return compleatetask9_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_compleatetask9(std::string* compleatetask9) {
+  if (compleatetask9 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask9_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), compleatetask9,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_compleatetask9() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return compleatetask9_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_compleatetask9(
+    std::string* compleatetask9) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (compleatetask9 != nullptr) {
+    
+  } else {
+    
+  }
+  compleatetask9_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      compleatetask9, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.compleatetask9)
+}
+
+// bytes unlockfuncs = 14;
+inline void GORM_PB_Table_mainlinetask::clear_unlockfuncs() {
+  unlockfuncs_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_mainlinetask::unlockfuncs() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+  return _internal_unlockfuncs();
+}
+inline void GORM_PB_Table_mainlinetask::set_unlockfuncs(const std::string& value) {
+  _internal_set_unlockfuncs(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+}
+inline std::string* GORM_PB_Table_mainlinetask::mutable_unlockfuncs() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+  return _internal_mutable_unlockfuncs();
+}
+inline const std::string& GORM_PB_Table_mainlinetask::_internal_unlockfuncs() const {
+  return unlockfuncs_.Get();
+}
+inline void GORM_PB_Table_mainlinetask::_internal_set_unlockfuncs(const std::string& value) {
+  
+  unlockfuncs_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_unlockfuncs(std::string&& value) {
+  
+  unlockfuncs_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+}
+inline void GORM_PB_Table_mainlinetask::set_unlockfuncs(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  unlockfuncs_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+}
+inline void GORM_PB_Table_mainlinetask::set_unlockfuncs(const void* value,
+    size_t size) {
+  
+  unlockfuncs_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+}
+inline std::string* GORM_PB_Table_mainlinetask::_internal_mutable_unlockfuncs() {
+  
+  return unlockfuncs_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_mainlinetask::release_unlockfuncs() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+  return unlockfuncs_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::set_allocated_unlockfuncs(std::string* unlockfuncs) {
+  if (unlockfuncs != nullptr) {
+    
+  } else {
+    
+  }
+  unlockfuncs_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), unlockfuncs,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+}
+inline std::string* GORM_PB_Table_mainlinetask::unsafe_arena_release_unlockfuncs() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return unlockfuncs_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_mainlinetask::unsafe_arena_set_allocated_unlockfuncs(
+    std::string* unlockfuncs) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (unlockfuncs != nullptr) {
+    
+  } else {
+    
+  }
+  unlockfuncs_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      unlockfuncs, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_mainlinetask.unlockfuncs)
+}
+
+// -------------------------------------------------------------------
+
+// GORM_PB_Table_pubmail
+
+// fixed64 version = 1;
+inline void GORM_PB_Table_pubmail::clear_version() {
+  version_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_pubmail::_internal_version() const {
+  return version_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 GORM_PB_Table_pubmail::version() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.version)
+  return _internal_version();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  version_ = value;
+}
+inline void GORM_PB_Table_pubmail::set_version(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_version(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.version)
+}
+
+// sfixed32 mailid = 2;
+inline void GORM_PB_Table_pubmail::clear_mailid() {
+  mailid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_pubmail::_internal_mailid() const {
+  return mailid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_pubmail::mailid() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.mailid)
+  return _internal_mailid();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_mailid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  mailid_ = value;
+}
+inline void GORM_PB_Table_pubmail::set_mailid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_mailid(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.mailid)
+}
+
+// bytes addresser = 3;
+inline void GORM_PB_Table_pubmail::clear_addresser() {
+  addresser_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_pubmail::addresser() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.addresser)
+  return _internal_addresser();
+}
+inline void GORM_PB_Table_pubmail::set_addresser(const std::string& value) {
+  _internal_set_addresser(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.addresser)
+}
+inline std::string* GORM_PB_Table_pubmail::mutable_addresser() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_pubmail.addresser)
+  return _internal_mutable_addresser();
+}
+inline const std::string& GORM_PB_Table_pubmail::_internal_addresser() const {
+  return addresser_.Get();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_addresser(const std::string& value) {
+  
+  addresser_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_addresser(std::string&& value) {
+  
+  addresser_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_pubmail.addresser)
+}
+inline void GORM_PB_Table_pubmail::set_addresser(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  addresser_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_pubmail.addresser)
+}
+inline void GORM_PB_Table_pubmail::set_addresser(const void* value,
+    size_t size) {
+  
+  addresser_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_pubmail.addresser)
+}
+inline std::string* GORM_PB_Table_pubmail::_internal_mutable_addresser() {
+  
+  return addresser_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_pubmail::release_addresser() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_pubmail.addresser)
+  return addresser_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_allocated_addresser(std::string* addresser) {
+  if (addresser != nullptr) {
+    
+  } else {
+    
+  }
+  addresser_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), addresser,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_pubmail.addresser)
+}
+inline std::string* GORM_PB_Table_pubmail::unsafe_arena_release_addresser() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_pubmail.addresser)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return addresser_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_pubmail::unsafe_arena_set_allocated_addresser(
+    std::string* addresser) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (addresser != nullptr) {
+    
+  } else {
+    
+  }
+  addresser_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      addresser, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_pubmail.addresser)
+}
+
+// bytes title = 4;
+inline void GORM_PB_Table_pubmail::clear_title() {
+  title_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_pubmail::title() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.title)
+  return _internal_title();
+}
+inline void GORM_PB_Table_pubmail::set_title(const std::string& value) {
+  _internal_set_title(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.title)
+}
+inline std::string* GORM_PB_Table_pubmail::mutable_title() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_pubmail.title)
+  return _internal_mutable_title();
+}
+inline const std::string& GORM_PB_Table_pubmail::_internal_title() const {
+  return title_.Get();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_title(const std::string& value) {
+  
+  title_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_title(std::string&& value) {
+  
+  title_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_pubmail.title)
+}
+inline void GORM_PB_Table_pubmail::set_title(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  title_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_pubmail.title)
+}
+inline void GORM_PB_Table_pubmail::set_title(const void* value,
+    size_t size) {
+  
+  title_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_pubmail.title)
+}
+inline std::string* GORM_PB_Table_pubmail::_internal_mutable_title() {
+  
+  return title_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_pubmail::release_title() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_pubmail.title)
+  return title_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_allocated_title(std::string* title) {
+  if (title != nullptr) {
+    
+  } else {
+    
+  }
+  title_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), title,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_pubmail.title)
+}
+inline std::string* GORM_PB_Table_pubmail::unsafe_arena_release_title() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_pubmail.title)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return title_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_pubmail::unsafe_arena_set_allocated_title(
+    std::string* title) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (title != nullptr) {
+    
+  } else {
+    
+  }
+  title_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      title, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_pubmail.title)
+}
+
+// bytes body = 5;
+inline void GORM_PB_Table_pubmail::clear_body() {
+  body_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_pubmail::body() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.body)
+  return _internal_body();
+}
+inline void GORM_PB_Table_pubmail::set_body(const std::string& value) {
+  _internal_set_body(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.body)
+}
+inline std::string* GORM_PB_Table_pubmail::mutable_body() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_pubmail.body)
+  return _internal_mutable_body();
+}
+inline const std::string& GORM_PB_Table_pubmail::_internal_body() const {
+  return body_.Get();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_body(const std::string& value) {
+  
+  body_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_body(std::string&& value) {
+  
+  body_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_pubmail.body)
+}
+inline void GORM_PB_Table_pubmail::set_body(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  body_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_pubmail.body)
+}
+inline void GORM_PB_Table_pubmail::set_body(const void* value,
+    size_t size) {
+  
+  body_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_pubmail.body)
+}
+inline std::string* GORM_PB_Table_pubmail::_internal_mutable_body() {
+  
+  return body_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_pubmail::release_body() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_pubmail.body)
+  return body_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_allocated_body(std::string* body) {
+  if (body != nullptr) {
+    
+  } else {
+    
+  }
+  body_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), body,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_pubmail.body)
+}
+inline std::string* GORM_PB_Table_pubmail::unsafe_arena_release_body() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_pubmail.body)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return body_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_pubmail::unsafe_arena_set_allocated_body(
+    std::string* body) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (body != nullptr) {
+    
+  } else {
+    
+  }
+  body_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      body, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_pubmail.body)
+}
+
+// bytes roles = 6;
+inline void GORM_PB_Table_pubmail::clear_roles() {
+  roles_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_pubmail::roles() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.roles)
+  return _internal_roles();
+}
+inline void GORM_PB_Table_pubmail::set_roles(const std::string& value) {
+  _internal_set_roles(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.roles)
+}
+inline std::string* GORM_PB_Table_pubmail::mutable_roles() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_pubmail.roles)
+  return _internal_mutable_roles();
+}
+inline const std::string& GORM_PB_Table_pubmail::_internal_roles() const {
+  return roles_.Get();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_roles(const std::string& value) {
+  
+  roles_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_roles(std::string&& value) {
+  
+  roles_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_pubmail.roles)
+}
+inline void GORM_PB_Table_pubmail::set_roles(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  roles_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_pubmail.roles)
+}
+inline void GORM_PB_Table_pubmail::set_roles(const void* value,
+    size_t size) {
+  
+  roles_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_pubmail.roles)
+}
+inline std::string* GORM_PB_Table_pubmail::_internal_mutable_roles() {
+  
+  return roles_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_pubmail::release_roles() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_pubmail.roles)
+  return roles_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_allocated_roles(std::string* roles) {
+  if (roles != nullptr) {
+    
+  } else {
+    
+  }
+  roles_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), roles,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_pubmail.roles)
+}
+inline std::string* GORM_PB_Table_pubmail::unsafe_arena_release_roles() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_pubmail.roles)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return roles_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_pubmail::unsafe_arena_set_allocated_roles(
+    std::string* roles) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (roles != nullptr) {
+    
+  } else {
+    
+  }
+  roles_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      roles, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_pubmail.roles)
+}
+
+// bytes attachment = 7;
+inline void GORM_PB_Table_pubmail::clear_attachment() {
+  attachment_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GORM_PB_Table_pubmail::attachment() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.attachment)
+  return _internal_attachment();
+}
+inline void GORM_PB_Table_pubmail::set_attachment(const std::string& value) {
+  _internal_set_attachment(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.attachment)
+}
+inline std::string* GORM_PB_Table_pubmail::mutable_attachment() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_Table_pubmail.attachment)
+  return _internal_mutable_attachment();
+}
+inline const std::string& GORM_PB_Table_pubmail::_internal_attachment() const {
+  return attachment_.Get();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_attachment(const std::string& value) {
+  
+  attachment_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_attachment(std::string&& value) {
+  
+  attachment_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:gorm.GORM_PB_Table_pubmail.attachment)
+}
+inline void GORM_PB_Table_pubmail::set_attachment(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  attachment_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:gorm.GORM_PB_Table_pubmail.attachment)
+}
+inline void GORM_PB_Table_pubmail::set_attachment(const void* value,
+    size_t size) {
+  
+  attachment_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:gorm.GORM_PB_Table_pubmail.attachment)
+}
+inline std::string* GORM_PB_Table_pubmail::_internal_mutable_attachment() {
+  
+  return attachment_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GORM_PB_Table_pubmail::release_attachment() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_Table_pubmail.attachment)
+  return attachment_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GORM_PB_Table_pubmail::set_allocated_attachment(std::string* attachment) {
+  if (attachment != nullptr) {
+    
+  } else {
+    
+  }
+  attachment_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), attachment,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_Table_pubmail.attachment)
+}
+inline std::string* GORM_PB_Table_pubmail::unsafe_arena_release_attachment() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:gorm.GORM_PB_Table_pubmail.attachment)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return attachment_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GORM_PB_Table_pubmail::unsafe_arena_set_allocated_attachment(
+    std::string* attachment) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (attachment != nullptr) {
+    
+  } else {
+    
+  }
+  attachment_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      attachment, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_Table_pubmail.attachment)
+}
+
+// sfixed64 dt = 8;
+inline void GORM_PB_Table_pubmail::clear_dt() {
+  dt_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_pubmail::_internal_dt() const {
+  return dt_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GORM_PB_Table_pubmail::dt() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.dt)
+  return _internal_dt();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_dt(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  dt_ = value;
+}
+inline void GORM_PB_Table_pubmail::set_dt(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_dt(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.dt)
+}
+
+// sfixed32 del = 9;
+inline void GORM_PB_Table_pubmail::clear_del() {
+  del_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_pubmail::_internal_del() const {
+  return del_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GORM_PB_Table_pubmail::del() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_Table_pubmail.del)
+  return _internal_del();
+}
+inline void GORM_PB_Table_pubmail::_internal_set_del(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  del_ = value;
+}
+inline void GORM_PB_Table_pubmail::set_del(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_del(value);
+  // @@protoc_insertion_point(field_set:gorm.GORM_PB_Table_pubmail.del)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

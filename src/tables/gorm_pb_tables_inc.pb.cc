@@ -25,9 +25,11 @@ extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::inter
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_interaction_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_login_log_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_mail_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_mainlinetask_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_material_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_npc_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_pubmail_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_res_log_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_role_gorm_2ddb_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_gorm_2ddb_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GORM_PB_Table_roles_gorm_2ddb_2eproto;
@@ -111,8 +113,8 @@ static void InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto(
   ::gorm::GORM_PB_TABLE::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<18> scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 18, 0, InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<20> scc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 20, 0, InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto}, {
       &scc_info_GORM_PB_CUSTEM_COLUMNS_gorm_5fpb_5ftables_5finc_2eproto.base,
       &scc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_cycleevent_gorm_2ddb_2eproto.base,
@@ -130,7 +132,9 @@ static void InitDefaultsscc_info_GORM_PB_TABLE_gorm_5fpb_5ftables_5finc_2eproto(
       &scc_info_GORM_PB_Table_scene_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_skill_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto.base,
-      &scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base,}};
+      &scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_mainlinetask_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_pubmail_gorm_2ddb_2eproto.base,}};
 
 static void InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -143,8 +147,8 @@ static void InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto
   ::gorm::GORM_PB_TABLES::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<17> scc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 17, 0, InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<19> scc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 19, 0, InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto}, {
       &scc_info_GORM_PB_Table_currency_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_cycleevent_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_equip_gorm_2ddb_2eproto.base,
@@ -161,10 +165,12 @@ static void InitDefaultsscc_info_GORM_PB_TABLES_gorm_5fpb_5ftables_5finc_2eproto
       &scc_info_GORM_PB_Table_scene_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_skill_gorm_2ddb_2eproto.base,
       &scc_info_GORM_PB_Table_ptuser_gorm_2ddb_2eproto.base,
-      &scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base,}};
+      &scc_info_GORM_PB_Table_user_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_mainlinetask_gorm_2ddb_2eproto.base,
+      &scc_info_GORM_PB_Table_pubmail_gorm_2ddb_2eproto.base,}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gorm_5fpb_5ftables_5finc_2eproto[5];
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[19];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[21];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gorm_5fpb_5ftables_5finc_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5ftables_5finc_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -215,6 +221,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5ftables_5finc_2epro
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, skill_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, ptuser_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, user_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, mainlinetask_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLE, pubmail_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -237,13 +245,15 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gorm_5fpb_5ftables_5finc_2epro
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, skill_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, ptuser_),
   PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, user_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, mainlinetask_),
+  PROTOBUF_FIELD_OFFSET(::gorm::GORM_PB_TABLES, pubmail_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::gorm::GORM_PB_COLUMN_VALUE)},
   { 10, -1, sizeof(::gorm::GORM_PB_COLUMN)},
   { 17, -1, sizeof(::gorm::GORM_PB_CUSTEM_COLUMNS)},
   { 23, -1, sizeof(::gorm::GORM_PB_TABLE)},
-  { 47, -1, sizeof(::gorm::GORM_PB_TABLES)},
+  { 49, -1, sizeof(::gorm::GORM_PB_TABLES)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -263,7 +273,7 @@ const char descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto[] PROTOBUF
   "_PB_COLUMN\022\014\n\004name\030\001 \001(\t\022)\n\005value\030\002 \001(\0132"
   "\032.gorm.GORM_PB_COLUMN_VALUE\"\?\n\026GORM_PB_C"
   "USTEM_COLUMNS\022%\n\007columns\030\001 \003(\0132\024.gorm.GO"
-  "RM_PB_COLUMN\"\302\006\n\rGORM_PB_TABLE\022\017\n\007TableI"
+  "RM_PB_COLUMN\"\250\007\n\rGORM_PB_TABLE\022\017\n\007TableI"
   "d\030\001 \001(\017\0224\n\016custom_columns\030\002 \001(\0132\034.gorm.G"
   "ORM_PB_CUSTEM_COLUMNS\022.\n\010currency\030\003 \001(\0132"
   "\034.gorm.GORM_PB_Table_currency\0222\n\ncycleev"
@@ -284,165 +294,198 @@ const char descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto[] PROTOBUF
   "ene\022(\n\005skill\030\021 \001(\0132\031.gorm.GORM_PB_Table_"
   "skill\022*\n\006ptuser\030\022 \001(\0132\032.gorm.GORM_PB_Tab"
   "le_ptuser\022&\n\004user\030\023 \001(\0132\030.gorm.GORM_PB_T"
-  "able_user\"\374\005\n\016GORM_PB_TABLES\022.\n\010currency"
-  "\030\001 \003(\0132\034.gorm.GORM_PB_Table_currency\0222\n\n"
-  "cycleevent\030\002 \003(\0132\036.gorm.GORM_PB_Table_cy"
-  "cleevent\022(\n\005equip\030\003 \003(\0132\031.gorm.GORM_PB_T"
-  "able_equip\022&\n\004food\030\004 \003(\0132\030.gorm.GORM_PB_"
-  "Table_food\022&\n\004hero\030\005 \003(\0132\030.gorm.GORM_PB_"
-  "Table_hero\0220\n\tlogin_log\030\006 \003(\0132\035.gorm.GOR"
-  "M_PB_Table_login_log\022&\n\004mail\030\007 \003(\0132\030.gor"
-  "m.GORM_PB_Table_mail\022.\n\010material\030\010 \003(\0132\034"
-  ".gorm.GORM_PB_Table_material\022$\n\003npc\030\t \003("
-  "\0132\027.gorm.GORM_PB_Table_npc\022,\n\007res_log\030\n "
-  "\003(\0132\033.gorm.GORM_PB_Table_res_log\0224\n\013inte"
-  "raction\030\013 \003(\0132\037.gorm.GORM_PB_Table_inter"
-  "action\022(\n\005roles\030\014 \003(\0132\031.gorm.GORM_PB_Tab"
-  "le_roles\022&\n\004role\030\r \003(\0132\030.gorm.GORM_PB_Ta"
-  "ble_role\022(\n\005scene\030\016 \003(\0132\031.gorm.GORM_PB_T"
-  "able_scene\022(\n\005skill\030\017 \003(\0132\031.gorm.GORM_PB"
-  "_Table_skill\022*\n\006ptuser\030\020 \003(\0132\032.gorm.GORM"
-  "_PB_Table_ptuser\022&\n\004user\030\021 \003(\0132\030.gorm.GO"
-  "RM_PB_Table_user*\315\004\n\023GORM_PB_TABLE_INDEX"
-  "\022\033\n\027GORM_PB_TABLE_IDX_MIN__\020\000\022\036\n\032GORM_PB"
-  "_TABLE_IDX_CURRENCY\020\001\022 \n\034GORM_PB_TABLE_I"
-  "DX_CYCLEEVENT\020\002\022\033\n\027GORM_PB_TABLE_IDX_EQU"
-  "IP\020\003\022\032\n\026GORM_PB_TABLE_IDX_FOOD\020\004\022\032\n\026GORM"
-  "_PB_TABLE_IDX_HERO\020\005\022\037\n\033GORM_PB_TABLE_ID"
-  "X_LOGIN_LOG\020\006\022\032\n\026GORM_PB_TABLE_IDX_MAIL\020"
-  "\007\022\036\n\032GORM_PB_TABLE_IDX_MATERIAL\020\010\022\031\n\025GOR"
-  "M_PB_TABLE_IDX_NPC\020\t\022\035\n\031GORM_PB_TABLE_ID"
-  "X_RES_LOG\020\n\022!\n\035GORM_PB_TABLE_IDX_INTERAC"
-  "TION\020\013\022\033\n\027GORM_PB_TABLE_IDX_ROLES\020\014\022\032\n\026G"
-  "ORM_PB_TABLE_IDX_ROLE\020\r\022\033\n\027GORM_PB_TABLE"
-  "_IDX_SCENE\020\016\022\033\n\027GORM_PB_TABLE_IDX_SKILL\020"
-  "\017\022\034\n\030GORM_PB_TABLE_IDX_PTUSER\020\020\022\032\n\026GORM_"
-  "PB_TABLE_IDX_USER\020\021\022\033\n\027GORM_PB_TABLE_IDX"
-  "_MAX__\020\022*\241\002\n\034GORM_PB_CURRENCY_FIELD_INDE"
-  "X\022\"\n\036GORM_PB_FIELD_CURRENCY_VERSION\020\000\022!\n"
-  "\035GORM_PB_FIELD_CURRENCY_ROLEID\020\001\022\"\n\036GORM"
-  "_PB_FIELD_CURRENCY_SNAKEID\020\002\022$\n GORM_PB_"
-  "FIELD_CURRENCY_CURRENCY1\020\003\022$\n GORM_PB_FI"
-  "ELD_CURRENCY_CURRENCY2\020\004\022$\n GORM_PB_FIEL"
-  "D_CURRENCY_CURRENCY3\020\005\022$\n GORM_PB_FIELD_"
-  "CURRENCY_CURRENCY4\020\006*\220\001\n\036GORM_PB_CYCLEEV"
-  "ENT_FIELD_INDEX\022$\n GORM_PB_FIELD_CYCLEEV"
-  "ENT_VERSION\020\000\022#\n\037GORM_PB_FIELD_CYCLEEVEN"
-  "T_ROLEID\020\001\022#\n\037GORM_PB_FIELD_CYCLEEVENT_E"
-  "VENTS\020\002*\375\001\n\031GORM_PB_EQUIP_FIELD_INDEX\022\037\n"
-  "\033GORM_PB_FIELD_EQUIP_VERSION\020\000\022\036\n\032GORM_P"
-  "B_FIELD_EQUIP_ROLEID\020\001\022\037\n\033GORM_PB_FIELD_"
-  "EQUIP_SNAKEID\020\002\022\036\n\032GORM_PB_FIELD_EQUIP_E"
-  "QUIP1\020\003\022\036\n\032GORM_PB_FIELD_EQUIP_EQUIP2\020\004\022"
-  "\036\n\032GORM_PB_FIELD_EQUIP_EQUIP3\020\005\022\036\n\032GORM_"
-  "PB_FIELD_EQUIP_EQUIP4\020\006*\361\001\n\030GORM_PB_FOOD"
-  "_FIELD_INDEX\022\036\n\032GORM_PB_FIELD_FOOD_VERSI"
-  "ON\020\000\022\035\n\031GORM_PB_FIELD_FOOD_ROLEID\020\001\022\036\n\032G"
-  "ORM_PB_FIELD_FOOD_SNAKEID\020\002\022\034\n\030GORM_PB_F"
-  "IELD_FOOD_FOOD1\020\003\022\034\n\030GORM_PB_FIELD_FOOD_"
-  "FOOD2\020\004\022\034\n\030GORM_PB_FIELD_FOOD_FOOD3\020\005\022\034\n"
-  "\030GORM_PB_FIELD_FOOD_FOOD4\020\006*\265\001\n\030GORM_PB_"
-  "HERO_FIELD_INDEX\022\036\n\032GORM_PB_FIELD_HERO_V"
-  "ERSION\020\000\022\035\n\031GORM_PB_FIELD_HERO_ROLEID\020\001\022"
-  "\036\n\032GORM_PB_FIELD_HERO_SNAKEID\020\002\022\034\n\030GORM_"
-  "PB_FIELD_HERO_HEROS\020\003\022\034\n\030GORM_PB_FIELD_H"
-  "ERO_TEAMS\020\004*\233\002\n\035GORM_PB_LOGIN_LOG_FIELD_"
-  "INDEX\022#\n\037GORM_PB_FIELD_LOGIN_LOG_VERSION"
-  "\020\000\022\"\n\036GORM_PB_FIELD_LOGIN_LOG_ROLEID\020\001\022\""
-  "\n\036GORM_PB_FIELD_LOGIN_LOG_ACTION\020\002\022\"\n\036GO"
-  "RM_PB_FIELD_LOGIN_LOG_ONLINE\020\003\022\036\n\032GORM_P"
-  "B_FIELD_LOGIN_LOG_IP\020\004\022!\n\035GORM_PB_FIELD_"
-  "LOGIN_LOG_APPID\020\005\022&\n\"GORM_PB_FIELD_LOGIN"
-  "_LOG_CREATETIME\020\006*\262\002\n\030GORM_PB_MAIL_FIELD"
-  "_INDEX\022\036\n\032GORM_PB_FIELD_MAIL_VERSION\020\000\022\035"
-  "\n\031GORM_PB_FIELD_MAIL_ROLEID\020\001\022\034\n\030GORM_PB"
-  "_FIELD_MAIL_MAIL1\020\002\022\034\n\030GORM_PB_FIELD_MAI"
-  "L_MAIL2\020\003\022\034\n\030GORM_PB_FIELD_MAIL_MAIL3\020\004\022"
-  "\034\n\030GORM_PB_FIELD_MAIL_MAIL4\020\005\022\034\n\030GORM_PB"
-  "_FIELD_MAIL_MAIL5\020\006\022!\n\035GORM_PB_FIELD_MAI"
-  "L_LASTMAILID\020\007\022\036\n\032GORM_PB_FIELD_MAIL_SNA"
-  "KEID\020\010*\241\002\n\034GORM_PB_MATERIAL_FIELD_INDEX\022"
-  "\"\n\036GORM_PB_FIELD_MATERIAL_VERSION\020\000\022!\n\035G"
-  "ORM_PB_FIELD_MATERIAL_ROLEID\020\001\022\"\n\036GORM_P"
-  "B_FIELD_MATERIAL_SNAKEID\020\002\022$\n GORM_PB_FI"
-  "ELD_MATERIAL_MATERIAL1\020\003\022$\n GORM_PB_FIEL"
-  "D_MATERIAL_MATERIAL2\020\004\022$\n GORM_PB_FIELD_"
-  "MATERIAL_MATERIAL3\020\005\022$\n GORM_PB_FIELD_MA"
-  "TERIAL_MATERIAL4\020\006*\221\001\n\027GORM_PB_NPC_FIELD"
-  "_INDEX\022\035\n\031GORM_PB_FIELD_NPC_VERSION\020\000\022\034\n"
-  "\030GORM_PB_FIELD_NPC_ROLEID\020\001\022\035\n\031GORM_PB_F"
-  "IELD_NPC_SNAKEID\020\002\022\032\n\026GORM_PB_FIELD_NPC_"
-  "NPCS\020\003*\260\002\n\033GORM_PB_RES_LOG_FIELD_INDEX\022!"
-  "\n\035GORM_PB_FIELD_RES_LOG_VERSION\020\000\022 \n\034GOR"
-  "M_PB_FIELD_RES_LOG_ROLEID\020\001\022 \n\034GORM_PB_F"
-  "IELD_RES_LOG_ACTION\020\002\022!\n\035GORM_PB_FIELD_R"
-  "ES_LOG_CFGTYPE\020\003\022\037\n\033GORM_PB_FIELD_RES_LO"
-  "G_CFGID\020\004\022\037\n\033GORM_PB_FIELD_RES_LOG_DELTA"
-  "\020\005\022\037\n\033GORM_PB_FIELD_RES_LOG_VALUE\020\006\022$\n G"
-  "ORM_PB_FIELD_RES_LOG_CREATETIME\020\007*\305\002\n\037GO"
-  "RM_PB_INTERACTION_FIELD_INDEX\022%\n!GORM_PB"
-  "_FIELD_INTERACTION_VERSION\020\000\022$\n GORM_PB_"
-  "FIELD_INTERACTION_ROLEID\020\001\022%\n!GORM_PB_FI"
-  "ELD_INTERACTION_SNAKEID\020\002\022*\n&GORM_PB_FIE"
-  "LD_INTERACTION_INTERACTION1\020\003\022*\n&GORM_PB"
-  "_FIELD_INTERACTION_INTERACTION2\020\004\022*\n&GOR"
-  "M_PB_FIELD_INTERACTION_INTERACTION3\020\005\022*\n"
-  "&GORM_PB_FIELD_INTERACTION_INTERACTION4\020"
-  "\006*\273\002\n\031GORM_PB_ROLES_FIELD_INDEX\022\037\n\033GORM_"
-  "PB_FIELD_ROLES_VERSION\020\000\022\036\n\032GORM_PB_FIEL"
-  "D_ROLES_ROLEID\020\001\022\036\n\032GORM_PB_FIELD_ROLES_"
-  "USERID\020\002\022\037\n\033GORM_PB_FIELD_ROLES_WORLDID\020"
-  "\003\022\034\n\030GORM_PB_FIELD_ROLES_DBID\020\004\022\034\n\030GORM_"
-  "PB_FIELD_ROLES_NAME\020\005\022\036\n\032GORM_PB_FIELD_R"
-  "OLES_CHARID\020\006\022\034\n\030GORM_PB_FIELD_ROLES_FAC"
-  "E\020\007\022\"\n\036GORM_PB_FIELD_ROLES_CREATETIME\020\010*"
-  "\365\003\n\030GORM_PB_ROLE_FIELD_INDEX\022\036\n\032GORM_PB_"
-  "FIELD_ROLE_VERSION\020\000\022\035\n\031GORM_PB_FIELD_RO"
-  "LE_ROLEID\020\001\022\037\n\033GORM_PB_FIELD_ROLE_ROLENA"
-  "ME\020\002\022\034\n\030GORM_PB_FIELD_ROLE_LEVEL\020\003\022\032\n\026GO"
-  "RM_PB_FIELD_ROLE_EXP\020\004\022\"\n\036GORM_PB_FIELD_"
-  "ROLE_CHARACTERID\020\005\022\033\n\027GORM_PB_FIELD_ROLE"
-  "_GOLD\020\006\022\"\n\036GORM_PB_FIELD_ROLE_OFFLINETIM"
-  "E\020\007\022\035\n\031GORM_PB_FIELD_ROLE_INITED\020\010\022!\n\035GO"
-  "RM_PB_FIELD_ROLE_CREATETIME\020\t\022\033\n\027GORM_PB"
-  "_FIELD_ROLE_FACE\020\n\022\035\n\031GORM_PB_FIELD_ROLE"
-  "_ONLINE\020\013\022\036\n\032GORM_PB_FIELD_ROLE_WORLDID\020"
-  "\014\022\035\n\031GORM_PB_FIELD_ROLE_PTTYPE\020\r\022\035\n\031GORM"
-  "_PB_FIELD_ROLE_USERID\020\016*\237\001\n\031GORM_PB_SCEN"
-  "E_FIELD_INDEX\022\037\n\033GORM_PB_FIELD_SCENE_VER"
-  "SION\020\000\022\036\n\032GORM_PB_FIELD_SCENE_ROLEID\020\001\022\037"
-  "\n\033GORM_PB_FIELD_SCENE_SCENEID\020\002\022 \n\034GORM_"
-  "PB_FIELD_SCENE_COLLECTS\020\003*\375\001\n\031GORM_PB_SK"
-  "ILL_FIELD_INDEX\022\037\n\033GORM_PB_FIELD_SKILL_V"
-  "ERSION\020\000\022\036\n\032GORM_PB_FIELD_SKILL_ROLEID\020\001"
-  "\022\037\n\033GORM_PB_FIELD_SKILL_SNAKEID\020\002\022\036\n\032GOR"
-  "M_PB_FIELD_SKILL_SKILL1\020\003\022\036\n\032GORM_PB_FIE"
-  "LD_SKILL_SKILL2\020\004\022\036\n\032GORM_PB_FIELD_SKILL"
-  "_SKILL3\020\005\022\036\n\032GORM_PB_FIELD_SKILL_SKILL4\020"
-  "\006*\237\001\n\032GORM_PB_PTUSER_FIELD_INDEX\022 \n\034GORM"
-  "_PB_FIELD_PTUSER_VERSION\020\000\022\035\n\031GORM_PB_FI"
-  "ELD_PTUSER_PTID\020\001\022\037\n\033GORM_PB_FIELD_PTUSE"
-  "R_PTTYPE\020\002\022\037\n\033GORM_PB_FIELD_PTUSER_USERI"
-  "D\020\003*\332\001\n\030GORM_PB_USER_FIELD_INDEX\022\036\n\032GORM"
-  "_PB_FIELD_USER_VERSION\020\000\022\035\n\031GORM_PB_FIEL"
-  "D_USER_USERID\020\001\022\033\n\027GORM_PB_FIELD_USER_PT"
-  "ID\020\002\022\035\n\031GORM_PB_FIELD_USER_PTTYPE\020\003\022!\n\035G"
-  "ORM_PB_FIELD_USER_CREATETIME\020\004\022 \n\034GORM_P"
-  "B_FIELD_USER_ROLESDATA\020\005*\206\004\n\023GORM_PB_COL"
-  "UMN_TYPE\022\037\n\033GORM_PB_COLUMN_TYPE_INVALID\020"
-  "\000\022\033\n\027GORM_PB_COLUMN_TYPE_INT\020\001\022\034\n\030GORM_P"
-  "B_COLUMN_TYPE_UINT\020\002\022\036\n\032GORM_PB_COLUMN_T"
-  "YPE_DOUBLE\020\003\022\036\n\032GORM_PB_COLUMN_TYPE_STRI"
-  "NG\020\004\022\034\n\030GORM_PB_COLUMN_TYPE_INT8\020\005\022\035\n\031GO"
-  "RM_PB_COLUMN_TYPE_INT16\020\006\022\035\n\031GORM_PB_COL"
-  "UMN_TYPE_INT32\020\007\022\035\n\031GORM_PB_COLUMN_TYPE_"
-  "INT64\020\010\022\035\n\031GORM_PB_COLUMN_TYPE_UINT8\020\t\022\036"
-  "\n\032GORM_PB_COLUMN_TYPE_UINT16\020\n\022\036\n\032GORM_P"
-  "B_COLUMN_TYPE_UINT32\020\013\022\036\n\032GORM_PB_COLUMN"
-  "_TYPE_UINT64\020\014\022\034\n\030GORM_PB_COLUMN_TYPE_BL"
-  "OB\020\r\022\034\n\030GORM_PB_COLUMN_TYPE_CHAR\020\016\022\035\n\031GO"
-  "RM_PB_COLUMN_TYPE_BYTES\020\017B\013Z\tgorm/gormb\006"
-  "proto3"
+  "able_user\0226\n\014mainlinetask\030\024 \001(\0132 .gorm.G"
+  "ORM_PB_Table_mainlinetask\022,\n\007pubmail\030\025 \001"
+  "(\0132\033.gorm.GORM_PB_Table_pubmail\"\342\006\n\016GORM"
+  "_PB_TABLES\022.\n\010currency\030\001 \003(\0132\034.gorm.GORM"
+  "_PB_Table_currency\0222\n\ncycleevent\030\002 \003(\0132\036"
+  ".gorm.GORM_PB_Table_cycleevent\022(\n\005equip\030"
+  "\003 \003(\0132\031.gorm.GORM_PB_Table_equip\022&\n\004food"
+  "\030\004 \003(\0132\030.gorm.GORM_PB_Table_food\022&\n\004hero"
+  "\030\005 \003(\0132\030.gorm.GORM_PB_Table_hero\0220\n\tlogi"
+  "n_log\030\006 \003(\0132\035.gorm.GORM_PB_Table_login_l"
+  "og\022&\n\004mail\030\007 \003(\0132\030.gorm.GORM_PB_Table_ma"
+  "il\022.\n\010material\030\010 \003(\0132\034.gorm.GORM_PB_Tabl"
+  "e_material\022$\n\003npc\030\t \003(\0132\027.gorm.GORM_PB_T"
+  "able_npc\022,\n\007res_log\030\n \003(\0132\033.gorm.GORM_PB"
+  "_Table_res_log\0224\n\013interaction\030\013 \003(\0132\037.go"
+  "rm.GORM_PB_Table_interaction\022(\n\005roles\030\014 "
+  "\003(\0132\031.gorm.GORM_PB_Table_roles\022&\n\004role\030\r"
+  " \003(\0132\030.gorm.GORM_PB_Table_role\022(\n\005scene\030"
+  "\016 \003(\0132\031.gorm.GORM_PB_Table_scene\022(\n\005skil"
+  "l\030\017 \003(\0132\031.gorm.GORM_PB_Table_skill\022*\n\006pt"
+  "user\030\020 \003(\0132\032.gorm.GORM_PB_Table_ptuser\022&"
+  "\n\004user\030\021 \003(\0132\030.gorm.GORM_PB_Table_user\0226"
+  "\n\014mainlinetask\030\022 \003(\0132 .gorm.GORM_PB_Tabl"
+  "e_mainlinetask\022,\n\007pubmail\030\023 \003(\0132\033.gorm.G"
+  "ORM_PB_Table_pubmail*\220\005\n\023GORM_PB_TABLE_I"
+  "NDEX\022\033\n\027GORM_PB_TABLE_IDX_MIN__\020\000\022\036\n\032GOR"
+  "M_PB_TABLE_IDX_CURRENCY\020\001\022 \n\034GORM_PB_TAB"
+  "LE_IDX_CYCLEEVENT\020\002\022\033\n\027GORM_PB_TABLE_IDX"
+  "_EQUIP\020\003\022\032\n\026GORM_PB_TABLE_IDX_FOOD\020\004\022\032\n\026"
+  "GORM_PB_TABLE_IDX_HERO\020\005\022\037\n\033GORM_PB_TABL"
+  "E_IDX_LOGIN_LOG\020\006\022\032\n\026GORM_PB_TABLE_IDX_M"
+  "AIL\020\007\022\036\n\032GORM_PB_TABLE_IDX_MATERIAL\020\010\022\031\n"
+  "\025GORM_PB_TABLE_IDX_NPC\020\t\022\035\n\031GORM_PB_TABL"
+  "E_IDX_RES_LOG\020\n\022!\n\035GORM_PB_TABLE_IDX_INT"
+  "ERACTION\020\013\022\033\n\027GORM_PB_TABLE_IDX_ROLES\020\014\022"
+  "\032\n\026GORM_PB_TABLE_IDX_ROLE\020\r\022\033\n\027GORM_PB_T"
+  "ABLE_IDX_SCENE\020\016\022\033\n\027GORM_PB_TABLE_IDX_SK"
+  "ILL\020\017\022\034\n\030GORM_PB_TABLE_IDX_PTUSER\020\020\022\032\n\026G"
+  "ORM_PB_TABLE_IDX_USER\020\021\022\"\n\036GORM_PB_TABLE"
+  "_IDX_MAINLINETASK\020\022\022\035\n\031GORM_PB_TABLE_IDX"
+  "_PUBMAIL\020\023\022\033\n\027GORM_PB_TABLE_IDX_MAX__\020\024*"
+  "\241\002\n\034GORM_PB_CURRENCY_FIELD_INDEX\022\"\n\036GORM"
+  "_PB_FIELD_CURRENCY_VERSION\020\000\022!\n\035GORM_PB_"
+  "FIELD_CURRENCY_ROLEID\020\001\022\"\n\036GORM_PB_FIELD"
+  "_CURRENCY_SNAKEID\020\002\022$\n GORM_PB_FIELD_CUR"
+  "RENCY_CURRENCY1\020\003\022$\n GORM_PB_FIELD_CURRE"
+  "NCY_CURRENCY2\020\004\022$\n GORM_PB_FIELD_CURRENC"
+  "Y_CURRENCY3\020\005\022$\n GORM_PB_FIELD_CURRENCY_"
+  "CURRENCY4\020\006*\220\001\n\036GORM_PB_CYCLEEVENT_FIELD"
+  "_INDEX\022$\n GORM_PB_FIELD_CYCLEEVENT_VERSI"
+  "ON\020\000\022#\n\037GORM_PB_FIELD_CYCLEEVENT_ROLEID\020"
+  "\001\022#\n\037GORM_PB_FIELD_CYCLEEVENT_EVENTS\020\002*\375"
+  "\001\n\031GORM_PB_EQUIP_FIELD_INDEX\022\037\n\033GORM_PB_"
+  "FIELD_EQUIP_VERSION\020\000\022\036\n\032GORM_PB_FIELD_E"
+  "QUIP_ROLEID\020\001\022\037\n\033GORM_PB_FIELD_EQUIP_SNA"
+  "KEID\020\002\022\036\n\032GORM_PB_FIELD_EQUIP_EQUIP1\020\003\022\036"
+  "\n\032GORM_PB_FIELD_EQUIP_EQUIP2\020\004\022\036\n\032GORM_P"
+  "B_FIELD_EQUIP_EQUIP3\020\005\022\036\n\032GORM_PB_FIELD_"
+  "EQUIP_EQUIP4\020\006*\361\001\n\030GORM_PB_FOOD_FIELD_IN"
+  "DEX\022\036\n\032GORM_PB_FIELD_FOOD_VERSION\020\000\022\035\n\031G"
+  "ORM_PB_FIELD_FOOD_ROLEID\020\001\022\036\n\032GORM_PB_FI"
+  "ELD_FOOD_SNAKEID\020\002\022\034\n\030GORM_PB_FIELD_FOOD"
+  "_FOOD1\020\003\022\034\n\030GORM_PB_FIELD_FOOD_FOOD2\020\004\022\034"
+  "\n\030GORM_PB_FIELD_FOOD_FOOD3\020\005\022\034\n\030GORM_PB_"
+  "FIELD_FOOD_FOOD4\020\006*\265\001\n\030GORM_PB_HERO_FIEL"
+  "D_INDEX\022\036\n\032GORM_PB_FIELD_HERO_VERSION\020\000\022"
+  "\035\n\031GORM_PB_FIELD_HERO_ROLEID\020\001\022\036\n\032GORM_P"
+  "B_FIELD_HERO_SNAKEID\020\002\022\034\n\030GORM_PB_FIELD_"
+  "HERO_HEROS\020\003\022\034\n\030GORM_PB_FIELD_HERO_TEAMS"
+  "\020\004*\233\002\n\035GORM_PB_LOGIN_LOG_FIELD_INDEX\022#\n\037"
+  "GORM_PB_FIELD_LOGIN_LOG_VERSION\020\000\022\"\n\036GOR"
+  "M_PB_FIELD_LOGIN_LOG_ROLEID\020\001\022\"\n\036GORM_PB"
+  "_FIELD_LOGIN_LOG_ACTION\020\002\022\"\n\036GORM_PB_FIE"
+  "LD_LOGIN_LOG_ONLINE\020\003\022\036\n\032GORM_PB_FIELD_L"
+  "OGIN_LOG_IP\020\004\022!\n\035GORM_PB_FIELD_LOGIN_LOG"
+  "_APPID\020\005\022&\n\"GORM_PB_FIELD_LOGIN_LOG_CREA"
+  "TETIME\020\006*\262\002\n\030GORM_PB_MAIL_FIELD_INDEX\022\036\n"
+  "\032GORM_PB_FIELD_MAIL_VERSION\020\000\022\035\n\031GORM_PB"
+  "_FIELD_MAIL_ROLEID\020\001\022\034\n\030GORM_PB_FIELD_MA"
+  "IL_MAIL1\020\002\022\034\n\030GORM_PB_FIELD_MAIL_MAIL2\020\003"
+  "\022\034\n\030GORM_PB_FIELD_MAIL_MAIL3\020\004\022\034\n\030GORM_P"
+  "B_FIELD_MAIL_MAIL4\020\005\022\034\n\030GORM_PB_FIELD_MA"
+  "IL_MAIL5\020\006\022!\n\035GORM_PB_FIELD_MAIL_LASTMAI"
+  "LID\020\007\022\036\n\032GORM_PB_FIELD_MAIL_SNAKEID\020\010*\241\002"
+  "\n\034GORM_PB_MATERIAL_FIELD_INDEX\022\"\n\036GORM_P"
+  "B_FIELD_MATERIAL_VERSION\020\000\022!\n\035GORM_PB_FI"
+  "ELD_MATERIAL_ROLEID\020\001\022\"\n\036GORM_PB_FIELD_M"
+  "ATERIAL_SNAKEID\020\002\022$\n GORM_PB_FIELD_MATER"
+  "IAL_MATERIAL1\020\003\022$\n GORM_PB_FIELD_MATERIA"
+  "L_MATERIAL2\020\004\022$\n GORM_PB_FIELD_MATERIAL_"
+  "MATERIAL3\020\005\022$\n GORM_PB_FIELD_MATERIAL_MA"
+  "TERIAL4\020\006*\221\001\n\027GORM_PB_NPC_FIELD_INDEX\022\035\n"
+  "\031GORM_PB_FIELD_NPC_VERSION\020\000\022\034\n\030GORM_PB_"
+  "FIELD_NPC_ROLEID\020\001\022\035\n\031GORM_PB_FIELD_NPC_"
+  "SNAKEID\020\002\022\032\n\026GORM_PB_FIELD_NPC_NPCS\020\003*\260\002"
+  "\n\033GORM_PB_RES_LOG_FIELD_INDEX\022!\n\035GORM_PB"
+  "_FIELD_RES_LOG_VERSION\020\000\022 \n\034GORM_PB_FIEL"
+  "D_RES_LOG_ROLEID\020\001\022 \n\034GORM_PB_FIELD_RES_"
+  "LOG_ACTION\020\002\022!\n\035GORM_PB_FIELD_RES_LOG_CF"
+  "GTYPE\020\003\022\037\n\033GORM_PB_FIELD_RES_LOG_CFGID\020\004"
+  "\022\037\n\033GORM_PB_FIELD_RES_LOG_DELTA\020\005\022\037\n\033GOR"
+  "M_PB_FIELD_RES_LOG_VALUE\020\006\022$\n GORM_PB_FI"
+  "ELD_RES_LOG_CREATETIME\020\007*\305\002\n\037GORM_PB_INT"
+  "ERACTION_FIELD_INDEX\022%\n!GORM_PB_FIELD_IN"
+  "TERACTION_VERSION\020\000\022$\n GORM_PB_FIELD_INT"
+  "ERACTION_ROLEID\020\001\022%\n!GORM_PB_FIELD_INTER"
+  "ACTION_SNAKEID\020\002\022*\n&GORM_PB_FIELD_INTERA"
+  "CTION_INTERACTION1\020\003\022*\n&GORM_PB_FIELD_IN"
+  "TERACTION_INTERACTION2\020\004\022*\n&GORM_PB_FIEL"
+  "D_INTERACTION_INTERACTION3\020\005\022*\n&GORM_PB_"
+  "FIELD_INTERACTION_INTERACTION4\020\006*\273\002\n\031GOR"
+  "M_PB_ROLES_FIELD_INDEX\022\037\n\033GORM_PB_FIELD_"
+  "ROLES_VERSION\020\000\022\036\n\032GORM_PB_FIELD_ROLES_R"
+  "OLEID\020\001\022\036\n\032GORM_PB_FIELD_ROLES_USERID\020\002\022"
+  "\037\n\033GORM_PB_FIELD_ROLES_WORLDID\020\003\022\034\n\030GORM"
+  "_PB_FIELD_ROLES_DBID\020\004\022\034\n\030GORM_PB_FIELD_"
+  "ROLES_NAME\020\005\022\036\n\032GORM_PB_FIELD_ROLES_CHAR"
+  "ID\020\006\022\034\n\030GORM_PB_FIELD_ROLES_FACE\020\007\022\"\n\036GO"
+  "RM_PB_FIELD_ROLES_CREATETIME\020\010*\230\004\n\030GORM_"
+  "PB_ROLE_FIELD_INDEX\022\036\n\032GORM_PB_FIELD_ROL"
+  "E_VERSION\020\000\022\035\n\031GORM_PB_FIELD_ROLE_ROLEID"
+  "\020\001\022\037\n\033GORM_PB_FIELD_ROLE_ROLENAME\020\002\022\034\n\030G"
+  "ORM_PB_FIELD_ROLE_LEVEL\020\003\022\032\n\026GORM_PB_FIE"
+  "LD_ROLE_EXP\020\004\022\"\n\036GORM_PB_FIELD_ROLE_CHAR"
+  "ACTERID\020\005\022\033\n\027GORM_PB_FIELD_ROLE_GOLD\020\006\022\""
+  "\n\036GORM_PB_FIELD_ROLE_OFFLINETIME\020\007\022\035\n\031GO"
+  "RM_PB_FIELD_ROLE_INITED\020\010\022!\n\035GORM_PB_FIE"
+  "LD_ROLE_CREATETIME\020\t\022\033\n\027GORM_PB_FIELD_RO"
+  "LE_FACE\020\n\022\035\n\031GORM_PB_FIELD_ROLE_ONLINE\020\013"
+  "\022\036\n\032GORM_PB_FIELD_ROLE_WORLDID\020\014\022\035\n\031GORM"
+  "_PB_FIELD_ROLE_PTTYPE\020\r\022\035\n\031GORM_PB_FIELD"
+  "_ROLE_USERID\020\016\022!\n\035GORM_PB_FIELD_ROLE_PRO"
+  "CEEDSLV\020\017*\277\001\n\031GORM_PB_SCENE_FIELD_INDEX\022"
+  "\037\n\033GORM_PB_FIELD_SCENE_VERSION\020\000\022\036\n\032GORM"
+  "_PB_FIELD_SCENE_ROLEID\020\001\022\037\n\033GORM_PB_FIEL"
+  "D_SCENE_SCENEID\020\002\022 \n\034GORM_PB_FIELD_SCENE"
+  "_COLLECTS\020\003\022\036\n\032GORM_PB_FIELD_SCENE_SEASO"
+  "N\020\004*\375\001\n\031GORM_PB_SKILL_FIELD_INDEX\022\037\n\033GOR"
+  "M_PB_FIELD_SKILL_VERSION\020\000\022\036\n\032GORM_PB_FI"
+  "ELD_SKILL_ROLEID\020\001\022\037\n\033GORM_PB_FIELD_SKIL"
+  "L_SNAKEID\020\002\022\036\n\032GORM_PB_FIELD_SKILL_SKILL"
+  "1\020\003\022\036\n\032GORM_PB_FIELD_SKILL_SKILL2\020\004\022\036\n\032G"
+  "ORM_PB_FIELD_SKILL_SKILL3\020\005\022\036\n\032GORM_PB_F"
+  "IELD_SKILL_SKILL4\020\006*\237\001\n\032GORM_PB_PTUSER_F"
+  "IELD_INDEX\022 \n\034GORM_PB_FIELD_PTUSER_VERSI"
+  "ON\020\000\022\035\n\031GORM_PB_FIELD_PTUSER_PTID\020\001\022\037\n\033G"
+  "ORM_PB_FIELD_PTUSER_PTTYPE\020\002\022\037\n\033GORM_PB_"
+  "FIELD_PTUSER_USERID\020\003*\332\001\n\030GORM_PB_USER_F"
+  "IELD_INDEX\022\036\n\032GORM_PB_FIELD_USER_VERSION"
+  "\020\000\022\035\n\031GORM_PB_FIELD_USER_USERID\020\001\022\033\n\027GOR"
+  "M_PB_FIELD_USER_PTID\020\002\022\035\n\031GORM_PB_FIELD_"
+  "USER_PTTYPE\020\003\022!\n\035GORM_PB_FIELD_USER_CREA"
+  "TETIME\020\004\022 \n\034GORM_PB_FIELD_USER_ROLESDATA"
+  "\020\005*\237\005\n GORM_PB_MAINLINETASK_FIELD_INDEX\022"
+  "&\n\"GORM_PB_FIELD_MAINLINETASK_VERSION\020\000\022"
+  "%\n!GORM_PB_FIELD_MAINLINETASK_ROLEID\020\001\022*"
+  "\n&GORM_PB_FIELD_MAINLINETASK_RUNNINGTASK"
+  "\020\002\022-\n)GORM_PB_FIELD_MAINLINETASK_COMPLEA"
+  "TETASK0\020\003\022-\n)GORM_PB_FIELD_MAINLINETASK_"
+  "COMPLEATETASK1\020\004\022-\n)GORM_PB_FIELD_MAINLI"
+  "NETASK_COMPLEATETASK2\020\005\022-\n)GORM_PB_FIELD"
+  "_MAINLINETASK_COMPLEATETASK3\020\006\022-\n)GORM_P"
+  "B_FIELD_MAINLINETASK_COMPLEATETASK4\020\007\022-\n"
+  ")GORM_PB_FIELD_MAINLINETASK_COMPLEATETAS"
+  "K5\020\010\022-\n)GORM_PB_FIELD_MAINLINETASK_COMPL"
+  "EATETASK6\020\t\022-\n)GORM_PB_FIELD_MAINLINETAS"
+  "K_COMPLEATETASK7\020\n\022-\n)GORM_PB_FIELD_MAIN"
+  "LINETASK_COMPLEATETASK8\020\013\022-\n)GORM_PB_FIE"
+  "LD_MAINLINETASK_COMPLEATETASK9\020\014\022*\n&GORM"
+  "_PB_FIELD_MAINLINETASK_UNLOCKFUNCS\020\r*\314\002\n"
+  "\033GORM_PB_PUBMAIL_FIELD_INDEX\022!\n\035GORM_PB_"
+  "FIELD_PUBMAIL_VERSION\020\000\022 \n\034GORM_PB_FIELD"
+  "_PUBMAIL_MAILID\020\001\022#\n\037GORM_PB_FIELD_PUBMA"
+  "IL_ADDRESSER\020\002\022\037\n\033GORM_PB_FIELD_PUBMAIL_"
+  "TITLE\020\003\022\036\n\032GORM_PB_FIELD_PUBMAIL_BODY\020\004\022"
+  "\037\n\033GORM_PB_FIELD_PUBMAIL_ROLES\020\005\022$\n GORM"
+  "_PB_FIELD_PUBMAIL_ATTACHMENT\020\006\022\034\n\030GORM_P"
+  "B_FIELD_PUBMAIL_DT\020\007\022\035\n\031GORM_PB_FIELD_PU"
+  "BMAIL_DEL\020\010*\206\004\n\023GORM_PB_COLUMN_TYPE\022\037\n\033G"
+  "ORM_PB_COLUMN_TYPE_INVALID\020\000\022\033\n\027GORM_PB_"
+  "COLUMN_TYPE_INT\020\001\022\034\n\030GORM_PB_COLUMN_TYPE"
+  "_UINT\020\002\022\036\n\032GORM_PB_COLUMN_TYPE_DOUBLE\020\003\022"
+  "\036\n\032GORM_PB_COLUMN_TYPE_STRING\020\004\022\034\n\030GORM_"
+  "PB_COLUMN_TYPE_INT8\020\005\022\035\n\031GORM_PB_COLUMN_"
+  "TYPE_INT16\020\006\022\035\n\031GORM_PB_COLUMN_TYPE_INT3"
+  "2\020\007\022\035\n\031GORM_PB_COLUMN_TYPE_INT64\020\010\022\035\n\031GO"
+  "RM_PB_COLUMN_TYPE_UINT8\020\t\022\036\n\032GORM_PB_COL"
+  "UMN_TYPE_UINT16\020\n\022\036\n\032GORM_PB_COLUMN_TYPE"
+  "_UINT32\020\013\022\036\n\032GORM_PB_COLUMN_TYPE_UINT64\020"
+  "\014\022\034\n\030GORM_PB_COLUMN_TYPE_BLOB\020\r\022\034\n\030GORM_"
+  "PB_COLUMN_TYPE_CHAR\020\016\022\035\n\031GORM_PB_COLUMN_"
+  "TYPE_BYTES\020\017B\013Z\tgorm/gormb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_deps[1] = {
   &::descriptor_table_gorm_2ddb_2eproto,
@@ -456,7 +499,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gor
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gorm_5fpb_5ftables_5finc_2eproto = {
-  false, false, descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto, "gorm_pb_tables_inc.proto", 7486,
+  false, false, descriptor_table_protodef_gorm_5fpb_5ftables_5finc_2eproto, "gorm_pb_tables_inc.proto", 8833,
   &descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_once, descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_sccs, descriptor_table_gorm_5fpb_5ftables_5finc_2eproto_deps, 5, 1,
   schemas, file_default_instances, TableStruct_gorm_5fpb_5ftables_5finc_2eproto::offsets,
   file_level_metadata_gorm_5fpb_5ftables_5finc_2eproto, 5, file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto, file_level_service_descriptors_gorm_5fpb_5ftables_5finc_2eproto,
@@ -490,6 +533,8 @@ bool GORM_PB_TABLE_INDEX_IsValid(int value) {
     case 16:
     case 17:
     case 18:
+    case 19:
+    case 20:
       return true;
     default:
       return false;
@@ -741,6 +786,7 @@ bool GORM_PB_ROLE_FIELD_INDEX_IsValid(int value) {
     case 12:
     case 13:
     case 14:
+    case 15:
       return true;
     default:
       return false;
@@ -757,6 +803,7 @@ bool GORM_PB_SCENE_FIELD_INDEX_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
       return true;
     default:
       return false;
@@ -816,9 +863,56 @@ bool GORM_PB_USER_FIELD_INDEX_IsValid(int value) {
   }
 }
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_COLUMN_TYPE_descriptor() {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_MAINLINETASK_FIELD_INDEX_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
   return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[18];
+}
+bool GORM_PB_MAINLINETASK_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_PUBMAIL_FIELD_INDEX_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[19];
+}
+bool GORM_PB_PUBMAIL_FIELD_INDEX_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_COLUMN_TYPE_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_gorm_5fpb_5ftables_5finc_2eproto);
+  return file_level_enum_descriptors_gorm_5fpb_5ftables_5finc_2eproto[20];
 }
 bool GORM_PB_COLUMN_TYPE_IsValid(int value) {
   switch (value) {
@@ -1651,6 +1745,10 @@ void GORM_PB_TABLE::InitAsDefaultInstance() {
       ::gorm::GORM_PB_Table_ptuser::internal_default_instance());
   ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->user_ = const_cast< ::gorm::GORM_PB_Table_user*>(
       ::gorm::GORM_PB_Table_user::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->mainlinetask_ = const_cast< ::gorm::GORM_PB_Table_mainlinetask*>(
+      ::gorm::GORM_PB_Table_mainlinetask::internal_default_instance());
+  ::gorm::_GORM_PB_TABLE_default_instance_._instance.get_mutable()->pubmail_ = const_cast< ::gorm::GORM_PB_Table_pubmail*>(
+      ::gorm::GORM_PB_Table_pubmail::internal_default_instance());
 }
 class GORM_PB_TABLE::_Internal {
  public:
@@ -1672,6 +1770,8 @@ class GORM_PB_TABLE::_Internal {
   static const ::gorm::GORM_PB_Table_skill& skill(const GORM_PB_TABLE* msg);
   static const ::gorm::GORM_PB_Table_ptuser& ptuser(const GORM_PB_TABLE* msg);
   static const ::gorm::GORM_PB_Table_user& user(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_mainlinetask& mainlinetask(const GORM_PB_TABLE* msg);
+  static const ::gorm::GORM_PB_Table_pubmail& pubmail(const GORM_PB_TABLE* msg);
 };
 
 const ::gorm::GORM_PB_CUSTEM_COLUMNS&
@@ -1745,6 +1845,14 @@ GORM_PB_TABLE::_Internal::ptuser(const GORM_PB_TABLE* msg) {
 const ::gorm::GORM_PB_Table_user&
 GORM_PB_TABLE::_Internal::user(const GORM_PB_TABLE* msg) {
   return *msg->user_;
+}
+const ::gorm::GORM_PB_Table_mainlinetask&
+GORM_PB_TABLE::_Internal::mainlinetask(const GORM_PB_TABLE* msg) {
+  return *msg->mainlinetask_;
+}
+const ::gorm::GORM_PB_Table_pubmail&
+GORM_PB_TABLE::_Internal::pubmail(const GORM_PB_TABLE* msg) {
+  return *msg->pubmail_;
 }
 void GORM_PB_TABLE::clear_currency() {
   if (GetArena() == nullptr && currency_ != nullptr) {
@@ -1848,6 +1956,18 @@ void GORM_PB_TABLE::clear_user() {
   }
   user_ = nullptr;
 }
+void GORM_PB_TABLE::clear_mainlinetask() {
+  if (GetArena() == nullptr && mainlinetask_ != nullptr) {
+    delete mainlinetask_;
+  }
+  mainlinetask_ = nullptr;
+}
+void GORM_PB_TABLE::clear_pubmail() {
+  if (GetArena() == nullptr && pubmail_ != nullptr) {
+    delete pubmail_;
+  }
+  pubmail_ = nullptr;
+}
 GORM_PB_TABLE::GORM_PB_TABLE(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
@@ -1947,6 +2067,16 @@ GORM_PB_TABLE::GORM_PB_TABLE(const GORM_PB_TABLE& from)
   } else {
     user_ = nullptr;
   }
+  if (from._internal_has_mainlinetask()) {
+    mainlinetask_ = new ::gorm::GORM_PB_Table_mainlinetask(*from.mainlinetask_);
+  } else {
+    mainlinetask_ = nullptr;
+  }
+  if (from._internal_has_pubmail()) {
+    pubmail_ = new ::gorm::GORM_PB_Table_pubmail(*from.pubmail_);
+  } else {
+    pubmail_ = nullptr;
+  }
   tableid_ = from.tableid_;
   // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_TABLE)
 }
@@ -1984,6 +2114,8 @@ void GORM_PB_TABLE::SharedDtor() {
   if (this != internal_default_instance()) delete skill_;
   if (this != internal_default_instance()) delete ptuser_;
   if (this != internal_default_instance()) delete user_;
+  if (this != internal_default_instance()) delete mainlinetask_;
+  if (this != internal_default_instance()) delete pubmail_;
 }
 
 void GORM_PB_TABLE::ArenaDtor(void* object) {
@@ -2079,6 +2211,14 @@ void GORM_PB_TABLE::Clear() {
     delete user_;
   }
   user_ = nullptr;
+  if (GetArena() == nullptr && mainlinetask_ != nullptr) {
+    delete mainlinetask_;
+  }
+  mainlinetask_ = nullptr;
+  if (GetArena() == nullptr && pubmail_ != nullptr) {
+    delete pubmail_;
+  }
+  pubmail_ = nullptr;
   tableid_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -2221,6 +2361,20 @@ const char* GORM_PB_TABLE::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_
       case 19:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 154)) {
           ptr = ctx->ParseMessage(_internal_mutable_user(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_mainlinetask mainlinetask = 20;
+      case 20:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 162)) {
+          ptr = ctx->ParseMessage(_internal_mutable_mainlinetask(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .gorm.GORM_PB_Table_pubmail pubmail = 21;
+      case 21:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 170)) {
+          ptr = ctx->ParseMessage(_internal_mutable_pubmail(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2402,6 +2556,22 @@ failure:
         19, _Internal::user(this), target, stream);
   }
 
+  // .gorm.GORM_PB_Table_mainlinetask mainlinetask = 20;
+  if (this->has_mainlinetask()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        20, _Internal::mainlinetask(this), target, stream);
+  }
+
+  // .gorm.GORM_PB_Table_pubmail pubmail = 21;
+  if (this->has_pubmail()) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        21, _Internal::pubmail(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2544,6 +2714,20 @@ size_t GORM_PB_TABLE::ByteSizeLong() const {
         *user_);
   }
 
+  // .gorm.GORM_PB_Table_mainlinetask mainlinetask = 20;
+  if (this->has_mainlinetask()) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *mainlinetask_);
+  }
+
+  // .gorm.GORM_PB_Table_pubmail pubmail = 21;
+  if (this->has_pubmail()) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *pubmail_);
+  }
+
   // sfixed32 TableId = 1;
   if (this->tableid() != 0) {
     total_size += 1 + 4;
@@ -2633,6 +2817,12 @@ void GORM_PB_TABLE::MergeFrom(const GORM_PB_TABLE& from) {
   }
   if (from.has_user()) {
     _internal_mutable_user()->::gorm::GORM_PB_Table_user::MergeFrom(from._internal_user());
+  }
+  if (from.has_mainlinetask()) {
+    _internal_mutable_mainlinetask()->::gorm::GORM_PB_Table_mainlinetask::MergeFrom(from._internal_mainlinetask());
+  }
+  if (from.has_pubmail()) {
+    _internal_mutable_pubmail()->::gorm::GORM_PB_Table_pubmail::MergeFrom(from._internal_pubmail());
   }
   if (from.tableid() != 0) {
     _internal_set_tableid(from._internal_tableid());
@@ -2732,6 +2922,12 @@ void GORM_PB_TABLES::clear_ptuser() {
 void GORM_PB_TABLES::clear_user() {
   user_.Clear();
 }
+void GORM_PB_TABLES::clear_mainlinetask() {
+  mainlinetask_.Clear();
+}
+void GORM_PB_TABLES::clear_pubmail() {
+  pubmail_.Clear();
+}
 GORM_PB_TABLES::GORM_PB_TABLES(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   currency_(arena),
@@ -2750,7 +2946,9 @@ GORM_PB_TABLES::GORM_PB_TABLES(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   scene_(arena),
   skill_(arena),
   ptuser_(arena),
-  user_(arena) {
+  user_(arena),
+  mainlinetask_(arena),
+  pubmail_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:gorm.GORM_PB_TABLES)
@@ -2773,7 +2971,9 @@ GORM_PB_TABLES::GORM_PB_TABLES(const GORM_PB_TABLES& from)
       scene_(from.scene_),
       skill_(from.skill_),
       ptuser_(from.ptuser_),
-      user_(from.user_) {
+      user_(from.user_),
+      mainlinetask_(from.mainlinetask_),
+      pubmail_(from.pubmail_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:gorm.GORM_PB_TABLES)
 }
@@ -2830,6 +3030,8 @@ void GORM_PB_TABLES::Clear() {
   skill_.Clear();
   ptuser_.Clear();
   user_.Clear();
+  mainlinetask_.Clear();
+  pubmail_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -3045,6 +3247,30 @@ const char* GORM_PB_TABLES::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<138>(ptr));
         } else goto handle_unusual;
         continue;
+      // repeated .gorm.GORM_PB_Table_mainlinetask mainlinetask = 18;
+      case 18:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 146)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            ptr = ctx->ParseMessage(_internal_add_mainlinetask(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<146>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .gorm.GORM_PB_Table_pubmail pubmail = 19;
+      case 19:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 154)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            ptr = ctx->ParseMessage(_internal_add_pubmail(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<154>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -3209,6 +3435,22 @@ failure:
       InternalWriteMessage(17, this->_internal_user(i), target, stream);
   }
 
+  // repeated .gorm.GORM_PB_Table_mainlinetask mainlinetask = 18;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_mainlinetask_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(18, this->_internal_mainlinetask(i), target, stream);
+  }
+
+  // repeated .gorm.GORM_PB_Table_pubmail pubmail = 19;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_pubmail_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(19, this->_internal_pubmail(i), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3344,6 +3586,20 @@ size_t GORM_PB_TABLES::ByteSizeLong() const {
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
+  // repeated .gorm.GORM_PB_Table_mainlinetask mainlinetask = 18;
+  total_size += 2UL * this->_internal_mainlinetask_size();
+  for (const auto& msg : this->mainlinetask_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .gorm.GORM_PB_Table_pubmail pubmail = 19;
+  total_size += 2UL * this->_internal_pubmail_size();
+  for (const auto& msg : this->pubmail_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
         _internal_metadata_, total_size, &_cached_size_);
@@ -3392,6 +3648,8 @@ void GORM_PB_TABLES::MergeFrom(const GORM_PB_TABLES& from) {
   skill_.MergeFrom(from.skill_);
   ptuser_.MergeFrom(from.ptuser_);
   user_.MergeFrom(from.user_);
+  mainlinetask_.MergeFrom(from.mainlinetask_);
+  pubmail_.MergeFrom(from.pubmail_);
 }
 
 void GORM_PB_TABLES::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -3432,6 +3690,8 @@ void GORM_PB_TABLES::InternalSwap(GORM_PB_TABLES* other) {
   skill_.InternalSwap(&other->skill_);
   ptuser_.InternalSwap(&other->ptuser_);
   user_.InternalSwap(&other->user_);
+  mainlinetask_.InternalSwap(&other->mainlinetask_);
+  pubmail_.InternalSwap(&other->pubmail_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata GORM_PB_TABLES::GetMetadata() const {

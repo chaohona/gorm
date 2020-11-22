@@ -6,7 +6,7 @@
 work-model: concurrences
 
 #server listen address
-listen-address: 0.0.0.0:8806
+listen-address: 0.0.0.0:7707
 
 #work thread numbers
 work-threads: 1

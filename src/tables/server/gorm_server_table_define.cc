@@ -24,6 +24,91 @@ int GORM_GetSplitTableName(int iTableId, uint32 uiHashCode, char *szOutTableName
         iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " cycleevent_%d ", uiHashCode%2);
         break;
     }
+    case GORM_PB_TABLE_IDX_EQUIP:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " equip_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_FOOD:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " food_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_HERO:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " hero_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " login_log_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_MAIL:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " mail_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_MATERIAL:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " material_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_NPC:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " npc_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_RES_LOG:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " res_log_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_INTERACTION:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " interaction_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_ROLES:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " roles_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_ROLE:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " role_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_SCENE:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " scene_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_SKILL:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " skill_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_PTUSER:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " ptuser_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_USER:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " user_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " mainlinetask_%d ", uiHashCode%2);
+        break;
+    }
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+    {
+        iUsedBuffLen = GORM_SafeSnprintf(szOutTableName, iInBuffLen, " pubmail_%d ", uiHashCode%2);
+        break;
+    }
     default:
         return GORM_INVALID_TABLE;
     }
@@ -225,6 +310,1565 @@ int GORM_PackInsertSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLE
     }
     return GORM_OK;
 }
+#define EQUIPINSERTSQL "insert into equip_%d(`version`, `roleid`, `snakeid`, `equip1`, `equip2`, `equip3`, `equip4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s');"
+int GORM_PackInsertSQLEQUIP_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_equip &table_equip, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 167;
+    int iTmpLen = 0;
+
+    const uint64 equip_version = table_equip.version();
+
+    const int64 equip_roleid = table_equip.roleid();
+
+    const int32 equip_snakeid = table_equip.snakeid();
+
+    const string &equip_equip1 = table_equip.equip1();
+    const char *sz_equip_equip1 = "";
+    int len_equip_equip1 = 0;
+    GORM_MemPoolData *buffer_equip_equip1 = nullptr;
+    if(equip_equip1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip1, equip_equip1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip1->m_uszData, equip_equip1.c_str(), equip_equip1.size());
+        buffer_equip_equip1->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip1->m_sUsedSize = iTmpLen;
+        sz_equip_equip1 = buffer_equip_equip1->m_uszData;
+        len_equip_equip1 = iTmpLen;
+    }
+
+    const string &equip_equip2 = table_equip.equip2();
+    const char *sz_equip_equip2 = "";
+    int len_equip_equip2 = 0;
+    GORM_MemPoolData *buffer_equip_equip2 = nullptr;
+    if(equip_equip2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip2, equip_equip2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip2->m_uszData, equip_equip2.c_str(), equip_equip2.size());
+        buffer_equip_equip2->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip2->m_sUsedSize = iTmpLen;
+        sz_equip_equip2 = buffer_equip_equip2->m_uszData;
+        len_equip_equip2 = iTmpLen;
+    }
+
+    const string &equip_equip3 = table_equip.equip3();
+    const char *sz_equip_equip3 = "";
+    int len_equip_equip3 = 0;
+    GORM_MemPoolData *buffer_equip_equip3 = nullptr;
+    if(equip_equip3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip3, equip_equip3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip3->m_uszData, equip_equip3.c_str(), equip_equip3.size());
+        buffer_equip_equip3->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip3->m_sUsedSize = iTmpLen;
+        sz_equip_equip3 = buffer_equip_equip3->m_uszData;
+        len_equip_equip3 = iTmpLen;
+    }
+
+    const string &equip_equip4 = table_equip.equip4();
+    const char *sz_equip_equip4 = "";
+    int len_equip_equip4 = 0;
+    GORM_MemPoolData *buffer_equip_equip4 = nullptr;
+    if(equip_equip4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip4, equip_equip4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip4->m_uszData, equip_equip4.c_str(), equip_equip4.size());
+        buffer_equip_equip4->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip4->m_sUsedSize = iTmpLen;
+        sz_equip_equip4 = buffer_equip_equip4->m_uszData;
+        len_equip_equip4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_equip_equip1 + len_equip_equip2 + len_equip_equip3 + len_equip_equip4;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, EQUIPINSERTSQL, iTableIndex, equip_version, equip_roleid, equip_snakeid, sz_equip_equip1, sz_equip_equip2, sz_equip_equip3, sz_equip_equip4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_equip_equip1 != nullptr)
+        buffer_equip_equip1->Release();
+    if (buffer_equip_equip2 != nullptr)
+        buffer_equip_equip2->Release();
+    if (buffer_equip_equip3 != nullptr)
+        buffer_equip_equip3->Release();
+    if (buffer_equip_equip4 != nullptr)
+        buffer_equip_equip4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_equip())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_equip &table_equip = table.equip();
+        return GORM_PackInsertSQLEQUIP_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_equip, pReqData);
+    }
+    return GORM_OK;
+}
+#define FOODINSERTSQL "insert into food_%d(`version`, `roleid`, `snakeid`, `food1`, `food2`, `food3`, `food4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s');"
+int GORM_PackInsertSQLFOOD_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_food &table_food, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 161;
+    int iTmpLen = 0;
+
+    const uint64 food_version = table_food.version();
+
+    const int64 food_roleid = table_food.roleid();
+
+    const int32 food_snakeid = table_food.snakeid();
+
+    const string &food_food1 = table_food.food1();
+    const char *sz_food_food1 = "";
+    int len_food_food1 = 0;
+    GORM_MemPoolData *buffer_food_food1 = nullptr;
+    if(food_food1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food1, food_food1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food1->m_uszData, food_food1.c_str(), food_food1.size());
+        buffer_food_food1->m_uszData[iTmpLen] = '\0';
+        buffer_food_food1->m_sUsedSize = iTmpLen;
+        sz_food_food1 = buffer_food_food1->m_uszData;
+        len_food_food1 = iTmpLen;
+    }
+
+    const string &food_food2 = table_food.food2();
+    const char *sz_food_food2 = "";
+    int len_food_food2 = 0;
+    GORM_MemPoolData *buffer_food_food2 = nullptr;
+    if(food_food2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food2, food_food2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food2->m_uszData, food_food2.c_str(), food_food2.size());
+        buffer_food_food2->m_uszData[iTmpLen] = '\0';
+        buffer_food_food2->m_sUsedSize = iTmpLen;
+        sz_food_food2 = buffer_food_food2->m_uszData;
+        len_food_food2 = iTmpLen;
+    }
+
+    const string &food_food3 = table_food.food3();
+    const char *sz_food_food3 = "";
+    int len_food_food3 = 0;
+    GORM_MemPoolData *buffer_food_food3 = nullptr;
+    if(food_food3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food3, food_food3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food3->m_uszData, food_food3.c_str(), food_food3.size());
+        buffer_food_food3->m_uszData[iTmpLen] = '\0';
+        buffer_food_food3->m_sUsedSize = iTmpLen;
+        sz_food_food3 = buffer_food_food3->m_uszData;
+        len_food_food3 = iTmpLen;
+    }
+
+    const string &food_food4 = table_food.food4();
+    const char *sz_food_food4 = "";
+    int len_food_food4 = 0;
+    GORM_MemPoolData *buffer_food_food4 = nullptr;
+    if(food_food4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food4, food_food4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food4->m_uszData, food_food4.c_str(), food_food4.size());
+        buffer_food_food4->m_uszData[iTmpLen] = '\0';
+        buffer_food_food4->m_sUsedSize = iTmpLen;
+        sz_food_food4 = buffer_food_food4->m_uszData;
+        len_food_food4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_food_food1 + len_food_food2 + len_food_food3 + len_food_food4;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, FOODINSERTSQL, iTableIndex, food_version, food_roleid, food_snakeid, sz_food_food1, sz_food_food2, sz_food_food3, sz_food_food4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_food_food1 != nullptr)
+        buffer_food_food1->Release();
+    if (buffer_food_food2 != nullptr)
+        buffer_food_food2->Release();
+    if (buffer_food_food3 != nullptr)
+        buffer_food_food3->Release();
+    if (buffer_food_food4 != nullptr)
+        buffer_food_food4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_food())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_food &table_food = table.food();
+        return GORM_PackInsertSQLFOOD_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_food, pReqData);
+    }
+    return GORM_OK;
+}
+#define HEROINSERTSQL "insert into hero_%d(`version`, `roleid`, `snakeid`, `heros`, `teams`) values (%llu, %lld, %d, '%s', '%s');"
+int GORM_PackInsertSQLHERO_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_hero &table_hero, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 131;
+    int iTmpLen = 0;
+
+    const uint64 hero_version = table_hero.version();
+
+    const int64 hero_roleid = table_hero.roleid();
+
+    const int32 hero_snakeid = table_hero.snakeid();
+
+    const string &hero_heros = table_hero.heros();
+    const char *sz_hero_heros = "";
+    int len_hero_heros = 0;
+    GORM_MemPoolData *buffer_hero_heros = nullptr;
+    if(hero_heros.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_heros, hero_heros.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_hero_heros->m_uszData, hero_heros.c_str(), hero_heros.size());
+        buffer_hero_heros->m_uszData[iTmpLen] = '\0';
+        buffer_hero_heros->m_sUsedSize = iTmpLen;
+        sz_hero_heros = buffer_hero_heros->m_uszData;
+        len_hero_heros = iTmpLen;
+    }
+
+    const string &hero_teams = table_hero.teams();
+    const char *sz_hero_teams = "";
+    int len_hero_teams = 0;
+    GORM_MemPoolData *buffer_hero_teams = nullptr;
+    if(hero_teams.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_teams, hero_teams.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_hero_teams->m_uszData, hero_teams.c_str(), hero_teams.size());
+        buffer_hero_teams->m_uszData[iTmpLen] = '\0';
+        buffer_hero_teams->m_sUsedSize = iTmpLen;
+        sz_hero_teams = buffer_hero_teams->m_uszData;
+        len_hero_teams = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_hero_heros + len_hero_teams;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, HEROINSERTSQL, iTableIndex, hero_version, hero_roleid, hero_snakeid, sz_hero_heros, sz_hero_teams);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_hero_heros != nullptr)
+        buffer_hero_heros->Release();
+    if (buffer_hero_teams != nullptr)
+        buffer_hero_teams->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_hero())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_hero &table_hero = table.hero();
+        return GORM_PackInsertSQLHERO_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_hero, pReqData);
+    }
+    return GORM_OK;
+}
+#define LOGIN_LOGINSERTSQL "insert into login_log_%d(`version`, `roleid`, `action`, `online`, `ip`, `appid`, `createtime`) values (%llu, %lld, %d, %d, '%s', '%s', %lld);"
+int GORM_PackInsertSQLLOGIN_LOG_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_login_log &table_login_log, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 171;
+    int iTmpLen = 0;
+
+    const uint64 login_log_version = table_login_log.version();
+
+    const int64 login_log_roleid = table_login_log.roleid();
+
+    const int32 login_log_action = table_login_log.action();
+
+    const int32 login_log_online = table_login_log.online();
+
+    const string &login_log_ip = table_login_log.ip();
+    const char *sz_login_log_ip = "";
+    int len_login_log_ip = 0;
+    GORM_MemPoolData *buffer_login_log_ip = nullptr;
+    if(login_log_ip.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_ip, login_log_ip.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_login_log_ip->m_uszData, login_log_ip.c_str(), login_log_ip.size());
+        buffer_login_log_ip->m_uszData[iTmpLen] = '\0';
+        buffer_login_log_ip->m_sUsedSize = iTmpLen;
+        sz_login_log_ip = buffer_login_log_ip->m_uszData;
+        len_login_log_ip = iTmpLen;
+    }
+
+    const string &login_log_appid = table_login_log.appid();
+    const char *sz_login_log_appid = "";
+    int len_login_log_appid = 0;
+    GORM_MemPoolData *buffer_login_log_appid = nullptr;
+    if(login_log_appid.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_appid, login_log_appid.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_login_log_appid->m_uszData, login_log_appid.c_str(), login_log_appid.size());
+        buffer_login_log_appid->m_uszData[iTmpLen] = '\0';
+        buffer_login_log_appid->m_sUsedSize = iTmpLen;
+        sz_login_log_appid = buffer_login_log_appid->m_uszData;
+        len_login_log_appid = iTmpLen;
+    }
+
+    const int64 login_log_createtime = table_login_log.createtime();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + 8 + len_login_log_ip + len_login_log_appid + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, LOGIN_LOGINSERTSQL, iTableIndex, login_log_version, login_log_roleid, login_log_action, login_log_online, sz_login_log_ip, sz_login_log_appid, login_log_createtime);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_login_log_ip != nullptr)
+        buffer_login_log_ip->Release();
+    if (buffer_login_log_appid != nullptr)
+        buffer_login_log_appid->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_login_log())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_login_log &table_login_log = table.login_log();
+        return GORM_PackInsertSQLLOGIN_LOG_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_login_log, pReqData);
+    }
+    return GORM_OK;
+}
+#define MAILINSERTSQL "insert into mail_%d(`version`, `roleid`, `mail1`, `mail2`, `mail3`, `mail4`, `mail5`, `lastmailid`, `snakeid`) values (%llu, %lld, '%s', '%s', '%s', '%s', '%s', %d, %d);"
+int GORM_PackInsertSQLMAIL_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mail &table_mail, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 194;
+    int iTmpLen = 0;
+
+    const uint64 mail_version = table_mail.version();
+
+    const int64 mail_roleid = table_mail.roleid();
+
+    const string &mail_mail1 = table_mail.mail1();
+    const char *sz_mail_mail1 = "";
+    int len_mail_mail1 = 0;
+    GORM_MemPoolData *buffer_mail_mail1 = nullptr;
+    if(mail_mail1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail1, mail_mail1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail1->m_uszData, mail_mail1.c_str(), mail_mail1.size());
+        buffer_mail_mail1->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail1->m_sUsedSize = iTmpLen;
+        sz_mail_mail1 = buffer_mail_mail1->m_uszData;
+        len_mail_mail1 = iTmpLen;
+    }
+
+    const string &mail_mail2 = table_mail.mail2();
+    const char *sz_mail_mail2 = "";
+    int len_mail_mail2 = 0;
+    GORM_MemPoolData *buffer_mail_mail2 = nullptr;
+    if(mail_mail2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail2, mail_mail2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail2->m_uszData, mail_mail2.c_str(), mail_mail2.size());
+        buffer_mail_mail2->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail2->m_sUsedSize = iTmpLen;
+        sz_mail_mail2 = buffer_mail_mail2->m_uszData;
+        len_mail_mail2 = iTmpLen;
+    }
+
+    const string &mail_mail3 = table_mail.mail3();
+    const char *sz_mail_mail3 = "";
+    int len_mail_mail3 = 0;
+    GORM_MemPoolData *buffer_mail_mail3 = nullptr;
+    if(mail_mail3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail3, mail_mail3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail3->m_uszData, mail_mail3.c_str(), mail_mail3.size());
+        buffer_mail_mail3->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail3->m_sUsedSize = iTmpLen;
+        sz_mail_mail3 = buffer_mail_mail3->m_uszData;
+        len_mail_mail3 = iTmpLen;
+    }
+
+    const string &mail_mail4 = table_mail.mail4();
+    const char *sz_mail_mail4 = "";
+    int len_mail_mail4 = 0;
+    GORM_MemPoolData *buffer_mail_mail4 = nullptr;
+    if(mail_mail4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail4, mail_mail4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail4->m_uszData, mail_mail4.c_str(), mail_mail4.size());
+        buffer_mail_mail4->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail4->m_sUsedSize = iTmpLen;
+        sz_mail_mail4 = buffer_mail_mail4->m_uszData;
+        len_mail_mail4 = iTmpLen;
+    }
+
+    const string &mail_mail5 = table_mail.mail5();
+    const char *sz_mail_mail5 = "";
+    int len_mail_mail5 = 0;
+    GORM_MemPoolData *buffer_mail_mail5 = nullptr;
+    if(mail_mail5.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail5, mail_mail5.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail5->m_uszData, mail_mail5.c_str(), mail_mail5.size());
+        buffer_mail_mail5->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail5->m_sUsedSize = iTmpLen;
+        sz_mail_mail5 = buffer_mail_mail5->m_uszData;
+        len_mail_mail5 = iTmpLen;
+    }
+
+    const int32 mail_lastmailid = table_mail.lastmailid();
+
+    const int32 mail_snakeid = table_mail.snakeid();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_mail_mail1 + len_mail_mail2 + len_mail_mail3 + len_mail_mail4 + len_mail_mail5 + 8 + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAILINSERTSQL, iTableIndex, mail_version, mail_roleid, sz_mail_mail1, sz_mail_mail2, sz_mail_mail3, sz_mail_mail4, sz_mail_mail5, mail_lastmailid, mail_snakeid);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_mail_mail1 != nullptr)
+        buffer_mail_mail1->Release();
+    if (buffer_mail_mail2 != nullptr)
+        buffer_mail_mail2->Release();
+    if (buffer_mail_mail3 != nullptr)
+        buffer_mail_mail3->Release();
+    if (buffer_mail_mail4 != nullptr)
+        buffer_mail_mail4->Release();
+    if (buffer_mail_mail5 != nullptr)
+        buffer_mail_mail5->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_mail())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_mail &table_mail = table.mail();
+        return GORM_PackInsertSQLMAIL_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_mail, pReqData);
+    }
+    return GORM_OK;
+}
+#define MATERIALINSERTSQL "insert into material_%d(`version`, `roleid`, `snakeid`, `material1`, `material2`, `material3`, `material4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s');"
+int GORM_PackInsertSQLMATERIAL_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_material &table_material, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 185;
+    int iTmpLen = 0;
+
+    const uint64 material_version = table_material.version();
+
+    const int64 material_roleid = table_material.roleid();
+
+    const int32 material_snakeid = table_material.snakeid();
+
+    const string &material_material1 = table_material.material1();
+    const char *sz_material_material1 = "";
+    int len_material_material1 = 0;
+    GORM_MemPoolData *buffer_material_material1 = nullptr;
+    if(material_material1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material1, material_material1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material1->m_uszData, material_material1.c_str(), material_material1.size());
+        buffer_material_material1->m_uszData[iTmpLen] = '\0';
+        buffer_material_material1->m_sUsedSize = iTmpLen;
+        sz_material_material1 = buffer_material_material1->m_uszData;
+        len_material_material1 = iTmpLen;
+    }
+
+    const string &material_material2 = table_material.material2();
+    const char *sz_material_material2 = "";
+    int len_material_material2 = 0;
+    GORM_MemPoolData *buffer_material_material2 = nullptr;
+    if(material_material2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material2, material_material2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material2->m_uszData, material_material2.c_str(), material_material2.size());
+        buffer_material_material2->m_uszData[iTmpLen] = '\0';
+        buffer_material_material2->m_sUsedSize = iTmpLen;
+        sz_material_material2 = buffer_material_material2->m_uszData;
+        len_material_material2 = iTmpLen;
+    }
+
+    const string &material_material3 = table_material.material3();
+    const char *sz_material_material3 = "";
+    int len_material_material3 = 0;
+    GORM_MemPoolData *buffer_material_material3 = nullptr;
+    if(material_material3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material3, material_material3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material3->m_uszData, material_material3.c_str(), material_material3.size());
+        buffer_material_material3->m_uszData[iTmpLen] = '\0';
+        buffer_material_material3->m_sUsedSize = iTmpLen;
+        sz_material_material3 = buffer_material_material3->m_uszData;
+        len_material_material3 = iTmpLen;
+    }
+
+    const string &material_material4 = table_material.material4();
+    const char *sz_material_material4 = "";
+    int len_material_material4 = 0;
+    GORM_MemPoolData *buffer_material_material4 = nullptr;
+    if(material_material4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material4, material_material4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material4->m_uszData, material_material4.c_str(), material_material4.size());
+        buffer_material_material4->m_uszData[iTmpLen] = '\0';
+        buffer_material_material4->m_sUsedSize = iTmpLen;
+        sz_material_material4 = buffer_material_material4->m_uszData;
+        len_material_material4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_material_material1 + len_material_material2 + len_material_material3 + len_material_material4;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MATERIALINSERTSQL, iTableIndex, material_version, material_roleid, material_snakeid, sz_material_material1, sz_material_material2, sz_material_material3, sz_material_material4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_material_material1 != nullptr)
+        buffer_material_material1->Release();
+    if (buffer_material_material2 != nullptr)
+        buffer_material_material2->Release();
+    if (buffer_material_material3 != nullptr)
+        buffer_material_material3->Release();
+    if (buffer_material_material4 != nullptr)
+        buffer_material_material4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_material())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_material &table_material = table.material();
+        return GORM_PackInsertSQLMATERIAL_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_material, pReqData);
+    }
+    return GORM_OK;
+}
+#define NPCINSERTSQL "insert into npc_%d(`version`, `roleid`, `snakeid`, `npcs`) values (%llu, %lld, %d, '%s');"
+int GORM_PackInsertSQLNPC_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_npc &table_npc, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 113;
+    int iTmpLen = 0;
+
+    const uint64 npc_version = table_npc.version();
+
+    const int64 npc_roleid = table_npc.roleid();
+
+    const int32 npc_snakeid = table_npc.snakeid();
+
+    const string &npc_npcs = table_npc.npcs();
+    const char *sz_npc_npcs = "";
+    int len_npc_npcs = 0;
+    GORM_MemPoolData *buffer_npc_npcs = nullptr;
+    if(npc_npcs.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_npc_npcs, npc_npcs.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_npc_npcs->m_uszData, npc_npcs.c_str(), npc_npcs.size());
+        buffer_npc_npcs->m_uszData[iTmpLen] = '\0';
+        buffer_npc_npcs->m_sUsedSize = iTmpLen;
+        sz_npc_npcs = buffer_npc_npcs->m_uszData;
+        len_npc_npcs = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_npc_npcs;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, NPCINSERTSQL, iTableIndex, npc_version, npc_roleid, npc_snakeid, sz_npc_npcs);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_npc_npcs != nullptr)
+        buffer_npc_npcs->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_npc())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_npc &table_npc = table.npc();
+        return GORM_PackInsertSQLNPC_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_npc, pReqData);
+    }
+    return GORM_OK;
+}
+#define RES_LOGINSERTSQL "insert into res_log_%d(`version`, `roleid`, `action`, `cfgtype`, `cfgid`, `delta`, `value`, `createtime`) values (%llu, %lld, %d, %d, %d, %d, %d, %lld);"
+int GORM_PackInsertSQLRES_LOG_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_res_log &table_res_log, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 180;
+    int iTmpLen = 0;
+
+    const uint64 res_log_version = table_res_log.version();
+
+    const int64 res_log_roleid = table_res_log.roleid();
+
+    const int32 res_log_action = table_res_log.action();
+
+    const int32 res_log_cfgtype = table_res_log.cfgtype();
+
+    const int32 res_log_cfgid = table_res_log.cfgid();
+
+    const int32 res_log_delta = table_res_log.delta();
+
+    const int32 res_log_value = table_res_log.value();
+
+    const int64 res_log_createtime = table_res_log.createtime();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + 8 + 8 + 8 + 8 + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, RES_LOGINSERTSQL, iTableIndex, res_log_version, res_log_roleid, res_log_action, res_log_cfgtype, res_log_cfgid, res_log_delta, res_log_value, res_log_createtime);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_res_log())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_res_log &table_res_log = table.res_log();
+        return GORM_PackInsertSQLRES_LOG_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_res_log, pReqData);
+    }
+    return GORM_OK;
+}
+#define INTERACTIONINSERTSQL "insert into interaction_%d(`version`, `roleid`, `snakeid`, `interaction1`, `interaction2`, `interaction3`, `interaction4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s');"
+int GORM_PackInsertSQLINTERACTION_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_interaction &table_interaction, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 203;
+    int iTmpLen = 0;
+
+    const uint64 interaction_version = table_interaction.version();
+
+    const int64 interaction_roleid = table_interaction.roleid();
+
+    const int32 interaction_snakeid = table_interaction.snakeid();
+
+    const string &interaction_interaction1 = table_interaction.interaction1();
+    const char *sz_interaction_interaction1 = "";
+    int len_interaction_interaction1 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction1 = nullptr;
+    if(interaction_interaction1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction1, interaction_interaction1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction1->m_uszData, interaction_interaction1.c_str(), interaction_interaction1.size());
+        buffer_interaction_interaction1->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction1->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction1 = buffer_interaction_interaction1->m_uszData;
+        len_interaction_interaction1 = iTmpLen;
+    }
+
+    const string &interaction_interaction2 = table_interaction.interaction2();
+    const char *sz_interaction_interaction2 = "";
+    int len_interaction_interaction2 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction2 = nullptr;
+    if(interaction_interaction2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction2, interaction_interaction2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction2->m_uszData, interaction_interaction2.c_str(), interaction_interaction2.size());
+        buffer_interaction_interaction2->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction2->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction2 = buffer_interaction_interaction2->m_uszData;
+        len_interaction_interaction2 = iTmpLen;
+    }
+
+    const string &interaction_interaction3 = table_interaction.interaction3();
+    const char *sz_interaction_interaction3 = "";
+    int len_interaction_interaction3 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction3 = nullptr;
+    if(interaction_interaction3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction3, interaction_interaction3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction3->m_uszData, interaction_interaction3.c_str(), interaction_interaction3.size());
+        buffer_interaction_interaction3->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction3->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction3 = buffer_interaction_interaction3->m_uszData;
+        len_interaction_interaction3 = iTmpLen;
+    }
+
+    const string &interaction_interaction4 = table_interaction.interaction4();
+    const char *sz_interaction_interaction4 = "";
+    int len_interaction_interaction4 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction4 = nullptr;
+    if(interaction_interaction4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction4, interaction_interaction4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction4->m_uszData, interaction_interaction4.c_str(), interaction_interaction4.size());
+        buffer_interaction_interaction4->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction4->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction4 = buffer_interaction_interaction4->m_uszData;
+        len_interaction_interaction4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_interaction_interaction1 + len_interaction_interaction2 + len_interaction_interaction3 + len_interaction_interaction4;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, INTERACTIONINSERTSQL, iTableIndex, interaction_version, interaction_roleid, interaction_snakeid, sz_interaction_interaction1, sz_interaction_interaction2, sz_interaction_interaction3, sz_interaction_interaction4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_interaction_interaction1 != nullptr)
+        buffer_interaction_interaction1->Release();
+    if (buffer_interaction_interaction2 != nullptr)
+        buffer_interaction_interaction2->Release();
+    if (buffer_interaction_interaction3 != nullptr)
+        buffer_interaction_interaction3->Release();
+    if (buffer_interaction_interaction4 != nullptr)
+        buffer_interaction_interaction4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_interaction())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_interaction &table_interaction = table.interaction();
+        return GORM_PackInsertSQLINTERACTION_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_interaction, pReqData);
+    }
+    return GORM_OK;
+}
+#define ROLESINSERTSQL "insert into roles_%d(`version`, `roleid`, `userid`, `worldid`, `dbid`, `name`, `charid`, `face`, `createtime`) values (%llu, %lld, %lld, %lld, %d, '%s', %d, '%s', %lld);"
+int GORM_PackInsertSQLROLES_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_roles &table_roles, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 195;
+    int iTmpLen = 0;
+
+    const uint64 roles_version = table_roles.version();
+
+    const int64 roles_roleid = table_roles.roleid();
+
+    const int64 roles_userid = table_roles.userid();
+
+    const int64 roles_worldid = table_roles.worldid();
+
+    const int32 roles_dbid = table_roles.dbid();
+
+    const string &roles_name = table_roles.name();
+    const char *sz_roles_name = "";
+    int len_roles_name = 0;
+    GORM_MemPoolData *buffer_roles_name = nullptr;
+    if(roles_name.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_name, roles_name.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_roles_name->m_uszData, roles_name.c_str(), roles_name.size());
+        buffer_roles_name->m_uszData[iTmpLen] = '\0';
+        buffer_roles_name->m_sUsedSize = iTmpLen;
+        sz_roles_name = buffer_roles_name->m_uszData;
+        len_roles_name = iTmpLen;
+    }
+
+    const int32 roles_charid = table_roles.charid();
+
+    const string &roles_face = table_roles.face();
+    const char *sz_roles_face = "";
+    int len_roles_face = 0;
+    GORM_MemPoolData *buffer_roles_face = nullptr;
+    if(roles_face.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_face, roles_face.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_roles_face->m_uszData, roles_face.c_str(), roles_face.size());
+        buffer_roles_face->m_uszData[iTmpLen] = '\0';
+        buffer_roles_face->m_sUsedSize = iTmpLen;
+        sz_roles_face = buffer_roles_face->m_uszData;
+        len_roles_face = iTmpLen;
+    }
+
+    const int64 roles_createtime = table_roles.createtime();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + 8 + 8 + len_roles_name + 8 + len_roles_face + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLESINSERTSQL, iTableIndex, roles_version, roles_roleid, roles_userid, roles_worldid, roles_dbid, sz_roles_name, roles_charid, sz_roles_face, roles_createtime);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_roles_name != nullptr)
+        buffer_roles_name->Release();
+    if (buffer_roles_face != nullptr)
+        buffer_roles_face->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_roles())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_roles &table_roles = table.roles();
+        return GORM_PackInsertSQLROLES_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_roles, pReqData);
+    }
+    return GORM_OK;
+}
+#define ROLEINSERTSQL "insert into role_%d(`version`, `roleid`, `rolename`, `level`, `exp`, `characterid`, `gold`, `offlinetime`, `inited`, `createtime`, `face`, `online`, `worldid`, `pttype`, `userid`, `proceedslv`) values (%llu, %lld, '%s', %d, %lld, %d, %d, %lld, %d, %lld, '%s', %lld, %lld, %d, %lld, %d);"
+int GORM_PackInsertSQLROLE_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_role &table_role, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 311;
+    int iTmpLen = 0;
+
+    const uint64 role_version = table_role.version();
+
+    const int64 role_roleid = table_role.roleid();
+
+    const string &role_rolename = table_role.rolename();
+    const char *sz_role_rolename = "";
+    int len_role_rolename = 0;
+    GORM_MemPoolData *buffer_role_rolename = nullptr;
+    if(role_rolename.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_rolename, role_rolename.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_role_rolename->m_uszData, role_rolename.c_str(), role_rolename.size());
+        buffer_role_rolename->m_uszData[iTmpLen] = '\0';
+        buffer_role_rolename->m_sUsedSize = iTmpLen;
+        sz_role_rolename = buffer_role_rolename->m_uszData;
+        len_role_rolename = iTmpLen;
+    }
+
+    const int32 role_level = table_role.level();
+
+    const int64 role_exp = table_role.exp();
+
+    const int32 role_characterid = table_role.characterid();
+
+    const int32 role_gold = table_role.gold();
+
+    const int64 role_offlinetime = table_role.offlinetime();
+
+    const int32 role_inited = table_role.inited();
+
+    const int64 role_createtime = table_role.createtime();
+
+    const string &role_face = table_role.face();
+    const char *sz_role_face = "";
+    int len_role_face = 0;
+    GORM_MemPoolData *buffer_role_face = nullptr;
+    if(role_face.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_face, role_face.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_role_face->m_uszData, role_face.c_str(), role_face.size());
+        buffer_role_face->m_uszData[iTmpLen] = '\0';
+        buffer_role_face->m_sUsedSize = iTmpLen;
+        sz_role_face = buffer_role_face->m_uszData;
+        len_role_face = iTmpLen;
+    }
+
+    const int64 role_online = table_role.online();
+
+    const int64 role_worldid = table_role.worldid();
+
+    const int32 role_pttype = table_role.pttype();
+
+    const int64 role_userid = table_role.userid();
+
+    const int32 role_proceedslv = table_role.proceedslv();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_role_rolename + 8 + 8 + 8 + 8 + 8 + 8 + 8 + len_role_face + 8 + 8 + 8 + 8 + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLEINSERTSQL, iTableIndex, role_version, role_roleid, sz_role_rolename, role_level, role_exp, role_characterid, role_gold, role_offlinetime, role_inited, role_createtime, sz_role_face, role_online, role_worldid, role_pttype, role_userid, role_proceedslv);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_role_rolename != nullptr)
+        buffer_role_rolename->Release();
+    if (buffer_role_face != nullptr)
+        buffer_role_face->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_role())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_role &table_role = table.role();
+        return GORM_PackInsertSQLROLE_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_role, pReqData);
+    }
+    return GORM_OK;
+}
+#define SCENEINSERTSQL "insert into scene_%d(`version`, `roleid`, `sceneid`, `collects`, `season`) values (%llu, %lld, %d, '%s', '%s');"
+int GORM_PackInsertSQLSCENE_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_scene &table_scene, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 137;
+    int iTmpLen = 0;
+
+    const uint64 scene_version = table_scene.version();
+
+    const int64 scene_roleid = table_scene.roleid();
+
+    const int32 scene_sceneid = table_scene.sceneid();
+
+    const string &scene_collects = table_scene.collects();
+    const char *sz_scene_collects = "";
+    int len_scene_collects = 0;
+    GORM_MemPoolData *buffer_scene_collects = nullptr;
+    if(scene_collects.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_collects, scene_collects.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_scene_collects->m_uszData, scene_collects.c_str(), scene_collects.size());
+        buffer_scene_collects->m_uszData[iTmpLen] = '\0';
+        buffer_scene_collects->m_sUsedSize = iTmpLen;
+        sz_scene_collects = buffer_scene_collects->m_uszData;
+        len_scene_collects = iTmpLen;
+    }
+
+    const string &scene_season = table_scene.season();
+    const char *sz_scene_season = "";
+    int len_scene_season = 0;
+    GORM_MemPoolData *buffer_scene_season = nullptr;
+    if(scene_season.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_season, scene_season.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_scene_season->m_uszData, scene_season.c_str(), scene_season.size());
+        buffer_scene_season->m_uszData[iTmpLen] = '\0';
+        buffer_scene_season->m_sUsedSize = iTmpLen;
+        sz_scene_season = buffer_scene_season->m_uszData;
+        len_scene_season = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_scene_collects + len_scene_season;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SCENEINSERTSQL, iTableIndex, scene_version, scene_roleid, scene_sceneid, sz_scene_collects, sz_scene_season);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_scene_collects != nullptr)
+        buffer_scene_collects->Release();
+    if (buffer_scene_season != nullptr)
+        buffer_scene_season->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_scene())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_scene &table_scene = table.scene();
+        return GORM_PackInsertSQLSCENE_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_scene, pReqData);
+    }
+    return GORM_OK;
+}
+#define SKILLINSERTSQL "insert into skill_%d(`version`, `roleid`, `snakeid`, `skill1`, `skill2`, `skill3`, `skill4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s');"
+int GORM_PackInsertSQLSKILL_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_skill &table_skill, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 167;
+    int iTmpLen = 0;
+
+    const uint64 skill_version = table_skill.version();
+
+    const int64 skill_roleid = table_skill.roleid();
+
+    const int32 skill_snakeid = table_skill.snakeid();
+
+    const string &skill_skill1 = table_skill.skill1();
+    const char *sz_skill_skill1 = "";
+    int len_skill_skill1 = 0;
+    GORM_MemPoolData *buffer_skill_skill1 = nullptr;
+    if(skill_skill1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill1, skill_skill1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill1->m_uszData, skill_skill1.c_str(), skill_skill1.size());
+        buffer_skill_skill1->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill1->m_sUsedSize = iTmpLen;
+        sz_skill_skill1 = buffer_skill_skill1->m_uszData;
+        len_skill_skill1 = iTmpLen;
+    }
+
+    const string &skill_skill2 = table_skill.skill2();
+    const char *sz_skill_skill2 = "";
+    int len_skill_skill2 = 0;
+    GORM_MemPoolData *buffer_skill_skill2 = nullptr;
+    if(skill_skill2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill2, skill_skill2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill2->m_uszData, skill_skill2.c_str(), skill_skill2.size());
+        buffer_skill_skill2->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill2->m_sUsedSize = iTmpLen;
+        sz_skill_skill2 = buffer_skill_skill2->m_uszData;
+        len_skill_skill2 = iTmpLen;
+    }
+
+    const string &skill_skill3 = table_skill.skill3();
+    const char *sz_skill_skill3 = "";
+    int len_skill_skill3 = 0;
+    GORM_MemPoolData *buffer_skill_skill3 = nullptr;
+    if(skill_skill3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill3, skill_skill3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill3->m_uszData, skill_skill3.c_str(), skill_skill3.size());
+        buffer_skill_skill3->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill3->m_sUsedSize = iTmpLen;
+        sz_skill_skill3 = buffer_skill_skill3->m_uszData;
+        len_skill_skill3 = iTmpLen;
+    }
+
+    const string &skill_skill4 = table_skill.skill4();
+    const char *sz_skill_skill4 = "";
+    int len_skill_skill4 = 0;
+    GORM_MemPoolData *buffer_skill_skill4 = nullptr;
+    if(skill_skill4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill4, skill_skill4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill4->m_uszData, skill_skill4.c_str(), skill_skill4.size());
+        buffer_skill_skill4->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill4->m_sUsedSize = iTmpLen;
+        sz_skill_skill4 = buffer_skill_skill4->m_uszData;
+        len_skill_skill4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_skill_skill1 + len_skill_skill2 + len_skill_skill3 + len_skill_skill4;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SKILLINSERTSQL, iTableIndex, skill_version, skill_roleid, skill_snakeid, sz_skill_skill1, sz_skill_skill2, sz_skill_skill3, sz_skill_skill4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_skill_skill1 != nullptr)
+        buffer_skill_skill1->Release();
+    if (buffer_skill_skill2 != nullptr)
+        buffer_skill_skill2->Release();
+    if (buffer_skill_skill3 != nullptr)
+        buffer_skill_skill3->Release();
+    if (buffer_skill_skill4 != nullptr)
+        buffer_skill_skill4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_skill())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_skill &table_skill = table.skill();
+        return GORM_PackInsertSQLSKILL_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_skill, pReqData);
+    }
+    return GORM_OK;
+}
+#define PTUSERINSERTSQL "insert into ptuser_%d(`version`, `ptid`, `pttype`, `userid`) values (%llu, '%s', %d, %lld);"
+int GORM_PackInsertSQLPTUSER_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_ptuser &table_ptuser, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 118;
+    int iTmpLen = 0;
+
+    const uint64 ptuser_version = table_ptuser.version();
+
+    const string &ptuser_ptid = table_ptuser.ptid();
+    const char *sz_ptuser_ptid = "";
+    int len_ptuser_ptid = 0;
+    GORM_MemPoolData *buffer_ptuser_ptid = nullptr;
+    if(ptuser_ptid.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_ptid, ptuser_ptid.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_ptuser_ptid->m_uszData, ptuser_ptid.c_str(), ptuser_ptid.size());
+        buffer_ptuser_ptid->m_uszData[iTmpLen] = '\0';
+        buffer_ptuser_ptid->m_sUsedSize = iTmpLen;
+        sz_ptuser_ptid = buffer_ptuser_ptid->m_uszData;
+        len_ptuser_ptid = iTmpLen;
+    }
+
+    const int32 ptuser_pttype = table_ptuser.pttype();
+
+    const int64 ptuser_userid = table_ptuser.userid();
+
+    int iLen = iSqlLen + 128 + 8 + len_ptuser_ptid + 8 + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PTUSERINSERTSQL, iTableIndex, ptuser_version, sz_ptuser_ptid, ptuser_pttype, ptuser_userid);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_ptuser_ptid != nullptr)
+        buffer_ptuser_ptid->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_ptuser())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_ptuser &table_ptuser = table.ptuser();
+        return GORM_PackInsertSQLPTUSER_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_ptuser, pReqData);
+    }
+    return GORM_OK;
+}
+#define USERINSERTSQL "insert into user_%d(`version`, `userid`, `ptid`, `pttype`, `createtime`, `rolesdata`) values (%llu, %lld, '%s', %d, %lld, '%s');"
+int GORM_PackInsertSQLUSER_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_user &table_user, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 153;
+    int iTmpLen = 0;
+
+    const uint64 user_version = table_user.version();
+
+    const int64 user_userid = table_user.userid();
+
+    const string &user_ptid = table_user.ptid();
+    const char *sz_user_ptid = "";
+    int len_user_ptid = 0;
+    GORM_MemPoolData *buffer_user_ptid = nullptr;
+    if(user_ptid.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_ptid, user_ptid.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_user_ptid->m_uszData, user_ptid.c_str(), user_ptid.size());
+        buffer_user_ptid->m_uszData[iTmpLen] = '\0';
+        buffer_user_ptid->m_sUsedSize = iTmpLen;
+        sz_user_ptid = buffer_user_ptid->m_uszData;
+        len_user_ptid = iTmpLen;
+    }
+
+    const int32 user_pttype = table_user.pttype();
+
+    const int64 user_createtime = table_user.createtime();
+
+    const string &user_rolesdata = table_user.rolesdata();
+    const char *sz_user_rolesdata = "";
+    int len_user_rolesdata = 0;
+    GORM_MemPoolData *buffer_user_rolesdata = nullptr;
+    if(user_rolesdata.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_rolesdata, user_rolesdata.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_user_rolesdata->m_uszData, user_rolesdata.c_str(), user_rolesdata.size());
+        buffer_user_rolesdata->m_uszData[iTmpLen] = '\0';
+        buffer_user_rolesdata->m_sUsedSize = iTmpLen;
+        sz_user_rolesdata = buffer_user_rolesdata->m_uszData;
+        len_user_rolesdata = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_user_ptid + 8 + 8 + len_user_rolesdata;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, USERINSERTSQL, iTableIndex, user_version, user_userid, sz_user_ptid, user_pttype, user_createtime, sz_user_rolesdata);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_user_ptid != nullptr)
+        buffer_user_ptid->Release();
+    if (buffer_user_rolesdata != nullptr)
+        buffer_user_rolesdata->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_user())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_user &table_user = table.user();
+        return GORM_PackInsertSQLUSER_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_user, pReqData);
+    }
+    return GORM_OK;
+}
+#define MAINLINETASKINSERTSQL "insert into mainlinetask_%d(`version`, `roleid`, `runningtask`, `compleatetask0`, `compleatetask1`, `compleatetask2`, `compleatetask3`, `compleatetask4`, `compleatetask5`, `compleatetask6`, `compleatetask7`, `compleatetask8`, `compleatetask9`, `unlockfuncs`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"
+int GORM_PackInsertSQLMAINLINETASK_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mainlinetask &table_mainlinetask, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 382;
+    int iTmpLen = 0;
+
+    const uint64 mainlinetask_version = table_mainlinetask.version();
+
+    const int64 mainlinetask_roleid = table_mainlinetask.roleid();
+
+    const int32 mainlinetask_runningtask = table_mainlinetask.runningtask();
+
+    const string &mainlinetask_compleatetask0 = table_mainlinetask.compleatetask0();
+    const char *sz_mainlinetask_compleatetask0 = "";
+    int len_mainlinetask_compleatetask0 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask0 = nullptr;
+    if(mainlinetask_compleatetask0.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask0, mainlinetask_compleatetask0.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask0->m_uszData, mainlinetask_compleatetask0.c_str(), mainlinetask_compleatetask0.size());
+        buffer_mainlinetask_compleatetask0->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask0->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask0 = buffer_mainlinetask_compleatetask0->m_uszData;
+        len_mainlinetask_compleatetask0 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask1 = table_mainlinetask.compleatetask1();
+    const char *sz_mainlinetask_compleatetask1 = "";
+    int len_mainlinetask_compleatetask1 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask1 = nullptr;
+    if(mainlinetask_compleatetask1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask1, mainlinetask_compleatetask1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask1->m_uszData, mainlinetask_compleatetask1.c_str(), mainlinetask_compleatetask1.size());
+        buffer_mainlinetask_compleatetask1->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask1->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask1 = buffer_mainlinetask_compleatetask1->m_uszData;
+        len_mainlinetask_compleatetask1 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask2 = table_mainlinetask.compleatetask2();
+    const char *sz_mainlinetask_compleatetask2 = "";
+    int len_mainlinetask_compleatetask2 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask2 = nullptr;
+    if(mainlinetask_compleatetask2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask2, mainlinetask_compleatetask2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask2->m_uszData, mainlinetask_compleatetask2.c_str(), mainlinetask_compleatetask2.size());
+        buffer_mainlinetask_compleatetask2->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask2->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask2 = buffer_mainlinetask_compleatetask2->m_uszData;
+        len_mainlinetask_compleatetask2 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask3 = table_mainlinetask.compleatetask3();
+    const char *sz_mainlinetask_compleatetask3 = "";
+    int len_mainlinetask_compleatetask3 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask3 = nullptr;
+    if(mainlinetask_compleatetask3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask3, mainlinetask_compleatetask3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask3->m_uszData, mainlinetask_compleatetask3.c_str(), mainlinetask_compleatetask3.size());
+        buffer_mainlinetask_compleatetask3->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask3->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask3 = buffer_mainlinetask_compleatetask3->m_uszData;
+        len_mainlinetask_compleatetask3 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask4 = table_mainlinetask.compleatetask4();
+    const char *sz_mainlinetask_compleatetask4 = "";
+    int len_mainlinetask_compleatetask4 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask4 = nullptr;
+    if(mainlinetask_compleatetask4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask4, mainlinetask_compleatetask4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask4->m_uszData, mainlinetask_compleatetask4.c_str(), mainlinetask_compleatetask4.size());
+        buffer_mainlinetask_compleatetask4->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask4->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask4 = buffer_mainlinetask_compleatetask4->m_uszData;
+        len_mainlinetask_compleatetask4 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask5 = table_mainlinetask.compleatetask5();
+    const char *sz_mainlinetask_compleatetask5 = "";
+    int len_mainlinetask_compleatetask5 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask5 = nullptr;
+    if(mainlinetask_compleatetask5.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask5, mainlinetask_compleatetask5.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask5->m_uszData, mainlinetask_compleatetask5.c_str(), mainlinetask_compleatetask5.size());
+        buffer_mainlinetask_compleatetask5->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask5->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask5 = buffer_mainlinetask_compleatetask5->m_uszData;
+        len_mainlinetask_compleatetask5 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask6 = table_mainlinetask.compleatetask6();
+    const char *sz_mainlinetask_compleatetask6 = "";
+    int len_mainlinetask_compleatetask6 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask6 = nullptr;
+    if(mainlinetask_compleatetask6.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask6, mainlinetask_compleatetask6.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask6->m_uszData, mainlinetask_compleatetask6.c_str(), mainlinetask_compleatetask6.size());
+        buffer_mainlinetask_compleatetask6->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask6->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask6 = buffer_mainlinetask_compleatetask6->m_uszData;
+        len_mainlinetask_compleatetask6 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask7 = table_mainlinetask.compleatetask7();
+    const char *sz_mainlinetask_compleatetask7 = "";
+    int len_mainlinetask_compleatetask7 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask7 = nullptr;
+    if(mainlinetask_compleatetask7.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask7, mainlinetask_compleatetask7.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask7->m_uszData, mainlinetask_compleatetask7.c_str(), mainlinetask_compleatetask7.size());
+        buffer_mainlinetask_compleatetask7->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask7->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask7 = buffer_mainlinetask_compleatetask7->m_uszData;
+        len_mainlinetask_compleatetask7 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask8 = table_mainlinetask.compleatetask8();
+    const char *sz_mainlinetask_compleatetask8 = "";
+    int len_mainlinetask_compleatetask8 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask8 = nullptr;
+    if(mainlinetask_compleatetask8.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask8, mainlinetask_compleatetask8.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask8->m_uszData, mainlinetask_compleatetask8.c_str(), mainlinetask_compleatetask8.size());
+        buffer_mainlinetask_compleatetask8->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask8->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask8 = buffer_mainlinetask_compleatetask8->m_uszData;
+        len_mainlinetask_compleatetask8 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask9 = table_mainlinetask.compleatetask9();
+    const char *sz_mainlinetask_compleatetask9 = "";
+    int len_mainlinetask_compleatetask9 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask9 = nullptr;
+    if(mainlinetask_compleatetask9.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask9, mainlinetask_compleatetask9.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask9->m_uszData, mainlinetask_compleatetask9.c_str(), mainlinetask_compleatetask9.size());
+        buffer_mainlinetask_compleatetask9->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask9->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask9 = buffer_mainlinetask_compleatetask9->m_uszData;
+        len_mainlinetask_compleatetask9 = iTmpLen;
+    }
+
+    const string &mainlinetask_unlockfuncs = table_mainlinetask.unlockfuncs();
+    const char *sz_mainlinetask_unlockfuncs = "";
+    int len_mainlinetask_unlockfuncs = 0;
+    GORM_MemPoolData *buffer_mainlinetask_unlockfuncs = nullptr;
+    if(mainlinetask_unlockfuncs.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_unlockfuncs, mainlinetask_unlockfuncs.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_unlockfuncs->m_uszData, mainlinetask_unlockfuncs.c_str(), mainlinetask_unlockfuncs.size());
+        buffer_mainlinetask_unlockfuncs->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_unlockfuncs->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_unlockfuncs = buffer_mainlinetask_unlockfuncs->m_uszData;
+        len_mainlinetask_unlockfuncs = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_mainlinetask_compleatetask0 + len_mainlinetask_compleatetask1 + len_mainlinetask_compleatetask2 + len_mainlinetask_compleatetask3 + len_mainlinetask_compleatetask4 + len_mainlinetask_compleatetask5 + len_mainlinetask_compleatetask6 + len_mainlinetask_compleatetask7 + len_mainlinetask_compleatetask8 + len_mainlinetask_compleatetask9 + len_mainlinetask_unlockfuncs;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAINLINETASKINSERTSQL, iTableIndex, mainlinetask_version, mainlinetask_roleid, mainlinetask_runningtask, sz_mainlinetask_compleatetask0, sz_mainlinetask_compleatetask1, sz_mainlinetask_compleatetask2, sz_mainlinetask_compleatetask3, sz_mainlinetask_compleatetask4, sz_mainlinetask_compleatetask5, sz_mainlinetask_compleatetask6, sz_mainlinetask_compleatetask7, sz_mainlinetask_compleatetask8, sz_mainlinetask_compleatetask9, sz_mainlinetask_unlockfuncs);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_mainlinetask_compleatetask0 != nullptr)
+        buffer_mainlinetask_compleatetask0->Release();
+    if (buffer_mainlinetask_compleatetask1 != nullptr)
+        buffer_mainlinetask_compleatetask1->Release();
+    if (buffer_mainlinetask_compleatetask2 != nullptr)
+        buffer_mainlinetask_compleatetask2->Release();
+    if (buffer_mainlinetask_compleatetask3 != nullptr)
+        buffer_mainlinetask_compleatetask3->Release();
+    if (buffer_mainlinetask_compleatetask4 != nullptr)
+        buffer_mainlinetask_compleatetask4->Release();
+    if (buffer_mainlinetask_compleatetask5 != nullptr)
+        buffer_mainlinetask_compleatetask5->Release();
+    if (buffer_mainlinetask_compleatetask6 != nullptr)
+        buffer_mainlinetask_compleatetask6->Release();
+    if (buffer_mainlinetask_compleatetask7 != nullptr)
+        buffer_mainlinetask_compleatetask7->Release();
+    if (buffer_mainlinetask_compleatetask8 != nullptr)
+        buffer_mainlinetask_compleatetask8->Release();
+    if (buffer_mainlinetask_compleatetask9 != nullptr)
+        buffer_mainlinetask_compleatetask9->Release();
+    if (buffer_mainlinetask_unlockfuncs != nullptr)
+        buffer_mainlinetask_unlockfuncs->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_mainlinetask())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_mainlinetask &table_mainlinetask = table.mainlinetask();
+        return GORM_PackInsertSQLMAINLINETASK_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_mainlinetask, pReqData);
+    }
+    return GORM_OK;
+}
+#define PUBMAILINSERTSQL "insert into pubmail_%d(`version`, `mailid`, `addresser`, `title`, `body`, `roles`, `attachment`, `dt`, `del`) values (%llu, %d, '%s', '%s', '%s', '%s', '%s', %lld, %d);"
+int GORM_PackInsertSQLPUBMAIL_ONE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_pubmail &table_pubmail, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 196;
+    int iTmpLen = 0;
+
+    const uint64 pubmail_version = table_pubmail.version();
+
+    const int32 pubmail_mailid = table_pubmail.mailid();
+
+    const string &pubmail_addresser = table_pubmail.addresser();
+    const char *sz_pubmail_addresser = "";
+    int len_pubmail_addresser = 0;
+    GORM_MemPoolData *buffer_pubmail_addresser = nullptr;
+    if(pubmail_addresser.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_addresser, pubmail_addresser.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_addresser->m_uszData, pubmail_addresser.c_str(), pubmail_addresser.size());
+        buffer_pubmail_addresser->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_addresser->m_sUsedSize = iTmpLen;
+        sz_pubmail_addresser = buffer_pubmail_addresser->m_uszData;
+        len_pubmail_addresser = iTmpLen;
+    }
+
+    const string &pubmail_title = table_pubmail.title();
+    const char *sz_pubmail_title = "";
+    int len_pubmail_title = 0;
+    GORM_MemPoolData *buffer_pubmail_title = nullptr;
+    if(pubmail_title.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_title, pubmail_title.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_title->m_uszData, pubmail_title.c_str(), pubmail_title.size());
+        buffer_pubmail_title->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_title->m_sUsedSize = iTmpLen;
+        sz_pubmail_title = buffer_pubmail_title->m_uszData;
+        len_pubmail_title = iTmpLen;
+    }
+
+    const string &pubmail_body = table_pubmail.body();
+    const char *sz_pubmail_body = "";
+    int len_pubmail_body = 0;
+    GORM_MemPoolData *buffer_pubmail_body = nullptr;
+    if(pubmail_body.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_body, pubmail_body.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_body->m_uszData, pubmail_body.c_str(), pubmail_body.size());
+        buffer_pubmail_body->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_body->m_sUsedSize = iTmpLen;
+        sz_pubmail_body = buffer_pubmail_body->m_uszData;
+        len_pubmail_body = iTmpLen;
+    }
+
+    const string &pubmail_roles = table_pubmail.roles();
+    const char *sz_pubmail_roles = "";
+    int len_pubmail_roles = 0;
+    GORM_MemPoolData *buffer_pubmail_roles = nullptr;
+    if(pubmail_roles.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_roles, pubmail_roles.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_roles->m_uszData, pubmail_roles.c_str(), pubmail_roles.size());
+        buffer_pubmail_roles->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_roles->m_sUsedSize = iTmpLen;
+        sz_pubmail_roles = buffer_pubmail_roles->m_uszData;
+        len_pubmail_roles = iTmpLen;
+    }
+
+    const string &pubmail_attachment = table_pubmail.attachment();
+    const char *sz_pubmail_attachment = "";
+    int len_pubmail_attachment = 0;
+    GORM_MemPoolData *buffer_pubmail_attachment = nullptr;
+    if(pubmail_attachment.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_attachment, pubmail_attachment.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_attachment->m_uszData, pubmail_attachment.c_str(), pubmail_attachment.size());
+        buffer_pubmail_attachment->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_attachment->m_sUsedSize = iTmpLen;
+        sz_pubmail_attachment = buffer_pubmail_attachment->m_uszData;
+        len_pubmail_attachment = iTmpLen;
+    }
+
+    const int64 pubmail_dt = table_pubmail.dt();
+
+    const int32 pubmail_del = table_pubmail.del();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_pubmail_addresser + len_pubmail_title + len_pubmail_body + len_pubmail_roles + len_pubmail_attachment + 8 + 8;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PUBMAILINSERTSQL, iTableIndex, pubmail_version, pubmail_mailid, sz_pubmail_addresser, sz_pubmail_title, sz_pubmail_body, sz_pubmail_roles, sz_pubmail_attachment, pubmail_dt, pubmail_del);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_pubmail_addresser != nullptr)
+        buffer_pubmail_addresser->Release();
+    if (buffer_pubmail_title != nullptr)
+        buffer_pubmail_title->Release();
+    if (buffer_pubmail_body != nullptr)
+        buffer_pubmail_body->Release();
+    if (buffer_pubmail_roles != nullptr)
+        buffer_pubmail_roles->Release();
+    if (buffer_pubmail_attachment != nullptr)
+        buffer_pubmail_attachment->Release();
+
+    return GORM_OK;
+}
+int GORM_PackInsertSQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_pubmail())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_pubmail &table_pubmail = table.pubmail();
+        return GORM_PackInsertSQLPUBMAIL_ONE(pMemPool, pMySQLEvent, mysql, iTableIndex, table_pubmail, pReqData);
+    }
+    return GORM_OK;
+}
 int GORM_PackInsertSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_INSERT_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -234,6 +1878,57 @@ int GORM_PackInsertSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMyS
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackInsertSQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackInsertSQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackInsertSQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackInsertSQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackInsertSQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackInsertSQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackInsertSQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackInsertSQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackInsertSQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackInsertSQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackInsertSQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackInsertSQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackInsertSQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackInsertSQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackInsertSQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackInsertSQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackInsertSQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackInsertSQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -254,6 +1949,108 @@ int GORM_PackInsertSQLTable(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent 
         if (!table.has_cycleevent())
             return GORM_REQ_NO_RECORDS;
         return GORM_PackInsertSQLCYCLEEVENT_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.cycleevent(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_EQUIP:
+    {
+        if (!table.has_equip())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLEQUIP_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.equip(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_FOOD:
+    {
+        if (!table.has_food())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLFOOD_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.food(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_HERO:
+    {
+        if (!table.has_hero())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLHERO_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.hero(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+    {
+        if (!table.has_login_log())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLLOGIN_LOG_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.login_log(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_MAIL:
+    {
+        if (!table.has_mail())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLMAIL_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.mail(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_MATERIAL:
+    {
+        if (!table.has_material())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLMATERIAL_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.material(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_NPC:
+    {
+        if (!table.has_npc())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLNPC_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.npc(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_RES_LOG:
+    {
+        if (!table.has_res_log())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLRES_LOG_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.res_log(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_INTERACTION:
+    {
+        if (!table.has_interaction())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLINTERACTION_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.interaction(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_ROLES:
+    {
+        if (!table.has_roles())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLROLES_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.roles(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_ROLE:
+    {
+        if (!table.has_role())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLROLE_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.role(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_SCENE:
+    {
+        if (!table.has_scene())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLSCENE_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.scene(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_SKILL:
+    {
+        if (!table.has_skill())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLSKILL_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.skill(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_PTUSER:
+    {
+        if (!table.has_ptuser())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLPTUSER_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.ptuser(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_USER:
+    {
+        if (!table.has_user())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLUSER_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.user(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+    {
+        if (!table.has_mainlinetask())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLMAINLINETASK_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.mainlinetask(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+    {
+        if (!table.has_pubmail())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackInsertSQLPUBMAIL_ONE(pMemPool, pMySQLEvent, pMySQLEvent->m_pMySQL, uiHashValue, table.pubmail(), pReqData);
     }
     }
     return GORM_INVALID_TABLE;
@@ -362,6 +2159,930 @@ int GORM_PackGetSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEven
     
     return GORM_PackGetSQLCYCLEEVENT_ONE(pMemPool, mysql, iTableIndex, table_cycleevent, pReqData);
 }
+#define EQUIPGETSQL "select `version`, `roleid`, `snakeid`, `equip1`, `equip2`, `equip3`, `equip4` from equip_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLEQUIP_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_equip &table_equip, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 135;
+    int iTmpLen = 0;
+
+    const int64 equip_roleid = table_equip.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_equip.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, EQUIPGETSQL, iTableIndex, equip_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_equip())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_equip &table_equip = table.equip();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_EQUIP_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLEQUIP_ONE(pMemPool, mysql, iTableIndex, table_equip, pReqData);
+}
+#define FOODGETSQL "select `version`, `roleid`, `snakeid`, `food1`, `food2`, `food3`, `food4` from food_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLFOOD_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_food &table_food, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 129;
+    int iTmpLen = 0;
+
+    const int64 food_roleid = table_food.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_food.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, FOODGETSQL, iTableIndex, food_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_food())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_food &table_food = table.food();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_FOOD_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLFOOD_ONE(pMemPool, mysql, iTableIndex, table_food, pReqData);
+}
+#define HEROGETSQL "select `version`, `roleid`, `snakeid`, `heros`, `teams` from hero_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLHERO_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_hero &table_hero, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 111;
+    int iTmpLen = 0;
+
+    const int64 hero_roleid = table_hero.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_hero.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, HEROGETSQL, iTableIndex, hero_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_hero())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_hero &table_hero = table.hero();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_HERO_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLHERO_ONE(pMemPool, mysql, iTableIndex, table_hero, pReqData);
+}
+#define LOGIN_LOGGETSQL "select `version`, `roleid`, `action`, `online`, `ip`, `appid`, `createtime` from login_log_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLLOGIN_LOG_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_login_log &table_login_log, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 141;
+    int iTmpLen = 0;
+
+    const int64 login_log_roleid = table_login_log.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_login_log.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, LOGIN_LOGGETSQL, iTableIndex, login_log_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_login_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_login_log &table_login_log = table.login_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_LOGIN_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLLOGIN_LOG_ONE(pMemPool, mysql, iTableIndex, table_login_log, pReqData);
+}
+#define MAILGETSQL "select `version`, `roleid`, `mail1`, `mail2`, `mail3`, `mail4`, `mail5`, `lastmailid`, `snakeid` from mail_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLMAIL_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mail &table_mail, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 152;
+    int iTmpLen = 0;
+
+    const int64 mail_roleid = table_mail.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_mail.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAILGETSQL, iTableIndex, mail_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_mail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_mail &table_mail = table.mail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAIL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLMAIL_ONE(pMemPool, mysql, iTableIndex, table_mail, pReqData);
+}
+#define MATERIALGETSQL "select `version`, `roleid`, `snakeid`, `material1`, `material2`, `material3`, `material4` from material_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLMATERIAL_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_material &table_material, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 153;
+    int iTmpLen = 0;
+
+    const int64 material_roleid = table_material.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_material.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MATERIALGETSQL, iTableIndex, material_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_material())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_material &table_material = table.material();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MATERIAL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLMATERIAL_ONE(pMemPool, mysql, iTableIndex, table_material, pReqData);
+}
+#define NPCGETSQL "select `version`, `roleid`, `snakeid`, `npcs` from npc_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLNPC_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_npc &table_npc, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 99;
+    int iTmpLen = 0;
+
+    const int64 npc_roleid = table_npc.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_npc.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, NPCGETSQL, iTableIndex, npc_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_npc())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_npc &table_npc = table.npc();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_NPC_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLNPC_ONE(pMemPool, mysql, iTableIndex, table_npc, pReqData);
+}
+#define RES_LOGGETSQL "select `version`, `roleid`, `action`, `cfgtype`, `cfgid`, `delta`, `value`, `createtime` from res_log_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLRES_LOG_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_res_log &table_res_log, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 150;
+    int iTmpLen = 0;
+
+    const int64 res_log_roleid = table_res_log.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_res_log.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, RES_LOGGETSQL, iTableIndex, res_log_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_res_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_res_log &table_res_log = table.res_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_RES_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLRES_LOG_ONE(pMemPool, mysql, iTableIndex, table_res_log, pReqData);
+}
+#define INTERACTIONGETSQL "select `version`, `roleid`, `snakeid`, `interaction1`, `interaction2`, `interaction3`, `interaction4` from interaction_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLINTERACTION_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_interaction &table_interaction, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 171;
+    int iTmpLen = 0;
+
+    const int64 interaction_roleid = table_interaction.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_interaction.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, INTERACTIONGETSQL, iTableIndex, interaction_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_interaction())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_interaction &table_interaction = table.interaction();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_INTERACTION_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLINTERACTION_ONE(pMemPool, mysql, iTableIndex, table_interaction, pReqData);
+}
+#define ROLESGETSQL "select `version`, `roleid`, `userid`, `worldid`, `dbid`, `name`, `charid`, `face`, `createtime` from roles_%d where  `roleid`=%lld and `userid`=%lld;"
+int GORM_PackGetSQLROLES_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_roles &table_roles, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 171;
+    int iTmpLen = 0;
+
+    const int64 roles_roleid = table_roles.roleid();
+    const int64 roles_userid = table_roles.userid();
+    int iLen = iSqlLen + 128 + 8 + 8 + table_roles.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLESGETSQL, iTableIndex, roles_roleid, roles_userid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_roles())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_roles &table_roles = table.roles();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLROLES_ONE(pMemPool, mysql, iTableIndex, table_roles, pReqData);
+}
+#define ROLEGETSQL "select `version`, `roleid`, `rolename`, `level`, `exp`, `characterid`, `gold`, `offlinetime`, `inited`, `createtime`, `face`, `online`, `worldid`, `pttype`, `userid`, `proceedslv` from role_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLROLE_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_role &table_role, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 235;
+    int iTmpLen = 0;
+
+    const int64 role_roleid = table_role.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_role.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLEGETSQL, iTableIndex, role_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_role())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_role &table_role = table.role();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLROLE_ONE(pMemPool, mysql, iTableIndex, table_role, pReqData);
+}
+#define SCENEGETSQL "select `version`, `roleid`, `sceneid`, `collects`, `season` from scene_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLSCENE_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_scene &table_scene, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 117;
+    int iTmpLen = 0;
+
+    const int64 scene_roleid = table_scene.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_scene.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SCENEGETSQL, iTableIndex, scene_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_scene())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_scene &table_scene = table.scene();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SCENE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLSCENE_ONE(pMemPool, mysql, iTableIndex, table_scene, pReqData);
+}
+#define SKILLGETSQL "select `version`, `roleid`, `snakeid`, `skill1`, `skill2`, `skill3`, `skill4` from skill_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLSKILL_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_skill &table_skill, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 135;
+    int iTmpLen = 0;
+
+    const int64 skill_roleid = table_skill.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_skill.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SKILLGETSQL, iTableIndex, skill_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_skill())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_skill &table_skill = table.skill();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SKILL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLSKILL_ONE(pMemPool, mysql, iTableIndex, table_skill, pReqData);
+}
+#define PTUSERGETSQL "select `version`, `ptid`, `pttype`, `userid` from ptuser_%d where  `ptid`='%s' and `pttype`=%d;"
+int GORM_PackGetSQLPTUSER_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_ptuser &table_ptuser, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 118;
+    int iTmpLen = 0;
+
+    const string &ptuser_ptid = table_ptuser.ptid();
+    const char *sz_ptuser_ptid = "";
+    int len_ptuser_ptid = 0;
+    GORM_MemPoolData *buffer_ptuser_ptid = nullptr;
+    if(ptuser_ptid.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_ptid, ptuser_ptid.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_ptuser_ptid->m_uszData, ptuser_ptid.c_str(), ptuser_ptid.size());
+        buffer_ptuser_ptid->m_uszData[iTmpLen] = 0;
+        buffer_ptuser_ptid->m_sUsedSize = iTmpLen;
+        sz_ptuser_ptid = buffer_ptuser_ptid->m_uszData;
+        len_ptuser_ptid = iTmpLen;
+    }
+    const int32 ptuser_pttype = table_ptuser.pttype();
+    int iLen = iSqlLen + 128 + len_ptuser_ptid + 8 + table_ptuser.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PTUSERGETSQL, iTableIndex, sz_ptuser_ptid, ptuser_pttype);
+    pReqData->m_sUsedSize = iLen;
+
+    if(buffer_ptuser_ptid != nullptr)
+        buffer_ptuser_ptid->Release();
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_ptuser())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_ptuser &table_ptuser = table.ptuser();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTTYPE == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLPTUSER_ONE(pMemPool, mysql, iTableIndex, table_ptuser, pReqData);
+}
+#define USERGETSQL "select `version`, `userid`, `ptid`, `pttype`, `createtime`, `rolesdata` from user_%d where  `userid`=%lld;"
+int GORM_PackGetSQLUSER_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_user &table_user, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 127;
+    int iTmpLen = 0;
+
+    const int64 user_userid = table_user.userid();
+    int iLen = iSqlLen + 128 + 8 + table_user.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, USERGETSQL, iTableIndex, user_userid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_user())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_user &table_user = table.user();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_USER_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLUSER_ONE(pMemPool, mysql, iTableIndex, table_user, pReqData);
+}
+#define MAINLINETASKGETSQL "select `version`, `roleid`, `runningtask`, `compleatetask0`, `compleatetask1`, `compleatetask2`, `compleatetask3`, `compleatetask4`, `compleatetask5`, `compleatetask6`, `compleatetask7`, `compleatetask8`, `compleatetask9`, `unlockfuncs` from mainlinetask_%d where  `roleid`=%lld;"
+int GORM_PackGetSQLMAINLINETASK_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mainlinetask &table_mainlinetask, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 308;
+    int iTmpLen = 0;
+
+    const int64 mainlinetask_roleid = table_mainlinetask.roleid();
+    int iLen = iSqlLen + 128 + 8 + table_mainlinetask.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAINLINETASKGETSQL, iTableIndex, mainlinetask_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_mainlinetask())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_mainlinetask &table_mainlinetask = table.mainlinetask();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAINLINETASK_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLMAINLINETASK_ONE(pMemPool, mysql, iTableIndex, table_mainlinetask, pReqData);
+}
+#define PUBMAILGETSQL "select `version`, `mailid`, `addresser`, `title`, `body`, `roles`, `attachment`, `dt`, `del` from pubmail_%d where  `mailid`=%d;"
+int GORM_PackGetSQLPUBMAIL_ONE(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_pubmail &table_pubmail, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 152;
+    int iTmpLen = 0;
+
+    const int32 pubmail_mailid = table_pubmail.mailid();
+    int iLen = iSqlLen + 128 + 8 + table_pubmail.ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PUBMAILGETSQL, iTableIndex, pubmail_mailid);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackGetSQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_pubmail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    const GORM_PB_Table_pubmail &table_pubmail = table.pubmail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PUBMAIL_MAILID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    
+    return GORM_PackGetSQLPUBMAIL_ONE(pMemPool, mysql, iTableIndex, table_pubmail, pReqData);
+}
 int GORM_PackGetSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_GET_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -371,6 +3092,57 @@ int GORM_PackGetSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLE
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackGetSQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackGetSQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackGetSQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackGetSQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackGetSQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackGetSQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackGetSQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackGetSQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackGetSQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackGetSQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackGetSQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackGetSQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackGetSQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackGetSQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackGetSQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackGetSQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackGetSQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackGetSQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -470,6 +3242,845 @@ int GORM_PackDeleteSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLE
     
     return GORM_OK;
 }
+#define EQUIPDELETESQL "delete  from equip_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_equip())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 68;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_equip table_equip = table.equip();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_EQUIP_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 equip_roleid = table_equip.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, EQUIPDELETESQL, iTableIndex, equip_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define FOODDELETESQL "delete  from food_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_food())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 66;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_food table_food = table.food();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_FOOD_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 food_roleid = table_food.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, FOODDELETESQL, iTableIndex, food_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define HERODELETESQL "delete  from hero_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_hero())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 66;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_hero table_hero = table.hero();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_HERO_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 hero_roleid = table_hero.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, HERODELETESQL, iTableIndex, hero_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define LOGIN_LOGDELETESQL "delete  from login_log_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_login_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 76;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_login_log table_login_log = table.login_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_LOGIN_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 login_log_roleid = table_login_log.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, LOGIN_LOGDELETESQL, iTableIndex, login_log_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define MAILDELETESQL "delete  from mail_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_mail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 66;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_mail table_mail = table.mail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAIL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 mail_roleid = table_mail.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAILDELETESQL, iTableIndex, mail_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define MATERIALDELETESQL "delete  from material_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_material())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 74;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_material table_material = table.material();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MATERIAL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 material_roleid = table_material.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MATERIALDELETESQL, iTableIndex, material_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define NPCDELETESQL "delete  from npc_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_npc())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 64;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_npc table_npc = table.npc();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_NPC_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 npc_roleid = table_npc.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, NPCDELETESQL, iTableIndex, npc_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define RES_LOGDELETESQL "delete  from res_log_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_res_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 72;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_res_log table_res_log = table.res_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_RES_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 res_log_roleid = table_res_log.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, RES_LOGDELETESQL, iTableIndex, res_log_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define INTERACTIONDELETESQL "delete  from interaction_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_interaction())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 80;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_interaction table_interaction = table.interaction();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_INTERACTION_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 interaction_roleid = table_interaction.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, INTERACTIONDELETESQL, iTableIndex, interaction_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define ROLESDELETESQL "delete  from roles_%d where  `roleid`=%lld and  `userid`=%lld;"
+int GORM_PackDeleteSQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_roles())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 87;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_roles table_roles = table.roles();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 roles_roleid = table_roles.roleid();
+    const int64 roles_userid = table_roles.userid();
+    int iLen = iSqlLen + 128 + 8 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLESDELETESQL, iTableIndex, roles_roleid, roles_userid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define ROLEDELETESQL "delete  from role_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_role())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 66;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_role table_role = table.role();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 role_roleid = table_role.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLEDELETESQL, iTableIndex, role_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define SCENEDELETESQL "delete  from scene_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_scene())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 68;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_scene table_scene = table.scene();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SCENE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 scene_roleid = table_scene.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SCENEDELETESQL, iTableIndex, scene_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define SKILLDELETESQL "delete  from skill_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_skill())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 68;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_skill table_skill = table.skill();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SKILL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 skill_roleid = table_skill.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SKILLDELETESQL, iTableIndex, skill_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define PTUSERDELETESQL "delete  from ptuser_%d where  `ptid`='%s' and  `pttype`=%d;"
+int GORM_PackDeleteSQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_ptuser())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 85;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_ptuser table_ptuser = table.ptuser();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTTYPE == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const string &ptuser_ptid = table_ptuser.ptid();
+    const char *sz_ptuser_ptid = "";
+    int len_ptuser_ptid = 0;
+    GORM_MemPoolData *buffer_ptuser_ptid = nullptr;
+    if(ptuser_ptid.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_ptid, ptuser_ptid.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_ptuser_ptid->m_uszData, ptuser_ptid.c_str(), ptuser_ptid.size());
+        buffer_ptuser_ptid->m_uszData[iTmpLen] = 0;
+        buffer_ptuser_ptid->m_sUsedSize = iTmpLen;
+        sz_ptuser_ptid = buffer_ptuser_ptid->m_uszData;
+        len_ptuser_ptid = iTmpLen;
+    }
+    const int32 ptuser_pttype = table_ptuser.pttype();
+    int iLen = iSqlLen + 128 + len_ptuser_ptid + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PTUSERDELETESQL, iTableIndex, sz_ptuser_ptid, ptuser_pttype);
+    pReqData->m_sUsedSize = iLen;
+
+    if(buffer_ptuser_ptid != nullptr)
+        buffer_ptuser_ptid->Release();
+    
+    return GORM_OK;
+}
+#define USERDELETESQL "delete  from user_%d where  `userid`=%lld;"
+int GORM_PackDeleteSQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_user())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 66;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_user table_user = table.user();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_USER_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 user_userid = table_user.userid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, USERDELETESQL, iTableIndex, user_userid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define MAINLINETASKDELETESQL "delete  from mainlinetask_%d where  `roleid`=%lld;"
+int GORM_PackDeleteSQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_mainlinetask())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 82;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_mainlinetask table_mainlinetask = table.mainlinetask();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAINLINETASK_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int64 mainlinetask_roleid = table_mainlinetask.roleid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAINLINETASKDELETESQL, iTableIndex, mainlinetask_roleid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
+#define PUBMAILDELETESQL "delete  from pubmail_%d where  `mailid`=%d;"
+int GORM_PackDeleteSQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (!pMsg->has_table())
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->table();
+    if (!table.has_pubmail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    string fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 70;
+    int iTmpLen = 0;
+
+    GORM_PB_Table_pubmail table_pubmail = table.pubmail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PUBMAIL_MAILID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const int32 pubmail_mailid = table_pubmail.mailid();
+    int iLen = iSqlLen + 128 + 8 + pMsg->ByteSizeLong();
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PUBMAILDELETESQL, iTableIndex, pubmail_mailid);
+    pReqData->m_sUsedSize = iLen;
+
+    
+    return GORM_OK;
+}
 int GORM_PackDeleteSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_DELETE_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -479,6 +4090,57 @@ int GORM_PackDeleteSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMyS
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackDeleteSQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackDeleteSQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackDeleteSQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackDeleteSQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackDeleteSQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackDeleteSQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackDeleteSQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackDeleteSQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackDeleteSQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackDeleteSQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackDeleteSQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackDeleteSQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackDeleteSQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackDeleteSQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackDeleteSQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackDeleteSQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackDeleteSQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackDeleteSQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -837,6 +4499,3724 @@ int GORM_PackUpdateSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLE
     
     return GORM_OK;
 }
+#define EQUIPUPDATESQL "update equip_%d set "
+#define EQUIPUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_equip())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(EQUIPUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_equip &table_equip = table.equip();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_EQUIP_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 equip_version = table_equip.version();
+    const int64 equip_roleid = table_equip.roleid();
+    const int32 equip_snakeid = table_equip.snakeid();
+    const string &equip_equip1 = table_equip.equip1();
+    const char *sz_equip_equip1 = "";
+    int len_equip_equip1 = 0;
+    GORM_MemPoolData *buffer_equip_equip1 = nullptr;
+    if(equip_equip1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip1, equip_equip1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_equip_equip1->m_uszData, equip_equip1.c_str(), equip_equip1.size());
+        buffer_equip_equip1->m_uszData[iTmpLen] = 0;
+        buffer_equip_equip1->m_sUsedSize = iTmpLen;
+        sz_equip_equip1 = buffer_equip_equip1->m_uszData;
+        len_equip_equip1 = iTmpLen;
+    }
+
+    const string &equip_equip2 = table_equip.equip2();
+    const char *sz_equip_equip2 = "";
+    int len_equip_equip2 = 0;
+    GORM_MemPoolData *buffer_equip_equip2 = nullptr;
+    if(equip_equip2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip2, equip_equip2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_equip_equip2->m_uszData, equip_equip2.c_str(), equip_equip2.size());
+        buffer_equip_equip2->m_uszData[iTmpLen] = 0;
+        buffer_equip_equip2->m_sUsedSize = iTmpLen;
+        sz_equip_equip2 = buffer_equip_equip2->m_uszData;
+        len_equip_equip2 = iTmpLen;
+    }
+
+    const string &equip_equip3 = table_equip.equip3();
+    const char *sz_equip_equip3 = "";
+    int len_equip_equip3 = 0;
+    GORM_MemPoolData *buffer_equip_equip3 = nullptr;
+    if(equip_equip3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip3, equip_equip3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_equip_equip3->m_uszData, equip_equip3.c_str(), equip_equip3.size());
+        buffer_equip_equip3->m_uszData[iTmpLen] = 0;
+        buffer_equip_equip3->m_sUsedSize = iTmpLen;
+        sz_equip_equip3 = buffer_equip_equip3->m_uszData;
+        len_equip_equip3 = iTmpLen;
+    }
+
+    const string &equip_equip4 = table_equip.equip4();
+    const char *sz_equip_equip4 = "";
+    int len_equip_equip4 = 0;
+    GORM_MemPoolData *buffer_equip_equip4 = nullptr;
+    if(equip_equip4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip4, equip_equip4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_equip_equip4->m_uszData, equip_equip4.c_str(), equip_equip4.size());
+        buffer_equip_equip4->m_uszData[iTmpLen] = 0;
+        buffer_equip_equip4->m_sUsedSize = iTmpLen;
+        sz_equip_equip4 = buffer_equip_equip4->m_uszData;
+        len_equip_equip4 = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_equip_equip1 + len_equip_equip2 + len_equip_equip3 + len_equip_equip4 + 24;
+    GORM_MemPoolData *buffer_equip_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_equip_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_equip_where->m_sCapacity, EQUIPUPDATEWHERESQL , equip_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_equip_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), equip_version);
+    buffer_equip_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_equip_equip1+ len_equip_equip2+ len_equip_equip3+ len_equip_equip4+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, EQUIPUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), equip_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_EQUIP_VERSION == iFieldId || GORM_PB_FIELD_EQUIP_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_EQUIP_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", equip_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", equip_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", equip_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", equip_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", equip_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", equip_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `equip1`='%s'", sz_equip_equip1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`equip1`='%s'", sz_equip_equip1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `equip2`='%s'", sz_equip_equip2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`equip2`='%s'", sz_equip_equip2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `equip3`='%s'", sz_equip_equip3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`equip3`='%s'", sz_equip_equip3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `equip4`='%s'", sz_equip_equip4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`equip4`='%s'", sz_equip_equip4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_equip_equip1 != nullptr)
+        buffer_equip_equip1->Release();
+    if (buffer_equip_equip2 != nullptr)
+        buffer_equip_equip2->Release();
+    if (buffer_equip_equip3 != nullptr)
+        buffer_equip_equip3->Release();
+    if (buffer_equip_equip4 != nullptr)
+        buffer_equip_equip4->Release();
+    
+    return GORM_OK;
+}
+#define FOODUPDATESQL "update food_%d set "
+#define FOODUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_food())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(FOODUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_food &table_food = table.food();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_FOOD_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 food_version = table_food.version();
+    const int64 food_roleid = table_food.roleid();
+    const int32 food_snakeid = table_food.snakeid();
+    const string &food_food1 = table_food.food1();
+    const char *sz_food_food1 = "";
+    int len_food_food1 = 0;
+    GORM_MemPoolData *buffer_food_food1 = nullptr;
+    if(food_food1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food1, food_food1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_food_food1->m_uszData, food_food1.c_str(), food_food1.size());
+        buffer_food_food1->m_uszData[iTmpLen] = 0;
+        buffer_food_food1->m_sUsedSize = iTmpLen;
+        sz_food_food1 = buffer_food_food1->m_uszData;
+        len_food_food1 = iTmpLen;
+    }
+
+    const string &food_food2 = table_food.food2();
+    const char *sz_food_food2 = "";
+    int len_food_food2 = 0;
+    GORM_MemPoolData *buffer_food_food2 = nullptr;
+    if(food_food2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food2, food_food2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_food_food2->m_uszData, food_food2.c_str(), food_food2.size());
+        buffer_food_food2->m_uszData[iTmpLen] = 0;
+        buffer_food_food2->m_sUsedSize = iTmpLen;
+        sz_food_food2 = buffer_food_food2->m_uszData;
+        len_food_food2 = iTmpLen;
+    }
+
+    const string &food_food3 = table_food.food3();
+    const char *sz_food_food3 = "";
+    int len_food_food3 = 0;
+    GORM_MemPoolData *buffer_food_food3 = nullptr;
+    if(food_food3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food3, food_food3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_food_food3->m_uszData, food_food3.c_str(), food_food3.size());
+        buffer_food_food3->m_uszData[iTmpLen] = 0;
+        buffer_food_food3->m_sUsedSize = iTmpLen;
+        sz_food_food3 = buffer_food_food3->m_uszData;
+        len_food_food3 = iTmpLen;
+    }
+
+    const string &food_food4 = table_food.food4();
+    const char *sz_food_food4 = "";
+    int len_food_food4 = 0;
+    GORM_MemPoolData *buffer_food_food4 = nullptr;
+    if(food_food4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food4, food_food4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_food_food4->m_uszData, food_food4.c_str(), food_food4.size());
+        buffer_food_food4->m_uszData[iTmpLen] = 0;
+        buffer_food_food4->m_sUsedSize = iTmpLen;
+        sz_food_food4 = buffer_food_food4->m_uszData;
+        len_food_food4 = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_food_food1 + len_food_food2 + len_food_food3 + len_food_food4 + 24;
+    GORM_MemPoolData *buffer_food_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_food_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_food_where->m_sCapacity, FOODUPDATEWHERESQL , food_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_food_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), food_version);
+    buffer_food_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_food_food1+ len_food_food2+ len_food_food3+ len_food_food4+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, FOODUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), food_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_FOOD_VERSION == iFieldId || GORM_PB_FIELD_FOOD_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_FOOD_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", food_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", food_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", food_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", food_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", food_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", food_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `food1`='%s'", sz_food_food1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`food1`='%s'", sz_food_food1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `food2`='%s'", sz_food_food2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`food2`='%s'", sz_food_food2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `food3`='%s'", sz_food_food3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`food3`='%s'", sz_food_food3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `food4`='%s'", sz_food_food4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`food4`='%s'", sz_food_food4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_food_food1 != nullptr)
+        buffer_food_food1->Release();
+    if (buffer_food_food2 != nullptr)
+        buffer_food_food2->Release();
+    if (buffer_food_food3 != nullptr)
+        buffer_food_food3->Release();
+    if (buffer_food_food4 != nullptr)
+        buffer_food_food4->Release();
+    
+    return GORM_OK;
+}
+#define HEROUPDATESQL "update hero_%d set "
+#define HEROUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_hero())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(HEROUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_hero &table_hero = table.hero();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_HERO_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 hero_version = table_hero.version();
+    const int64 hero_roleid = table_hero.roleid();
+    const int32 hero_snakeid = table_hero.snakeid();
+    const string &hero_heros = table_hero.heros();
+    const char *sz_hero_heros = "";
+    int len_hero_heros = 0;
+    GORM_MemPoolData *buffer_hero_heros = nullptr;
+    if(hero_heros.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_heros, hero_heros.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_hero_heros->m_uszData, hero_heros.c_str(), hero_heros.size());
+        buffer_hero_heros->m_uszData[iTmpLen] = 0;
+        buffer_hero_heros->m_sUsedSize = iTmpLen;
+        sz_hero_heros = buffer_hero_heros->m_uszData;
+        len_hero_heros = iTmpLen;
+    }
+
+    const string &hero_teams = table_hero.teams();
+    const char *sz_hero_teams = "";
+    int len_hero_teams = 0;
+    GORM_MemPoolData *buffer_hero_teams = nullptr;
+    if(hero_teams.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_teams, hero_teams.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_hero_teams->m_uszData, hero_teams.c_str(), hero_teams.size());
+        buffer_hero_teams->m_uszData[iTmpLen] = 0;
+        buffer_hero_teams->m_sUsedSize = iTmpLen;
+        sz_hero_teams = buffer_hero_teams->m_uszData;
+        len_hero_teams = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_hero_heros + len_hero_teams + 24;
+    GORM_MemPoolData *buffer_hero_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_hero_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_hero_where->m_sCapacity, HEROUPDATEWHERESQL , hero_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_hero_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), hero_version);
+    buffer_hero_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_hero_heros+ len_hero_teams+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, HEROUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), hero_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_HERO_VERSION == iFieldId || GORM_PB_FIELD_HERO_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_HERO_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", hero_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", hero_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_HERO_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", hero_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", hero_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_HERO_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", hero_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", hero_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_HERO_HEROS:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `heros`='%s'", sz_hero_heros);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`heros`='%s'", sz_hero_heros);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_HERO_TEAMS:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `teams`='%s'", sz_hero_teams);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`teams`='%s'", sz_hero_teams);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_hero_heros != nullptr)
+        buffer_hero_heros->Release();
+    if (buffer_hero_teams != nullptr)
+        buffer_hero_teams->Release();
+    
+    return GORM_OK;
+}
+#define LOGIN_LOGUPDATESQL "update login_log_%d set "
+#define LOGIN_LOGUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_login_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(LOGIN_LOGUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_login_log &table_login_log = table.login_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_LOGIN_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 login_log_version = table_login_log.version();
+    const int64 login_log_roleid = table_login_log.roleid();
+    const int32 login_log_action = table_login_log.action();
+    const int32 login_log_online = table_login_log.online();
+    const string &login_log_ip = table_login_log.ip();
+    const char *sz_login_log_ip = "";
+    int len_login_log_ip = 0;
+    GORM_MemPoolData *buffer_login_log_ip = nullptr;
+    if(login_log_ip.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_ip, login_log_ip.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_login_log_ip->m_uszData, login_log_ip.c_str(), login_log_ip.size());
+        buffer_login_log_ip->m_uszData[iTmpLen] = 0;
+        buffer_login_log_ip->m_sUsedSize = iTmpLen;
+        sz_login_log_ip = buffer_login_log_ip->m_uszData;
+        len_login_log_ip = iTmpLen;
+    }
+
+    const string &login_log_appid = table_login_log.appid();
+    const char *sz_login_log_appid = "";
+    int len_login_log_appid = 0;
+    GORM_MemPoolData *buffer_login_log_appid = nullptr;
+    if(login_log_appid.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_appid, login_log_appid.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_login_log_appid->m_uszData, login_log_appid.c_str(), login_log_appid.size());
+        buffer_login_log_appid->m_uszData[iTmpLen] = 0;
+        buffer_login_log_appid->m_sUsedSize = iTmpLen;
+        sz_login_log_appid = buffer_login_log_appid->m_uszData;
+        len_login_log_appid = iTmpLen;
+    }
+
+    const int64 login_log_createtime = table_login_log.createtime();
+
+    int iWhereLen = iSqlLen + 128  + len_login_log_ip + len_login_log_appid + 40;
+    GORM_MemPoolData *buffer_login_log_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_login_log_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_login_log_where->m_sCapacity, LOGIN_LOGUPDATEWHERESQL , login_log_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_login_log_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), login_log_version);
+    buffer_login_log_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_login_log_ip+ len_login_log_appid+40;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, LOGIN_LOGUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), login_log_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_LOGIN_LOG_VERSION == iFieldId || GORM_PB_FIELD_LOGIN_LOG_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_LOGIN_LOG_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", login_log_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", login_log_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", login_log_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", login_log_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ACTION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `action`=%d", login_log_action);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`action`=%d", login_log_action);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ONLINE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `online`=%d", login_log_online);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`online`=%d", login_log_online);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_IP:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `ip`='%s'", sz_login_log_ip);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`ip`='%s'", sz_login_log_ip);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_APPID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `appid`='%s'", sz_login_log_appid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`appid`='%s'", sz_login_log_appid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_CREATETIME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=%lld", login_log_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`createtime`=%lld", login_log_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_login_log_ip != nullptr)
+        buffer_login_log_ip->Release();
+    if (buffer_login_log_appid != nullptr)
+        buffer_login_log_appid->Release();
+    
+    return GORM_OK;
+}
+#define MAILUPDATESQL "update mail_%d set "
+#define MAILUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_mail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(MAILUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_mail &table_mail = table.mail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAIL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 mail_version = table_mail.version();
+    const int64 mail_roleid = table_mail.roleid();
+    const string &mail_mail1 = table_mail.mail1();
+    const char *sz_mail_mail1 = "";
+    int len_mail_mail1 = 0;
+    GORM_MemPoolData *buffer_mail_mail1 = nullptr;
+    if(mail_mail1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail1, mail_mail1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mail_mail1->m_uszData, mail_mail1.c_str(), mail_mail1.size());
+        buffer_mail_mail1->m_uszData[iTmpLen] = 0;
+        buffer_mail_mail1->m_sUsedSize = iTmpLen;
+        sz_mail_mail1 = buffer_mail_mail1->m_uszData;
+        len_mail_mail1 = iTmpLen;
+    }
+
+    const string &mail_mail2 = table_mail.mail2();
+    const char *sz_mail_mail2 = "";
+    int len_mail_mail2 = 0;
+    GORM_MemPoolData *buffer_mail_mail2 = nullptr;
+    if(mail_mail2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail2, mail_mail2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mail_mail2->m_uszData, mail_mail2.c_str(), mail_mail2.size());
+        buffer_mail_mail2->m_uszData[iTmpLen] = 0;
+        buffer_mail_mail2->m_sUsedSize = iTmpLen;
+        sz_mail_mail2 = buffer_mail_mail2->m_uszData;
+        len_mail_mail2 = iTmpLen;
+    }
+
+    const string &mail_mail3 = table_mail.mail3();
+    const char *sz_mail_mail3 = "";
+    int len_mail_mail3 = 0;
+    GORM_MemPoolData *buffer_mail_mail3 = nullptr;
+    if(mail_mail3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail3, mail_mail3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mail_mail3->m_uszData, mail_mail3.c_str(), mail_mail3.size());
+        buffer_mail_mail3->m_uszData[iTmpLen] = 0;
+        buffer_mail_mail3->m_sUsedSize = iTmpLen;
+        sz_mail_mail3 = buffer_mail_mail3->m_uszData;
+        len_mail_mail3 = iTmpLen;
+    }
+
+    const string &mail_mail4 = table_mail.mail4();
+    const char *sz_mail_mail4 = "";
+    int len_mail_mail4 = 0;
+    GORM_MemPoolData *buffer_mail_mail4 = nullptr;
+    if(mail_mail4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail4, mail_mail4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mail_mail4->m_uszData, mail_mail4.c_str(), mail_mail4.size());
+        buffer_mail_mail4->m_uszData[iTmpLen] = 0;
+        buffer_mail_mail4->m_sUsedSize = iTmpLen;
+        sz_mail_mail4 = buffer_mail_mail4->m_uszData;
+        len_mail_mail4 = iTmpLen;
+    }
+
+    const string &mail_mail5 = table_mail.mail5();
+    const char *sz_mail_mail5 = "";
+    int len_mail_mail5 = 0;
+    GORM_MemPoolData *buffer_mail_mail5 = nullptr;
+    if(mail_mail5.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail5, mail_mail5.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mail_mail5->m_uszData, mail_mail5.c_str(), mail_mail5.size());
+        buffer_mail_mail5->m_uszData[iTmpLen] = 0;
+        buffer_mail_mail5->m_sUsedSize = iTmpLen;
+        sz_mail_mail5 = buffer_mail_mail5->m_uszData;
+        len_mail_mail5 = iTmpLen;
+    }
+
+    const int32 mail_lastmailid = table_mail.lastmailid();
+    const int32 mail_snakeid = table_mail.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + len_mail_mail1 + len_mail_mail2 + len_mail_mail3 + len_mail_mail4 + len_mail_mail5 + 32;
+    GORM_MemPoolData *buffer_mail_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_mail_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_mail_where->m_sCapacity, MAILUPDATEWHERESQL , mail_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_mail_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), mail_version);
+    buffer_mail_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_mail_mail1+ len_mail_mail2+ len_mail_mail3+ len_mail_mail4+ len_mail_mail5+32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAILUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), mail_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_MAIL_VERSION == iFieldId || GORM_PB_FIELD_MAIL_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_MAIL_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", mail_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", mail_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", mail_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", mail_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mail1`='%s'", sz_mail_mail1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`mail1`='%s'", sz_mail_mail1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mail2`='%s'", sz_mail_mail2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`mail2`='%s'", sz_mail_mail2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mail3`='%s'", sz_mail_mail3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`mail3`='%s'", sz_mail_mail3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mail4`='%s'", sz_mail_mail4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`mail4`='%s'", sz_mail_mail4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL5:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mail5`='%s'", sz_mail_mail5);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`mail5`='%s'", sz_mail_mail5);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_LASTMAILID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `lastmailid`=%d", mail_lastmailid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`lastmailid`=%d", mail_lastmailid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", mail_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", mail_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_mail_mail1 != nullptr)
+        buffer_mail_mail1->Release();
+    if (buffer_mail_mail2 != nullptr)
+        buffer_mail_mail2->Release();
+    if (buffer_mail_mail3 != nullptr)
+        buffer_mail_mail3->Release();
+    if (buffer_mail_mail4 != nullptr)
+        buffer_mail_mail4->Release();
+    if (buffer_mail_mail5 != nullptr)
+        buffer_mail_mail5->Release();
+    
+    return GORM_OK;
+}
+#define MATERIALUPDATESQL "update material_%d set "
+#define MATERIALUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_material())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(MATERIALUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_material &table_material = table.material();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MATERIAL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 material_version = table_material.version();
+    const int64 material_roleid = table_material.roleid();
+    const int32 material_snakeid = table_material.snakeid();
+    const string &material_material1 = table_material.material1();
+    const char *sz_material_material1 = "";
+    int len_material_material1 = 0;
+    GORM_MemPoolData *buffer_material_material1 = nullptr;
+    if(material_material1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material1, material_material1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_material_material1->m_uszData, material_material1.c_str(), material_material1.size());
+        buffer_material_material1->m_uszData[iTmpLen] = 0;
+        buffer_material_material1->m_sUsedSize = iTmpLen;
+        sz_material_material1 = buffer_material_material1->m_uszData;
+        len_material_material1 = iTmpLen;
+    }
+
+    const string &material_material2 = table_material.material2();
+    const char *sz_material_material2 = "";
+    int len_material_material2 = 0;
+    GORM_MemPoolData *buffer_material_material2 = nullptr;
+    if(material_material2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material2, material_material2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_material_material2->m_uszData, material_material2.c_str(), material_material2.size());
+        buffer_material_material2->m_uszData[iTmpLen] = 0;
+        buffer_material_material2->m_sUsedSize = iTmpLen;
+        sz_material_material2 = buffer_material_material2->m_uszData;
+        len_material_material2 = iTmpLen;
+    }
+
+    const string &material_material3 = table_material.material3();
+    const char *sz_material_material3 = "";
+    int len_material_material3 = 0;
+    GORM_MemPoolData *buffer_material_material3 = nullptr;
+    if(material_material3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material3, material_material3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_material_material3->m_uszData, material_material3.c_str(), material_material3.size());
+        buffer_material_material3->m_uszData[iTmpLen] = 0;
+        buffer_material_material3->m_sUsedSize = iTmpLen;
+        sz_material_material3 = buffer_material_material3->m_uszData;
+        len_material_material3 = iTmpLen;
+    }
+
+    const string &material_material4 = table_material.material4();
+    const char *sz_material_material4 = "";
+    int len_material_material4 = 0;
+    GORM_MemPoolData *buffer_material_material4 = nullptr;
+    if(material_material4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material4, material_material4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_material_material4->m_uszData, material_material4.c_str(), material_material4.size());
+        buffer_material_material4->m_uszData[iTmpLen] = 0;
+        buffer_material_material4->m_sUsedSize = iTmpLen;
+        sz_material_material4 = buffer_material_material4->m_uszData;
+        len_material_material4 = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_material_material1 + len_material_material2 + len_material_material3 + len_material_material4 + 24;
+    GORM_MemPoolData *buffer_material_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_material_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_material_where->m_sCapacity, MATERIALUPDATEWHERESQL , material_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_material_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), material_version);
+    buffer_material_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_material_material1+ len_material_material2+ len_material_material3+ len_material_material4+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, MATERIALUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), material_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_MATERIAL_VERSION == iFieldId || GORM_PB_FIELD_MATERIAL_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_MATERIAL_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", material_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", material_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", material_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", material_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", material_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", material_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `material1`='%s'", sz_material_material1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`material1`='%s'", sz_material_material1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `material2`='%s'", sz_material_material2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`material2`='%s'", sz_material_material2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `material3`='%s'", sz_material_material3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`material3`='%s'", sz_material_material3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `material4`='%s'", sz_material_material4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`material4`='%s'", sz_material_material4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_material_material1 != nullptr)
+        buffer_material_material1->Release();
+    if (buffer_material_material2 != nullptr)
+        buffer_material_material2->Release();
+    if (buffer_material_material3 != nullptr)
+        buffer_material_material3->Release();
+    if (buffer_material_material4 != nullptr)
+        buffer_material_material4->Release();
+    
+    return GORM_OK;
+}
+#define NPCUPDATESQL "update npc_%d set "
+#define NPCUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_npc())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(NPCUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_npc &table_npc = table.npc();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_NPC_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 npc_version = table_npc.version();
+    const int64 npc_roleid = table_npc.roleid();
+    const int32 npc_snakeid = table_npc.snakeid();
+    const string &npc_npcs = table_npc.npcs();
+    const char *sz_npc_npcs = "";
+    int len_npc_npcs = 0;
+    GORM_MemPoolData *buffer_npc_npcs = nullptr;
+    if(npc_npcs.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_npc_npcs, npc_npcs.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_npc_npcs->m_uszData, npc_npcs.c_str(), npc_npcs.size());
+        buffer_npc_npcs->m_uszData[iTmpLen] = 0;
+        buffer_npc_npcs->m_sUsedSize = iTmpLen;
+        sz_npc_npcs = buffer_npc_npcs->m_uszData;
+        len_npc_npcs = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_npc_npcs + 24;
+    GORM_MemPoolData *buffer_npc_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_npc_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_npc_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_npc_where->m_sCapacity, NPCUPDATEWHERESQL , npc_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_npc_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), npc_version);
+    buffer_npc_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_npc_npcs+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, NPCUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), npc_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_NPC_VERSION == iFieldId || GORM_PB_FIELD_NPC_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_NPC_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", npc_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", npc_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_NPC_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", npc_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", npc_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_NPC_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", npc_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", npc_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_NPC_NPCS:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `npcs`='%s'", sz_npc_npcs);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`npcs`='%s'", sz_npc_npcs);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_npc_npcs != nullptr)
+        buffer_npc_npcs->Release();
+    
+    return GORM_OK;
+}
+#define RES_LOGUPDATESQL "update res_log_%d set "
+#define RES_LOGUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_res_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(RES_LOGUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_res_log &table_res_log = table.res_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_RES_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 res_log_version = table_res_log.version();
+    const int64 res_log_roleid = table_res_log.roleid();
+    const int32 res_log_action = table_res_log.action();
+    const int32 res_log_cfgtype = table_res_log.cfgtype();
+    const int32 res_log_cfgid = table_res_log.cfgid();
+    const int32 res_log_delta = table_res_log.delta();
+    const int32 res_log_value = table_res_log.value();
+    const int64 res_log_createtime = table_res_log.createtime();
+
+    int iWhereLen = iSqlLen + 128  + 64;
+    GORM_MemPoolData *buffer_res_log_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_res_log_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_res_log_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_res_log_where->m_sCapacity, RES_LOGUPDATEWHERESQL , res_log_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_res_log_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), res_log_version);
+    buffer_res_log_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +64;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, RES_LOGUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), res_log_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_RES_LOG_VERSION == iFieldId || GORM_PB_FIELD_RES_LOG_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_RES_LOG_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", res_log_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", res_log_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", res_log_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", res_log_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_ACTION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `action`=%d", res_log_action);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`action`=%d", res_log_action);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CFGTYPE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `cfgtype`=%d", res_log_cfgtype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`cfgtype`=%d", res_log_cfgtype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CFGID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `cfgid`=%d", res_log_cfgid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`cfgid`=%d", res_log_cfgid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_DELTA:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `delta`=%d", res_log_delta);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`delta`=%d", res_log_delta);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_VALUE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `value`=%d", res_log_value);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`value`=%d", res_log_value);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CREATETIME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=%lld", res_log_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`createtime`=%lld", res_log_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define INTERACTIONUPDATESQL "update interaction_%d set "
+#define INTERACTIONUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_interaction())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(INTERACTIONUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_interaction &table_interaction = table.interaction();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_INTERACTION_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 interaction_version = table_interaction.version();
+    const int64 interaction_roleid = table_interaction.roleid();
+    const int32 interaction_snakeid = table_interaction.snakeid();
+    const string &interaction_interaction1 = table_interaction.interaction1();
+    const char *sz_interaction_interaction1 = "";
+    int len_interaction_interaction1 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction1 = nullptr;
+    if(interaction_interaction1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction1, interaction_interaction1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_interaction_interaction1->m_uszData, interaction_interaction1.c_str(), interaction_interaction1.size());
+        buffer_interaction_interaction1->m_uszData[iTmpLen] = 0;
+        buffer_interaction_interaction1->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction1 = buffer_interaction_interaction1->m_uszData;
+        len_interaction_interaction1 = iTmpLen;
+    }
+
+    const string &interaction_interaction2 = table_interaction.interaction2();
+    const char *sz_interaction_interaction2 = "";
+    int len_interaction_interaction2 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction2 = nullptr;
+    if(interaction_interaction2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction2, interaction_interaction2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_interaction_interaction2->m_uszData, interaction_interaction2.c_str(), interaction_interaction2.size());
+        buffer_interaction_interaction2->m_uszData[iTmpLen] = 0;
+        buffer_interaction_interaction2->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction2 = buffer_interaction_interaction2->m_uszData;
+        len_interaction_interaction2 = iTmpLen;
+    }
+
+    const string &interaction_interaction3 = table_interaction.interaction3();
+    const char *sz_interaction_interaction3 = "";
+    int len_interaction_interaction3 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction3 = nullptr;
+    if(interaction_interaction3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction3, interaction_interaction3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_interaction_interaction3->m_uszData, interaction_interaction3.c_str(), interaction_interaction3.size());
+        buffer_interaction_interaction3->m_uszData[iTmpLen] = 0;
+        buffer_interaction_interaction3->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction3 = buffer_interaction_interaction3->m_uszData;
+        len_interaction_interaction3 = iTmpLen;
+    }
+
+    const string &interaction_interaction4 = table_interaction.interaction4();
+    const char *sz_interaction_interaction4 = "";
+    int len_interaction_interaction4 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction4 = nullptr;
+    if(interaction_interaction4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction4, interaction_interaction4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_interaction_interaction4->m_uszData, interaction_interaction4.c_str(), interaction_interaction4.size());
+        buffer_interaction_interaction4->m_uszData[iTmpLen] = 0;
+        buffer_interaction_interaction4->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction4 = buffer_interaction_interaction4->m_uszData;
+        len_interaction_interaction4 = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_interaction_interaction1 + len_interaction_interaction2 + len_interaction_interaction3 + len_interaction_interaction4 + 24;
+    GORM_MemPoolData *buffer_interaction_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_interaction_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_interaction_where->m_sCapacity, INTERACTIONUPDATEWHERESQL , interaction_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_interaction_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), interaction_version);
+    buffer_interaction_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_interaction_interaction1+ len_interaction_interaction2+ len_interaction_interaction3+ len_interaction_interaction4+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, INTERACTIONUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), interaction_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_INTERACTION_VERSION == iFieldId || GORM_PB_FIELD_INTERACTION_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_INTERACTION_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", interaction_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", interaction_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", interaction_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", interaction_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", interaction_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", interaction_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `interaction1`='%s'", sz_interaction_interaction1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`interaction1`='%s'", sz_interaction_interaction1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `interaction2`='%s'", sz_interaction_interaction2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`interaction2`='%s'", sz_interaction_interaction2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `interaction3`='%s'", sz_interaction_interaction3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`interaction3`='%s'", sz_interaction_interaction3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `interaction4`='%s'", sz_interaction_interaction4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`interaction4`='%s'", sz_interaction_interaction4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_interaction_interaction1 != nullptr)
+        buffer_interaction_interaction1->Release();
+    if (buffer_interaction_interaction2 != nullptr)
+        buffer_interaction_interaction2->Release();
+    if (buffer_interaction_interaction3 != nullptr)
+        buffer_interaction_interaction3->Release();
+    if (buffer_interaction_interaction4 != nullptr)
+        buffer_interaction_interaction4->Release();
+    
+    return GORM_OK;
+}
+#define ROLESUPDATESQL "update roles_%d set "
+#define ROLESUPDATEWHERESQL " where `roleid`=%lld and `userid`=%lld"
+int GORM_PackUpdateSQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_roles())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(ROLESUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_roles &table_roles = table.roles();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 roles_version = table_roles.version();
+    const int64 roles_roleid = table_roles.roleid();
+    const int64 roles_userid = table_roles.userid();
+    const int64 roles_worldid = table_roles.worldid();
+    const int32 roles_dbid = table_roles.dbid();
+    const string &roles_name = table_roles.name();
+    const char *sz_roles_name = "";
+    int len_roles_name = 0;
+    GORM_MemPoolData *buffer_roles_name = nullptr;
+    if(roles_name.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_name, roles_name.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_roles_name->m_uszData, roles_name.c_str(), roles_name.size());
+        buffer_roles_name->m_uszData[iTmpLen] = 0;
+        buffer_roles_name->m_sUsedSize = iTmpLen;
+        sz_roles_name = buffer_roles_name->m_uszData;
+        len_roles_name = iTmpLen;
+    }
+
+    const int32 roles_charid = table_roles.charid();
+    const string &roles_face = table_roles.face();
+    const char *sz_roles_face = "";
+    int len_roles_face = 0;
+    GORM_MemPoolData *buffer_roles_face = nullptr;
+    if(roles_face.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_face, roles_face.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_roles_face->m_uszData, roles_face.c_str(), roles_face.size());
+        buffer_roles_face->m_uszData[iTmpLen] = 0;
+        buffer_roles_face->m_sUsedSize = iTmpLen;
+        sz_roles_face = buffer_roles_face->m_uszData;
+        len_roles_face = iTmpLen;
+    }
+
+    const int64 roles_createtime = table_roles.createtime();
+
+    int iWhereLen = iSqlLen + 128  + len_roles_name + len_roles_face + 56;
+    GORM_MemPoolData *buffer_roles_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_roles_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_roles_where->m_sCapacity, ROLESUPDATEWHERESQL , roles_roleid, roles_userid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_roles_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), roles_version);
+    buffer_roles_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_roles_name+ len_roles_face+56;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLESUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), roles_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_ROLES_VERSION == iFieldId || GORM_PB_FIELD_ROLES_ROLEID == iFieldId || GORM_PB_FIELD_ROLES_USERID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_ROLES_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", roles_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", roles_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", roles_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", roles_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_USERID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=%lld", roles_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`userid`=%lld", roles_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_WORLDID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `worldid`=%lld", roles_worldid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`worldid`=%lld", roles_worldid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_DBID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `dbid`=%d", roles_dbid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`dbid`=%d", roles_dbid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_NAME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `name`='%s'", sz_roles_name);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`name`='%s'", sz_roles_name);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_CHARID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `charid`=%d", roles_charid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`charid`=%d", roles_charid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_FACE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `face`='%s'", sz_roles_face);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`face`='%s'", sz_roles_face);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_CREATETIME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=%lld", roles_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`createtime`=%lld", roles_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_roles_name != nullptr)
+        buffer_roles_name->Release();
+    if (buffer_roles_face != nullptr)
+        buffer_roles_face->Release();
+    
+    return GORM_OK;
+}
+#define ROLEUPDATESQL "update role_%d set "
+#define ROLEUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_role())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(ROLEUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_role &table_role = table.role();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 role_version = table_role.version();
+    const int64 role_roleid = table_role.roleid();
+    const string &role_rolename = table_role.rolename();
+    const char *sz_role_rolename = "";
+    int len_role_rolename = 0;
+    GORM_MemPoolData *buffer_role_rolename = nullptr;
+    if(role_rolename.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_rolename, role_rolename.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_role_rolename->m_uszData, role_rolename.c_str(), role_rolename.size());
+        buffer_role_rolename->m_uszData[iTmpLen] = 0;
+        buffer_role_rolename->m_sUsedSize = iTmpLen;
+        sz_role_rolename = buffer_role_rolename->m_uszData;
+        len_role_rolename = iTmpLen;
+    }
+
+    const int32 role_level = table_role.level();
+    const int64 role_exp = table_role.exp();
+    const int32 role_characterid = table_role.characterid();
+    const int32 role_gold = table_role.gold();
+    const int64 role_offlinetime = table_role.offlinetime();
+    const int32 role_inited = table_role.inited();
+    const int64 role_createtime = table_role.createtime();
+    const string &role_face = table_role.face();
+    const char *sz_role_face = "";
+    int len_role_face = 0;
+    GORM_MemPoolData *buffer_role_face = nullptr;
+    if(role_face.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_face, role_face.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_role_face->m_uszData, role_face.c_str(), role_face.size());
+        buffer_role_face->m_uszData[iTmpLen] = 0;
+        buffer_role_face->m_sUsedSize = iTmpLen;
+        sz_role_face = buffer_role_face->m_uszData;
+        len_role_face = iTmpLen;
+    }
+
+    const int64 role_online = table_role.online();
+    const int64 role_worldid = table_role.worldid();
+    const int32 role_pttype = table_role.pttype();
+    const int64 role_userid = table_role.userid();
+    const int32 role_proceedslv = table_role.proceedslv();
+
+    int iWhereLen = iSqlLen + 128  + len_role_rolename + len_role_face + 112;
+    GORM_MemPoolData *buffer_role_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_role_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_role_where->m_sCapacity, ROLEUPDATEWHERESQL , role_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_role_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), role_version);
+    buffer_role_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_role_rolename+ len_role_face+112;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLEUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), role_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_ROLE_VERSION == iFieldId || GORM_PB_FIELD_ROLE_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_ROLE_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", role_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", role_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", role_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", role_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ROLENAME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `rolename`='%s'", sz_role_rolename);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`rolename`='%s'", sz_role_rolename);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_LEVEL:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `level`=%d", role_level);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`level`=%d", role_level);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_EXP:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `exp`=%lld", role_exp);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`exp`=%lld", role_exp);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_CHARACTERID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `characterid`=%d", role_characterid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`characterid`=%d", role_characterid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_GOLD:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `gold`=%d", role_gold);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`gold`=%d", role_gold);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_OFFLINETIME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `offlinetime`=%lld", role_offlinetime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`offlinetime`=%lld", role_offlinetime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_INITED:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `inited`=%d", role_inited);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`inited`=%d", role_inited);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_CREATETIME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=%lld", role_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`createtime`=%lld", role_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_FACE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `face`='%s'", sz_role_face);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`face`='%s'", sz_role_face);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ONLINE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `online`=%lld", role_online);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`online`=%lld", role_online);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_WORLDID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `worldid`=%lld", role_worldid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`worldid`=%lld", role_worldid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_PTTYPE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `pttype`=%d", role_pttype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`pttype`=%d", role_pttype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_USERID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=%lld", role_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`userid`=%lld", role_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_PROCEEDSLV:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `proceedslv`=%d", role_proceedslv);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`proceedslv`=%d", role_proceedslv);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_role_rolename != nullptr)
+        buffer_role_rolename->Release();
+    if (buffer_role_face != nullptr)
+        buffer_role_face->Release();
+    
+    return GORM_OK;
+}
+#define SCENEUPDATESQL "update scene_%d set "
+#define SCENEUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_scene())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(SCENEUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_scene &table_scene = table.scene();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SCENE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 scene_version = table_scene.version();
+    const int64 scene_roleid = table_scene.roleid();
+    const int32 scene_sceneid = table_scene.sceneid();
+    const string &scene_collects = table_scene.collects();
+    const char *sz_scene_collects = "";
+    int len_scene_collects = 0;
+    GORM_MemPoolData *buffer_scene_collects = nullptr;
+    if(scene_collects.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_collects, scene_collects.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_scene_collects->m_uszData, scene_collects.c_str(), scene_collects.size());
+        buffer_scene_collects->m_uszData[iTmpLen] = 0;
+        buffer_scene_collects->m_sUsedSize = iTmpLen;
+        sz_scene_collects = buffer_scene_collects->m_uszData;
+        len_scene_collects = iTmpLen;
+    }
+
+    const string &scene_season = table_scene.season();
+    const char *sz_scene_season = "";
+    int len_scene_season = 0;
+    GORM_MemPoolData *buffer_scene_season = nullptr;
+    if(scene_season.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_season, scene_season.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_scene_season->m_uszData, scene_season.c_str(), scene_season.size());
+        buffer_scene_season->m_uszData[iTmpLen] = 0;
+        buffer_scene_season->m_sUsedSize = iTmpLen;
+        sz_scene_season = buffer_scene_season->m_uszData;
+        len_scene_season = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_scene_collects + len_scene_season + 24;
+    GORM_MemPoolData *buffer_scene_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_scene_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_scene_where->m_sCapacity, SCENEUPDATEWHERESQL , scene_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_scene_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), scene_version);
+    buffer_scene_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_scene_collects+ len_scene_season+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, SCENEUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), scene_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_SCENE_VERSION == iFieldId || GORM_PB_FIELD_SCENE_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_SCENE_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", scene_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", scene_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", scene_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", scene_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_SCENEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `sceneid`=%d", scene_sceneid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`sceneid`=%d", scene_sceneid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_COLLECTS:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `collects`='%s'", sz_scene_collects);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`collects`='%s'", sz_scene_collects);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_SEASON:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `season`='%s'", sz_scene_season);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`season`='%s'", sz_scene_season);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_scene_collects != nullptr)
+        buffer_scene_collects->Release();
+    if (buffer_scene_season != nullptr)
+        buffer_scene_season->Release();
+    
+    return GORM_OK;
+}
+#define SKILLUPDATESQL "update skill_%d set "
+#define SKILLUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_skill())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(SKILLUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_skill &table_skill = table.skill();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SKILL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 skill_version = table_skill.version();
+    const int64 skill_roleid = table_skill.roleid();
+    const int32 skill_snakeid = table_skill.snakeid();
+    const string &skill_skill1 = table_skill.skill1();
+    const char *sz_skill_skill1 = "";
+    int len_skill_skill1 = 0;
+    GORM_MemPoolData *buffer_skill_skill1 = nullptr;
+    if(skill_skill1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill1, skill_skill1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_skill_skill1->m_uszData, skill_skill1.c_str(), skill_skill1.size());
+        buffer_skill_skill1->m_uszData[iTmpLen] = 0;
+        buffer_skill_skill1->m_sUsedSize = iTmpLen;
+        sz_skill_skill1 = buffer_skill_skill1->m_uszData;
+        len_skill_skill1 = iTmpLen;
+    }
+
+    const string &skill_skill2 = table_skill.skill2();
+    const char *sz_skill_skill2 = "";
+    int len_skill_skill2 = 0;
+    GORM_MemPoolData *buffer_skill_skill2 = nullptr;
+    if(skill_skill2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill2, skill_skill2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_skill_skill2->m_uszData, skill_skill2.c_str(), skill_skill2.size());
+        buffer_skill_skill2->m_uszData[iTmpLen] = 0;
+        buffer_skill_skill2->m_sUsedSize = iTmpLen;
+        sz_skill_skill2 = buffer_skill_skill2->m_uszData;
+        len_skill_skill2 = iTmpLen;
+    }
+
+    const string &skill_skill3 = table_skill.skill3();
+    const char *sz_skill_skill3 = "";
+    int len_skill_skill3 = 0;
+    GORM_MemPoolData *buffer_skill_skill3 = nullptr;
+    if(skill_skill3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill3, skill_skill3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_skill_skill3->m_uszData, skill_skill3.c_str(), skill_skill3.size());
+        buffer_skill_skill3->m_uszData[iTmpLen] = 0;
+        buffer_skill_skill3->m_sUsedSize = iTmpLen;
+        sz_skill_skill3 = buffer_skill_skill3->m_uszData;
+        len_skill_skill3 = iTmpLen;
+    }
+
+    const string &skill_skill4 = table_skill.skill4();
+    const char *sz_skill_skill4 = "";
+    int len_skill_skill4 = 0;
+    GORM_MemPoolData *buffer_skill_skill4 = nullptr;
+    if(skill_skill4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill4, skill_skill4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_skill_skill4->m_uszData, skill_skill4.c_str(), skill_skill4.size());
+        buffer_skill_skill4->m_uszData[iTmpLen] = 0;
+        buffer_skill_skill4->m_sUsedSize = iTmpLen;
+        sz_skill_skill4 = buffer_skill_skill4->m_uszData;
+        len_skill_skill4 = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_skill_skill1 + len_skill_skill2 + len_skill_skill3 + len_skill_skill4 + 24;
+    GORM_MemPoolData *buffer_skill_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_skill_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_skill_where->m_sCapacity, SKILLUPDATEWHERESQL , skill_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_skill_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), skill_version);
+    buffer_skill_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_skill_skill1+ len_skill_skill2+ len_skill_skill3+ len_skill_skill4+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, SKILLUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), skill_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_SKILL_VERSION == iFieldId || GORM_PB_FIELD_SKILL_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_SKILL_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", skill_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", skill_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", skill_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", skill_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SNAKEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=%d", skill_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`snakeid`=%d", skill_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `skill1`='%s'", sz_skill_skill1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`skill1`='%s'", sz_skill_skill1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `skill2`='%s'", sz_skill_skill2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`skill2`='%s'", sz_skill_skill2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `skill3`='%s'", sz_skill_skill3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`skill3`='%s'", sz_skill_skill3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `skill4`='%s'", sz_skill_skill4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`skill4`='%s'", sz_skill_skill4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_skill_skill1 != nullptr)
+        buffer_skill_skill1->Release();
+    if (buffer_skill_skill2 != nullptr)
+        buffer_skill_skill2->Release();
+    if (buffer_skill_skill3 != nullptr)
+        buffer_skill_skill3->Release();
+    if (buffer_skill_skill4 != nullptr)
+        buffer_skill_skill4->Release();
+    
+    return GORM_OK;
+}
+#define PTUSERUPDATESQL "update ptuser_%d set "
+#define PTUSERUPDATEWHERESQL " where `ptid`='%s' and `pttype`=%d"
+int GORM_PackUpdateSQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_ptuser())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(PTUSERUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_ptuser &table_ptuser = table.ptuser();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTTYPE == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 ptuser_version = table_ptuser.version();
+    const string &ptuser_ptid = table_ptuser.ptid();
+    const char *sz_ptuser_ptid = "";
+    int len_ptuser_ptid = 0;
+    GORM_MemPoolData *buffer_ptuser_ptid = nullptr;
+    if(ptuser_ptid.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_ptid, ptuser_ptid.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_ptuser_ptid->m_uszData, ptuser_ptid.c_str(), ptuser_ptid.size());
+        buffer_ptuser_ptid->m_uszData[iTmpLen] = 0;
+        buffer_ptuser_ptid->m_sUsedSize = iTmpLen;
+        sz_ptuser_ptid = buffer_ptuser_ptid->m_uszData;
+        len_ptuser_ptid = iTmpLen;
+    }
+
+    const int32 ptuser_pttype = table_ptuser.pttype();
+    const int64 ptuser_userid = table_ptuser.userid();
+
+    int iWhereLen = iSqlLen + 128  + len_ptuser_ptid + 24;
+    GORM_MemPoolData *buffer_ptuser_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_ptuser_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_ptuser_where->m_sCapacity, PTUSERUPDATEWHERESQL , sz_ptuser_ptid, ptuser_pttype);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_ptuser_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), ptuser_version);
+    buffer_ptuser_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_ptuser_ptid+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, PTUSERUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), ptuser_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_PTUSER_VERSION == iFieldId || GORM_PB_FIELD_PTUSER_PTID == iFieldId || GORM_PB_FIELD_PTUSER_PTTYPE == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_PTUSER_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", ptuser_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", ptuser_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_PTID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `ptid`='%s'", sz_ptuser_ptid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`ptid`='%s'", sz_ptuser_ptid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_PTTYPE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `pttype`=%d", ptuser_pttype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`pttype`=%d", ptuser_pttype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_USERID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=%lld", ptuser_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`userid`=%lld", ptuser_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_ptuser_ptid != nullptr)
+        buffer_ptuser_ptid->Release();
+    
+    return GORM_OK;
+}
+#define USERUPDATESQL "update user_%d set "
+#define USERUPDATEWHERESQL " where `userid`=%lld"
+int GORM_PackUpdateSQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_user())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(USERUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_user &table_user = table.user();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_USER_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 user_version = table_user.version();
+    const int64 user_userid = table_user.userid();
+    const string &user_ptid = table_user.ptid();
+    const char *sz_user_ptid = "";
+    int len_user_ptid = 0;
+    GORM_MemPoolData *buffer_user_ptid = nullptr;
+    if(user_ptid.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_ptid, user_ptid.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_user_ptid->m_uszData, user_ptid.c_str(), user_ptid.size());
+        buffer_user_ptid->m_uszData[iTmpLen] = 0;
+        buffer_user_ptid->m_sUsedSize = iTmpLen;
+        sz_user_ptid = buffer_user_ptid->m_uszData;
+        len_user_ptid = iTmpLen;
+    }
+
+    const int32 user_pttype = table_user.pttype();
+    const int64 user_createtime = table_user.createtime();
+    const string &user_rolesdata = table_user.rolesdata();
+    const char *sz_user_rolesdata = "";
+    int len_user_rolesdata = 0;
+    GORM_MemPoolData *buffer_user_rolesdata = nullptr;
+    if(user_rolesdata.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_rolesdata, user_rolesdata.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_user_rolesdata->m_uszData, user_rolesdata.c_str(), user_rolesdata.size());
+        buffer_user_rolesdata->m_uszData[iTmpLen] = 0;
+        buffer_user_rolesdata->m_sUsedSize = iTmpLen;
+        sz_user_rolesdata = buffer_user_rolesdata->m_uszData;
+        len_user_rolesdata = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_user_ptid + len_user_rolesdata + 32;
+    GORM_MemPoolData *buffer_user_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_user_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_user_where->m_sCapacity, USERUPDATEWHERESQL , user_userid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_user_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), user_version);
+    buffer_user_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_user_ptid+ len_user_rolesdata+32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, USERUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), user_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_USER_VERSION == iFieldId || GORM_PB_FIELD_USER_USERID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_USER_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", user_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", user_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_USERID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=%lld", user_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`userid`=%lld", user_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_PTID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `ptid`='%s'", sz_user_ptid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`ptid`='%s'", sz_user_ptid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_PTTYPE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `pttype`=%d", user_pttype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`pttype`=%d", user_pttype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_CREATETIME:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=%lld", user_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`createtime`=%lld", user_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_ROLESDATA:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `rolesdata`='%s'", sz_user_rolesdata);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`rolesdata`='%s'", sz_user_rolesdata);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_user_ptid != nullptr)
+        buffer_user_ptid->Release();
+    if (buffer_user_rolesdata != nullptr)
+        buffer_user_rolesdata->Release();
+    
+    return GORM_OK;
+}
+#define MAINLINETASKUPDATESQL "update mainlinetask_%d set "
+#define MAINLINETASKUPDATEWHERESQL " where `roleid`=%lld"
+int GORM_PackUpdateSQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_mainlinetask())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(MAINLINETASKUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_mainlinetask &table_mainlinetask = table.mainlinetask();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAINLINETASK_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 mainlinetask_version = table_mainlinetask.version();
+    const int64 mainlinetask_roleid = table_mainlinetask.roleid();
+    const int32 mainlinetask_runningtask = table_mainlinetask.runningtask();
+    const string &mainlinetask_compleatetask0 = table_mainlinetask.compleatetask0();
+    const char *sz_mainlinetask_compleatetask0 = "";
+    int len_mainlinetask_compleatetask0 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask0 = nullptr;
+    if(mainlinetask_compleatetask0.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask0, mainlinetask_compleatetask0.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask0->m_uszData, mainlinetask_compleatetask0.c_str(), mainlinetask_compleatetask0.size());
+        buffer_mainlinetask_compleatetask0->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask0->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask0 = buffer_mainlinetask_compleatetask0->m_uszData;
+        len_mainlinetask_compleatetask0 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask1 = table_mainlinetask.compleatetask1();
+    const char *sz_mainlinetask_compleatetask1 = "";
+    int len_mainlinetask_compleatetask1 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask1 = nullptr;
+    if(mainlinetask_compleatetask1.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask1, mainlinetask_compleatetask1.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask1->m_uszData, mainlinetask_compleatetask1.c_str(), mainlinetask_compleatetask1.size());
+        buffer_mainlinetask_compleatetask1->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask1->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask1 = buffer_mainlinetask_compleatetask1->m_uszData;
+        len_mainlinetask_compleatetask1 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask2 = table_mainlinetask.compleatetask2();
+    const char *sz_mainlinetask_compleatetask2 = "";
+    int len_mainlinetask_compleatetask2 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask2 = nullptr;
+    if(mainlinetask_compleatetask2.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask2, mainlinetask_compleatetask2.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask2->m_uszData, mainlinetask_compleatetask2.c_str(), mainlinetask_compleatetask2.size());
+        buffer_mainlinetask_compleatetask2->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask2->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask2 = buffer_mainlinetask_compleatetask2->m_uszData;
+        len_mainlinetask_compleatetask2 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask3 = table_mainlinetask.compleatetask3();
+    const char *sz_mainlinetask_compleatetask3 = "";
+    int len_mainlinetask_compleatetask3 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask3 = nullptr;
+    if(mainlinetask_compleatetask3.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask3, mainlinetask_compleatetask3.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask3->m_uszData, mainlinetask_compleatetask3.c_str(), mainlinetask_compleatetask3.size());
+        buffer_mainlinetask_compleatetask3->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask3->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask3 = buffer_mainlinetask_compleatetask3->m_uszData;
+        len_mainlinetask_compleatetask3 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask4 = table_mainlinetask.compleatetask4();
+    const char *sz_mainlinetask_compleatetask4 = "";
+    int len_mainlinetask_compleatetask4 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask4 = nullptr;
+    if(mainlinetask_compleatetask4.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask4, mainlinetask_compleatetask4.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask4->m_uszData, mainlinetask_compleatetask4.c_str(), mainlinetask_compleatetask4.size());
+        buffer_mainlinetask_compleatetask4->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask4->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask4 = buffer_mainlinetask_compleatetask4->m_uszData;
+        len_mainlinetask_compleatetask4 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask5 = table_mainlinetask.compleatetask5();
+    const char *sz_mainlinetask_compleatetask5 = "";
+    int len_mainlinetask_compleatetask5 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask5 = nullptr;
+    if(mainlinetask_compleatetask5.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask5, mainlinetask_compleatetask5.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask5->m_uszData, mainlinetask_compleatetask5.c_str(), mainlinetask_compleatetask5.size());
+        buffer_mainlinetask_compleatetask5->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask5->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask5 = buffer_mainlinetask_compleatetask5->m_uszData;
+        len_mainlinetask_compleatetask5 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask6 = table_mainlinetask.compleatetask6();
+    const char *sz_mainlinetask_compleatetask6 = "";
+    int len_mainlinetask_compleatetask6 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask6 = nullptr;
+    if(mainlinetask_compleatetask6.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask6, mainlinetask_compleatetask6.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask6->m_uszData, mainlinetask_compleatetask6.c_str(), mainlinetask_compleatetask6.size());
+        buffer_mainlinetask_compleatetask6->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask6->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask6 = buffer_mainlinetask_compleatetask6->m_uszData;
+        len_mainlinetask_compleatetask6 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask7 = table_mainlinetask.compleatetask7();
+    const char *sz_mainlinetask_compleatetask7 = "";
+    int len_mainlinetask_compleatetask7 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask7 = nullptr;
+    if(mainlinetask_compleatetask7.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask7, mainlinetask_compleatetask7.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask7->m_uszData, mainlinetask_compleatetask7.c_str(), mainlinetask_compleatetask7.size());
+        buffer_mainlinetask_compleatetask7->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask7->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask7 = buffer_mainlinetask_compleatetask7->m_uszData;
+        len_mainlinetask_compleatetask7 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask8 = table_mainlinetask.compleatetask8();
+    const char *sz_mainlinetask_compleatetask8 = "";
+    int len_mainlinetask_compleatetask8 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask8 = nullptr;
+    if(mainlinetask_compleatetask8.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask8, mainlinetask_compleatetask8.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask8->m_uszData, mainlinetask_compleatetask8.c_str(), mainlinetask_compleatetask8.size());
+        buffer_mainlinetask_compleatetask8->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask8->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask8 = buffer_mainlinetask_compleatetask8->m_uszData;
+        len_mainlinetask_compleatetask8 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask9 = table_mainlinetask.compleatetask9();
+    const char *sz_mainlinetask_compleatetask9 = "";
+    int len_mainlinetask_compleatetask9 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask9 = nullptr;
+    if(mainlinetask_compleatetask9.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask9, mainlinetask_compleatetask9.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask9->m_uszData, mainlinetask_compleatetask9.c_str(), mainlinetask_compleatetask9.size());
+        buffer_mainlinetask_compleatetask9->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_compleatetask9->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask9 = buffer_mainlinetask_compleatetask9->m_uszData;
+        len_mainlinetask_compleatetask9 = iTmpLen;
+    }
+
+    const string &mainlinetask_unlockfuncs = table_mainlinetask.unlockfuncs();
+    const char *sz_mainlinetask_unlockfuncs = "";
+    int len_mainlinetask_unlockfuncs = 0;
+    GORM_MemPoolData *buffer_mainlinetask_unlockfuncs = nullptr;
+    if(mainlinetask_unlockfuncs.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_unlockfuncs, mainlinetask_unlockfuncs.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_mainlinetask_unlockfuncs->m_uszData, mainlinetask_unlockfuncs.c_str(), mainlinetask_unlockfuncs.size());
+        buffer_mainlinetask_unlockfuncs->m_uszData[iTmpLen] = 0;
+        buffer_mainlinetask_unlockfuncs->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_unlockfuncs = buffer_mainlinetask_unlockfuncs->m_uszData;
+        len_mainlinetask_unlockfuncs = iTmpLen;
+    }
+
+
+    int iWhereLen = iSqlLen + 128  + len_mainlinetask_compleatetask0 + len_mainlinetask_compleatetask1 + len_mainlinetask_compleatetask2 + len_mainlinetask_compleatetask3 + len_mainlinetask_compleatetask4 + len_mainlinetask_compleatetask5 + len_mainlinetask_compleatetask6 + len_mainlinetask_compleatetask7 + len_mainlinetask_compleatetask8 + len_mainlinetask_compleatetask9 + len_mainlinetask_unlockfuncs + 24;
+    GORM_MemPoolData *buffer_mainlinetask_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_mainlinetask_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_mainlinetask_where->m_sCapacity, MAINLINETASKUPDATEWHERESQL , mainlinetask_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_mainlinetask_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), mainlinetask_version);
+    buffer_mainlinetask_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_mainlinetask_compleatetask0+ len_mainlinetask_compleatetask1+ len_mainlinetask_compleatetask2+ len_mainlinetask_compleatetask3+ len_mainlinetask_compleatetask4+ len_mainlinetask_compleatetask5+ len_mainlinetask_compleatetask6+ len_mainlinetask_compleatetask7+ len_mainlinetask_compleatetask8+ len_mainlinetask_compleatetask9+ len_mainlinetask_unlockfuncs+24;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAINLINETASKUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), mainlinetask_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_MAINLINETASK_VERSION == iFieldId || GORM_PB_FIELD_MAINLINETASK_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_MAINLINETASK_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", mainlinetask_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", mainlinetask_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_ROLEID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=%lld", mainlinetask_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roleid`=%lld", mainlinetask_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_RUNNINGTASK:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `runningtask`=%d", mainlinetask_runningtask);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`runningtask`=%d", mainlinetask_runningtask);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK0:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask0`='%s'", sz_mainlinetask_compleatetask0);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask0`='%s'", sz_mainlinetask_compleatetask0);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK1:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask1`='%s'", sz_mainlinetask_compleatetask1);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask1`='%s'", sz_mainlinetask_compleatetask1);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK2:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask2`='%s'", sz_mainlinetask_compleatetask2);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask2`='%s'", sz_mainlinetask_compleatetask2);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK3:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask3`='%s'", sz_mainlinetask_compleatetask3);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask3`='%s'", sz_mainlinetask_compleatetask3);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK4:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask4`='%s'", sz_mainlinetask_compleatetask4);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask4`='%s'", sz_mainlinetask_compleatetask4);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK5:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask5`='%s'", sz_mainlinetask_compleatetask5);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask5`='%s'", sz_mainlinetask_compleatetask5);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK6:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask6`='%s'", sz_mainlinetask_compleatetask6);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask6`='%s'", sz_mainlinetask_compleatetask6);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK7:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask7`='%s'", sz_mainlinetask_compleatetask7);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask7`='%s'", sz_mainlinetask_compleatetask7);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK8:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask8`='%s'", sz_mainlinetask_compleatetask8);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask8`='%s'", sz_mainlinetask_compleatetask8);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK9:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `compleatetask9`='%s'", sz_mainlinetask_compleatetask9);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`compleatetask9`='%s'", sz_mainlinetask_compleatetask9);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_UNLOCKFUNCS:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `unlockfuncs`='%s'", sz_mainlinetask_unlockfuncs);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`unlockfuncs`='%s'", sz_mainlinetask_unlockfuncs);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_mainlinetask_compleatetask0 != nullptr)
+        buffer_mainlinetask_compleatetask0->Release();
+    if (buffer_mainlinetask_compleatetask1 != nullptr)
+        buffer_mainlinetask_compleatetask1->Release();
+    if (buffer_mainlinetask_compleatetask2 != nullptr)
+        buffer_mainlinetask_compleatetask2->Release();
+    if (buffer_mainlinetask_compleatetask3 != nullptr)
+        buffer_mainlinetask_compleatetask3->Release();
+    if (buffer_mainlinetask_compleatetask4 != nullptr)
+        buffer_mainlinetask_compleatetask4->Release();
+    if (buffer_mainlinetask_compleatetask5 != nullptr)
+        buffer_mainlinetask_compleatetask5->Release();
+    if (buffer_mainlinetask_compleatetask6 != nullptr)
+        buffer_mainlinetask_compleatetask6->Release();
+    if (buffer_mainlinetask_compleatetask7 != nullptr)
+        buffer_mainlinetask_compleatetask7->Release();
+    if (buffer_mainlinetask_compleatetask8 != nullptr)
+        buffer_mainlinetask_compleatetask8->Release();
+    if (buffer_mainlinetask_compleatetask9 != nullptr)
+        buffer_mainlinetask_compleatetask9->Release();
+    if (buffer_mainlinetask_unlockfuncs != nullptr)
+        buffer_mainlinetask_unlockfuncs->Release();
+    
+    return GORM_OK;
+}
+#define PUBMAILUPDATESQL "update pubmail_%d set "
+#define PUBMAILUPDATEWHERESQL " where `mailid`=%d"
+int GORM_PackUpdateSQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_TABLE &table = pMsg->tables(0);
+    if (!table.has_pubmail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(PUBMAILUPDATESQL);
+    int iTmpLen = 0;
+
+    const GORM_PB_Table_pubmail &table_pubmail = table.pubmail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PUBMAIL_MAILID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 pubmail_version = table_pubmail.version();
+    const int32 pubmail_mailid = table_pubmail.mailid();
+    const string &pubmail_addresser = table_pubmail.addresser();
+    const char *sz_pubmail_addresser = "";
+    int len_pubmail_addresser = 0;
+    GORM_MemPoolData *buffer_pubmail_addresser = nullptr;
+    if(pubmail_addresser.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_addresser, pubmail_addresser.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_pubmail_addresser->m_uszData, pubmail_addresser.c_str(), pubmail_addresser.size());
+        buffer_pubmail_addresser->m_uszData[iTmpLen] = 0;
+        buffer_pubmail_addresser->m_sUsedSize = iTmpLen;
+        sz_pubmail_addresser = buffer_pubmail_addresser->m_uszData;
+        len_pubmail_addresser = iTmpLen;
+    }
+
+    const string &pubmail_title = table_pubmail.title();
+    const char *sz_pubmail_title = "";
+    int len_pubmail_title = 0;
+    GORM_MemPoolData *buffer_pubmail_title = nullptr;
+    if(pubmail_title.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_title, pubmail_title.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_pubmail_title->m_uszData, pubmail_title.c_str(), pubmail_title.size());
+        buffer_pubmail_title->m_uszData[iTmpLen] = 0;
+        buffer_pubmail_title->m_sUsedSize = iTmpLen;
+        sz_pubmail_title = buffer_pubmail_title->m_uszData;
+        len_pubmail_title = iTmpLen;
+    }
+
+    const string &pubmail_body = table_pubmail.body();
+    const char *sz_pubmail_body = "";
+    int len_pubmail_body = 0;
+    GORM_MemPoolData *buffer_pubmail_body = nullptr;
+    if(pubmail_body.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_body, pubmail_body.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_pubmail_body->m_uszData, pubmail_body.c_str(), pubmail_body.size());
+        buffer_pubmail_body->m_uszData[iTmpLen] = 0;
+        buffer_pubmail_body->m_sUsedSize = iTmpLen;
+        sz_pubmail_body = buffer_pubmail_body->m_uszData;
+        len_pubmail_body = iTmpLen;
+    }
+
+    const string &pubmail_roles = table_pubmail.roles();
+    const char *sz_pubmail_roles = "";
+    int len_pubmail_roles = 0;
+    GORM_MemPoolData *buffer_pubmail_roles = nullptr;
+    if(pubmail_roles.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_roles, pubmail_roles.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_pubmail_roles->m_uszData, pubmail_roles.c_str(), pubmail_roles.size());
+        buffer_pubmail_roles->m_uszData[iTmpLen] = 0;
+        buffer_pubmail_roles->m_sUsedSize = iTmpLen;
+        sz_pubmail_roles = buffer_pubmail_roles->m_uszData;
+        len_pubmail_roles = iTmpLen;
+    }
+
+    const string &pubmail_attachment = table_pubmail.attachment();
+    const char *sz_pubmail_attachment = "";
+    int len_pubmail_attachment = 0;
+    GORM_MemPoolData *buffer_pubmail_attachment = nullptr;
+    if(pubmail_attachment.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_attachment, pubmail_attachment.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_pubmail_attachment->m_uszData, pubmail_attachment.c_str(), pubmail_attachment.size());
+        buffer_pubmail_attachment->m_uszData[iTmpLen] = 0;
+        buffer_pubmail_attachment->m_sUsedSize = iTmpLen;
+        sz_pubmail_attachment = buffer_pubmail_attachment->m_uszData;
+        len_pubmail_attachment = iTmpLen;
+    }
+
+    const int64 pubmail_dt = table_pubmail.dt();
+    const int32 pubmail_del = table_pubmail.del();
+
+    int iWhereLen = iSqlLen + 128  + len_pubmail_addresser + len_pubmail_title + len_pubmail_body + len_pubmail_roles + len_pubmail_attachment + 32;
+    GORM_MemPoolData *buffer_pubmail_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_where, iWhereLen);
+    iWhereLen = 0;
+    char *szWhereBegin = buffer_pubmail_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen,  buffer_pubmail_where->m_sCapacity, PUBMAILUPDATEWHERESQL , pubmail_mailid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_pubmail_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), pubmail_version);
+    buffer_pubmail_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_pubmail_addresser+ len_pubmail_title+ len_pubmail_body+ len_pubmail_roles+ len_pubmail_attachment+32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    int iUpdateLen = GORM_SafeSnprintf(szSQLBegin, iLen, PUBMAILUPDATESQL, iTableIndex);
+    szSQLBegin += iUpdateLen;
+    pReqData->m_sUsedSize = iUpdateLen;
+    int iDataLen = 0;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen, GORM_CheckDataVerType(header.verpolice()), pubmail_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_PUBMAIL_VERSION == iFieldId || GORM_PB_FIELD_PUBMAIL_MAILID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_PUBMAIL_VERSION:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=%llu", pubmail_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`version`=%llu", pubmail_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_MAILID:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mailid`=%d", pubmail_mailid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`mailid`=%d", pubmail_mailid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_ADDRESSER:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `addresser`='%s'", sz_pubmail_addresser);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`addresser`='%s'", sz_pubmail_addresser);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_TITLE:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `title`='%s'", sz_pubmail_title);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`title`='%s'", sz_pubmail_title);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_BODY:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `body`='%s'", sz_pubmail_body);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`body`='%s'", sz_pubmail_body);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_ROLES:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roles`='%s'", sz_pubmail_roles);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`roles`='%s'", sz_pubmail_roles);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_ATTACHMENT:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `attachment`='%s'", sz_pubmail_attachment);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`attachment`='%s'", sz_pubmail_attachment);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_DT:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `dt`=%lld", pubmail_dt);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`dt`=%lld", pubmail_dt);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_DEL:
+        {
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `del`=%d", pubmail_del);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, "`del`=%d", pubmail_del);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            return GORM_INVALID_FIELD;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_pubmail_addresser != nullptr)
+        buffer_pubmail_addresser->Release();
+    if (buffer_pubmail_title != nullptr)
+        buffer_pubmail_title->Release();
+    if (buffer_pubmail_body != nullptr)
+        buffer_pubmail_body->Release();
+    if (buffer_pubmail_roles != nullptr)
+        buffer_pubmail_roles->Release();
+    if (buffer_pubmail_attachment != nullptr)
+        buffer_pubmail_attachment->Release();
+    
+    return GORM_OK;
+}
 int GORM_PackUpdateSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_UPDATE_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -846,6 +8226,57 @@ int GORM_PackUpdateSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMyS
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackUpdateSQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackUpdateSQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackUpdateSQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackUpdateSQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackUpdateSQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackUpdateSQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackUpdateSQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackUpdateSQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackUpdateSQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackUpdateSQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackUpdateSQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackUpdateSQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackUpdateSQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackUpdateSQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackUpdateSQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackUpdateSQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackUpdateSQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackUpdateSQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -1089,6 +8520,2538 @@ int GORM_PackIncreaseSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQ
     
     return GORM_OK;
 }
+#define EQUIPINCREASESQL "update equip_%d set "
+#define EQUIPINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_equip())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(EQUIPINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_equip table_equip = table.equip();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_EQUIP_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 equip_version = table_equip.version();
+    const int64 equip_roleid = table_equip.roleid();
+    const int32 equip_snakeid = table_equip.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_equip_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_where, iWhereLen);
+    char *szWhereBegin = buffer_equip_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_equip_where->m_sCapacity, EQUIPINCREASEWHERESQL , equip_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_equip_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), equip_version);
+    buffer_equip_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +88;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, EQUIPUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, EQUIPINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), equip_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_EQUIP_VERSION == iFieldId || GORM_PB_FIELD_EQUIP_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_EQUIP_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_EQUIP_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, equip_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, equip_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_EQUIP_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, equip_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, equip_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_EQUIP_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, equip_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, equip_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define FOODINCREASESQL "update food_%d set "
+#define FOODINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_food())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(FOODINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_food table_food = table.food();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_FOOD_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 food_version = table_food.version();
+    const int64 food_roleid = table_food.roleid();
+    const int32 food_snakeid = table_food.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_food_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_where, iWhereLen);
+    char *szWhereBegin = buffer_food_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_food_where->m_sCapacity, FOODINCREASEWHERESQL , food_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_food_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), food_version);
+    buffer_food_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +84;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, FOODUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, FOODINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), food_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_FOOD_VERSION == iFieldId || GORM_PB_FIELD_FOOD_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_FOOD_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_FOOD_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, food_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, food_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_FOOD_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, food_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, food_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_FOOD_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, food_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, food_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define HEROINCREASESQL "update hero_%d set "
+#define HEROINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_hero())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(HEROINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_hero table_hero = table.hero();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_HERO_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 hero_version = table_hero.version();
+    const int64 hero_roleid = table_hero.roleid();
+    const int32 hero_snakeid = table_hero.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_hero_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_where, iWhereLen);
+    char *szWhereBegin = buffer_hero_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_hero_where->m_sCapacity, HEROINCREASEWHERESQL , hero_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_hero_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), hero_version);
+    buffer_hero_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +54;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, HEROUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, HEROINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), hero_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_HERO_VERSION == iFieldId || GORM_PB_FIELD_HERO_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_HERO_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_HERO_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, hero_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, hero_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_HERO_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_HERO_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, hero_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, hero_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_HERO_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_HERO_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, hero_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, hero_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define LOGIN_LOGINCREASESQL "update login_log_%d set "
+#define LOGIN_LOGINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_login_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(LOGIN_LOGINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_login_log table_login_log = table.login_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_LOGIN_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 login_log_version = table_login_log.version();
+    const int64 login_log_roleid = table_login_log.roleid();
+    const int32 login_log_action = table_login_log.action();
+    const int32 login_log_online = table_login_log.online();
+    const int64 login_log_createtime = table_login_log.createtime();
+
+    int iWhereLen = iSqlLen + 128  + 40;
+    GORM_MemPoolData *buffer_login_log_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_where, iWhereLen);
+    char *szWhereBegin = buffer_login_log_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_login_log_where->m_sCapacity, LOGIN_LOGINCREASEWHERESQL , login_log_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_login_log_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), login_log_version);
+    buffer_login_log_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +67;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, LOGIN_LOGUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, LOGIN_LOGINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), login_log_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_LOGIN_LOG_VERSION == iFieldId || GORM_PB_FIELD_LOGIN_LOG_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_LOGIN_LOG_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_LOGIN_LOG_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, login_log_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, login_log_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_LOGIN_LOG_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, login_log_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, login_log_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ACTION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_LOGIN_LOG_ACTION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `action`=`action`%c%d", cOpt, login_log_action);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `action`=`action`%c%d", cOpt, login_log_action);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ONLINE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_LOGIN_LOG_ONLINE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `online`=`online`%c%d", cOpt, login_log_online);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `online`=`online`%c%d", cOpt, login_log_online);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_CREATETIME:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_LOGIN_LOG_CREATETIME))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=`createtime`%c%lld", cOpt, login_log_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `createtime`=`createtime`%c%lld", cOpt, login_log_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define MAILINCREASESQL "update mail_%d set "
+#define MAILINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_mail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(MAILINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_mail table_mail = table.mail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAIL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 mail_version = table_mail.version();
+    const int64 mail_roleid = table_mail.roleid();
+    const int32 mail_lastmailid = table_mail.lastmailid();
+    const int32 mail_snakeid = table_mail.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 32;
+    GORM_MemPoolData *buffer_mail_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_where, iWhereLen);
+    char *szWhereBegin = buffer_mail_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_mail_where->m_sCapacity, MAILINCREASEWHERESQL , mail_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_mail_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), mail_version);
+    buffer_mail_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +107;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, MAILUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAILINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), mail_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_MAIL_VERSION == iFieldId || GORM_PB_FIELD_MAIL_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_MAIL_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAIL_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, mail_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, mail_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAIL_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, mail_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, mail_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_LASTMAILID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAIL_LASTMAILID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `lastmailid`=`lastmailid`%c%d", cOpt, mail_lastmailid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `lastmailid`=`lastmailid`%c%d", cOpt, mail_lastmailid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAIL_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, mail_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, mail_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define MATERIALINCREASESQL "update material_%d set "
+#define MATERIALINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_material())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(MATERIALINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_material table_material = table.material();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MATERIAL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 material_version = table_material.version();
+    const int64 material_roleid = table_material.roleid();
+    const int32 material_snakeid = table_material.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_material_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_where, iWhereLen);
+    char *szWhereBegin = buffer_material_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_material_where->m_sCapacity, MATERIALINCREASEWHERESQL , material_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_material_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), material_version);
+    buffer_material_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +100;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, MATERIALUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, MATERIALINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), material_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_MATERIAL_VERSION == iFieldId || GORM_PB_FIELD_MATERIAL_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_MATERIAL_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MATERIAL_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, material_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, material_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MATERIAL_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, material_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, material_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MATERIAL_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, material_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, material_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define NPCINCREASESQL "update npc_%d set "
+#define NPCINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_npc())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(NPCINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_npc table_npc = table.npc();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_NPC_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 npc_version = table_npc.version();
+    const int64 npc_roleid = table_npc.roleid();
+    const int32 npc_snakeid = table_npc.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_npc_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_npc_where, iWhereLen);
+    char *szWhereBegin = buffer_npc_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_npc_where->m_sCapacity, NPCINCREASEWHERESQL , npc_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_npc_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), npc_version);
+    buffer_npc_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +38;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, NPCUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, NPCINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), npc_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_NPC_VERSION == iFieldId || GORM_PB_FIELD_NPC_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_NPC_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_NPC_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, npc_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, npc_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_NPC_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_NPC_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, npc_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, npc_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_NPC_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_NPC_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, npc_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, npc_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define RES_LOGINCREASESQL "update res_log_%d set "
+#define RES_LOGINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_res_log())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(RES_LOGINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_res_log table_res_log = table.res_log();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_RES_LOG_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 res_log_version = table_res_log.version();
+    const int64 res_log_roleid = table_res_log.roleid();
+    const int32 res_log_action = table_res_log.action();
+    const int32 res_log_cfgtype = table_res_log.cfgtype();
+    const int32 res_log_cfgid = table_res_log.cfgid();
+    const int32 res_log_delta = table_res_log.delta();
+    const int32 res_log_value = table_res_log.value();
+    const int64 res_log_createtime = table_res_log.createtime();
+
+    int iWhereLen = iSqlLen + 128  + 64;
+    GORM_MemPoolData *buffer_res_log_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_res_log_where, iWhereLen);
+    char *szWhereBegin = buffer_res_log_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_res_log_where->m_sCapacity, RES_LOGINCREASEWHERESQL , res_log_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_res_log_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), res_log_version);
+    buffer_res_log_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +64;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, RES_LOGUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, RES_LOGINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), res_log_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_RES_LOG_VERSION == iFieldId || GORM_PB_FIELD_RES_LOG_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_RES_LOG_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, res_log_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, res_log_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, res_log_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, res_log_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_ACTION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_ACTION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `action`=`action`%c%d", cOpt, res_log_action);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `action`=`action`%c%d", cOpt, res_log_action);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CFGTYPE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_CFGTYPE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `cfgtype`=`cfgtype`%c%d", cOpt, res_log_cfgtype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `cfgtype`=`cfgtype`%c%d", cOpt, res_log_cfgtype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CFGID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_CFGID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `cfgid`=`cfgid`%c%d", cOpt, res_log_cfgid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `cfgid`=`cfgid`%c%d", cOpt, res_log_cfgid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_DELTA:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_DELTA))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `delta`=`delta`%c%d", cOpt, res_log_delta);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `delta`=`delta`%c%d", cOpt, res_log_delta);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_VALUE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_VALUE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `value`=`value`%c%d", cOpt, res_log_value);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `value`=`value`%c%d", cOpt, res_log_value);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CREATETIME:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_RES_LOG_CREATETIME))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=`createtime`%c%lld", cOpt, res_log_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `createtime`=`createtime`%c%lld", cOpt, res_log_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define INTERACTIONINCREASESQL "update interaction_%d set "
+#define INTERACTIONINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_interaction())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(INTERACTIONINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_interaction table_interaction = table.interaction();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_INTERACTION_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 interaction_version = table_interaction.version();
+    const int64 interaction_roleid = table_interaction.roleid();
+    const int32 interaction_snakeid = table_interaction.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_interaction_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_where, iWhereLen);
+    char *szWhereBegin = buffer_interaction_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_interaction_where->m_sCapacity, INTERACTIONINCREASEWHERESQL , interaction_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_interaction_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), interaction_version);
+    buffer_interaction_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +112;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, INTERACTIONUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, INTERACTIONINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), interaction_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_INTERACTION_VERSION == iFieldId || GORM_PB_FIELD_INTERACTION_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_INTERACTION_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_INTERACTION_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, interaction_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, interaction_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_INTERACTION_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, interaction_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, interaction_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_INTERACTION_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, interaction_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, interaction_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define ROLESINCREASESQL "update roles_%d set "
+#define ROLESINCREASEWHERESQL " where `roleid`=%lld and `userid`=%lld"
+int GORM_PackIncreaseSQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_roles())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(ROLESINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_roles table_roles = table.roles();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLES_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 roles_version = table_roles.version();
+    const int64 roles_roleid = table_roles.roleid();
+    const int64 roles_userid = table_roles.userid();
+    const int64 roles_worldid = table_roles.worldid();
+    const int32 roles_dbid = table_roles.dbid();
+    const int32 roles_charid = table_roles.charid();
+    const int64 roles_createtime = table_roles.createtime();
+
+    int iWhereLen = iSqlLen + 128  + 56;
+    GORM_MemPoolData *buffer_roles_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_where, iWhereLen);
+    char *szWhereBegin = buffer_roles_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_roles_where->m_sCapacity, ROLESINCREASEWHERESQL , roles_roleid, roles_userid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_roles_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), roles_version);
+    buffer_roles_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +84;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, ROLESUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLESINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), roles_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_ROLES_VERSION == iFieldId || GORM_PB_FIELD_ROLES_ROLEID == iFieldId || GORM_PB_FIELD_ROLES_USERID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_ROLES_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, roles_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, roles_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, roles_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, roles_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_USERID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_USERID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=`userid`%c%lld", cOpt, roles_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `userid`=`userid`%c%lld", cOpt, roles_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_WORLDID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_WORLDID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `worldid`=`worldid`%c%lld", cOpt, roles_worldid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `worldid`=`worldid`%c%lld", cOpt, roles_worldid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_DBID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_DBID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `dbid`=`dbid`%c%d", cOpt, roles_dbid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `dbid`=`dbid`%c%d", cOpt, roles_dbid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_CHARID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_CHARID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `charid`=`charid`%c%d", cOpt, roles_charid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `charid`=`charid`%c%d", cOpt, roles_charid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_CREATETIME:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLES_CREATETIME))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=`createtime`%c%lld", cOpt, roles_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `createtime`=`createtime`%c%lld", cOpt, roles_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define ROLEINCREASESQL "update role_%d set "
+#define ROLEINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_role())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(ROLEINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_role table_role = table.role();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_ROLE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 role_version = table_role.version();
+    const int64 role_roleid = table_role.roleid();
+    const int32 role_level = table_role.level();
+    const int64 role_exp = table_role.exp();
+    const int32 role_characterid = table_role.characterid();
+    const int32 role_gold = table_role.gold();
+    const int64 role_offlinetime = table_role.offlinetime();
+    const int32 role_inited = table_role.inited();
+    const int64 role_createtime = table_role.createtime();
+    const int64 role_online = table_role.online();
+    const int64 role_worldid = table_role.worldid();
+    const int32 role_pttype = table_role.pttype();
+    const int64 role_userid = table_role.userid();
+    const int32 role_proceedslv = table_role.proceedslv();
+
+    int iWhereLen = iSqlLen + 128  + 112;
+    GORM_MemPoolData *buffer_role_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_where, iWhereLen);
+    char *szWhereBegin = buffer_role_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_role_where->m_sCapacity, ROLEINCREASEWHERESQL , role_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_role_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), role_version);
+    buffer_role_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +144;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, ROLEUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLEINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), role_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_ROLE_VERSION == iFieldId || GORM_PB_FIELD_ROLE_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_ROLE_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, role_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, role_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, role_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, role_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_LEVEL:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_LEVEL))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `level`=`level`%c%d", cOpt, role_level);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `level`=`level`%c%d", cOpt, role_level);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_EXP:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_EXP))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `exp`=`exp`%c%lld", cOpt, role_exp);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `exp`=`exp`%c%lld", cOpt, role_exp);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_CHARACTERID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_CHARACTERID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `characterid`=`characterid`%c%d", cOpt, role_characterid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `characterid`=`characterid`%c%d", cOpt, role_characterid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_GOLD:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_GOLD))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `gold`=`gold`%c%d", cOpt, role_gold);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `gold`=`gold`%c%d", cOpt, role_gold);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_OFFLINETIME:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_OFFLINETIME))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `offlinetime`=`offlinetime`%c%lld", cOpt, role_offlinetime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `offlinetime`=`offlinetime`%c%lld", cOpt, role_offlinetime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_INITED:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_INITED))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `inited`=`inited`%c%d", cOpt, role_inited);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `inited`=`inited`%c%d", cOpt, role_inited);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_CREATETIME:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_CREATETIME))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=`createtime`%c%lld", cOpt, role_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `createtime`=`createtime`%c%lld", cOpt, role_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ONLINE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_ONLINE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `online`=`online`%c%lld", cOpt, role_online);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `online`=`online`%c%lld", cOpt, role_online);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_WORLDID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_WORLDID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `worldid`=`worldid`%c%lld", cOpt, role_worldid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `worldid`=`worldid`%c%lld", cOpt, role_worldid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_PTTYPE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_PTTYPE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `pttype`=`pttype`%c%d", cOpt, role_pttype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `pttype`=`pttype`%c%d", cOpt, role_pttype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_USERID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_USERID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=`userid`%c%lld", cOpt, role_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `userid`=`userid`%c%lld", cOpt, role_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_PROCEEDSLV:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_ROLE_PROCEEDSLV))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `proceedslv`=`proceedslv`%c%d", cOpt, role_proceedslv);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `proceedslv`=`proceedslv`%c%d", cOpt, role_proceedslv);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define SCENEINCREASESQL "update scene_%d set "
+#define SCENEINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_scene())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(SCENEINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_scene table_scene = table.scene();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SCENE_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 scene_version = table_scene.version();
+    const int64 scene_roleid = table_scene.roleid();
+    const int32 scene_sceneid = table_scene.sceneid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_scene_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_where, iWhereLen);
+    char *szWhereBegin = buffer_scene_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_scene_where->m_sCapacity, SCENEINCREASEWHERESQL , scene_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_scene_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), scene_version);
+    buffer_scene_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +58;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, SCENEUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, SCENEINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), scene_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_SCENE_VERSION == iFieldId || GORM_PB_FIELD_SCENE_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_SCENE_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_SCENE_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, scene_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, scene_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_SCENE_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, scene_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, scene_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_SCENEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_SCENE_SCENEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `sceneid`=`sceneid`%c%d", cOpt, scene_sceneid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `sceneid`=`sceneid`%c%d", cOpt, scene_sceneid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define SKILLINCREASESQL "update skill_%d set "
+#define SKILLINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_skill())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(SKILLINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_skill table_skill = table.skill();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_SKILL_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 skill_version = table_skill.version();
+    const int64 skill_roleid = table_skill.roleid();
+    const int32 skill_snakeid = table_skill.snakeid();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_skill_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_where, iWhereLen);
+    char *szWhereBegin = buffer_skill_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_skill_where->m_sCapacity, SKILLINCREASEWHERESQL , skill_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_skill_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), skill_version);
+    buffer_skill_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +88;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, SKILLUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, SKILLINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), skill_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_SKILL_VERSION == iFieldId || GORM_PB_FIELD_SKILL_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_SKILL_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_SKILL_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, skill_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, skill_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_SKILL_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, skill_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, skill_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SNAKEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_SKILL_SNAKEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `snakeid`=`snakeid`%c%d", cOpt, skill_snakeid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `snakeid`=`snakeid`%c%d", cOpt, skill_snakeid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define PTUSERINCREASESQL "update ptuser_%d set "
+#define PTUSERINCREASEWHERESQL " where `ptid`='%s' and `pttype`=%d"
+int GORM_PackIncreaseSQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_ptuser())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(PTUSERINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_ptuser table_ptuser = table.ptuser();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PTUSER_PTTYPE == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 ptuser_version = table_ptuser.version();
+    const string &ptuser_ptid = table_ptuser.ptid();
+    const char *sz_ptuser_ptid = "";
+    int len_ptuser_ptid = 0;
+    GORM_MemPoolData *buffer_ptuser_ptid = nullptr;
+    if(ptuser_ptid.size() > 0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_ptid, ptuser_ptid.size()<<1);
+        iTmpLen=mysql_real_escape_string(mysql, buffer_ptuser_ptid->m_uszData, ptuser_ptid.c_str(), ptuser_ptid.size());
+        buffer_ptuser_ptid->m_uszData[iTmpLen] = 0;
+        buffer_ptuser_ptid->m_sUsedSize = iTmpLen;
+        sz_ptuser_ptid = buffer_ptuser_ptid->m_uszData;
+        len_ptuser_ptid = iTmpLen;
+    }
+
+    const int32 ptuser_pttype = table_ptuser.pttype();
+    const int64 ptuser_userid = table_ptuser.userid();
+
+    int iWhereLen = iSqlLen + 128  + len_ptuser_ptid + 24;
+    GORM_MemPoolData *buffer_ptuser_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_where, iWhereLen);
+    char *szWhereBegin = buffer_ptuser_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_ptuser_where->m_sCapacity, PTUSERINCREASEWHERESQL , sz_ptuser_ptid, ptuser_pttype);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_ptuser_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), ptuser_version);
+    buffer_ptuser_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() + len_ptuser_ptid+38;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, PTUSERUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, PTUSERINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), ptuser_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_PTUSER_VERSION == iFieldId || GORM_PB_FIELD_PTUSER_PTID == iFieldId || GORM_PB_FIELD_PTUSER_PTTYPE == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_PTUSER_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PTUSER_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, ptuser_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, ptuser_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_PTTYPE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PTUSER_PTTYPE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `pttype`=`pttype`%c%d", cOpt, ptuser_pttype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `pttype`=`pttype`%c%d", cOpt, ptuser_pttype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_USERID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PTUSER_USERID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=`userid`%c%lld", cOpt, ptuser_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `userid`=`userid`%c%lld", cOpt, ptuser_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    if (buffer_ptuser_ptid != nullptr)
+        buffer_ptuser_ptid->Release();
+    
+    return GORM_OK;
+}
+#define USERINCREASESQL "update user_%d set "
+#define USERINCREASEWHERESQL " where `userid`=%lld"
+int GORM_PackIncreaseSQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_user())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(USERINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_user table_user = table.user();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_USER_USERID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 user_version = table_user.version();
+    const int64 user_userid = table_user.userid();
+    const int32 user_pttype = table_user.pttype();
+    const int64 user_createtime = table_user.createtime();
+
+    int iWhereLen = iSqlLen + 128  + 32;
+    GORM_MemPoolData *buffer_user_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_where, iWhereLen);
+    char *szWhereBegin = buffer_user_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_user_where->m_sCapacity, USERINCREASEWHERESQL , user_userid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_user_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), user_version);
+    buffer_user_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +65;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, USERUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, USERINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), user_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_USER_VERSION == iFieldId || GORM_PB_FIELD_USER_USERID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_USER_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_USER_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, user_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, user_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_USERID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_USER_USERID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `userid`=`userid`%c%lld", cOpt, user_userid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `userid`=`userid`%c%lld", cOpt, user_userid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_PTTYPE:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_USER_PTTYPE))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `pttype`=`pttype`%c%d", cOpt, user_pttype);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `pttype`=`pttype`%c%d", cOpt, user_pttype);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_USER_CREATETIME:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_USER_CREATETIME))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `createtime`=`createtime`%c%lld", cOpt, user_createtime);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `createtime`=`createtime`%c%lld", cOpt, user_createtime);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define MAINLINETASKINCREASESQL "update mainlinetask_%d set "
+#define MAINLINETASKINCREASEWHERESQL " where `roleid`=%lld"
+int GORM_PackIncreaseSQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_mainlinetask())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(MAINLINETASKINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_mainlinetask table_mainlinetask = table.mainlinetask();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_MAINLINETASK_ROLEID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 mainlinetask_version = table_mainlinetask.version();
+    const int64 mainlinetask_roleid = table_mainlinetask.roleid();
+    const int32 mainlinetask_runningtask = table_mainlinetask.runningtask();
+
+    int iWhereLen = iSqlLen + 128  + 24;
+    GORM_MemPoolData *buffer_mainlinetask_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_where, iWhereLen);
+    char *szWhereBegin = buffer_mainlinetask_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_mainlinetask_where->m_sCapacity, MAINLINETASKINCREASEWHERESQL , mainlinetask_roleid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_mainlinetask_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), mainlinetask_version);
+    buffer_mainlinetask_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +285;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, MAINLINETASKUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAINLINETASKINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), mainlinetask_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_MAINLINETASK_VERSION == iFieldId || GORM_PB_FIELD_MAINLINETASK_ROLEID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_MAINLINETASK_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAINLINETASK_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, mainlinetask_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, mainlinetask_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_ROLEID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAINLINETASK_ROLEID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `roleid`=`roleid`%c%lld", cOpt, mainlinetask_roleid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `roleid`=`roleid`%c%lld", cOpt, mainlinetask_roleid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_RUNNINGTASK:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_MAINLINETASK_RUNNINGTASK))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `runningtask`=`runningtask`%c%d", cOpt, mainlinetask_runningtask);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `runningtask`=`runningtask`%c%d", cOpt, mainlinetask_runningtask);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
+#define PUBMAILINCREASESQL "update pubmail_%d set "
+#define PUBMAILINCREASEWHERESQL " where `mailid`=%d"
+int GORM_PackIncreaseSQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    if (pMsg->tables_size() == 0)
+        return GORM_REQ_NO_RECORDS;
+
+    GORM_PB_TABLE table = pMsg->tables(0);
+    if (!table.has_pubmail())
+        return GORM_REQ_NO_RECORDS;
+
+    const GORM_PB_REQ_HEADER &header = pMsg->header();
+    const string &fieldMode = header.fieldmode();
+    if (fieldMode == "")
+        return GORM_REQ_NO_RECORDS;
+    vector<int> vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+
+    const string &strMinusFieldsMode = pMsg->minuscolumns();
+    bool bMatch = false;
+    char *szSQLBegin = nullptr;
+    int iSqlLen = strlen(PUBMAILINCREASESQL);
+    int iTmpLen = 0;
+
+    GORM_PB_Table_pubmail table_pubmail = table.pubmail();
+
+    bMatch = false;
+    for(int i=0; i<vFields.size(); i++)
+    {
+        if (GORM_PB_FIELD_PUBMAIL_MAILID == vFields[i])
+        {
+            bMatch = true;
+            break;
+        }
+    }
+    if (!bMatch)
+        return GORM_REQ_NEED_SPLIT;
+
+    const uint64 pubmail_version = table_pubmail.version();
+    const int32 pubmail_mailid = table_pubmail.mailid();
+    const int64 pubmail_dt = table_pubmail.dt();
+    const int32 pubmail_del = table_pubmail.del();
+
+    int iWhereLen = iSqlLen + 128  + 32;
+    GORM_MemPoolData *buffer_pubmail_where = nullptr;
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_where, iWhereLen);
+    char *szWhereBegin = buffer_pubmail_where->m_uszData;
+    iWhereLen += GORM_SafeSnprintf(szWhereBegin+iWhereLen, buffer_pubmail_where->m_sCapacity, PUBMAILINCREASEWHERESQL , pubmail_mailid);
+    iWhereLen += GORM_GETVERSION_WHERE(szWhereBegin+iWhereLen, buffer_pubmail_where->m_sCapacity-iWhereLen, GORM_CheckDataVerType(header.verpolice()), pubmail_version);
+    buffer_pubmail_where->m_sUsedSize = iWhereLen;
+
+    int iLen = iSqlLen + 128 + pMsg->ByteSizeLong() +115;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen+iWhereLen+1);
+    szSQLBegin = pReqData->m_uszData;
+    memcpy(szSQLBegin, PUBMAILUPDATESQL, iSqlLen);
+    int iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, PUBMAILINCREASESQL, iTableIndex);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize = iDataLen;
+    int iSetField = 1;
+    iDataLen  = GORM_GETVERSION_SET(szSQLBegin, iLen-pReqData->m_sUsedSize, GORM_CheckDataVerType(header.verpolice()), pubmail_version);
+    szSQLBegin += iDataLen;
+    pReqData->m_sUsedSize += iDataLen;
+    iLen -= iDataLen;
+    iDataLen = 0;
+    for (int i=0; i<vFields.size(); i++)
+    {
+        int iFieldId = vFields[i];
+        if (GORM_PB_FIELD_PUBMAIL_VERSION == iFieldId || GORM_PB_FIELD_PUBMAIL_MAILID == iFieldId)
+            continue;
+        iSetField += 1;
+        switch (iFieldId)
+        {
+        case GORM_PB_FIELD_PUBMAIL_VERSION:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PUBMAIL_VERSION))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `version`=`version`%c%llu", cOpt, pubmail_version);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `version`=`version`%c%llu", cOpt, pubmail_version);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_MAILID:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PUBMAIL_MAILID))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `mailid`=`mailid`%c%d", cOpt, pubmail_mailid);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `mailid`=`mailid`%c%d", cOpt, pubmail_mailid);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_DT:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PUBMAIL_DT))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `dt`=`dt`%c%lld", cOpt, pubmail_dt);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `dt`=`dt`%c%lld", cOpt, pubmail_dt);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_DEL:
+        {
+            char cOpt = '+';
+            if (GORM_FieldsOpt::FieldInMode(strMinusFieldsMode.c_str(), strMinusFieldsMode.size(), GORM_PB_FIELD_PUBMAIL_DEL))
+                cOpt = '-';
+            if (iSetField != 1)
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, ", `del`=`del`%c%d", cOpt, pubmail_del);
+            else
+                iDataLen = GORM_SafeSnprintf(szSQLBegin, iLen, " `del`=`del`%c%d", cOpt, pubmail_del);
+            iLen -= iDataLen;
+            szSQLBegin += iDataLen;
+            break;
+        }
+        default:
+            continue;
+        }
+        pReqData->m_sUsedSize += iDataLen;
+        if (iLen <= 0)
+            break;
+    }
+    memcpy(pReqData->m_uszData+pReqData->m_sUsedSize, szWhereBegin, iWhereLen);
+    pReqData->m_sUsedSize += iWhereLen;
+    pReqData->m_uszData[pReqData->m_sUsedSize] = ';';
+    pReqData->m_sUsedSize += 1;
+
+    
+    return GORM_OK;
+}
 int GORM_PackIncreaseSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_INCREASE_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -1098,6 +11061,57 @@ int GORM_PackIncreaseSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pM
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackIncreaseSQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackIncreaseSQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackIncreaseSQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackIncreaseSQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackIncreaseSQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackIncreaseSQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackIncreaseSQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackIncreaseSQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackIncreaseSQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackIncreaseSQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackIncreaseSQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackIncreaseSQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackIncreaseSQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackIncreaseSQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackIncreaseSQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackIncreaseSQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackIncreaseSQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackIncreaseSQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -1257,6 +11271,1582 @@ int GORM_PackReplaceSQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQL
     }
     return GORM_OK;
 }
+#define EQUIPREPLACESQL "insert into equip_%d(`version`, `roleid`, `snakeid`, `equip1`, `equip2`, `equip3`, `equip4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `equip1`='%s', `equip2`='%s', `equip3`='%s', `equip4`='%s';"
+int GORM_PackReplaceSQLEQUIP_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_equip &table_equip, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 288;
+    int iTmpLen = 0;
+
+    const uint64 equip_version = table_equip.version();
+
+    const int64 equip_roleid = table_equip.roleid();
+
+    const int32 equip_snakeid = table_equip.snakeid();
+
+    const string &equip_equip1 = table_equip.equip1();
+    const char *sz_equip_equip1 = "";
+    int len_equip_equip1 = 0;
+    GORM_MemPoolData *buffer_equip_equip1 = nullptr;
+    if(equip_equip1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip1, equip_equip1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip1->m_uszData, equip_equip1.c_str(), equip_equip1.size());
+        buffer_equip_equip1->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip1->m_sUsedSize = iTmpLen;
+        sz_equip_equip1 = buffer_equip_equip1->m_uszData;
+        len_equip_equip1 = iTmpLen;
+    }
+
+    const string &equip_equip2 = table_equip.equip2();
+    const char *sz_equip_equip2 = "";
+    int len_equip_equip2 = 0;
+    GORM_MemPoolData *buffer_equip_equip2 = nullptr;
+    if(equip_equip2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip2, equip_equip2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip2->m_uszData, equip_equip2.c_str(), equip_equip2.size());
+        buffer_equip_equip2->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip2->m_sUsedSize = iTmpLen;
+        sz_equip_equip2 = buffer_equip_equip2->m_uszData;
+        len_equip_equip2 = iTmpLen;
+    }
+
+    const string &equip_equip3 = table_equip.equip3();
+    const char *sz_equip_equip3 = "";
+    int len_equip_equip3 = 0;
+    GORM_MemPoolData *buffer_equip_equip3 = nullptr;
+    if(equip_equip3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip3, equip_equip3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip3->m_uszData, equip_equip3.c_str(), equip_equip3.size());
+        buffer_equip_equip3->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip3->m_sUsedSize = iTmpLen;
+        sz_equip_equip3 = buffer_equip_equip3->m_uszData;
+        len_equip_equip3 = iTmpLen;
+    }
+
+    const string &equip_equip4 = table_equip.equip4();
+    const char *sz_equip_equip4 = "";
+    int len_equip_equip4 = 0;
+    GORM_MemPoolData *buffer_equip_equip4 = nullptr;
+    if(equip_equip4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_equip_equip4, equip_equip4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_equip_equip4->m_uszData, equip_equip4.c_str(), equip_equip4.size());
+        buffer_equip_equip4->m_uszData[iTmpLen] = '\0';
+        buffer_equip_equip4->m_sUsedSize = iTmpLen;
+        sz_equip_equip4 = buffer_equip_equip4->m_uszData;
+        len_equip_equip4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_equip_equip1 + len_equip_equip2 + len_equip_equip3 + len_equip_equip4;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, EQUIPREPLACESQL, iTableIndex, equip_version, equip_roleid, equip_snakeid, sz_equip_equip1, sz_equip_equip2, sz_equip_equip3, sz_equip_equip4,equip_snakeid, sz_equip_equip1, sz_equip_equip2, sz_equip_equip3, sz_equip_equip4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_equip_equip1 != nullptr)
+        buffer_equip_equip1->Release();
+    if (buffer_equip_equip2 != nullptr)
+        buffer_equip_equip2->Release();
+    if (buffer_equip_equip3 != nullptr)
+        buffer_equip_equip3->Release();
+    if (buffer_equip_equip4 != nullptr)
+        buffer_equip_equip4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_equip())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_equip &table_equip = table.equip();
+        return GORM_PackReplaceSQLEQUIP_One(pMemPool, mysql, iTableIndex, table_equip, pReqData);
+    }
+    return GORM_OK;
+}
+#define FOODREPLACESQL "insert into food_%d(`version`, `roleid`, `snakeid`, `food1`, `food2`, `food3`, `food4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `food1`='%s', `food2`='%s', `food3`='%s', `food4`='%s';"
+int GORM_PackReplaceSQLFOOD_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_food &table_food, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 278;
+    int iTmpLen = 0;
+
+    const uint64 food_version = table_food.version();
+
+    const int64 food_roleid = table_food.roleid();
+
+    const int32 food_snakeid = table_food.snakeid();
+
+    const string &food_food1 = table_food.food1();
+    const char *sz_food_food1 = "";
+    int len_food_food1 = 0;
+    GORM_MemPoolData *buffer_food_food1 = nullptr;
+    if(food_food1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food1, food_food1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food1->m_uszData, food_food1.c_str(), food_food1.size());
+        buffer_food_food1->m_uszData[iTmpLen] = '\0';
+        buffer_food_food1->m_sUsedSize = iTmpLen;
+        sz_food_food1 = buffer_food_food1->m_uszData;
+        len_food_food1 = iTmpLen;
+    }
+
+    const string &food_food2 = table_food.food2();
+    const char *sz_food_food2 = "";
+    int len_food_food2 = 0;
+    GORM_MemPoolData *buffer_food_food2 = nullptr;
+    if(food_food2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food2, food_food2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food2->m_uszData, food_food2.c_str(), food_food2.size());
+        buffer_food_food2->m_uszData[iTmpLen] = '\0';
+        buffer_food_food2->m_sUsedSize = iTmpLen;
+        sz_food_food2 = buffer_food_food2->m_uszData;
+        len_food_food2 = iTmpLen;
+    }
+
+    const string &food_food3 = table_food.food3();
+    const char *sz_food_food3 = "";
+    int len_food_food3 = 0;
+    GORM_MemPoolData *buffer_food_food3 = nullptr;
+    if(food_food3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food3, food_food3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food3->m_uszData, food_food3.c_str(), food_food3.size());
+        buffer_food_food3->m_uszData[iTmpLen] = '\0';
+        buffer_food_food3->m_sUsedSize = iTmpLen;
+        sz_food_food3 = buffer_food_food3->m_uszData;
+        len_food_food3 = iTmpLen;
+    }
+
+    const string &food_food4 = table_food.food4();
+    const char *sz_food_food4 = "";
+    int len_food_food4 = 0;
+    GORM_MemPoolData *buffer_food_food4 = nullptr;
+    if(food_food4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_food_food4, food_food4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_food_food4->m_uszData, food_food4.c_str(), food_food4.size());
+        buffer_food_food4->m_uszData[iTmpLen] = '\0';
+        buffer_food_food4->m_sUsedSize = iTmpLen;
+        sz_food_food4 = buffer_food_food4->m_uszData;
+        len_food_food4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_food_food1 + len_food_food2 + len_food_food3 + len_food_food4;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, FOODREPLACESQL, iTableIndex, food_version, food_roleid, food_snakeid, sz_food_food1, sz_food_food2, sz_food_food3, sz_food_food4,food_snakeid, sz_food_food1, sz_food_food2, sz_food_food3, sz_food_food4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_food_food1 != nullptr)
+        buffer_food_food1->Release();
+    if (buffer_food_food2 != nullptr)
+        buffer_food_food2->Release();
+    if (buffer_food_food3 != nullptr)
+        buffer_food_food3->Release();
+    if (buffer_food_food4 != nullptr)
+        buffer_food_food4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_food())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_food &table_food = table.food();
+        return GORM_PackReplaceSQLFOOD_One(pMemPool, mysql, iTableIndex, table_food, pReqData);
+    }
+    return GORM_OK;
+}
+#define HEROREPLACESQL "insert into hero_%d(`version`, `roleid`, `snakeid`, `heros`, `teams`) values (%llu, %lld, %d, '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `heros`='%s', `teams`='%s';"
+int GORM_PackReplaceSQLHERO_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_hero &table_hero, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 220;
+    int iTmpLen = 0;
+
+    const uint64 hero_version = table_hero.version();
+
+    const int64 hero_roleid = table_hero.roleid();
+
+    const int32 hero_snakeid = table_hero.snakeid();
+
+    const string &hero_heros = table_hero.heros();
+    const char *sz_hero_heros = "";
+    int len_hero_heros = 0;
+    GORM_MemPoolData *buffer_hero_heros = nullptr;
+    if(hero_heros.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_heros, hero_heros.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_hero_heros->m_uszData, hero_heros.c_str(), hero_heros.size());
+        buffer_hero_heros->m_uszData[iTmpLen] = '\0';
+        buffer_hero_heros->m_sUsedSize = iTmpLen;
+        sz_hero_heros = buffer_hero_heros->m_uszData;
+        len_hero_heros = iTmpLen;
+    }
+
+    const string &hero_teams = table_hero.teams();
+    const char *sz_hero_teams = "";
+    int len_hero_teams = 0;
+    GORM_MemPoolData *buffer_hero_teams = nullptr;
+    if(hero_teams.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_hero_teams, hero_teams.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_hero_teams->m_uszData, hero_teams.c_str(), hero_teams.size());
+        buffer_hero_teams->m_uszData[iTmpLen] = '\0';
+        buffer_hero_teams->m_sUsedSize = iTmpLen;
+        sz_hero_teams = buffer_hero_teams->m_uszData;
+        len_hero_teams = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_hero_heros + len_hero_teams;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, HEROREPLACESQL, iTableIndex, hero_version, hero_roleid, hero_snakeid, sz_hero_heros, sz_hero_teams,hero_snakeid, sz_hero_heros, sz_hero_teams);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_hero_heros != nullptr)
+        buffer_hero_heros->Release();
+    if (buffer_hero_teams != nullptr)
+        buffer_hero_teams->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_hero())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_hero &table_hero = table.hero();
+        return GORM_PackReplaceSQLHERO_One(pMemPool, mysql, iTableIndex, table_hero, pReqData);
+    }
+    return GORM_OK;
+}
+#define LOGIN_LOGREPLACESQL "insert into login_log_%d(`version`, `roleid`, `action`, `online`, `ip`, `appid`, `createtime`) values (%llu, %lld, %d, %d, '%s', '%s', %lld) ON DUPLICATE KEY UPDATE `version`=`version`+1, `action`=%d, `online`=%d, `ip`='%s', `appid`='%s', `createtime`=%lld;"
+int GORM_PackReplaceSQLLOGIN_LOG_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_login_log &table_login_log, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 288;
+    int iTmpLen = 0;
+
+    const uint64 login_log_version = table_login_log.version();
+
+    const int64 login_log_roleid = table_login_log.roleid();
+
+    const int32 login_log_action = table_login_log.action();
+
+    const int32 login_log_online = table_login_log.online();
+
+    const string &login_log_ip = table_login_log.ip();
+    const char *sz_login_log_ip = "";
+    int len_login_log_ip = 0;
+    GORM_MemPoolData *buffer_login_log_ip = nullptr;
+    if(login_log_ip.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_ip, login_log_ip.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_login_log_ip->m_uszData, login_log_ip.c_str(), login_log_ip.size());
+        buffer_login_log_ip->m_uszData[iTmpLen] = '\0';
+        buffer_login_log_ip->m_sUsedSize = iTmpLen;
+        sz_login_log_ip = buffer_login_log_ip->m_uszData;
+        len_login_log_ip = iTmpLen;
+    }
+
+    const string &login_log_appid = table_login_log.appid();
+    const char *sz_login_log_appid = "";
+    int len_login_log_appid = 0;
+    GORM_MemPoolData *buffer_login_log_appid = nullptr;
+    if(login_log_appid.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_login_log_appid, login_log_appid.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_login_log_appid->m_uszData, login_log_appid.c_str(), login_log_appid.size());
+        buffer_login_log_appid->m_uszData[iTmpLen] = '\0';
+        buffer_login_log_appid->m_sUsedSize = iTmpLen;
+        sz_login_log_appid = buffer_login_log_appid->m_uszData;
+        len_login_log_appid = iTmpLen;
+    }
+
+    const int64 login_log_createtime = table_login_log.createtime();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + 8 + len_login_log_ip + len_login_log_appid + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, LOGIN_LOGREPLACESQL, iTableIndex, login_log_version, login_log_roleid, login_log_action, login_log_online, sz_login_log_ip, sz_login_log_appid, login_log_createtime,login_log_action,login_log_online, sz_login_log_ip, sz_login_log_appid,login_log_createtime);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_login_log_ip != nullptr)
+        buffer_login_log_ip->Release();
+    if (buffer_login_log_appid != nullptr)
+        buffer_login_log_appid->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_login_log())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_login_log &table_login_log = table.login_log();
+        return GORM_PackReplaceSQLLOGIN_LOG_One(pMemPool, mysql, iTableIndex, table_login_log, pReqData);
+    }
+    return GORM_OK;
+}
+#define MAILREPLACESQL "insert into mail_%d(`version`, `roleid`, `mail1`, `mail2`, `mail3`, `mail4`, `mail5`, `lastmailid`, `snakeid`) values (%llu, %lld, '%s', '%s', '%s', '%s', '%s', %d, %d) ON DUPLICATE KEY UPDATE `version`=`version`+1, `mail1`='%s', `mail2`='%s', `mail3`='%s', `mail4`='%s', `mail5`='%s', `lastmailid`=%d, `snakeid`=%d;"
+int GORM_PackReplaceSQLMAIL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mail &table_mail, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 342;
+    int iTmpLen = 0;
+
+    const uint64 mail_version = table_mail.version();
+
+    const int64 mail_roleid = table_mail.roleid();
+
+    const string &mail_mail1 = table_mail.mail1();
+    const char *sz_mail_mail1 = "";
+    int len_mail_mail1 = 0;
+    GORM_MemPoolData *buffer_mail_mail1 = nullptr;
+    if(mail_mail1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail1, mail_mail1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail1->m_uszData, mail_mail1.c_str(), mail_mail1.size());
+        buffer_mail_mail1->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail1->m_sUsedSize = iTmpLen;
+        sz_mail_mail1 = buffer_mail_mail1->m_uszData;
+        len_mail_mail1 = iTmpLen;
+    }
+
+    const string &mail_mail2 = table_mail.mail2();
+    const char *sz_mail_mail2 = "";
+    int len_mail_mail2 = 0;
+    GORM_MemPoolData *buffer_mail_mail2 = nullptr;
+    if(mail_mail2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail2, mail_mail2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail2->m_uszData, mail_mail2.c_str(), mail_mail2.size());
+        buffer_mail_mail2->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail2->m_sUsedSize = iTmpLen;
+        sz_mail_mail2 = buffer_mail_mail2->m_uszData;
+        len_mail_mail2 = iTmpLen;
+    }
+
+    const string &mail_mail3 = table_mail.mail3();
+    const char *sz_mail_mail3 = "";
+    int len_mail_mail3 = 0;
+    GORM_MemPoolData *buffer_mail_mail3 = nullptr;
+    if(mail_mail3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail3, mail_mail3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail3->m_uszData, mail_mail3.c_str(), mail_mail3.size());
+        buffer_mail_mail3->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail3->m_sUsedSize = iTmpLen;
+        sz_mail_mail3 = buffer_mail_mail3->m_uszData;
+        len_mail_mail3 = iTmpLen;
+    }
+
+    const string &mail_mail4 = table_mail.mail4();
+    const char *sz_mail_mail4 = "";
+    int len_mail_mail4 = 0;
+    GORM_MemPoolData *buffer_mail_mail4 = nullptr;
+    if(mail_mail4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail4, mail_mail4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail4->m_uszData, mail_mail4.c_str(), mail_mail4.size());
+        buffer_mail_mail4->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail4->m_sUsedSize = iTmpLen;
+        sz_mail_mail4 = buffer_mail_mail4->m_uszData;
+        len_mail_mail4 = iTmpLen;
+    }
+
+    const string &mail_mail5 = table_mail.mail5();
+    const char *sz_mail_mail5 = "";
+    int len_mail_mail5 = 0;
+    GORM_MemPoolData *buffer_mail_mail5 = nullptr;
+    if(mail_mail5.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mail_mail5, mail_mail5.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mail_mail5->m_uszData, mail_mail5.c_str(), mail_mail5.size());
+        buffer_mail_mail5->m_uszData[iTmpLen] = '\0';
+        buffer_mail_mail5->m_sUsedSize = iTmpLen;
+        sz_mail_mail5 = buffer_mail_mail5->m_uszData;
+        len_mail_mail5 = iTmpLen;
+    }
+
+    const int32 mail_lastmailid = table_mail.lastmailid();
+
+    const int32 mail_snakeid = table_mail.snakeid();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_mail_mail1 + len_mail_mail2 + len_mail_mail3 + len_mail_mail4 + len_mail_mail5 + 8 + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAILREPLACESQL, iTableIndex, mail_version, mail_roleid, sz_mail_mail1, sz_mail_mail2, sz_mail_mail3, sz_mail_mail4, sz_mail_mail5, mail_lastmailid, mail_snakeid, sz_mail_mail1, sz_mail_mail2, sz_mail_mail3, sz_mail_mail4, sz_mail_mail5,mail_lastmailid,mail_snakeid);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_mail_mail1 != nullptr)
+        buffer_mail_mail1->Release();
+    if (buffer_mail_mail2 != nullptr)
+        buffer_mail_mail2->Release();
+    if (buffer_mail_mail3 != nullptr)
+        buffer_mail_mail3->Release();
+    if (buffer_mail_mail4 != nullptr)
+        buffer_mail_mail4->Release();
+    if (buffer_mail_mail5 != nullptr)
+        buffer_mail_mail5->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_mail())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_mail &table_mail = table.mail();
+        return GORM_PackReplaceSQLMAIL_One(pMemPool, mysql, iTableIndex, table_mail, pReqData);
+    }
+    return GORM_OK;
+}
+#define MATERIALREPLACESQL "insert into material_%d(`version`, `roleid`, `snakeid`, `material1`, `material2`, `material3`, `material4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `material1`='%s', `material2`='%s', `material3`='%s', `material4`='%s';"
+int GORM_PackReplaceSQLMATERIAL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_material &table_material, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 318;
+    int iTmpLen = 0;
+
+    const uint64 material_version = table_material.version();
+
+    const int64 material_roleid = table_material.roleid();
+
+    const int32 material_snakeid = table_material.snakeid();
+
+    const string &material_material1 = table_material.material1();
+    const char *sz_material_material1 = "";
+    int len_material_material1 = 0;
+    GORM_MemPoolData *buffer_material_material1 = nullptr;
+    if(material_material1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material1, material_material1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material1->m_uszData, material_material1.c_str(), material_material1.size());
+        buffer_material_material1->m_uszData[iTmpLen] = '\0';
+        buffer_material_material1->m_sUsedSize = iTmpLen;
+        sz_material_material1 = buffer_material_material1->m_uszData;
+        len_material_material1 = iTmpLen;
+    }
+
+    const string &material_material2 = table_material.material2();
+    const char *sz_material_material2 = "";
+    int len_material_material2 = 0;
+    GORM_MemPoolData *buffer_material_material2 = nullptr;
+    if(material_material2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material2, material_material2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material2->m_uszData, material_material2.c_str(), material_material2.size());
+        buffer_material_material2->m_uszData[iTmpLen] = '\0';
+        buffer_material_material2->m_sUsedSize = iTmpLen;
+        sz_material_material2 = buffer_material_material2->m_uszData;
+        len_material_material2 = iTmpLen;
+    }
+
+    const string &material_material3 = table_material.material3();
+    const char *sz_material_material3 = "";
+    int len_material_material3 = 0;
+    GORM_MemPoolData *buffer_material_material3 = nullptr;
+    if(material_material3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material3, material_material3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material3->m_uszData, material_material3.c_str(), material_material3.size());
+        buffer_material_material3->m_uszData[iTmpLen] = '\0';
+        buffer_material_material3->m_sUsedSize = iTmpLen;
+        sz_material_material3 = buffer_material_material3->m_uszData;
+        len_material_material3 = iTmpLen;
+    }
+
+    const string &material_material4 = table_material.material4();
+    const char *sz_material_material4 = "";
+    int len_material_material4 = 0;
+    GORM_MemPoolData *buffer_material_material4 = nullptr;
+    if(material_material4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_material_material4, material_material4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_material_material4->m_uszData, material_material4.c_str(), material_material4.size());
+        buffer_material_material4->m_uszData[iTmpLen] = '\0';
+        buffer_material_material4->m_sUsedSize = iTmpLen;
+        sz_material_material4 = buffer_material_material4->m_uszData;
+        len_material_material4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_material_material1 + len_material_material2 + len_material_material3 + len_material_material4;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MATERIALREPLACESQL, iTableIndex, material_version, material_roleid, material_snakeid, sz_material_material1, sz_material_material2, sz_material_material3, sz_material_material4,material_snakeid, sz_material_material1, sz_material_material2, sz_material_material3, sz_material_material4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_material_material1 != nullptr)
+        buffer_material_material1->Release();
+    if (buffer_material_material2 != nullptr)
+        buffer_material_material2->Release();
+    if (buffer_material_material3 != nullptr)
+        buffer_material_material3->Release();
+    if (buffer_material_material4 != nullptr)
+        buffer_material_material4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_material())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_material &table_material = table.material();
+        return GORM_PackReplaceSQLMATERIAL_One(pMemPool, mysql, iTableIndex, table_material, pReqData);
+    }
+    return GORM_OK;
+}
+#define NPCREPLACESQL "insert into npc_%d(`version`, `roleid`, `snakeid`, `npcs`) values (%llu, %lld, %d, '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `npcs`='%s';"
+int GORM_PackReplaceSQLNPC_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_npc &table_npc, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 187;
+    int iTmpLen = 0;
+
+    const uint64 npc_version = table_npc.version();
+
+    const int64 npc_roleid = table_npc.roleid();
+
+    const int32 npc_snakeid = table_npc.snakeid();
+
+    const string &npc_npcs = table_npc.npcs();
+    const char *sz_npc_npcs = "";
+    int len_npc_npcs = 0;
+    GORM_MemPoolData *buffer_npc_npcs = nullptr;
+    if(npc_npcs.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_npc_npcs, npc_npcs.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_npc_npcs->m_uszData, npc_npcs.c_str(), npc_npcs.size());
+        buffer_npc_npcs->m_uszData[iTmpLen] = '\0';
+        buffer_npc_npcs->m_sUsedSize = iTmpLen;
+        sz_npc_npcs = buffer_npc_npcs->m_uszData;
+        len_npc_npcs = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_npc_npcs;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, NPCREPLACESQL, iTableIndex, npc_version, npc_roleid, npc_snakeid, sz_npc_npcs,npc_snakeid, sz_npc_npcs);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_npc_npcs != nullptr)
+        buffer_npc_npcs->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_npc())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_npc &table_npc = table.npc();
+        return GORM_PackReplaceSQLNPC_One(pMemPool, mysql, iTableIndex, table_npc, pReqData);
+    }
+    return GORM_OK;
+}
+#define RES_LOGREPLACESQL "insert into res_log_%d(`version`, `roleid`, `action`, `cfgtype`, `cfgid`, `delta`, `value`, `createtime`) values (%llu, %lld, %d, %d, %d, %d, %d, %lld) ON DUPLICATE KEY UPDATE `version`=`version`+1, `action`=%d, `cfgtype`=%d, `cfgid`=%d, `delta`=%d, `value`=%d, `createtime`=%lld;"
+int GORM_PackReplaceSQLRES_LOG_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_res_log &table_res_log, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 309;
+    int iTmpLen = 0;
+
+    const uint64 res_log_version = table_res_log.version();
+
+    const int64 res_log_roleid = table_res_log.roleid();
+
+    const int32 res_log_action = table_res_log.action();
+
+    const int32 res_log_cfgtype = table_res_log.cfgtype();
+
+    const int32 res_log_cfgid = table_res_log.cfgid();
+
+    const int32 res_log_delta = table_res_log.delta();
+
+    const int32 res_log_value = table_res_log.value();
+
+    const int64 res_log_createtime = table_res_log.createtime();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + 8 + 8 + 8 + 8 + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, RES_LOGREPLACESQL, iTableIndex, res_log_version, res_log_roleid, res_log_action, res_log_cfgtype, res_log_cfgid, res_log_delta, res_log_value, res_log_createtime,res_log_action,res_log_cfgtype,res_log_cfgid,res_log_delta,res_log_value,res_log_createtime);
+    pReqData->m_sUsedSize = iLen;
+
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_res_log())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_res_log &table_res_log = table.res_log();
+        return GORM_PackReplaceSQLRES_LOG_One(pMemPool, mysql, iTableIndex, table_res_log, pReqData);
+    }
+    return GORM_OK;
+}
+#define INTERACTIONREPLACESQL "insert into interaction_%d(`version`, `roleid`, `snakeid`, `interaction1`, `interaction2`, `interaction3`, `interaction4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `interaction1`='%s', `interaction2`='%s', `interaction3`='%s', `interaction4`='%s';"
+int GORM_PackReplaceSQLINTERACTION_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_interaction &table_interaction, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 348;
+    int iTmpLen = 0;
+
+    const uint64 interaction_version = table_interaction.version();
+
+    const int64 interaction_roleid = table_interaction.roleid();
+
+    const int32 interaction_snakeid = table_interaction.snakeid();
+
+    const string &interaction_interaction1 = table_interaction.interaction1();
+    const char *sz_interaction_interaction1 = "";
+    int len_interaction_interaction1 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction1 = nullptr;
+    if(interaction_interaction1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction1, interaction_interaction1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction1->m_uszData, interaction_interaction1.c_str(), interaction_interaction1.size());
+        buffer_interaction_interaction1->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction1->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction1 = buffer_interaction_interaction1->m_uszData;
+        len_interaction_interaction1 = iTmpLen;
+    }
+
+    const string &interaction_interaction2 = table_interaction.interaction2();
+    const char *sz_interaction_interaction2 = "";
+    int len_interaction_interaction2 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction2 = nullptr;
+    if(interaction_interaction2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction2, interaction_interaction2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction2->m_uszData, interaction_interaction2.c_str(), interaction_interaction2.size());
+        buffer_interaction_interaction2->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction2->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction2 = buffer_interaction_interaction2->m_uszData;
+        len_interaction_interaction2 = iTmpLen;
+    }
+
+    const string &interaction_interaction3 = table_interaction.interaction3();
+    const char *sz_interaction_interaction3 = "";
+    int len_interaction_interaction3 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction3 = nullptr;
+    if(interaction_interaction3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction3, interaction_interaction3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction3->m_uszData, interaction_interaction3.c_str(), interaction_interaction3.size());
+        buffer_interaction_interaction3->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction3->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction3 = buffer_interaction_interaction3->m_uszData;
+        len_interaction_interaction3 = iTmpLen;
+    }
+
+    const string &interaction_interaction4 = table_interaction.interaction4();
+    const char *sz_interaction_interaction4 = "";
+    int len_interaction_interaction4 = 0;
+    GORM_MemPoolData *buffer_interaction_interaction4 = nullptr;
+    if(interaction_interaction4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_interaction_interaction4, interaction_interaction4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_interaction_interaction4->m_uszData, interaction_interaction4.c_str(), interaction_interaction4.size());
+        buffer_interaction_interaction4->m_uszData[iTmpLen] = '\0';
+        buffer_interaction_interaction4->m_sUsedSize = iTmpLen;
+        sz_interaction_interaction4 = buffer_interaction_interaction4->m_uszData;
+        len_interaction_interaction4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_interaction_interaction1 + len_interaction_interaction2 + len_interaction_interaction3 + len_interaction_interaction4;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, INTERACTIONREPLACESQL, iTableIndex, interaction_version, interaction_roleid, interaction_snakeid, sz_interaction_interaction1, sz_interaction_interaction2, sz_interaction_interaction3, sz_interaction_interaction4,interaction_snakeid, sz_interaction_interaction1, sz_interaction_interaction2, sz_interaction_interaction3, sz_interaction_interaction4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_interaction_interaction1 != nullptr)
+        buffer_interaction_interaction1->Release();
+    if (buffer_interaction_interaction2 != nullptr)
+        buffer_interaction_interaction2->Release();
+    if (buffer_interaction_interaction3 != nullptr)
+        buffer_interaction_interaction3->Release();
+    if (buffer_interaction_interaction4 != nullptr)
+        buffer_interaction_interaction4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_interaction())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_interaction &table_interaction = table.interaction();
+        return GORM_PackReplaceSQLINTERACTION_One(pMemPool, mysql, iTableIndex, table_interaction, pReqData);
+    }
+    return GORM_OK;
+}
+#define ROLESREPLACESQL "insert into roles_%d(`version`, `roleid`, `userid`, `worldid`, `dbid`, `name`, `charid`, `face`, `createtime`) values (%llu, %lld, %lld, %lld, %d, '%s', %d, '%s', %lld) ON DUPLICATE KEY UPDATE `version`=`version`+1, `worldid`=%lld, `dbid`=%d, `name`='%s', `charid`=%d, `face`='%s', `createtime`=%lld;"
+int GORM_PackReplaceSQLROLES_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_roles &table_roles, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 327;
+    int iTmpLen = 0;
+
+    const uint64 roles_version = table_roles.version();
+
+    const int64 roles_roleid = table_roles.roleid();
+
+    const int64 roles_userid = table_roles.userid();
+
+    const int64 roles_worldid = table_roles.worldid();
+
+    const int32 roles_dbid = table_roles.dbid();
+
+    const string &roles_name = table_roles.name();
+    const char *sz_roles_name = "";
+    int len_roles_name = 0;
+    GORM_MemPoolData *buffer_roles_name = nullptr;
+    if(roles_name.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_name, roles_name.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_roles_name->m_uszData, roles_name.c_str(), roles_name.size());
+        buffer_roles_name->m_uszData[iTmpLen] = '\0';
+        buffer_roles_name->m_sUsedSize = iTmpLen;
+        sz_roles_name = buffer_roles_name->m_uszData;
+        len_roles_name = iTmpLen;
+    }
+
+    const int32 roles_charid = table_roles.charid();
+
+    const string &roles_face = table_roles.face();
+    const char *sz_roles_face = "";
+    int len_roles_face = 0;
+    GORM_MemPoolData *buffer_roles_face = nullptr;
+    if(roles_face.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_roles_face, roles_face.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_roles_face->m_uszData, roles_face.c_str(), roles_face.size());
+        buffer_roles_face->m_uszData[iTmpLen] = '\0';
+        buffer_roles_face->m_sUsedSize = iTmpLen;
+        sz_roles_face = buffer_roles_face->m_uszData;
+        len_roles_face = iTmpLen;
+    }
+
+    const int64 roles_createtime = table_roles.createtime();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + 8 + 8 + len_roles_name + 8 + len_roles_face + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLESREPLACESQL, iTableIndex, roles_version, roles_roleid, roles_userid, roles_worldid, roles_dbid, sz_roles_name, roles_charid, sz_roles_face, roles_createtime,roles_worldid,roles_dbid, sz_roles_name,roles_charid, sz_roles_face,roles_createtime);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_roles_name != nullptr)
+        buffer_roles_name->Release();
+    if (buffer_roles_face != nullptr)
+        buffer_roles_face->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_roles())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_roles &table_roles = table.roles();
+        return GORM_PackReplaceSQLROLES_One(pMemPool, mysql, iTableIndex, table_roles, pReqData);
+    }
+    return GORM_OK;
+}
+#define ROLEREPLACESQL "insert into role_%d(`version`, `roleid`, `rolename`, `level`, `exp`, `characterid`, `gold`, `offlinetime`, `inited`, `createtime`, `face`, `online`, `worldid`, `pttype`, `userid`, `proceedslv`) values (%llu, %lld, '%s', %d, %lld, %d, %d, %lld, %d, %lld, '%s', %lld, %lld, %d, %lld, %d) ON DUPLICATE KEY UPDATE `version`=`version`+1, `rolename`='%s', `level`=%d, `exp`=%lld, `characterid`=%d, `gold`=%d, `offlinetime`=%lld, `inited`=%d, `createtime`=%lld, `face`='%s', `online`=%lld, `worldid`=%lld, `pttype`=%d, `userid`=%lld, `proceedslv`=%d;"
+int GORM_PackReplaceSQLROLE_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_role &table_role, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 569;
+    int iTmpLen = 0;
+
+    const uint64 role_version = table_role.version();
+
+    const int64 role_roleid = table_role.roleid();
+
+    const string &role_rolename = table_role.rolename();
+    const char *sz_role_rolename = "";
+    int len_role_rolename = 0;
+    GORM_MemPoolData *buffer_role_rolename = nullptr;
+    if(role_rolename.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_rolename, role_rolename.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_role_rolename->m_uszData, role_rolename.c_str(), role_rolename.size());
+        buffer_role_rolename->m_uszData[iTmpLen] = '\0';
+        buffer_role_rolename->m_sUsedSize = iTmpLen;
+        sz_role_rolename = buffer_role_rolename->m_uszData;
+        len_role_rolename = iTmpLen;
+    }
+
+    const int32 role_level = table_role.level();
+
+    const int64 role_exp = table_role.exp();
+
+    const int32 role_characterid = table_role.characterid();
+
+    const int32 role_gold = table_role.gold();
+
+    const int64 role_offlinetime = table_role.offlinetime();
+
+    const int32 role_inited = table_role.inited();
+
+    const int64 role_createtime = table_role.createtime();
+
+    const string &role_face = table_role.face();
+    const char *sz_role_face = "";
+    int len_role_face = 0;
+    GORM_MemPoolData *buffer_role_face = nullptr;
+    if(role_face.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_role_face, role_face.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_role_face->m_uszData, role_face.c_str(), role_face.size());
+        buffer_role_face->m_uszData[iTmpLen] = '\0';
+        buffer_role_face->m_sUsedSize = iTmpLen;
+        sz_role_face = buffer_role_face->m_uszData;
+        len_role_face = iTmpLen;
+    }
+
+    const int64 role_online = table_role.online();
+
+    const int64 role_worldid = table_role.worldid();
+
+    const int32 role_pttype = table_role.pttype();
+
+    const int64 role_userid = table_role.userid();
+
+    const int32 role_proceedslv = table_role.proceedslv();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_role_rolename + 8 + 8 + 8 + 8 + 8 + 8 + 8 + len_role_face + 8 + 8 + 8 + 8 + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, ROLEREPLACESQL, iTableIndex, role_version, role_roleid, sz_role_rolename, role_level, role_exp, role_characterid, role_gold, role_offlinetime, role_inited, role_createtime, sz_role_face, role_online, role_worldid, role_pttype, role_userid, role_proceedslv, sz_role_rolename,role_level,role_exp,role_characterid,role_gold,role_offlinetime,role_inited,role_createtime, sz_role_face,role_online,role_worldid,role_pttype,role_userid,role_proceedslv);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_role_rolename != nullptr)
+        buffer_role_rolename->Release();
+    if (buffer_role_face != nullptr)
+        buffer_role_face->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_role())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_role &table_role = table.role();
+        return GORM_PackReplaceSQLROLE_One(pMemPool, mysql, iTableIndex, table_role, pReqData);
+    }
+    return GORM_OK;
+}
+#define SCENEREPLACESQL "insert into scene_%d(`version`, `roleid`, `sceneid`, `collects`, `season`) values (%llu, %lld, %d, '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `sceneid`=%d, `collects`='%s', `season`='%s';"
+int GORM_PackReplaceSQLSCENE_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_scene &table_scene, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 230;
+    int iTmpLen = 0;
+
+    const uint64 scene_version = table_scene.version();
+
+    const int64 scene_roleid = table_scene.roleid();
+
+    const int32 scene_sceneid = table_scene.sceneid();
+
+    const string &scene_collects = table_scene.collects();
+    const char *sz_scene_collects = "";
+    int len_scene_collects = 0;
+    GORM_MemPoolData *buffer_scene_collects = nullptr;
+    if(scene_collects.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_collects, scene_collects.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_scene_collects->m_uszData, scene_collects.c_str(), scene_collects.size());
+        buffer_scene_collects->m_uszData[iTmpLen] = '\0';
+        buffer_scene_collects->m_sUsedSize = iTmpLen;
+        sz_scene_collects = buffer_scene_collects->m_uszData;
+        len_scene_collects = iTmpLen;
+    }
+
+    const string &scene_season = table_scene.season();
+    const char *sz_scene_season = "";
+    int len_scene_season = 0;
+    GORM_MemPoolData *buffer_scene_season = nullptr;
+    if(scene_season.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_scene_season, scene_season.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_scene_season->m_uszData, scene_season.c_str(), scene_season.size());
+        buffer_scene_season->m_uszData[iTmpLen] = '\0';
+        buffer_scene_season->m_sUsedSize = iTmpLen;
+        sz_scene_season = buffer_scene_season->m_uszData;
+        len_scene_season = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_scene_collects + len_scene_season;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SCENEREPLACESQL, iTableIndex, scene_version, scene_roleid, scene_sceneid, sz_scene_collects, sz_scene_season,scene_sceneid, sz_scene_collects, sz_scene_season);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_scene_collects != nullptr)
+        buffer_scene_collects->Release();
+    if (buffer_scene_season != nullptr)
+        buffer_scene_season->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_scene())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_scene &table_scene = table.scene();
+        return GORM_PackReplaceSQLSCENE_One(pMemPool, mysql, iTableIndex, table_scene, pReqData);
+    }
+    return GORM_OK;
+}
+#define SKILLREPLACESQL "insert into skill_%d(`version`, `roleid`, `snakeid`, `skill1`, `skill2`, `skill3`, `skill4`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `snakeid`=%d, `skill1`='%s', `skill2`='%s', `skill3`='%s', `skill4`='%s';"
+int GORM_PackReplaceSQLSKILL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_skill &table_skill, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 288;
+    int iTmpLen = 0;
+
+    const uint64 skill_version = table_skill.version();
+
+    const int64 skill_roleid = table_skill.roleid();
+
+    const int32 skill_snakeid = table_skill.snakeid();
+
+    const string &skill_skill1 = table_skill.skill1();
+    const char *sz_skill_skill1 = "";
+    int len_skill_skill1 = 0;
+    GORM_MemPoolData *buffer_skill_skill1 = nullptr;
+    if(skill_skill1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill1, skill_skill1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill1->m_uszData, skill_skill1.c_str(), skill_skill1.size());
+        buffer_skill_skill1->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill1->m_sUsedSize = iTmpLen;
+        sz_skill_skill1 = buffer_skill_skill1->m_uszData;
+        len_skill_skill1 = iTmpLen;
+    }
+
+    const string &skill_skill2 = table_skill.skill2();
+    const char *sz_skill_skill2 = "";
+    int len_skill_skill2 = 0;
+    GORM_MemPoolData *buffer_skill_skill2 = nullptr;
+    if(skill_skill2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill2, skill_skill2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill2->m_uszData, skill_skill2.c_str(), skill_skill2.size());
+        buffer_skill_skill2->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill2->m_sUsedSize = iTmpLen;
+        sz_skill_skill2 = buffer_skill_skill2->m_uszData;
+        len_skill_skill2 = iTmpLen;
+    }
+
+    const string &skill_skill3 = table_skill.skill3();
+    const char *sz_skill_skill3 = "";
+    int len_skill_skill3 = 0;
+    GORM_MemPoolData *buffer_skill_skill3 = nullptr;
+    if(skill_skill3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill3, skill_skill3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill3->m_uszData, skill_skill3.c_str(), skill_skill3.size());
+        buffer_skill_skill3->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill3->m_sUsedSize = iTmpLen;
+        sz_skill_skill3 = buffer_skill_skill3->m_uszData;
+        len_skill_skill3 = iTmpLen;
+    }
+
+    const string &skill_skill4 = table_skill.skill4();
+    const char *sz_skill_skill4 = "";
+    int len_skill_skill4 = 0;
+    GORM_MemPoolData *buffer_skill_skill4 = nullptr;
+    if(skill_skill4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_skill_skill4, skill_skill4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_skill_skill4->m_uszData, skill_skill4.c_str(), skill_skill4.size());
+        buffer_skill_skill4->m_uszData[iTmpLen] = '\0';
+        buffer_skill_skill4->m_sUsedSize = iTmpLen;
+        sz_skill_skill4 = buffer_skill_skill4->m_uszData;
+        len_skill_skill4 = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_skill_skill1 + len_skill_skill2 + len_skill_skill3 + len_skill_skill4;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, SKILLREPLACESQL, iTableIndex, skill_version, skill_roleid, skill_snakeid, sz_skill_skill1, sz_skill_skill2, sz_skill_skill3, sz_skill_skill4,skill_snakeid, sz_skill_skill1, sz_skill_skill2, sz_skill_skill3, sz_skill_skill4);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_skill_skill1 != nullptr)
+        buffer_skill_skill1->Release();
+    if (buffer_skill_skill2 != nullptr)
+        buffer_skill_skill2->Release();
+    if (buffer_skill_skill3 != nullptr)
+        buffer_skill_skill3->Release();
+    if (buffer_skill_skill4 != nullptr)
+        buffer_skill_skill4->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_skill())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_skill &table_skill = table.skill();
+        return GORM_PackReplaceSQLSKILL_One(pMemPool, mysql, iTableIndex, table_skill, pReqData);
+    }
+    return GORM_OK;
+}
+#define PTUSERREPLACESQL "insert into ptuser_%d(`version`, `ptid`, `pttype`, `userid`) values (%llu, '%s', %d, %lld) ON DUPLICATE KEY UPDATE `version`=`version`+1, `userid`=%lld;"
+int GORM_PackReplaceSQLPTUSER_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_ptuser &table_ptuser, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 180;
+    int iTmpLen = 0;
+
+    const uint64 ptuser_version = table_ptuser.version();
+
+    const string &ptuser_ptid = table_ptuser.ptid();
+    const char *sz_ptuser_ptid = "";
+    int len_ptuser_ptid = 0;
+    GORM_MemPoolData *buffer_ptuser_ptid = nullptr;
+    if(ptuser_ptid.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_ptuser_ptid, ptuser_ptid.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_ptuser_ptid->m_uszData, ptuser_ptid.c_str(), ptuser_ptid.size());
+        buffer_ptuser_ptid->m_uszData[iTmpLen] = '\0';
+        buffer_ptuser_ptid->m_sUsedSize = iTmpLen;
+        sz_ptuser_ptid = buffer_ptuser_ptid->m_uszData;
+        len_ptuser_ptid = iTmpLen;
+    }
+
+    const int32 ptuser_pttype = table_ptuser.pttype();
+
+    const int64 ptuser_userid = table_ptuser.userid();
+
+    int iLen = iSqlLen + 128 + 8 + len_ptuser_ptid + 8 + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PTUSERREPLACESQL, iTableIndex, ptuser_version, sz_ptuser_ptid, ptuser_pttype, ptuser_userid,ptuser_userid);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_ptuser_ptid != nullptr)
+        buffer_ptuser_ptid->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_ptuser())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_ptuser &table_ptuser = table.ptuser();
+        return GORM_PackReplaceSQLPTUSER_One(pMemPool, mysql, iTableIndex, table_ptuser, pReqData);
+    }
+    return GORM_OK;
+}
+#define USERREPLACESQL "insert into user_%d(`version`, `userid`, `ptid`, `pttype`, `createtime`, `rolesdata`) values (%llu, %lld, '%s', %d, %lld, '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `ptid`='%s', `pttype`=%d, `createtime`=%lld, `rolesdata`='%s';"
+int GORM_PackReplaceSQLUSER_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_user &table_user, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 263;
+    int iTmpLen = 0;
+
+    const uint64 user_version = table_user.version();
+
+    const int64 user_userid = table_user.userid();
+
+    const string &user_ptid = table_user.ptid();
+    const char *sz_user_ptid = "";
+    int len_user_ptid = 0;
+    GORM_MemPoolData *buffer_user_ptid = nullptr;
+    if(user_ptid.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_ptid, user_ptid.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_user_ptid->m_uszData, user_ptid.c_str(), user_ptid.size());
+        buffer_user_ptid->m_uszData[iTmpLen] = '\0';
+        buffer_user_ptid->m_sUsedSize = iTmpLen;
+        sz_user_ptid = buffer_user_ptid->m_uszData;
+        len_user_ptid = iTmpLen;
+    }
+
+    const int32 user_pttype = table_user.pttype();
+
+    const int64 user_createtime = table_user.createtime();
+
+    const string &user_rolesdata = table_user.rolesdata();
+    const char *sz_user_rolesdata = "";
+    int len_user_rolesdata = 0;
+    GORM_MemPoolData *buffer_user_rolesdata = nullptr;
+    if(user_rolesdata.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_user_rolesdata, user_rolesdata.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_user_rolesdata->m_uszData, user_rolesdata.c_str(), user_rolesdata.size());
+        buffer_user_rolesdata->m_uszData[iTmpLen] = '\0';
+        buffer_user_rolesdata->m_sUsedSize = iTmpLen;
+        sz_user_rolesdata = buffer_user_rolesdata->m_uszData;
+        len_user_rolesdata = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_user_ptid + 8 + 8 + len_user_rolesdata;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, USERREPLACESQL, iTableIndex, user_version, user_userid, sz_user_ptid, user_pttype, user_createtime, sz_user_rolesdata, sz_user_ptid,user_pttype,user_createtime, sz_user_rolesdata);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_user_ptid != nullptr)
+        buffer_user_ptid->Release();
+    if (buffer_user_rolesdata != nullptr)
+        buffer_user_rolesdata->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_user())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_user &table_user = table.user();
+        return GORM_PackReplaceSQLUSER_One(pMemPool, mysql, iTableIndex, table_user, pReqData);
+    }
+    return GORM_OK;
+}
+#define MAINLINETASKREPLACESQL "insert into mainlinetask_%d(`version`, `roleid`, `runningtask`, `compleatetask0`, `compleatetask1`, `compleatetask2`, `compleatetask3`, `compleatetask4`, `compleatetask5`, `compleatetask6`, `compleatetask7`, `compleatetask8`, `compleatetask9`, `unlockfuncs`) values (%llu, %lld, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') ON DUPLICATE KEY UPDATE `version`=`version`+1, `runningtask`=%d, `compleatetask0`='%s', `compleatetask1`='%s', `compleatetask2`='%s', `compleatetask3`='%s', `compleatetask4`='%s', `compleatetask5`='%s', `compleatetask6`='%s', `compleatetask7`='%s', `compleatetask8`='%s', `compleatetask9`='%s', `unlockfuncs`='%s';"
+int GORM_PackReplaceSQLMAINLINETASK_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mainlinetask &table_mainlinetask, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 697;
+    int iTmpLen = 0;
+
+    const uint64 mainlinetask_version = table_mainlinetask.version();
+
+    const int64 mainlinetask_roleid = table_mainlinetask.roleid();
+
+    const int32 mainlinetask_runningtask = table_mainlinetask.runningtask();
+
+    const string &mainlinetask_compleatetask0 = table_mainlinetask.compleatetask0();
+    const char *sz_mainlinetask_compleatetask0 = "";
+    int len_mainlinetask_compleatetask0 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask0 = nullptr;
+    if(mainlinetask_compleatetask0.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask0, mainlinetask_compleatetask0.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask0->m_uszData, mainlinetask_compleatetask0.c_str(), mainlinetask_compleatetask0.size());
+        buffer_mainlinetask_compleatetask0->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask0->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask0 = buffer_mainlinetask_compleatetask0->m_uszData;
+        len_mainlinetask_compleatetask0 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask1 = table_mainlinetask.compleatetask1();
+    const char *sz_mainlinetask_compleatetask1 = "";
+    int len_mainlinetask_compleatetask1 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask1 = nullptr;
+    if(mainlinetask_compleatetask1.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask1, mainlinetask_compleatetask1.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask1->m_uszData, mainlinetask_compleatetask1.c_str(), mainlinetask_compleatetask1.size());
+        buffer_mainlinetask_compleatetask1->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask1->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask1 = buffer_mainlinetask_compleatetask1->m_uszData;
+        len_mainlinetask_compleatetask1 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask2 = table_mainlinetask.compleatetask2();
+    const char *sz_mainlinetask_compleatetask2 = "";
+    int len_mainlinetask_compleatetask2 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask2 = nullptr;
+    if(mainlinetask_compleatetask2.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask2, mainlinetask_compleatetask2.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask2->m_uszData, mainlinetask_compleatetask2.c_str(), mainlinetask_compleatetask2.size());
+        buffer_mainlinetask_compleatetask2->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask2->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask2 = buffer_mainlinetask_compleatetask2->m_uszData;
+        len_mainlinetask_compleatetask2 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask3 = table_mainlinetask.compleatetask3();
+    const char *sz_mainlinetask_compleatetask3 = "";
+    int len_mainlinetask_compleatetask3 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask3 = nullptr;
+    if(mainlinetask_compleatetask3.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask3, mainlinetask_compleatetask3.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask3->m_uszData, mainlinetask_compleatetask3.c_str(), mainlinetask_compleatetask3.size());
+        buffer_mainlinetask_compleatetask3->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask3->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask3 = buffer_mainlinetask_compleatetask3->m_uszData;
+        len_mainlinetask_compleatetask3 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask4 = table_mainlinetask.compleatetask4();
+    const char *sz_mainlinetask_compleatetask4 = "";
+    int len_mainlinetask_compleatetask4 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask4 = nullptr;
+    if(mainlinetask_compleatetask4.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask4, mainlinetask_compleatetask4.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask4->m_uszData, mainlinetask_compleatetask4.c_str(), mainlinetask_compleatetask4.size());
+        buffer_mainlinetask_compleatetask4->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask4->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask4 = buffer_mainlinetask_compleatetask4->m_uszData;
+        len_mainlinetask_compleatetask4 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask5 = table_mainlinetask.compleatetask5();
+    const char *sz_mainlinetask_compleatetask5 = "";
+    int len_mainlinetask_compleatetask5 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask5 = nullptr;
+    if(mainlinetask_compleatetask5.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask5, mainlinetask_compleatetask5.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask5->m_uszData, mainlinetask_compleatetask5.c_str(), mainlinetask_compleatetask5.size());
+        buffer_mainlinetask_compleatetask5->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask5->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask5 = buffer_mainlinetask_compleatetask5->m_uszData;
+        len_mainlinetask_compleatetask5 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask6 = table_mainlinetask.compleatetask6();
+    const char *sz_mainlinetask_compleatetask6 = "";
+    int len_mainlinetask_compleatetask6 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask6 = nullptr;
+    if(mainlinetask_compleatetask6.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask6, mainlinetask_compleatetask6.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask6->m_uszData, mainlinetask_compleatetask6.c_str(), mainlinetask_compleatetask6.size());
+        buffer_mainlinetask_compleatetask6->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask6->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask6 = buffer_mainlinetask_compleatetask6->m_uszData;
+        len_mainlinetask_compleatetask6 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask7 = table_mainlinetask.compleatetask7();
+    const char *sz_mainlinetask_compleatetask7 = "";
+    int len_mainlinetask_compleatetask7 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask7 = nullptr;
+    if(mainlinetask_compleatetask7.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask7, mainlinetask_compleatetask7.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask7->m_uszData, mainlinetask_compleatetask7.c_str(), mainlinetask_compleatetask7.size());
+        buffer_mainlinetask_compleatetask7->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask7->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask7 = buffer_mainlinetask_compleatetask7->m_uszData;
+        len_mainlinetask_compleatetask7 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask8 = table_mainlinetask.compleatetask8();
+    const char *sz_mainlinetask_compleatetask8 = "";
+    int len_mainlinetask_compleatetask8 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask8 = nullptr;
+    if(mainlinetask_compleatetask8.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask8, mainlinetask_compleatetask8.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask8->m_uszData, mainlinetask_compleatetask8.c_str(), mainlinetask_compleatetask8.size());
+        buffer_mainlinetask_compleatetask8->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask8->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask8 = buffer_mainlinetask_compleatetask8->m_uszData;
+        len_mainlinetask_compleatetask8 = iTmpLen;
+    }
+
+    const string &mainlinetask_compleatetask9 = table_mainlinetask.compleatetask9();
+    const char *sz_mainlinetask_compleatetask9 = "";
+    int len_mainlinetask_compleatetask9 = 0;
+    GORM_MemPoolData *buffer_mainlinetask_compleatetask9 = nullptr;
+    if(mainlinetask_compleatetask9.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_compleatetask9, mainlinetask_compleatetask9.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_compleatetask9->m_uszData, mainlinetask_compleatetask9.c_str(), mainlinetask_compleatetask9.size());
+        buffer_mainlinetask_compleatetask9->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_compleatetask9->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_compleatetask9 = buffer_mainlinetask_compleatetask9->m_uszData;
+        len_mainlinetask_compleatetask9 = iTmpLen;
+    }
+
+    const string &mainlinetask_unlockfuncs = table_mainlinetask.unlockfuncs();
+    const char *sz_mainlinetask_unlockfuncs = "";
+    int len_mainlinetask_unlockfuncs = 0;
+    GORM_MemPoolData *buffer_mainlinetask_unlockfuncs = nullptr;
+    if(mainlinetask_unlockfuncs.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_mainlinetask_unlockfuncs, mainlinetask_unlockfuncs.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_mainlinetask_unlockfuncs->m_uszData, mainlinetask_unlockfuncs.c_str(), mainlinetask_unlockfuncs.size());
+        buffer_mainlinetask_unlockfuncs->m_uszData[iTmpLen] = '\0';
+        buffer_mainlinetask_unlockfuncs->m_sUsedSize = iTmpLen;
+        sz_mainlinetask_unlockfuncs = buffer_mainlinetask_unlockfuncs->m_uszData;
+        len_mainlinetask_unlockfuncs = iTmpLen;
+    }
+
+    int iLen = iSqlLen + 128 + 8 + 8 + 8 + len_mainlinetask_compleatetask0 + len_mainlinetask_compleatetask1 + len_mainlinetask_compleatetask2 + len_mainlinetask_compleatetask3 + len_mainlinetask_compleatetask4 + len_mainlinetask_compleatetask5 + len_mainlinetask_compleatetask6 + len_mainlinetask_compleatetask7 + len_mainlinetask_compleatetask8 + len_mainlinetask_compleatetask9 + len_mainlinetask_unlockfuncs;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, MAINLINETASKREPLACESQL, iTableIndex, mainlinetask_version, mainlinetask_roleid, mainlinetask_runningtask, sz_mainlinetask_compleatetask0, sz_mainlinetask_compleatetask1, sz_mainlinetask_compleatetask2, sz_mainlinetask_compleatetask3, sz_mainlinetask_compleatetask4, sz_mainlinetask_compleatetask5, sz_mainlinetask_compleatetask6, sz_mainlinetask_compleatetask7, sz_mainlinetask_compleatetask8, sz_mainlinetask_compleatetask9, sz_mainlinetask_unlockfuncs,mainlinetask_runningtask, sz_mainlinetask_compleatetask0, sz_mainlinetask_compleatetask1, sz_mainlinetask_compleatetask2, sz_mainlinetask_compleatetask3, sz_mainlinetask_compleatetask4, sz_mainlinetask_compleatetask5, sz_mainlinetask_compleatetask6, sz_mainlinetask_compleatetask7, sz_mainlinetask_compleatetask8, sz_mainlinetask_compleatetask9, sz_mainlinetask_unlockfuncs);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_mainlinetask_compleatetask0 != nullptr)
+        buffer_mainlinetask_compleatetask0->Release();
+    if (buffer_mainlinetask_compleatetask1 != nullptr)
+        buffer_mainlinetask_compleatetask1->Release();
+    if (buffer_mainlinetask_compleatetask2 != nullptr)
+        buffer_mainlinetask_compleatetask2->Release();
+    if (buffer_mainlinetask_compleatetask3 != nullptr)
+        buffer_mainlinetask_compleatetask3->Release();
+    if (buffer_mainlinetask_compleatetask4 != nullptr)
+        buffer_mainlinetask_compleatetask4->Release();
+    if (buffer_mainlinetask_compleatetask5 != nullptr)
+        buffer_mainlinetask_compleatetask5->Release();
+    if (buffer_mainlinetask_compleatetask6 != nullptr)
+        buffer_mainlinetask_compleatetask6->Release();
+    if (buffer_mainlinetask_compleatetask7 != nullptr)
+        buffer_mainlinetask_compleatetask7->Release();
+    if (buffer_mainlinetask_compleatetask8 != nullptr)
+        buffer_mainlinetask_compleatetask8->Release();
+    if (buffer_mainlinetask_compleatetask9 != nullptr)
+        buffer_mainlinetask_compleatetask9->Release();
+    if (buffer_mainlinetask_unlockfuncs != nullptr)
+        buffer_mainlinetask_unlockfuncs->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_mainlinetask())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_mainlinetask &table_mainlinetask = table.mainlinetask();
+        return GORM_PackReplaceSQLMAINLINETASK_One(pMemPool, mysql, iTableIndex, table_mainlinetask, pReqData);
+    }
+    return GORM_OK;
+}
+#define PUBMAILREPLACESQL "insert into pubmail_%d(`version`, `mailid`, `addresser`, `title`, `body`, `roles`, `attachment`, `dt`, `del`) values (%llu, %d, '%s', '%s', '%s', '%s', '%s', %lld, %d) ON DUPLICATE KEY UPDATE `version`=`version`+1, `addresser`='%s', `title`='%s', `body`='%s', `roles`='%s', `attachment`='%s', `dt`=%lld, `del`=%d;"
+int GORM_PackReplaceSQLPUBMAIL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_pubmail &table_pubmail, GORM_MemPoolData *&pReqData)
+{
+    char *szSQLBegin = nullptr;
+    int iSqlLen = 342;
+    int iTmpLen = 0;
+
+    const uint64 pubmail_version = table_pubmail.version();
+
+    const int32 pubmail_mailid = table_pubmail.mailid();
+
+    const string &pubmail_addresser = table_pubmail.addresser();
+    const char *sz_pubmail_addresser = "";
+    int len_pubmail_addresser = 0;
+    GORM_MemPoolData *buffer_pubmail_addresser = nullptr;
+    if(pubmail_addresser.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_addresser, pubmail_addresser.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_addresser->m_uszData, pubmail_addresser.c_str(), pubmail_addresser.size());
+        buffer_pubmail_addresser->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_addresser->m_sUsedSize = iTmpLen;
+        sz_pubmail_addresser = buffer_pubmail_addresser->m_uszData;
+        len_pubmail_addresser = iTmpLen;
+    }
+
+    const string &pubmail_title = table_pubmail.title();
+    const char *sz_pubmail_title = "";
+    int len_pubmail_title = 0;
+    GORM_MemPoolData *buffer_pubmail_title = nullptr;
+    if(pubmail_title.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_title, pubmail_title.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_title->m_uszData, pubmail_title.c_str(), pubmail_title.size());
+        buffer_pubmail_title->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_title->m_sUsedSize = iTmpLen;
+        sz_pubmail_title = buffer_pubmail_title->m_uszData;
+        len_pubmail_title = iTmpLen;
+    }
+
+    const string &pubmail_body = table_pubmail.body();
+    const char *sz_pubmail_body = "";
+    int len_pubmail_body = 0;
+    GORM_MemPoolData *buffer_pubmail_body = nullptr;
+    if(pubmail_body.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_body, pubmail_body.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_body->m_uszData, pubmail_body.c_str(), pubmail_body.size());
+        buffer_pubmail_body->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_body->m_sUsedSize = iTmpLen;
+        sz_pubmail_body = buffer_pubmail_body->m_uszData;
+        len_pubmail_body = iTmpLen;
+    }
+
+    const string &pubmail_roles = table_pubmail.roles();
+    const char *sz_pubmail_roles = "";
+    int len_pubmail_roles = 0;
+    GORM_MemPoolData *buffer_pubmail_roles = nullptr;
+    if(pubmail_roles.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_roles, pubmail_roles.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_roles->m_uszData, pubmail_roles.c_str(), pubmail_roles.size());
+        buffer_pubmail_roles->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_roles->m_sUsedSize = iTmpLen;
+        sz_pubmail_roles = buffer_pubmail_roles->m_uszData;
+        len_pubmail_roles = iTmpLen;
+    }
+
+    const string &pubmail_attachment = table_pubmail.attachment();
+    const char *sz_pubmail_attachment = "";
+    int len_pubmail_attachment = 0;
+    GORM_MemPoolData *buffer_pubmail_attachment = nullptr;
+    if(pubmail_attachment.size()>0)
+    {
+    GORM_MallocFromSharedPool(pMemPool, buffer_pubmail_attachment, pubmail_attachment.size()<<1);
+        iTmpLen = mysql_real_escape_string(mysql, buffer_pubmail_attachment->m_uszData, pubmail_attachment.c_str(), pubmail_attachment.size());
+        buffer_pubmail_attachment->m_uszData[iTmpLen] = '\0';
+        buffer_pubmail_attachment->m_sUsedSize = iTmpLen;
+        sz_pubmail_attachment = buffer_pubmail_attachment->m_uszData;
+        len_pubmail_attachment = iTmpLen;
+    }
+
+    const int64 pubmail_dt = table_pubmail.dt();
+
+    const int32 pubmail_del = table_pubmail.del();
+
+    int iLen = iSqlLen + 128 + 8 + 8 + len_pubmail_addresser + len_pubmail_title + len_pubmail_body + len_pubmail_roles + len_pubmail_attachment + 8 + 8;
+iLen *= 2;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iLen<<1);
+    szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, PUBMAILREPLACESQL, iTableIndex, pubmail_version, pubmail_mailid, sz_pubmail_addresser, sz_pubmail_title, sz_pubmail_body, sz_pubmail_roles, sz_pubmail_attachment, pubmail_dt, pubmail_del, sz_pubmail_addresser, sz_pubmail_title, sz_pubmail_body, sz_pubmail_roles, sz_pubmail_attachment,pubmail_dt,pubmail_del);
+    pReqData->m_sUsedSize = iLen;
+
+    if (buffer_pubmail_addresser != nullptr)
+        buffer_pubmail_addresser->Release();
+    if (buffer_pubmail_title != nullptr)
+        buffer_pubmail_title->Release();
+    if (buffer_pubmail_body != nullptr)
+        buffer_pubmail_body->Release();
+    if (buffer_pubmail_roles != nullptr)
+        buffer_pubmail_roles->Release();
+    if (buffer_pubmail_attachment != nullptr)
+        buffer_pubmail_attachment->Release();
+
+    return GORM_OK;
+}
+int GORM_PackReplaceSQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_pubmail())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_pubmail &table_pubmail = table.pubmail();
+        return GORM_PackReplaceSQLPUBMAIL_One(pMemPool, mysql, iTableIndex, table_pubmail, pReqData);
+    }
+    return GORM_OK;
+}
 int GORM_PackReplaceSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_REPLACE_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -1266,6 +12856,57 @@ int GORM_PackReplaceSQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMy
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackReplaceSQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackReplaceSQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackReplaceSQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackReplaceSQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackReplaceSQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackReplaceSQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackReplaceSQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackReplaceSQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackReplaceSQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackReplaceSQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackReplaceSQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackReplaceSQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackReplaceSQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackReplaceSQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackReplaceSQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackReplaceSQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackReplaceSQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackReplaceSQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -1286,6 +12927,108 @@ int GORM_PackGetSQLTable(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pM
         if (!table.has_cycleevent())
             return GORM_REQ_NO_RECORDS;
         return GORM_PackGetSQLCYCLEEVENT_ONE(pMemPool, mysql, uiHashValue, table.cycleevent(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_EQUIP:
+    {
+        if (!table.has_equip())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLEQUIP_ONE(pMemPool, mysql, uiHashValue, table.equip(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_FOOD:
+    {
+        if (!table.has_food())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLFOOD_ONE(pMemPool, mysql, uiHashValue, table.food(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_HERO:
+    {
+        if (!table.has_hero())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLHERO_ONE(pMemPool, mysql, uiHashValue, table.hero(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+    {
+        if (!table.has_login_log())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLLOGIN_LOG_ONE(pMemPool, mysql, uiHashValue, table.login_log(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_MAIL:
+    {
+        if (!table.has_mail())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLMAIL_ONE(pMemPool, mysql, uiHashValue, table.mail(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_MATERIAL:
+    {
+        if (!table.has_material())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLMATERIAL_ONE(pMemPool, mysql, uiHashValue, table.material(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_NPC:
+    {
+        if (!table.has_npc())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLNPC_ONE(pMemPool, mysql, uiHashValue, table.npc(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_RES_LOG:
+    {
+        if (!table.has_res_log())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLRES_LOG_ONE(pMemPool, mysql, uiHashValue, table.res_log(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_INTERACTION:
+    {
+        if (!table.has_interaction())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLINTERACTION_ONE(pMemPool, mysql, uiHashValue, table.interaction(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_ROLES:
+    {
+        if (!table.has_roles())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLROLES_ONE(pMemPool, mysql, uiHashValue, table.roles(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_ROLE:
+    {
+        if (!table.has_role())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLROLE_ONE(pMemPool, mysql, uiHashValue, table.role(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_SCENE:
+    {
+        if (!table.has_scene())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLSCENE_ONE(pMemPool, mysql, uiHashValue, table.scene(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_SKILL:
+    {
+        if (!table.has_skill())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLSKILL_ONE(pMemPool, mysql, uiHashValue, table.skill(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_PTUSER:
+    {
+        if (!table.has_ptuser())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLPTUSER_ONE(pMemPool, mysql, uiHashValue, table.ptuser(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_USER:
+    {
+        if (!table.has_user())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLUSER_ONE(pMemPool, mysql, uiHashValue, table.user(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+    {
+        if (!table.has_mainlinetask())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLMAINLINETASK_ONE(pMemPool, mysql, uiHashValue, table.mainlinetask(), pReqData);
+    }
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+    {
+        if (!table.has_pubmail())
+            return GORM_REQ_NO_RECORDS;
+        return GORM_PackGetSQLPUBMAIL_ONE(pMemPool, mysql, uiHashValue, table.pubmail(), pReqData);
     }
     }
     return GORM_INVALID_TABLE;
@@ -1532,6 +13275,2606 @@ int GORM_PackGet_By_Non_Primary_KeySQLCYCLEEVENT(shared_ptr<GORM_MemPool> &pMemP
     }
     return GORM_OK;
 }
+#define GetByNonPrimaySQL_EQUIP "select `version`,`roleid`,`snakeid`,`equip1`,`equip2`,`equip3`,`equip4` from equip_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLEQUIP_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_equip &table_equip, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_EQUIP);
+    int iTotalLen = 64*vFields.size() + iLen + table_equip.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_EQUIP, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_EQUIP_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_equip.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_equip.version());
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_equip.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_equip.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_equip.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_equip.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP1:
+        {
+            const char *szData = "";
+            const string &strData = table_equip.equip1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`equip1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `equip1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP2:
+        {
+            const char *szData = "";
+            const string &strData = table_equip.equip2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`equip2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `equip2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP3:
+        {
+            const char *szData = "";
+            const string &strData = table_equip.equip3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`equip3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `equip3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_EQUIP_EQUIP4:
+        {
+            const char *szData = "";
+            const string &strData = table_equip.equip4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`equip4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `equip4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLEQUIP(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_equip())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_equip &table_equip = table.equip();
+        return GORM_PackGet_By_Non_Primary_KeySQLEQUIP_One(pMemPool, mysql, iTableIndex, table_equip, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_FOOD "select `version`,`roleid`,`snakeid`,`food1`,`food2`,`food3`,`food4` from food_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLFOOD_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_food &table_food, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_FOOD);
+    int iTotalLen = 64*vFields.size() + iLen + table_food.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_FOOD, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_FOOD_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_food.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_food.version());
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_food.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_food.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_food.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_food.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD1:
+        {
+            const char *szData = "";
+            const string &strData = table_food.food1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`food1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `food1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD2:
+        {
+            const char *szData = "";
+            const string &strData = table_food.food2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`food2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `food2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD3:
+        {
+            const char *szData = "";
+            const string &strData = table_food.food3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`food3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `food3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_FOOD_FOOD4:
+        {
+            const char *szData = "";
+            const string &strData = table_food.food4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`food4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `food4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLFOOD(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_food())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_food &table_food = table.food();
+        return GORM_PackGet_By_Non_Primary_KeySQLFOOD_One(pMemPool, mysql, iTableIndex, table_food, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_HERO "select `version`,`roleid`,`snakeid`,`heros`,`teams` from hero_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLHERO_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_hero &table_hero, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_HERO);
+    int iTotalLen = 64*vFields.size() + iLen + table_hero.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_HERO, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_HERO_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_hero.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_hero.version());
+            break;
+        }
+        case GORM_PB_FIELD_HERO_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_hero.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_hero.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_HERO_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_hero.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_hero.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_HERO_HEROS:
+        {
+            const char *szData = "";
+            const string &strData = table_hero.heros();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`heros`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `heros`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_HERO_TEAMS:
+        {
+            const char *szData = "";
+            const string &strData = table_hero.teams();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`teams`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `teams`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLHERO(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_hero())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_hero &table_hero = table.hero();
+        return GORM_PackGet_By_Non_Primary_KeySQLHERO_One(pMemPool, mysql, iTableIndex, table_hero, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_LOGIN_LOG "select `version`,`roleid`,`action`,`online`,`ip`,`appid`,`createtime` from login_log_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLLOGIN_LOG_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_login_log &table_login_log, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_LOGIN_LOG);
+    int iTotalLen = 64*vFields.size() + iLen + table_login_log.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_LOGIN_LOG, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_LOGIN_LOG_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_login_log.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_login_log.version());
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_login_log.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_login_log.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ACTION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`action`=%d", table_login_log.action());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `action`=%d", table_login_log.action());
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_ONLINE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`online`=%d", table_login_log.online());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `online`=%d", table_login_log.online());
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_IP:
+        {
+            const char *szData = "";
+            const string &strData = table_login_log.ip();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`ip`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `ip`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_APPID:
+        {
+            const char *szData = "";
+            const string &strData = table_login_log.appid();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`appid`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `appid`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_LOGIN_LOG_CREATETIME:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`createtime`=%lld", table_login_log.createtime());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `createtime`=%lld", table_login_log.createtime());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLLOGIN_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_login_log())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_login_log &table_login_log = table.login_log();
+        return GORM_PackGet_By_Non_Primary_KeySQLLOGIN_LOG_One(pMemPool, mysql, iTableIndex, table_login_log, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_MAIL "select `version`,`roleid`,`mail1`,`mail2`,`mail3`,`mail4`,`mail5`,`lastmailid`,`snakeid` from mail_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLMAIL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mail &table_mail, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_MAIL);
+    int iTotalLen = 64*vFields.size() + iLen + table_mail.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_MAIL, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_MAIL_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_mail.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_mail.version());
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_mail.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_mail.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL1:
+        {
+            const char *szData = "";
+            const string &strData = table_mail.mail1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`mail1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `mail1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL2:
+        {
+            const char *szData = "";
+            const string &strData = table_mail.mail2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`mail2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `mail2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL3:
+        {
+            const char *szData = "";
+            const string &strData = table_mail.mail3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`mail3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `mail3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL4:
+        {
+            const char *szData = "";
+            const string &strData = table_mail.mail4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`mail4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `mail4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_MAIL5:
+        {
+            const char *szData = "";
+            const string &strData = table_mail.mail5();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`mail5`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `mail5`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_LASTMAILID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`lastmailid`=%d", table_mail.lastmailid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `lastmailid`=%d", table_mail.lastmailid());
+            break;
+        }
+        case GORM_PB_FIELD_MAIL_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_mail.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_mail.snakeid());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_mail())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_mail &table_mail = table.mail();
+        return GORM_PackGet_By_Non_Primary_KeySQLMAIL_One(pMemPool, mysql, iTableIndex, table_mail, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_MATERIAL "select `version`,`roleid`,`snakeid`,`material1`,`material2`,`material3`,`material4` from material_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLMATERIAL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_material &table_material, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_MATERIAL);
+    int iTotalLen = 64*vFields.size() + iLen + table_material.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_MATERIAL, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_MATERIAL_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_material.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_material.version());
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_material.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_material.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_material.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_material.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL1:
+        {
+            const char *szData = "";
+            const string &strData = table_material.material1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`material1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `material1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL2:
+        {
+            const char *szData = "";
+            const string &strData = table_material.material2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`material2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `material2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL3:
+        {
+            const char *szData = "";
+            const string &strData = table_material.material3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`material3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `material3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MATERIAL_MATERIAL4:
+        {
+            const char *szData = "";
+            const string &strData = table_material.material4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`material4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `material4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLMATERIAL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_material())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_material &table_material = table.material();
+        return GORM_PackGet_By_Non_Primary_KeySQLMATERIAL_One(pMemPool, mysql, iTableIndex, table_material, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_NPC "select `version`,`roleid`,`snakeid`,`npcs` from npc_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLNPC_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_npc &table_npc, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_NPC);
+    int iTotalLen = 64*vFields.size() + iLen + table_npc.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_NPC, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_NPC_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_npc.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_npc.version());
+            break;
+        }
+        case GORM_PB_FIELD_NPC_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_npc.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_npc.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_NPC_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_npc.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_npc.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_NPC_NPCS:
+        {
+            const char *szData = "";
+            const string &strData = table_npc.npcs();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`npcs`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `npcs`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLNPC(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_npc())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_npc &table_npc = table.npc();
+        return GORM_PackGet_By_Non_Primary_KeySQLNPC_One(pMemPool, mysql, iTableIndex, table_npc, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_RES_LOG "select `version`,`roleid`,`action`,`cfgtype`,`cfgid`,`delta`,`value`,`createtime` from res_log_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLRES_LOG_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_res_log &table_res_log, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_RES_LOG);
+    int iTotalLen = 64*vFields.size() + iLen + table_res_log.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_RES_LOG, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_RES_LOG_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_res_log.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_res_log.version());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_res_log.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_res_log.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_ACTION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`action`=%d", table_res_log.action());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `action`=%d", table_res_log.action());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CFGTYPE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`cfgtype`=%d", table_res_log.cfgtype());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `cfgtype`=%d", table_res_log.cfgtype());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CFGID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`cfgid`=%d", table_res_log.cfgid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `cfgid`=%d", table_res_log.cfgid());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_DELTA:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`delta`=%d", table_res_log.delta());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `delta`=%d", table_res_log.delta());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_VALUE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`value`=%d", table_res_log.value());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `value`=%d", table_res_log.value());
+            break;
+        }
+        case GORM_PB_FIELD_RES_LOG_CREATETIME:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`createtime`=%lld", table_res_log.createtime());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `createtime`=%lld", table_res_log.createtime());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLRES_LOG(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_res_log())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_res_log &table_res_log = table.res_log();
+        return GORM_PackGet_By_Non_Primary_KeySQLRES_LOG_One(pMemPool, mysql, iTableIndex, table_res_log, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_INTERACTION "select `version`,`roleid`,`snakeid`,`interaction1`,`interaction2`,`interaction3`,`interaction4` from interaction_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLINTERACTION_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_interaction &table_interaction, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_INTERACTION);
+    int iTotalLen = 64*vFields.size() + iLen + table_interaction.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_INTERACTION, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_INTERACTION_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_interaction.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_interaction.version());
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_interaction.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_interaction.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_interaction.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_interaction.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION1:
+        {
+            const char *szData = "";
+            const string &strData = table_interaction.interaction1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`interaction1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `interaction1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION2:
+        {
+            const char *szData = "";
+            const string &strData = table_interaction.interaction2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`interaction2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `interaction2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION3:
+        {
+            const char *szData = "";
+            const string &strData = table_interaction.interaction3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`interaction3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `interaction3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_INTERACTION_INTERACTION4:
+        {
+            const char *szData = "";
+            const string &strData = table_interaction.interaction4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`interaction4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `interaction4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLINTERACTION(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_interaction())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_interaction &table_interaction = table.interaction();
+        return GORM_PackGet_By_Non_Primary_KeySQLINTERACTION_One(pMemPool, mysql, iTableIndex, table_interaction, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_ROLES "select `version`,`roleid`,`userid`,`worldid`,`dbid`,`name`,`charid`,`face`,`createtime` from roles_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLROLES_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_roles &table_roles, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_ROLES);
+    int iTotalLen = 64*vFields.size() + iLen + table_roles.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_ROLES, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_ROLES_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_roles.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_roles.version());
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_roles.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_roles.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_USERID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`userid`=%lld", table_roles.userid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `userid`=%lld", table_roles.userid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_WORLDID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`worldid`=%lld", table_roles.worldid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `worldid`=%lld", table_roles.worldid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_DBID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`dbid`=%d", table_roles.dbid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `dbid`=%d", table_roles.dbid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_NAME:
+        {
+            const char *szData = "";
+            const string &strData = table_roles.name();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`name`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `name`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_CHARID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`charid`=%d", table_roles.charid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `charid`=%d", table_roles.charid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_FACE:
+        {
+            const char *szData = "";
+            const string &strData = table_roles.face();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`face`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `face`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_ROLES_CREATETIME:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`createtime`=%lld", table_roles.createtime());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `createtime`=%lld", table_roles.createtime());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLROLES(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_roles())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_roles &table_roles = table.roles();
+        return GORM_PackGet_By_Non_Primary_KeySQLROLES_One(pMemPool, mysql, iTableIndex, table_roles, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_ROLE "select `version`,`roleid`,`rolename`,`level`,`exp`,`characterid`,`gold`,`offlinetime`,`inited`,`createtime`,`face`,`online`,`worldid`,`pttype`,`userid`,`proceedslv` from role_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLROLE_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_role &table_role, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_ROLE);
+    int iTotalLen = 64*vFields.size() + iLen + table_role.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_ROLE, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_ROLE_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_role.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_role.version());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_role.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_role.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ROLENAME:
+        {
+            const char *szData = "";
+            const string &strData = table_role.rolename();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`rolename`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `rolename`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_LEVEL:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`level`=%d", table_role.level());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `level`=%d", table_role.level());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_EXP:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`exp`=%lld", table_role.exp());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `exp`=%lld", table_role.exp());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_CHARACTERID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`characterid`=%d", table_role.characterid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `characterid`=%d", table_role.characterid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_GOLD:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`gold`=%d", table_role.gold());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `gold`=%d", table_role.gold());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_OFFLINETIME:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`offlinetime`=%lld", table_role.offlinetime());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `offlinetime`=%lld", table_role.offlinetime());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_INITED:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`inited`=%d", table_role.inited());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `inited`=%d", table_role.inited());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_CREATETIME:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`createtime`=%lld", table_role.createtime());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `createtime`=%lld", table_role.createtime());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_FACE:
+        {
+            const char *szData = "";
+            const string &strData = table_role.face();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`face`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `face`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_ONLINE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`online`=%lld", table_role.online());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `online`=%lld", table_role.online());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_WORLDID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`worldid`=%lld", table_role.worldid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `worldid`=%lld", table_role.worldid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_PTTYPE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`pttype`=%d", table_role.pttype());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `pttype`=%d", table_role.pttype());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_USERID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`userid`=%lld", table_role.userid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `userid`=%lld", table_role.userid());
+            break;
+        }
+        case GORM_PB_FIELD_ROLE_PROCEEDSLV:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`proceedslv`=%d", table_role.proceedslv());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `proceedslv`=%d", table_role.proceedslv());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLROLE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_role())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_role &table_role = table.role();
+        return GORM_PackGet_By_Non_Primary_KeySQLROLE_One(pMemPool, mysql, iTableIndex, table_role, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_SCENE "select `version`,`roleid`,`sceneid`,`collects`,`season` from scene_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLSCENE_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_scene &table_scene, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_SCENE);
+    int iTotalLen = 64*vFields.size() + iLen + table_scene.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_SCENE, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_SCENE_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_scene.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_scene.version());
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_scene.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_scene.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_SCENEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`sceneid`=%d", table_scene.sceneid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `sceneid`=%d", table_scene.sceneid());
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_COLLECTS:
+        {
+            const char *szData = "";
+            const string &strData = table_scene.collects();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`collects`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `collects`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_SCENE_SEASON:
+        {
+            const char *szData = "";
+            const string &strData = table_scene.season();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`season`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `season`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLSCENE(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_scene())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_scene &table_scene = table.scene();
+        return GORM_PackGet_By_Non_Primary_KeySQLSCENE_One(pMemPool, mysql, iTableIndex, table_scene, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_SKILL "select `version`,`roleid`,`snakeid`,`skill1`,`skill2`,`skill3`,`skill4` from skill_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLSKILL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_skill &table_skill, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_SKILL);
+    int iTotalLen = 64*vFields.size() + iLen + table_skill.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_SKILL, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_SKILL_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_skill.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_skill.version());
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_skill.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_skill.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SNAKEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`snakeid`=%d", table_skill.snakeid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `snakeid`=%d", table_skill.snakeid());
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL1:
+        {
+            const char *szData = "";
+            const string &strData = table_skill.skill1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`skill1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `skill1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL2:
+        {
+            const char *szData = "";
+            const string &strData = table_skill.skill2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`skill2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `skill2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL3:
+        {
+            const char *szData = "";
+            const string &strData = table_skill.skill3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`skill3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `skill3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_SKILL_SKILL4:
+        {
+            const char *szData = "";
+            const string &strData = table_skill.skill4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`skill4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `skill4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLSKILL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_skill())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_skill &table_skill = table.skill();
+        return GORM_PackGet_By_Non_Primary_KeySQLSKILL_One(pMemPool, mysql, iTableIndex, table_skill, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_PTUSER "select `version`,`ptid`,`pttype`,`userid` from ptuser_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLPTUSER_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_ptuser &table_ptuser, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_PTUSER);
+    int iTotalLen = 64*vFields.size() + iLen + table_ptuser.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_PTUSER, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_PTUSER_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_ptuser.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_ptuser.version());
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_PTID:
+        {
+            const char *szData = "";
+            const string &strData = table_ptuser.ptid();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`ptid`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `ptid`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_PTTYPE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`pttype`=%d", table_ptuser.pttype());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `pttype`=%d", table_ptuser.pttype());
+            break;
+        }
+        case GORM_PB_FIELD_PTUSER_USERID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`userid`=%lld", table_ptuser.userid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `userid`=%lld", table_ptuser.userid());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLPTUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_ptuser())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_ptuser &table_ptuser = table.ptuser();
+        return GORM_PackGet_By_Non_Primary_KeySQLPTUSER_One(pMemPool, mysql, iTableIndex, table_ptuser, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_USER "select `version`,`userid`,`ptid`,`pttype`,`createtime`,`rolesdata` from user_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLUSER_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_user &table_user, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_USER);
+    int iTotalLen = 64*vFields.size() + iLen + table_user.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_USER, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_USER_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_user.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_user.version());
+            break;
+        }
+        case GORM_PB_FIELD_USER_USERID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`userid`=%lld", table_user.userid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `userid`=%lld", table_user.userid());
+            break;
+        }
+        case GORM_PB_FIELD_USER_PTID:
+        {
+            const char *szData = "";
+            const string &strData = table_user.ptid();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`ptid`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `ptid`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_USER_PTTYPE:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`pttype`=%d", table_user.pttype());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `pttype`=%d", table_user.pttype());
+            break;
+        }
+        case GORM_PB_FIELD_USER_CREATETIME:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`createtime`=%lld", table_user.createtime());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `createtime`=%lld", table_user.createtime());
+            break;
+        }
+        case GORM_PB_FIELD_USER_ROLESDATA:
+        {
+            const char *szData = "";
+            const string &strData = table_user.rolesdata();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`rolesdata`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `rolesdata`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLUSER(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_user())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_user &table_user = table.user();
+        return GORM_PackGet_By_Non_Primary_KeySQLUSER_One(pMemPool, mysql, iTableIndex, table_user, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_MAINLINETASK "select `version`,`roleid`,`runningtask`,`compleatetask0`,`compleatetask1`,`compleatetask2`,`compleatetask3`,`compleatetask4`,`compleatetask5`,`compleatetask6`,`compleatetask7`,`compleatetask8`,`compleatetask9`,`unlockfuncs` from mainlinetask_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLMAINLINETASK_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_mainlinetask &table_mainlinetask, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_MAINLINETASK);
+    int iTotalLen = 64*vFields.size() + iLen + table_mainlinetask.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_MAINLINETASK, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_MAINLINETASK_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_mainlinetask.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_mainlinetask.version());
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_ROLEID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roleid`=%lld", table_mainlinetask.roleid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `roleid`=%lld", table_mainlinetask.roleid());
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_RUNNINGTASK:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`runningtask`=%d", table_mainlinetask.runningtask());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `runningtask`=%d", table_mainlinetask.runningtask());
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK0:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask0();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask0`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask0`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK1:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask1();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask1`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask1`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK2:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask2();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask2`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask2`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK3:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask3();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask3`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask3`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK4:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask4();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask4`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask4`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK5:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask5();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask5`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask5`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK6:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask6();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask6`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask6`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK7:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask7();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask7`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask7`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK8:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask8();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask8`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask8`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK9:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.compleatetask9();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`compleatetask9`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `compleatetask9`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_MAINLINETASK_UNLOCKFUNCS:
+        {
+            const char *szData = "";
+            const string &strData = table_mainlinetask.unlockfuncs();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`unlockfuncs`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `unlockfuncs`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLMAINLINETASK(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_mainlinetask())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_mainlinetask &table_mainlinetask = table.mainlinetask();
+        return GORM_PackGet_By_Non_Primary_KeySQLMAINLINETASK_One(pMemPool, mysql, iTableIndex, table_mainlinetask, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
+#define GetByNonPrimaySQL_PUBMAIL "select `version`,`mailid`,`addresser`,`title`,`body`,`roles`,`attachment`,`dt`,`del` from pubmail_%d "
+int GORM_PackGet_By_Non_Primary_KeySQLPUBMAIL_One(shared_ptr<GORM_MemPool> &pMemPool, MYSQL* mysql, int iTableIndex, const GORM_PB_Table_pubmail &table_pubmail, const GORM_PB_REQ_HEADER &header, GORM_MemPoolData *&pReqData)
+{
+
+	vector<int> vFields;
+	string fieldMode = header.fieldmode();
+    if (fieldMode.size() != 0)
+        vFields = GORM_FieldsOpt::GetFields(fieldMode.c_str(), fieldMode.size());
+    int iLen = strlen(GetByNonPrimaySQL_PUBMAIL);
+    int iTotalLen = 64*vFields.size() + iLen + table_pubmail.ByteSizeLong() + 32;
+    GORM_MallocFromSharedPool(pMemPool, pReqData, iTotalLen);
+    char *szSQLBegin = pReqData->m_uszData;
+    iLen = GORM_SafeSnprintf(szSQLBegin, iLen, GetByNonPrimaySQL_PUBMAIL, iTableIndex);
+    if (vFields.size() > 0 )
+        iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " where ");
+    for(int i=0; i<vFields.size(); i++)
+    {
+        switch (vFields[i])
+        {
+        case GORM_PB_FIELD_PUBMAIL_VERSION:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`version`=%llu", table_pubmail.version());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `version`=%llu", table_pubmail.version());
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_MAILID:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`mailid`=%d", table_pubmail.mailid());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `mailid`=%d", table_pubmail.mailid());
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_ADDRESSER:
+        {
+            const char *szData = "";
+            const string &strData = table_pubmail.addresser();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`addresser`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `addresser`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_TITLE:
+        {
+            const char *szData = "";
+            const string &strData = table_pubmail.title();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`title`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `title`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_BODY:
+        {
+            const char *szData = "";
+            const string &strData = table_pubmail.body();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`body`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `body`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_ROLES:
+        {
+            const char *szData = "";
+            const string &strData = table_pubmail.roles();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`roles`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `roles`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_ATTACHMENT:
+        {
+            const char *szData = "";
+            const string &strData = table_pubmail.attachment();
+            GORM_MemPoolData *pDataBuffer = nullptr;
+            int iTmpLen = 0;
+            if (strData.size() > 0)
+            {
+    GORM_MallocFromSharedPool(pMemPool, pDataBuffer, strData.size()<<1);
+                iTmpLen=mysql_real_escape_string(mysql, pDataBuffer->m_uszData, strData.c_str(), strData.size());
+                pDataBuffer->m_uszData[iTmpLen] = 0;
+                pDataBuffer->m_sUsedSize = iTmpLen;
+                szData = pDataBuffer->m_uszData;
+            }
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`attachment`='%s'", szData);
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " and `attachment`='%s'", szData);
+            if (pDataBuffer != nullptr)
+                pDataBuffer->Release();
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_DT:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`dt`=%lld", table_pubmail.dt());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `dt`=%lld", table_pubmail.dt());
+            break;
+        }
+        case GORM_PB_FIELD_PUBMAIL_DEL:
+        {
+            if (i==0)
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "`del`=%d", table_pubmail.del());
+            else
+                iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, "and `del`=%d", table_pubmail.del());
+            break;
+        }
+        }
+    }
+    int nowLimit = header.limit();
+    if (nowLimit < 1) nowLimit = 1;
+    if (nowLimit > GORM_MAX_LIMIT_NUM) nowLimit = GORM_MAX_LIMIT_NUM;
+    iLen += GORM_SafeSnprintf(szSQLBegin+iLen, iTotalLen-iLen, " limit %d", nowLimit);
+    pReqData->m_sUsedSize = iLen;
+    return GORM_OK;
+}
+int GORM_PackGet_By_Non_Primary_KeySQLPUBMAIL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableIndex, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
+{
+
+	if (!pMsg->has_header())
+        return GORM_REQ_MSG_NO_HEADER;
+    int iTableNum = pMsg->tables_size();
+    if (iTableNum == 0)
+        return GORM_REQ_NO_RECORDS;
+    for (int i=0; i<iTableNum; i++)
+    {
+        const GORM_PB_TABLE &table = pMsg->tables(i);
+        if (!table.has_pubmail())
+            return GORM_REQ_NO_RECORDS;
+        const GORM_PB_Table_pubmail &table_pubmail = table.pubmail();
+        return GORM_PackGet_By_Non_Primary_KeySQLPUBMAIL_One(pMemPool, mysql, iTableIndex, table_pubmail, pMsg->header(), pReqData);
+    }
+    return GORM_OK;
+}
 int GORM_PackGet_By_Non_Primary_KeySQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_MySQLEvent *pMySQLEvent, MYSQL* mysql, int iTableId, uint32 uiHashValue, const GORM_PB_GET_BY_NON_PRIMARY_KEY_REQ* pMsg, GORM_MemPoolData *&pReqData)
 {
     switch (iTableId)
@@ -1541,6 +15884,57 @@ int GORM_PackGet_By_Non_Primary_KeySQL(shared_ptr<GORM_MemPool> &pMemPool, GORM_
     
     case GORM_PB_TABLE_IDX_CYCLEEVENT:
         return GORM_PackGet_By_Non_Primary_KeySQLCYCLEEVENT(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_EQUIP:
+        return GORM_PackGet_By_Non_Primary_KeySQLEQUIP(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_FOOD:
+        return GORM_PackGet_By_Non_Primary_KeySQLFOOD(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_HERO:
+        return GORM_PackGet_By_Non_Primary_KeySQLHERO(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+        return GORM_PackGet_By_Non_Primary_KeySQLLOGIN_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAIL:
+        return GORM_PackGet_By_Non_Primary_KeySQLMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MATERIAL:
+        return GORM_PackGet_By_Non_Primary_KeySQLMATERIAL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_NPC:
+        return GORM_PackGet_By_Non_Primary_KeySQLNPC(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_RES_LOG:
+        return GORM_PackGet_By_Non_Primary_KeySQLRES_LOG(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_INTERACTION:
+        return GORM_PackGet_By_Non_Primary_KeySQLINTERACTION(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLES:
+        return GORM_PackGet_By_Non_Primary_KeySQLROLES(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_ROLE:
+        return GORM_PackGet_By_Non_Primary_KeySQLROLE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SCENE:
+        return GORM_PackGet_By_Non_Primary_KeySQLSCENE(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_SKILL:
+        return GORM_PackGet_By_Non_Primary_KeySQLSKILL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PTUSER:
+        return GORM_PackGet_By_Non_Primary_KeySQLPTUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_USER:
+        return GORM_PackGet_By_Non_Primary_KeySQLUSER(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+        return GORM_PackGet_By_Non_Primary_KeySQLMAINLINETASK(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
+    
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+        return GORM_PackGet_By_Non_Primary_KeySQLPUBMAIL(pMemPool, pMySQLEvent, mysql, uiHashValue, pMsg, pReqData);
     
     }
     return GORM_INVALID_TABLE;
@@ -1604,6 +15998,729 @@ int GORM_MySQLResult2PbMSG_CYCLEEVENT(GORM_PB_Table_cycleevent *pPbTable, MYSQL_
 
     return GORM_OK;
 }
+int GORM_MySQLResult2PbMSG_EQUIP(GORM_PB_Table_equip *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_equip1(row[3], lengths[3]);
+    else
+        pPbTable->set_equip1("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_equip2(row[4], lengths[4]);
+    else
+        pPbTable->set_equip2("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_equip3(row[5], lengths[5]);
+    else
+        pPbTable->set_equip3("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_equip4(row[6], lengths[6]);
+    else
+        pPbTable->set_equip4("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_FOOD(GORM_PB_Table_food *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_food1(row[3], lengths[3]);
+    else
+        pPbTable->set_food1("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_food2(row[4], lengths[4]);
+    else
+        pPbTable->set_food2("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_food3(row[5], lengths[5]);
+    else
+        pPbTable->set_food3("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_food4(row[6], lengths[6]);
+    else
+        pPbTable->set_food4("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_HERO(GORM_PB_Table_hero *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_heros(row[3], lengths[3]);
+    else
+        pPbTable->set_heros("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_teams(row[4], lengths[4]);
+    else
+        pPbTable->set_teams("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_LOGIN_LOG(GORM_PB_Table_login_log *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_action(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_action(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_online(strtol(row[3], (char **)NULL,10));
+    else
+        pPbTable->set_online(0);
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_ip(row[4], lengths[4]);
+    else
+        pPbTable->set_ip("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_appid(row[5], lengths[5]);
+    else
+        pPbTable->set_appid("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_createtime(strtoll(row[6], (char **)NULL,10));
+    else
+        pPbTable->set_createtime(0);
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_MAIL(GORM_PB_Table_mail *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_mail1(row[2], lengths[2]);
+    else
+        pPbTable->set_mail1("");
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_mail2(row[3], lengths[3]);
+    else
+        pPbTable->set_mail2("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_mail3(row[4], lengths[4]);
+    else
+        pPbTable->set_mail3("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_mail4(row[5], lengths[5]);
+    else
+        pPbTable->set_mail4("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_mail5(row[6], lengths[6]);
+    else
+        pPbTable->set_mail5("");
+
+    if (nullptr != row[7] && lengths[7] > 0)
+        pPbTable->set_lastmailid(strtol(row[7], (char **)NULL,10));
+    else
+        pPbTable->set_lastmailid(0);
+
+    if (nullptr != row[8] && lengths[8] > 0)
+        pPbTable->set_snakeid(strtol(row[8], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_MATERIAL(GORM_PB_Table_material *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_material1(row[3], lengths[3]);
+    else
+        pPbTable->set_material1("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_material2(row[4], lengths[4]);
+    else
+        pPbTable->set_material2("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_material3(row[5], lengths[5]);
+    else
+        pPbTable->set_material3("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_material4(row[6], lengths[6]);
+    else
+        pPbTable->set_material4("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_NPC(GORM_PB_Table_npc *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_npcs(row[3], lengths[3]);
+    else
+        pPbTable->set_npcs("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_RES_LOG(GORM_PB_Table_res_log *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_action(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_action(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_cfgtype(strtol(row[3], (char **)NULL,10));
+    else
+        pPbTable->set_cfgtype(0);
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_cfgid(strtol(row[4], (char **)NULL,10));
+    else
+        pPbTable->set_cfgid(0);
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_delta(strtol(row[5], (char **)NULL,10));
+    else
+        pPbTable->set_delta(0);
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_value(strtol(row[6], (char **)NULL,10));
+    else
+        pPbTable->set_value(0);
+
+    if (nullptr != row[7] && lengths[7] > 0)
+        pPbTable->set_createtime(strtoll(row[7], (char **)NULL,10));
+    else
+        pPbTable->set_createtime(0);
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_INTERACTION(GORM_PB_Table_interaction *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_interaction1(row[3], lengths[3]);
+    else
+        pPbTable->set_interaction1("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_interaction2(row[4], lengths[4]);
+    else
+        pPbTable->set_interaction2("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_interaction3(row[5], lengths[5]);
+    else
+        pPbTable->set_interaction3("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_interaction4(row[6], lengths[6]);
+    else
+        pPbTable->set_interaction4("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_ROLES(GORM_PB_Table_roles *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_userid(strtoll(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_userid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_worldid(strtoll(row[3], (char **)NULL,10));
+    else
+        pPbTable->set_worldid(0);
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_dbid(strtol(row[4], (char **)NULL,10));
+    else
+        pPbTable->set_dbid(0);
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_name(row[5], lengths[5]);
+    else
+        pPbTable->set_name("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_charid(strtol(row[6], (char **)NULL,10));
+    else
+        pPbTable->set_charid(0);
+
+    if (nullptr != row[7] && lengths[7] > 0)
+        pPbTable->set_face(row[7], lengths[7]);
+    else
+        pPbTable->set_face("");
+
+    if (nullptr != row[8] && lengths[8] > 0)
+        pPbTable->set_createtime(strtoll(row[8], (char **)NULL,10));
+    else
+        pPbTable->set_createtime(0);
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_ROLE(GORM_PB_Table_role *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_rolename(row[2], lengths[2]);
+    else
+        pPbTable->set_rolename("");
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_level(strtol(row[3], (char **)NULL,10));
+    else
+        pPbTable->set_level(0);
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_exp(strtoll(row[4], (char **)NULL,10));
+    else
+        pPbTable->set_exp(0);
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_characterid(strtol(row[5], (char **)NULL,10));
+    else
+        pPbTable->set_characterid(0);
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_gold(strtol(row[6], (char **)NULL,10));
+    else
+        pPbTable->set_gold(0);
+
+    if (nullptr != row[7] && lengths[7] > 0)
+        pPbTable->set_offlinetime(strtoll(row[7], (char **)NULL,10));
+    else
+        pPbTable->set_offlinetime(0);
+
+    if (nullptr != row[8] && lengths[8] > 0)
+        pPbTable->set_inited(strtol(row[8], (char **)NULL,10));
+    else
+        pPbTable->set_inited(0);
+
+    if (nullptr != row[9] && lengths[9] > 0)
+        pPbTable->set_createtime(strtoll(row[9], (char **)NULL,10));
+    else
+        pPbTable->set_createtime(0);
+
+    if (nullptr != row[10] && lengths[10] > 0)
+        pPbTable->set_face(row[10], lengths[10]);
+    else
+        pPbTable->set_face("");
+
+    if (nullptr != row[11] && lengths[11] > 0)
+        pPbTable->set_online(strtoll(row[11], (char **)NULL,10));
+    else
+        pPbTable->set_online(0);
+
+    if (nullptr != row[12] && lengths[12] > 0)
+        pPbTable->set_worldid(strtoll(row[12], (char **)NULL,10));
+    else
+        pPbTable->set_worldid(0);
+
+    if (nullptr != row[13] && lengths[13] > 0)
+        pPbTable->set_pttype(strtol(row[13], (char **)NULL,10));
+    else
+        pPbTable->set_pttype(0);
+
+    if (nullptr != row[14] && lengths[14] > 0)
+        pPbTable->set_userid(strtoll(row[14], (char **)NULL,10));
+    else
+        pPbTable->set_userid(0);
+
+    if (nullptr != row[15] && lengths[15] > 0)
+        pPbTable->set_proceedslv(strtol(row[15], (char **)NULL,10));
+    else
+        pPbTable->set_proceedslv(0);
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_SCENE(GORM_PB_Table_scene *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_sceneid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_sceneid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_collects(row[3], lengths[3]);
+    else
+        pPbTable->set_collects("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_season(row[4], lengths[4]);
+    else
+        pPbTable->set_season("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_SKILL(GORM_PB_Table_skill *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_snakeid(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_snakeid(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_skill1(row[3], lengths[3]);
+    else
+        pPbTable->set_skill1("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_skill2(row[4], lengths[4]);
+    else
+        pPbTable->set_skill2("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_skill3(row[5], lengths[5]);
+    else
+        pPbTable->set_skill3("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_skill4(row[6], lengths[6]);
+    else
+        pPbTable->set_skill4("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_PTUSER(GORM_PB_Table_ptuser *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_ptid(row[1], lengths[1]);
+    else
+        pPbTable->set_ptid("");
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_pttype(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_pttype(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_userid(strtoll(row[3], (char **)NULL,10));
+    else
+        pPbTable->set_userid(0);
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_USER(GORM_PB_Table_user *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_userid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_userid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_ptid(row[2], lengths[2]);
+    else
+        pPbTable->set_ptid("");
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_pttype(strtol(row[3], (char **)NULL,10));
+    else
+        pPbTable->set_pttype(0);
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_createtime(strtoll(row[4], (char **)NULL,10));
+    else
+        pPbTable->set_createtime(0);
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_rolesdata(row[5], lengths[5]);
+    else
+        pPbTable->set_rolesdata("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_MAINLINETASK(GORM_PB_Table_mainlinetask *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_roleid(strtoll(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_roleid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_runningtask(strtol(row[2], (char **)NULL,10));
+    else
+        pPbTable->set_runningtask(0);
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_compleatetask0(row[3], lengths[3]);
+    else
+        pPbTable->set_compleatetask0("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_compleatetask1(row[4], lengths[4]);
+    else
+        pPbTable->set_compleatetask1("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_compleatetask2(row[5], lengths[5]);
+    else
+        pPbTable->set_compleatetask2("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_compleatetask3(row[6], lengths[6]);
+    else
+        pPbTable->set_compleatetask3("");
+
+    if (nullptr != row[7] && lengths[7] > 0)
+        pPbTable->set_compleatetask4(row[7], lengths[7]);
+    else
+        pPbTable->set_compleatetask4("");
+
+    if (nullptr != row[8] && lengths[8] > 0)
+        pPbTable->set_compleatetask5(row[8], lengths[8]);
+    else
+        pPbTable->set_compleatetask5("");
+
+    if (nullptr != row[9] && lengths[9] > 0)
+        pPbTable->set_compleatetask6(row[9], lengths[9]);
+    else
+        pPbTable->set_compleatetask6("");
+
+    if (nullptr != row[10] && lengths[10] > 0)
+        pPbTable->set_compleatetask7(row[10], lengths[10]);
+    else
+        pPbTable->set_compleatetask7("");
+
+    if (nullptr != row[11] && lengths[11] > 0)
+        pPbTable->set_compleatetask8(row[11], lengths[11]);
+    else
+        pPbTable->set_compleatetask8("");
+
+    if (nullptr != row[12] && lengths[12] > 0)
+        pPbTable->set_compleatetask9(row[12], lengths[12]);
+    else
+        pPbTable->set_compleatetask9("");
+
+    if (nullptr != row[13] && lengths[13] > 0)
+        pPbTable->set_unlockfuncs(row[13], lengths[13]);
+    else
+        pPbTable->set_unlockfuncs("");
+
+    return GORM_OK;
+}
+int GORM_MySQLResult2PbMSG_PUBMAIL(GORM_PB_Table_pubmail *pPbTable, MYSQL_ROW row, unsigned long *lengths)
+{
+    if (nullptr != row[0] && lengths[0] > 0)
+        pPbTable->set_version(strtoull(row[0], (char **)NULL,10));
+    else
+        pPbTable->set_version(0);
+
+    if (nullptr != row[1] && lengths[1] > 0)
+        pPbTable->set_mailid(strtol(row[1], (char **)NULL,10));
+    else
+        pPbTable->set_mailid(0);
+
+    if (nullptr != row[2] && lengths[2] > 0)
+        pPbTable->set_addresser(row[2], lengths[2]);
+    else
+        pPbTable->set_addresser("");
+
+    if (nullptr != row[3] && lengths[3] > 0)
+        pPbTable->set_title(row[3], lengths[3]);
+    else
+        pPbTable->set_title("");
+
+    if (nullptr != row[4] && lengths[4] > 0)
+        pPbTable->set_body(row[4], lengths[4]);
+    else
+        pPbTable->set_body("");
+
+    if (nullptr != row[5] && lengths[5] > 0)
+        pPbTable->set_roles(row[5], lengths[5]);
+    else
+        pPbTable->set_roles("");
+
+    if (nullptr != row[6] && lengths[6] > 0)
+        pPbTable->set_attachment(row[6], lengths[6]);
+    else
+        pPbTable->set_attachment("");
+
+    if (nullptr != row[7] && lengths[7] > 0)
+        pPbTable->set_dt(strtoll(row[7], (char **)NULL,10));
+    else
+        pPbTable->set_dt(0);
+
+    if (nullptr != row[8] && lengths[8] > 0)
+        pPbTable->set_del(strtol(row[8], (char **)NULL,10));
+    else
+        pPbTable->set_del(0);
+
+    return GORM_OK;
+}
 int GORM_MySQLResult2PbMSG(GORM_MySQLEvent *pMySQLEvent, int iTableId, GORM_PB_TABLE *pPbTable, MYSQL_ROW row, unsigned long *lengths)
 {
     switch (iTableId)
@@ -1617,6 +16734,91 @@ int GORM_MySQLResult2PbMSG(GORM_MySQLEvent *pMySQLEvent, int iTableId, GORM_PB_T
     {
         GORM_PB_Table_cycleevent *pSrcTable = pPbTable->mutable_cycleevent();
         return GORM_MySQLResult2PbMSG_CYCLEEVENT(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_EQUIP:
+    {
+        GORM_PB_Table_equip *pSrcTable = pPbTable->mutable_equip();
+        return GORM_MySQLResult2PbMSG_EQUIP(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_FOOD:
+    {
+        GORM_PB_Table_food *pSrcTable = pPbTable->mutable_food();
+        return GORM_MySQLResult2PbMSG_FOOD(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_HERO:
+    {
+        GORM_PB_Table_hero *pSrcTable = pPbTable->mutable_hero();
+        return GORM_MySQLResult2PbMSG_HERO(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_LOGIN_LOG:
+    {
+        GORM_PB_Table_login_log *pSrcTable = pPbTable->mutable_login_log();
+        return GORM_MySQLResult2PbMSG_LOGIN_LOG(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_MAIL:
+    {
+        GORM_PB_Table_mail *pSrcTable = pPbTable->mutable_mail();
+        return GORM_MySQLResult2PbMSG_MAIL(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_MATERIAL:
+    {
+        GORM_PB_Table_material *pSrcTable = pPbTable->mutable_material();
+        return GORM_MySQLResult2PbMSG_MATERIAL(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_NPC:
+    {
+        GORM_PB_Table_npc *pSrcTable = pPbTable->mutable_npc();
+        return GORM_MySQLResult2PbMSG_NPC(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_RES_LOG:
+    {
+        GORM_PB_Table_res_log *pSrcTable = pPbTable->mutable_res_log();
+        return GORM_MySQLResult2PbMSG_RES_LOG(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_INTERACTION:
+    {
+        GORM_PB_Table_interaction *pSrcTable = pPbTable->mutable_interaction();
+        return GORM_MySQLResult2PbMSG_INTERACTION(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_ROLES:
+    {
+        GORM_PB_Table_roles *pSrcTable = pPbTable->mutable_roles();
+        return GORM_MySQLResult2PbMSG_ROLES(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_ROLE:
+    {
+        GORM_PB_Table_role *pSrcTable = pPbTable->mutable_role();
+        return GORM_MySQLResult2PbMSG_ROLE(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_SCENE:
+    {
+        GORM_PB_Table_scene *pSrcTable = pPbTable->mutable_scene();
+        return GORM_MySQLResult2PbMSG_SCENE(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_SKILL:
+    {
+        GORM_PB_Table_skill *pSrcTable = pPbTable->mutable_skill();
+        return GORM_MySQLResult2PbMSG_SKILL(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_PTUSER:
+    {
+        GORM_PB_Table_ptuser *pSrcTable = pPbTable->mutable_ptuser();
+        return GORM_MySQLResult2PbMSG_PTUSER(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_USER:
+    {
+        GORM_PB_Table_user *pSrcTable = pPbTable->mutable_user();
+        return GORM_MySQLResult2PbMSG_USER(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_MAINLINETASK:
+    {
+        GORM_PB_Table_mainlinetask *pSrcTable = pPbTable->mutable_mainlinetask();
+        return GORM_MySQLResult2PbMSG_MAINLINETASK(pSrcTable, row, lengths);
+    }
+    case GORM_PB_TABLE_IDX_PUBMAIL:
+    {
+        GORM_PB_Table_pubmail *pSrcTable = pPbTable->mutable_pubmail();
+        return GORM_MySQLResult2PbMSG_PUBMAIL(pSrcTable, row, lengths);
     }
     default:
         return GORM_INVALID_TABLE;

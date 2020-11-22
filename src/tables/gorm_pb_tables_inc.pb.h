@@ -101,7 +101,9 @@ enum GORM_PB_TABLE_INDEX : int {
   GORM_PB_TABLE_IDX_SKILL = 15,
   GORM_PB_TABLE_IDX_PTUSER = 16,
   GORM_PB_TABLE_IDX_USER = 17,
-  GORM_PB_TABLE_IDX_MAX__ = 18,
+  GORM_PB_TABLE_IDX_MAINLINETASK = 18,
+  GORM_PB_TABLE_IDX_PUBMAIL = 19,
+  GORM_PB_TABLE_IDX_MAX__ = 20,
   GORM_PB_TABLE_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   GORM_PB_TABLE_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
@@ -496,12 +498,13 @@ enum GORM_PB_ROLE_FIELD_INDEX : int {
   GORM_PB_FIELD_ROLE_WORLDID = 12,
   GORM_PB_FIELD_ROLE_PTTYPE = 13,
   GORM_PB_FIELD_ROLE_USERID = 14,
+  GORM_PB_FIELD_ROLE_PROCEEDSLV = 15,
   GORM_PB_ROLE_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   GORM_PB_ROLE_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool GORM_PB_ROLE_FIELD_INDEX_IsValid(int value);
 constexpr GORM_PB_ROLE_FIELD_INDEX GORM_PB_ROLE_FIELD_INDEX_MIN = GORM_PB_FIELD_ROLE_VERSION;
-constexpr GORM_PB_ROLE_FIELD_INDEX GORM_PB_ROLE_FIELD_INDEX_MAX = GORM_PB_FIELD_ROLE_USERID;
+constexpr GORM_PB_ROLE_FIELD_INDEX GORM_PB_ROLE_FIELD_INDEX_MAX = GORM_PB_FIELD_ROLE_PROCEEDSLV;
 constexpr int GORM_PB_ROLE_FIELD_INDEX_ARRAYSIZE = GORM_PB_ROLE_FIELD_INDEX_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_ROLE_FIELD_INDEX_descriptor();
@@ -523,12 +526,13 @@ enum GORM_PB_SCENE_FIELD_INDEX : int {
   GORM_PB_FIELD_SCENE_ROLEID = 1,
   GORM_PB_FIELD_SCENE_SCENEID = 2,
   GORM_PB_FIELD_SCENE_COLLECTS = 3,
+  GORM_PB_FIELD_SCENE_SEASON = 4,
   GORM_PB_SCENE_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   GORM_PB_SCENE_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool GORM_PB_SCENE_FIELD_INDEX_IsValid(int value);
 constexpr GORM_PB_SCENE_FIELD_INDEX GORM_PB_SCENE_FIELD_INDEX_MIN = GORM_PB_FIELD_SCENE_VERSION;
-constexpr GORM_PB_SCENE_FIELD_INDEX GORM_PB_SCENE_FIELD_INDEX_MAX = GORM_PB_FIELD_SCENE_COLLECTS;
+constexpr GORM_PB_SCENE_FIELD_INDEX GORM_PB_SCENE_FIELD_INDEX_MAX = GORM_PB_FIELD_SCENE_SEASON;
 constexpr int GORM_PB_SCENE_FIELD_INDEX_ARRAYSIZE = GORM_PB_SCENE_FIELD_INDEX_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_SCENE_FIELD_INDEX_descriptor();
@@ -630,6 +634,75 @@ inline bool GORM_PB_USER_FIELD_INDEX_Parse(
     const std::string& name, GORM_PB_USER_FIELD_INDEX* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_USER_FIELD_INDEX>(
     GORM_PB_USER_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_MAINLINETASK_FIELD_INDEX : int {
+  GORM_PB_FIELD_MAINLINETASK_VERSION = 0,
+  GORM_PB_FIELD_MAINLINETASK_ROLEID = 1,
+  GORM_PB_FIELD_MAINLINETASK_RUNNINGTASK = 2,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK0 = 3,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK1 = 4,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK2 = 5,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK3 = 6,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK4 = 7,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK5 = 8,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK6 = 9,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK7 = 10,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK8 = 11,
+  GORM_PB_FIELD_MAINLINETASK_COMPLEATETASK9 = 12,
+  GORM_PB_FIELD_MAINLINETASK_UNLOCKFUNCS = 13,
+  GORM_PB_MAINLINETASK_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_MAINLINETASK_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_MAINLINETASK_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_MAINLINETASK_FIELD_INDEX GORM_PB_MAINLINETASK_FIELD_INDEX_MIN = GORM_PB_FIELD_MAINLINETASK_VERSION;
+constexpr GORM_PB_MAINLINETASK_FIELD_INDEX GORM_PB_MAINLINETASK_FIELD_INDEX_MAX = GORM_PB_FIELD_MAINLINETASK_UNLOCKFUNCS;
+constexpr int GORM_PB_MAINLINETASK_FIELD_INDEX_ARRAYSIZE = GORM_PB_MAINLINETASK_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_MAINLINETASK_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_MAINLINETASK_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_MAINLINETASK_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_MAINLINETASK_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_MAINLINETASK_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_MAINLINETASK_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_MAINLINETASK_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_MAINLINETASK_FIELD_INDEX>(
+    GORM_PB_MAINLINETASK_FIELD_INDEX_descriptor(), name, value);
+}
+enum GORM_PB_PUBMAIL_FIELD_INDEX : int {
+  GORM_PB_FIELD_PUBMAIL_VERSION = 0,
+  GORM_PB_FIELD_PUBMAIL_MAILID = 1,
+  GORM_PB_FIELD_PUBMAIL_ADDRESSER = 2,
+  GORM_PB_FIELD_PUBMAIL_TITLE = 3,
+  GORM_PB_FIELD_PUBMAIL_BODY = 4,
+  GORM_PB_FIELD_PUBMAIL_ROLES = 5,
+  GORM_PB_FIELD_PUBMAIL_ATTACHMENT = 6,
+  GORM_PB_FIELD_PUBMAIL_DT = 7,
+  GORM_PB_FIELD_PUBMAIL_DEL = 8,
+  GORM_PB_PUBMAIL_FIELD_INDEX_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  GORM_PB_PUBMAIL_FIELD_INDEX_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool GORM_PB_PUBMAIL_FIELD_INDEX_IsValid(int value);
+constexpr GORM_PB_PUBMAIL_FIELD_INDEX GORM_PB_PUBMAIL_FIELD_INDEX_MIN = GORM_PB_FIELD_PUBMAIL_VERSION;
+constexpr GORM_PB_PUBMAIL_FIELD_INDEX GORM_PB_PUBMAIL_FIELD_INDEX_MAX = GORM_PB_FIELD_PUBMAIL_DEL;
+constexpr int GORM_PB_PUBMAIL_FIELD_INDEX_ARRAYSIZE = GORM_PB_PUBMAIL_FIELD_INDEX_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GORM_PB_PUBMAIL_FIELD_INDEX_descriptor();
+template<typename T>
+inline const std::string& GORM_PB_PUBMAIL_FIELD_INDEX_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, GORM_PB_PUBMAIL_FIELD_INDEX>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function GORM_PB_PUBMAIL_FIELD_INDEX_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    GORM_PB_PUBMAIL_FIELD_INDEX_descriptor(), enum_t_value);
+}
+inline bool GORM_PB_PUBMAIL_FIELD_INDEX_Parse(
+    const std::string& name, GORM_PB_PUBMAIL_FIELD_INDEX* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<GORM_PB_PUBMAIL_FIELD_INDEX>(
+    GORM_PB_PUBMAIL_FIELD_INDEX_descriptor(), name, value);
 }
 enum GORM_PB_COLUMN_TYPE : int {
   GORM_PB_COLUMN_TYPE_INVALID = 0,
@@ -1319,6 +1392,8 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
     kSkillFieldNumber = 17,
     kPtuserFieldNumber = 18,
     kUserFieldNumber = 19,
+    kMainlinetaskFieldNumber = 20,
+    kPubmailFieldNumber = 21,
     kTableIdFieldNumber = 1,
   };
   // .gorm.GORM_PB_CUSTEM_COLUMNS custom_columns = 2;
@@ -1645,6 +1720,42 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
       ::gorm::GORM_PB_Table_user* user);
   ::gorm::GORM_PB_Table_user* unsafe_arena_release_user();
 
+  // .gorm.GORM_PB_Table_mainlinetask mainlinetask = 20;
+  bool has_mainlinetask() const;
+  private:
+  bool _internal_has_mainlinetask() const;
+  public:
+  void clear_mainlinetask();
+  const ::gorm::GORM_PB_Table_mainlinetask& mainlinetask() const;
+  ::gorm::GORM_PB_Table_mainlinetask* release_mainlinetask();
+  ::gorm::GORM_PB_Table_mainlinetask* mutable_mainlinetask();
+  void set_allocated_mainlinetask(::gorm::GORM_PB_Table_mainlinetask* mainlinetask);
+  private:
+  const ::gorm::GORM_PB_Table_mainlinetask& _internal_mainlinetask() const;
+  ::gorm::GORM_PB_Table_mainlinetask* _internal_mutable_mainlinetask();
+  public:
+  void unsafe_arena_set_allocated_mainlinetask(
+      ::gorm::GORM_PB_Table_mainlinetask* mainlinetask);
+  ::gorm::GORM_PB_Table_mainlinetask* unsafe_arena_release_mainlinetask();
+
+  // .gorm.GORM_PB_Table_pubmail pubmail = 21;
+  bool has_pubmail() const;
+  private:
+  bool _internal_has_pubmail() const;
+  public:
+  void clear_pubmail();
+  const ::gorm::GORM_PB_Table_pubmail& pubmail() const;
+  ::gorm::GORM_PB_Table_pubmail* release_pubmail();
+  ::gorm::GORM_PB_Table_pubmail* mutable_pubmail();
+  void set_allocated_pubmail(::gorm::GORM_PB_Table_pubmail* pubmail);
+  private:
+  const ::gorm::GORM_PB_Table_pubmail& _internal_pubmail() const;
+  ::gorm::GORM_PB_Table_pubmail* _internal_mutable_pubmail();
+  public:
+  void unsafe_arena_set_allocated_pubmail(
+      ::gorm::GORM_PB_Table_pubmail* pubmail);
+  ::gorm::GORM_PB_Table_pubmail* unsafe_arena_release_pubmail();
+
   // sfixed32 TableId = 1;
   void clear_tableid();
   ::PROTOBUF_NAMESPACE_ID::int32 tableid() const;
@@ -1679,6 +1790,8 @@ class GORM_PB_TABLE PROTOBUF_FINAL :
   ::gorm::GORM_PB_Table_skill* skill_;
   ::gorm::GORM_PB_Table_ptuser* ptuser_;
   ::gorm::GORM_PB_Table_user* user_;
+  ::gorm::GORM_PB_Table_mainlinetask* mainlinetask_;
+  ::gorm::GORM_PB_Table_pubmail* pubmail_;
   ::PROTOBUF_NAMESPACE_ID::int32 tableid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_5fpb_5ftables_5finc_2eproto;
@@ -1815,6 +1928,8 @@ class GORM_PB_TABLES PROTOBUF_FINAL :
     kSkillFieldNumber = 15,
     kPtuserFieldNumber = 16,
     kUserFieldNumber = 17,
+    kMainlinetaskFieldNumber = 18,
+    kPubmailFieldNumber = 19,
   };
   // repeated .gorm.GORM_PB_Table_currency currency = 1;
   int currency_size() const;
@@ -2122,6 +2237,42 @@ class GORM_PB_TABLES PROTOBUF_FINAL :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user >&
       user() const;
 
+  // repeated .gorm.GORM_PB_Table_mainlinetask mainlinetask = 18;
+  int mainlinetask_size() const;
+  private:
+  int _internal_mainlinetask_size() const;
+  public:
+  void clear_mainlinetask();
+  ::gorm::GORM_PB_Table_mainlinetask* mutable_mainlinetask(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mainlinetask >*
+      mutable_mainlinetask();
+  private:
+  const ::gorm::GORM_PB_Table_mainlinetask& _internal_mainlinetask(int index) const;
+  ::gorm::GORM_PB_Table_mainlinetask* _internal_add_mainlinetask();
+  public:
+  const ::gorm::GORM_PB_Table_mainlinetask& mainlinetask(int index) const;
+  ::gorm::GORM_PB_Table_mainlinetask* add_mainlinetask();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mainlinetask >&
+      mainlinetask() const;
+
+  // repeated .gorm.GORM_PB_Table_pubmail pubmail = 19;
+  int pubmail_size() const;
+  private:
+  int _internal_pubmail_size() const;
+  public:
+  void clear_pubmail();
+  ::gorm::GORM_PB_Table_pubmail* mutable_pubmail(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_pubmail >*
+      mutable_pubmail();
+  private:
+  const ::gorm::GORM_PB_Table_pubmail& _internal_pubmail(int index) const;
+  ::gorm::GORM_PB_Table_pubmail* _internal_add_pubmail();
+  public:
+  const ::gorm::GORM_PB_Table_pubmail& pubmail(int index) const;
+  ::gorm::GORM_PB_Table_pubmail* add_pubmail();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_pubmail >&
+      pubmail() const;
+
   // @@protoc_insertion_point(class_scope:gorm.GORM_PB_TABLES)
  private:
   class _Internal;
@@ -2146,6 +2297,8 @@ class GORM_PB_TABLES PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_skill > skill_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_ptuser > ptuser_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_user > user_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mainlinetask > mainlinetask_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_pubmail > pubmail_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_gorm_5fpb_5ftables_5finc_2eproto;
 };
@@ -3910,6 +4063,156 @@ inline void GORM_PB_TABLE::set_allocated_user(::gorm::GORM_PB_Table_user* user) 
   // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.user)
 }
 
+// .gorm.GORM_PB_Table_mainlinetask mainlinetask = 20;
+inline bool GORM_PB_TABLE::_internal_has_mainlinetask() const {
+  return this != internal_default_instance() && mainlinetask_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_mainlinetask() const {
+  return _internal_has_mainlinetask();
+}
+inline const ::gorm::GORM_PB_Table_mainlinetask& GORM_PB_TABLE::_internal_mainlinetask() const {
+  const ::gorm::GORM_PB_Table_mainlinetask* p = mainlinetask_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_mainlinetask*>(
+      &::gorm::_GORM_PB_Table_mainlinetask_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_mainlinetask& GORM_PB_TABLE::mainlinetask() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.mainlinetask)
+  return _internal_mainlinetask();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_mainlinetask(
+    ::gorm::GORM_PB_Table_mainlinetask* mainlinetask) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mainlinetask_);
+  }
+  mainlinetask_ = mainlinetask;
+  if (mainlinetask) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.mainlinetask)
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLE::release_mainlinetask() {
+  auto temp = unsafe_arena_release_mainlinetask();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLE::unsafe_arena_release_mainlinetask() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.mainlinetask)
+  
+  ::gorm::GORM_PB_Table_mainlinetask* temp = mainlinetask_;
+  mainlinetask_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLE::_internal_mutable_mainlinetask() {
+  
+  if (mainlinetask_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_mainlinetask>(GetArena());
+    mainlinetask_ = p;
+  }
+  return mainlinetask_;
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLE::mutable_mainlinetask() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.mainlinetask)
+  return _internal_mutable_mainlinetask();
+}
+inline void GORM_PB_TABLE::set_allocated_mainlinetask(::gorm::GORM_PB_Table_mainlinetask* mainlinetask) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(mainlinetask_);
+  }
+  if (mainlinetask) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(mainlinetask)->GetArena();
+    if (message_arena != submessage_arena) {
+      mainlinetask = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, mainlinetask, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  mainlinetask_ = mainlinetask;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.mainlinetask)
+}
+
+// .gorm.GORM_PB_Table_pubmail pubmail = 21;
+inline bool GORM_PB_TABLE::_internal_has_pubmail() const {
+  return this != internal_default_instance() && pubmail_ != nullptr;
+}
+inline bool GORM_PB_TABLE::has_pubmail() const {
+  return _internal_has_pubmail();
+}
+inline const ::gorm::GORM_PB_Table_pubmail& GORM_PB_TABLE::_internal_pubmail() const {
+  const ::gorm::GORM_PB_Table_pubmail* p = pubmail_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::gorm::GORM_PB_Table_pubmail*>(
+      &::gorm::_GORM_PB_Table_pubmail_default_instance_);
+}
+inline const ::gorm::GORM_PB_Table_pubmail& GORM_PB_TABLE::pubmail() const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLE.pubmail)
+  return _internal_pubmail();
+}
+inline void GORM_PB_TABLE::unsafe_arena_set_allocated_pubmail(
+    ::gorm::GORM_PB_Table_pubmail* pubmail) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pubmail_);
+  }
+  pubmail_ = pubmail;
+  if (pubmail) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gorm.GORM_PB_TABLE.pubmail)
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLE::release_pubmail() {
+  auto temp = unsafe_arena_release_pubmail();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLE::unsafe_arena_release_pubmail() {
+  // @@protoc_insertion_point(field_release:gorm.GORM_PB_TABLE.pubmail)
+  
+  ::gorm::GORM_PB_Table_pubmail* temp = pubmail_;
+  pubmail_ = nullptr;
+  return temp;
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLE::_internal_mutable_pubmail() {
+  
+  if (pubmail_ == nullptr) {
+    auto* p = CreateMaybeMessage<::gorm::GORM_PB_Table_pubmail>(GetArena());
+    pubmail_ = p;
+  }
+  return pubmail_;
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLE::mutable_pubmail() {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLE.pubmail)
+  return _internal_mutable_pubmail();
+}
+inline void GORM_PB_TABLE::set_allocated_pubmail(::gorm::GORM_PB_Table_pubmail* pubmail) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pubmail_);
+  }
+  if (pubmail) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(pubmail)->GetArena();
+    if (message_arena != submessage_arena) {
+      pubmail = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pubmail, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pubmail_ = pubmail;
+  // @@protoc_insertion_point(field_set_allocated:gorm.GORM_PB_TABLE.pubmail)
+}
+
 // -------------------------------------------------------------------
 
 // GORM_PB_TABLES
@@ -4526,6 +4829,78 @@ GORM_PB_TABLES::user() const {
   return user_;
 }
 
+// repeated .gorm.GORM_PB_Table_mainlinetask mainlinetask = 18;
+inline int GORM_PB_TABLES::_internal_mainlinetask_size() const {
+  return mainlinetask_.size();
+}
+inline int GORM_PB_TABLES::mainlinetask_size() const {
+  return _internal_mainlinetask_size();
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLES::mutable_mainlinetask(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.mainlinetask)
+  return mainlinetask_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mainlinetask >*
+GORM_PB_TABLES::mutable_mainlinetask() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.mainlinetask)
+  return &mainlinetask_;
+}
+inline const ::gorm::GORM_PB_Table_mainlinetask& GORM_PB_TABLES::_internal_mainlinetask(int index) const {
+  return mainlinetask_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_mainlinetask& GORM_PB_TABLES::mainlinetask(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.mainlinetask)
+  return _internal_mainlinetask(index);
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLES::_internal_add_mainlinetask() {
+  return mainlinetask_.Add();
+}
+inline ::gorm::GORM_PB_Table_mainlinetask* GORM_PB_TABLES::add_mainlinetask() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.mainlinetask)
+  return _internal_add_mainlinetask();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_mainlinetask >&
+GORM_PB_TABLES::mainlinetask() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.mainlinetask)
+  return mainlinetask_;
+}
+
+// repeated .gorm.GORM_PB_Table_pubmail pubmail = 19;
+inline int GORM_PB_TABLES::_internal_pubmail_size() const {
+  return pubmail_.size();
+}
+inline int GORM_PB_TABLES::pubmail_size() const {
+  return _internal_pubmail_size();
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLES::mutable_pubmail(int index) {
+  // @@protoc_insertion_point(field_mutable:gorm.GORM_PB_TABLES.pubmail)
+  return pubmail_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_pubmail >*
+GORM_PB_TABLES::mutable_pubmail() {
+  // @@protoc_insertion_point(field_mutable_list:gorm.GORM_PB_TABLES.pubmail)
+  return &pubmail_;
+}
+inline const ::gorm::GORM_PB_Table_pubmail& GORM_PB_TABLES::_internal_pubmail(int index) const {
+  return pubmail_.Get(index);
+}
+inline const ::gorm::GORM_PB_Table_pubmail& GORM_PB_TABLES::pubmail(int index) const {
+  // @@protoc_insertion_point(field_get:gorm.GORM_PB_TABLES.pubmail)
+  return _internal_pubmail(index);
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLES::_internal_add_pubmail() {
+  return pubmail_.Add();
+}
+inline ::gorm::GORM_PB_Table_pubmail* GORM_PB_TABLES::add_pubmail() {
+  // @@protoc_insertion_point(field_add:gorm.GORM_PB_TABLES.pubmail)
+  return _internal_add_pubmail();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::gorm::GORM_PB_Table_pubmail >&
+GORM_PB_TABLES::pubmail() const {
+  // @@protoc_insertion_point(field_list:gorm.GORM_PB_TABLES.pubmail)
+  return pubmail_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
@@ -4633,6 +5008,16 @@ template <> struct is_proto_enum< ::gorm::GORM_PB_USER_FIELD_INDEX> : ::std::tru
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_USER_FIELD_INDEX>() {
   return ::gorm::GORM_PB_USER_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_MAINLINETASK_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_MAINLINETASK_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_MAINLINETASK_FIELD_INDEX_descriptor();
+}
+template <> struct is_proto_enum< ::gorm::GORM_PB_PUBMAIL_FIELD_INDEX> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::gorm::GORM_PB_PUBMAIL_FIELD_INDEX>() {
+  return ::gorm::GORM_PB_PUBMAIL_FIELD_INDEX_descriptor();
 }
 template <> struct is_proto_enum< ::gorm::GORM_PB_COLUMN_TYPE> : ::std::true_type {};
 template <>

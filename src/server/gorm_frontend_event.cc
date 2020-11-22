@@ -9,8 +9,7 @@ using namespace gorm;
 GORM_FrontEndEvent::GORM_FrontEndEvent(GORM_FD iFD, shared_ptr<GORM_Epoll>       pEpoll, GORM_FrontEndThread *pThread) : 
     GORM_Event(iFD, pEpoll), m_pFrontThread(pThread)
 {
-    if (GORM_Config::Instance()->m_workMode == GORM_WORK_MODE_SERIAL)
-        this->m_pRequestRing = make_shared<GORM_RingBuffer<GORM_DBRequest, 1024*8>>();
+    this->m_pRequestRing = make_shared<GORM_RingBuffer<GORM_DBRequest, 1024*8>>();
     this->m_pReadCache = m_pFrontThread->m_pMemPool->GetData(1024*1024);
     m_pCurrentReadPtr = this->m_pReadCache->m_uszData;
     m_pStartPtr = this->m_pCurrentReadPtr;
@@ -42,12 +41,6 @@ GORM_FrontEndEvent::~GORM_FrontEndEvent()
         {
             it->second->pFrontendEvent = nullptr;
             it = this->m_requestMap.erase(it);
-        }
-        auto it = this->m_waitForResponseMap.begin();
-        while(it != this->m_waitForResponseMap.end())
-        {
-            it->second->pFrontendEvent = nullptr;
-            it = this->m_waitForResponseMap.erase(it);
         }
     }
     catch(exception &e)
@@ -208,7 +201,7 @@ GORM_Ret GORM_FrontEndEvent::PreRead()
                     reqMsg->pFrontendEvent = nullptr;
                     GORM_LOGE("request is time out, seqid:%d", reqMsg->uiReqID);
                     reqMsg->GetResult(GORM_REQUEST_TT);
-                    this->AddWrite();
+                    this->ReadyWrite();
                 }
                 return GORM_EAGAIN;
             }
@@ -229,13 +222,17 @@ int GORM_FrontEndEvent::Read()
     // 已经关闭了
     if (this->m_iFD <= 0 )
     {
+        GORM_LOGD("error");
         return GORM_ERROR;
     }
     GORM_Ret iRet;
     iRet = PreRead();
     if (iRet == GORM_EAGAIN)
+    {
+        GORM_LOGD("egain");
         return GORM_OK;
-    else if (iRet != GORM_ERROR)
+    }
+    else if (iRet == GORM_ERROR)
     {
         GORM_LOGE("close gorm client.");
         this->Close();
@@ -244,6 +241,7 @@ int GORM_FrontEndEvent::Read()
 
     int iLeft = 0;
     int iRead = 0;
+	GORM_LOGD("test::begin to read from network");
 
     for(;;)
     {
@@ -410,15 +408,15 @@ GORM_Ret GORM_FrontEndEvent::ProcMsg(char *szMsg, int iMsgLen)
     }
     else
     {
-        this->m_requestMap.insert(std::make_pair<uint32, GORM_DBRequest*>(pCurrentRequest->uiReqID, pCurrentRequest));
+	this->m_requestMap[pCurrentRequest->uiReqID] = pCurrentRequest;
     }
 
     if (this->m_ulClientId == 0)
     {
-        GORM_LOGE("client send request before make hand shake.");
+        /*GORM_LOGE("client send request before make hand shake.");
         pCurrentRequest->GetResult(GORM_NEED_HAND_SHAKE, 0, nullptr);
         this->ReadyWrite();
-        return GORM_OK;
+        return GORM_OK;*/
     }
 
     // 获取请求的路由
@@ -514,23 +512,26 @@ GORM_Ret GORM_FrontEndEvent::HeartBeat()
     }
     else
     {
-        this->m_requestMap.insert(std::make_pair<uint32, GORM_DBRequest*>(pCurrentRequest->uiReqID, pCurrentRequest));
+        this->m_requestMap[pHeartBeat->uiReqID] =  pHeartBeat;
     }
     this->ReadyWrite();
 
     return GORM_OK;
 }
 
-GORM_Ret GORM_FrontEndEvent::HandShakeResult(GORM_MySQLRequest* pHandShake, int code, uint64 clientId)
+GORM_Ret GORM_FrontEndEvent::HandShakeResult(GORM_DBRequest * pHandShake, int code, uint64 clientId)
 {
-    if (GORM_OK != pHandShake->PackHandShakeResult(code, clientId))   
+    GORM_MySQLRequest *pRequest = dynamic_cast<GORM_MySQLRequest*>(pHandShake);
+    if (pRequest == nullptr)
+        return GORM_ERROR;
+    if (GORM_OK != pRequest->PackHandShakeResult(code, clientId))   
     {                                                               
     }                                                               
     pHandShake->iWaitDone = 1;                                      
     pHandShake->iPreGood = 1;                                       
     if (this->m_workMode == GORM_WORK_MODE_SERIAL)
     {
-        if (!this->m_pRequestRing->AddData(pHeartBeat))
+        if (!this->m_pRequestRing->AddData(pHandShake))
         {
             GORM_LOGE("add request to request ring failed.");
             return GORM_OK;
@@ -538,7 +539,7 @@ GORM_Ret GORM_FrontEndEvent::HandShakeResult(GORM_MySQLRequest* pHandShake, int 
     }
     else
     {
-        this->m_requestMap.insert(std::make_pair<uint32, GORM_DBRequest*>(pCurrentRequest->uiReqID, pCurrentRequest));
+        this->m_requestMap[pHandShake->uiReqID] = pHandShake;
     }                                                         
     this->ReadyWrite();
 
@@ -547,7 +548,7 @@ GORM_Ret GORM_FrontEndEvent::HandShakeResult(GORM_MySQLRequest* pHandShake, int 
 
 GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
 {
-    GORM_MySQLRequest* pHandShake = new GORM_MySQLRequest(this->pMemPool);
+    GORM_DBRequest * pHandShake = new GORM_MySQLRequest(this->pMemPool);
     shared_ptr<GORM_PB_HAND_SHAKE_REQ> pHandShakeReq = make_shared<GORM_PB_HAND_SHAKE_REQ>();
     if (pHandShakeReq == nullptr)
     {
@@ -570,14 +571,14 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
     {
         GORM_LOGE("hand shake md5 check failed.");
         //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-        HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
+        HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0);
         return GORM_OK;
     }
     if (pHandShakeReq->schemas_size() != pSvrHandShake->schemas_size())
     {
         GORM_LOGE("hand shake schema size check failed, req size:%d, server size:%d", pHandShakeReq->schemas_size(), pSvrHandShake->schemas_size());
         //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-        HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
+        HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0);
         return GORM_OK;
     }
     for(int i=0; i<pHandShakeReq->schemas_size(); i++)
@@ -588,7 +589,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
         {
             GORM_LOGE("hand shake column size check failed, table:%s", reqInfo.tablename().c_str());
             //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-            HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
+            HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0);
             return GORM_OK;
         }
         for (int j=0; j<reqInfo.columns_size(); j++)
@@ -599,7 +600,7 @@ GORM_Ret GORM_FrontEndEvent::HandShake(char *szMsg, int iMsgLen, uint32 iReqID)
             {
                 GORM_LOGE("hand shake column type check failed, table:%s, column:%s", reqInfo.tablename().c_str(), reqColumn.name().c_str());
                 //GORM_HAND_SHAKE_RESULT(GORM_VERSION_NOT_MATCH, 0);
-                HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0)
+                HandShakeResult(pHandShake, GORM_VERSION_NOT_MATCH, 0);
                 return GORM_OK;
             }
         }

@@ -100,7 +100,8 @@ message GORM_PB_REQ_HEADER
 	fixed32 				ReqFlag  = 4;	// 参见GORM_CMD_FLAG_XXX
 	bytes					FieldMode	= 5;
 	GORM_PB_SPLIT_INFO 	SplitTableInfo = 6;	// 分库分表信息
-	sfixed32			Limit = 7;	// slect * from table limit ??;
+	sfixed32				Limit = 7;	// slect * from table limit ??;
+	sfixed32				RefTableIndex = 8;
 }
 
 message GORM_PB_HEART_REQ
