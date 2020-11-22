@@ -27,6 +27,7 @@ int GORM_SignalEvent::Init()
     this->m_iFD = m_iReadFD;
     GORM_Socket::SetNonBlocking(this->m_iReadFD);
     GORM_Socket::SetNonBlocking(this->m_iWriteFD);
+    
     this->m_Status = GORM_CONNECT_CONNECTED;
 
     if (0 != this->m_pEpoll->AddEventRead(this))

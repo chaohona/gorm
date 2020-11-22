@@ -165,9 +165,42 @@ int GORM_Socket::SetLinger(GORM_FD iFD, int iTimeOut)
 
 int GORM_Socket::SetTcpKeepAlive(GORM_FD iFD)
 {
+    int interval= 15;
     int val = 1;
-    return setsockopt(iFD, SOL_SOCKET, SO_KEEPALIVE, (const char*)&val, sizeof(val));
+    if (setsockopt(iFD, SOL_SOCKET, SO_KEEPALIVE, &val, sizeof(val)) == -1)
+    {
+        return GORM_ERROR;
+    }
+
+    /* Default settings are more or less garbage, with the keepalive time
+     * set to 7200 by default on Linux. Modify settings to make the feature
+     * actually useful. */
+
+    /* Send first probe after interval. */
+    val = interval;
+    if (setsockopt(iFD, IPPROTO_TCP, TCP_KEEPIDLE, &val, sizeof(val)) < 0) {
+        return GORM_ERROR;
+    }
+
+    /* Send next probes after the specified interval. Note that we set the
+     * delay as interval / 3, as we send three probes before detecting
+     * an error (see the next setsockopt call). */
+    val = interval/3;
+    if (val == 0) val = 1;
+    if (setsockopt(iFD, IPPROTO_TCP, TCP_KEEPINTVL, &val, sizeof(val)) < 0) {
+        return GORM_ERROR;
+    }
+
+    /* Consider the socket in error state after three we send three ACK
+     * probes without getting a reply. */
+    val = 3;
+    if (setsockopt(iFD, IPPROTO_TCP, TCP_KEEPCNT, &val, sizeof(val)) < 0) {
+        return GORM_ERROR;
+    }
+
+    return GORM_OK;
 }
+
 
 int GORM_Socket::SetSndBuff(GORM_FD iFD, int iSize)
 {

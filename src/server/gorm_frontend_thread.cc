@@ -96,7 +96,16 @@ void GORM_ListenEvent::AcceptClient(GORM_FD iFD)
         GORM_LOGE("set reuseraddr failed:%d", iFD);
         return;
     }
-
+    if (GORM_OK != GORM_Socket::SetLinger(iFD))
+    {
+        GORM_LOGE("set SetLinger failed:%d", iFD);
+        return;
+    }
+    if (GORM_OK != GORM_Socket::SetTcpKeepAlive(iFD))
+    {
+        GORM_LOGE("set SetLinger failed:%d", iFD);
+        return;
+    }
 
     if (GORM_OK != this->pFrontThread->AcceptClient(iFD))
     {

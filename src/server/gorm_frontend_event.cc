@@ -181,14 +181,30 @@ int GORM_FrontEndEvent::Write()
     return GORM_OK;
 }
 
-int GORM_FrontEndEvent::Read()
+GORM_Ret ReadPrec()
 {
-    // 已经关闭了
-    if (this->m_iFD <= 0 )
-    {
-        return GORM_ERROR;
-    }
+    // 同步请求，同时只处理一个
     if (this->m_workMode == GORM_WORK_MODE_SERIAL)
+    {
+        int iPendingNum = this->m_pRequestRing->GetNum();
+        // 有没有获取到响应的请求
+        if ( iPendingNum > 0)
+        {
+            GORM_DBRequest *reqMsg = this->m_pRequestRing->GetFront();
+            if (reqMsg != nullptr)
+            {
+                reqMsg->ulRspTimeMS = GORM_GetNowMS();
+                if (reqMsg->ulRspTimeMS - reqMsg->ulReqTimeMS > 1000)
+                {
+                    reqMsg->pFrontendEvent = nullptr;
+                    GORM_LOGE("request is time out, seqid:%d", reqMsg->uiReqID);
+                    reqMsg->GetResult(GORM_REQUEST_TT);
+                    this->AddWrite();
+                }       
+                //GORM_LOGE("there is message pending.");
+                return GORM_EAGAIN;
+            }
+        }
         if (GORM_RB_POOLFULL(this->m_pRequestRing))
         {
             GORM_LOGE("wait for response pool is full, fd %d, addr %s:%d", this-m_iFD, this->m_szIP, this->m_uiPort);
@@ -198,9 +214,30 @@ int GORM_FrontEndEvent::Read()
         }
     }
 
+    return GORM_OK;
+}
+
+int GORM_FrontEndEvent::Read()
+{
+    // 已经关闭了
+    if (this->m_iFD <= 0 )
+    {
+        return GORM_ERROR;
+    }
+    GORM_Ret iRet;
+    iRet = ReadPrec();
+    if (iRet == GORM_EAGAIN)
+        return GORM_OK;
+    else if (iRet != GORM_ERROR)
+    {
+        GORM_LOGE("close gorm client.");
+        this->Close();
+        return GORM_ERROR;
+    }
+
     int iLeft = 0;
     int iRead = 0;
-    GORM_Ret iRet;
+
     for(;;)
     {
         iLeft = m_pReadCache->m_uszEnd - m_pCurrentReadPtr;

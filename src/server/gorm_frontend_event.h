@@ -46,6 +46,7 @@ private:
         this->m_pStartPtr = this->m_pReadCache->m_uszData;
         this->m_pCurrentReadPtr = this->m_pStartPtr + iCurrentLen;
     }
+    GORM_Ret ReadPrec();
 public:
     // 请求的缓冲池子,主要此池子中数据个数大于1就说明有pending消息
     shared_ptr<GORM_RingBuffer<GORM_DBRequest, 1024*8>> m_pRequestRing = nullptr;
